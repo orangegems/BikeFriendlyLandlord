@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Login } from './components/index/Login.jsx';
-import { Signup } from './components/index/Signup.jsx';
+import { Login } from './Login.jsx';
+import { Signup } from './Signup.jsx';
 
-export function Index() {
+export function Authenticate() {
   function handleSubmit(source, data) {
     event.preventDefault();
     fetch(`/api/${source}`, {
@@ -24,14 +24,13 @@ export function Index() {
   }
 
   return (
-    <>
-      <h1>Welcolme to Bike Friendly Landlord</h1>
+    
       <div id="loginSignup">
         <Routes>
           <Route path="/" element={<Login handleSubmit={handleSubmit} />} />
           <Route path="signup" element={<Signup handleSubmit={handleSubmit} />} />
         </Routes>
       </div>
-    </>
+    
   );
 }

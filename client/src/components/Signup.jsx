@@ -14,7 +14,6 @@ export function Signup(props) {
     username: '',
     password: '',
     email: '',
-    city: '',
   });
 
   return (
@@ -28,7 +27,7 @@ export function Signup(props) {
         }}
         component="form"
         onSubmit={() =>
-          handleSubmit('login', { username: username, password: password })
+          handleSubmit('signup', {...formData, /** landlordId */})
         }
         noValidate>
         <h3>Signup</h3>
