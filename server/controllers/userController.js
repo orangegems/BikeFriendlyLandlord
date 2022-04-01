@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
-const db = require('./models/BFLL.js');
+const db = require('../models/BFLL.js');
 
 const saltRounds = 10;
 
@@ -53,7 +53,7 @@ userController.createUser = async (req, res, next) => {
      */
     const userQueryString = `
     INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
     `;
     const userValues = [
       firstname,
@@ -66,6 +66,7 @@ userController.createUser = async (req, res, next) => {
       landlordId,
     ];
     const userResult = await db.query(userQueryString, userValues);
+    console.log('here')
     console.log(userResult.rows);
 
     /**
@@ -78,7 +79,7 @@ userController.createUser = async (req, res, next) => {
     next();
   } catch (err) {
     return next({
-      log: `Error in userController.createUser hashing the password -> Error: ${err}`,
+      log: `Error in userController.createUser adding new user -> Error: ${err}`,
       message: {
         err: 'Error creating new user',
       },
@@ -95,17 +96,16 @@ userController.verifyUser = async (req, res, next) => {
     SELECT * FROM users
     WHERE users.username = $1
     `;
-    const values = [username];
-    const result = await db.query(queryString, values);
+    const result = await db.query(queryString, [username]);
     console.log(result.rows)
 
-    const hash = result.rows.something // !
+    // const hash = result.rows.something // !
 
     //  compare the passmords with bcrypt - return error if passwords don't match (200?)
     const match = await bcrypt.compare(password, hash);
     if (!match) res.status(401).send('passwords do not match');
 
-    res.locals.user = result.rows.something // !
+    // res.locals.user = result.rows.something // !
 
     return next();
   } catch (err) {
@@ -131,7 +131,7 @@ userController.deleteUser = async (req, res, next) => {
     const result = await db.query(queryString, values);
     console.log(result.rows)
 
-    res.locals.user = result.rows.something // !
+    // res.locals.user = result.rows.something // !
 
     return next();
   } catch (err) {
