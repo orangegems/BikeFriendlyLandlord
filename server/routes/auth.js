@@ -17,7 +17,7 @@ router.post(
 // post -> signup
 router.post(
   '/signup',
-  // ! userController.createUser,
+  userController.createUser,
   sessionController.startSession,
   (req, res) => {
     res.status(200).send();
