@@ -12,17 +12,16 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   console.log('entered userController.createUser');
   try {
-    console.log(req.body);
     const {
       username,
       password,
       firstname,
       lastname,
-      isTenant,
+      isLandlord,
       email,
       landlordId,
     } = req.body;
-    
+
     // ? validate user input
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -31,30 +30,31 @@ userController.createUser = async (req, res, next) => {
      * if the new user is a landlord, add the new landlord to the 'landlord' table
      * before adding the user to the users table with landlord_id
      */
-    if (landlordId && !isTenant) {
-      const landlordQueryString = `
-      INSERT INTO users (first_name, last_name, full_name,is_verified) 
-      VALUES ($1, $2, $3, $4);
-      `;
-      const landlordValues = [
-        firstname,
-        lastname,
-        firstname + ' ' + lastname,
-        true,
-      ];
-      const landlordResult = await db.query(
-        landlordQueryString,
-        landlordValues
-      );
-      console.log(landlordResult.rows);
-    }
+    // if (landlordId && !isTenant) {
+    //   const landlordQueryString = `
+    //   INSERT INTO users (first_name, last_name, full_name,is_verified) 
+    //   VALUES ($1, $2, $3, $4);
+    //   `;
+    //   const landlordValues = [
+    //     firstname,
+    //     lastname,
+    //     firstname + ' ' + lastname,
+    //     true,
+    //   ];
+    //   const landlordResult = await db.query(
+    //     landlordQueryString,
+    //     landlordValues
+    //   );
+    //   console.log(landlordResult.rows);
+    // }
 
     /**
      * database query to add the new user to the users table
      */
     const userQueryString = `
     INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING _id, username, landlord_id;
     `;
     const userValues = [
       firstname,
@@ -63,21 +63,14 @@ userController.createUser = async (req, res, next) => {
       username,
       email,
       hashedPassword,
-      !isTenant,
+      isLandlord,
       landlordId,
     ];
     const userResult = await db.query(userQueryString, userValues);
-    // console.log('here')
-    console.log(userResult);
-
-    /**
-     * Save user to res.locals
-     *
-     *
-     *
-     */
+    res.locals.user = userResult.rows[0];
 
     next();
+
   } catch (err) {
     return next({
       log: `Error in userController.createUser adding new user -> Error: ${err}`,
@@ -98,15 +91,14 @@ userController.verifyUser = async (req, res, next) => {
     WHERE users.username = $1;
     `;
     const result = await db.query(queryString, [username]);
-    console.log(result.rows)
 
-    // const hash = result.rows.something // !
+    const hash = result.rows[0].password 
 
     //  compare the passmords with bcrypt - return error if passwords don't match (200?)
     const match = await bcrypt.compare(password, hash);
     if (!match) res.status(401).send('passwords do not match');
 
-    // res.locals.user = result.rows.something // !
+    res.locals.user = result.rows[0] 
 
     return next();
   } catch (err) {
@@ -119,6 +111,7 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+// ! not tested
 userController.deleteUser = async (req, res, next) => {
   console.log('entered userController.deleteUser');
   try {

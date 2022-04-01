@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField';
 export function Signup(props) {
   const { handleSubmit } = props;
 
-  const [isTenant, setIsTenant] = useState(true);
+  const [isLandlord, setIsLandlord] = useState(false);
   const [formData, setFormData] = useState({
-    isTentant: isTenant,
+    isLandlord: isLandlord,
     firstname: '',
     lastname: '',
     username: '',
@@ -33,14 +33,14 @@ export function Signup(props) {
         }
         noValidate>
         <h3>Signup</h3>
-        <div>
-          <Button variant="contained" onClick={() => setIsTenant(true)}>
+        {/* <div>
+          <Button variant="contained" onClick={() => setIsLandlord(false)}>
             Tenant
           </Button>
-          <Button variant="contained" onClick={() => setIsTenant(false)}>
+          <Button variant="contained" onClick={() => setIsLandlord(true)}>
             Landlord
           </Button>
-        </div>
+        </div> */}
         <TextField
           id="outlined-basic"
           label="First Name"

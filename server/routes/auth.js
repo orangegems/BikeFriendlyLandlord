@@ -7,10 +7,11 @@ const router = express.Router();
 // post -> login
 router.post(
   '/login',
-  // ! userController.verifyUser,
+  userController.verifyUser,
   sessionController.startSession,
   (req, res) => {
-    res.status(200).send();
+    const response = res.locals.user;
+    res.status(200).json(response);
   }
 );
 
@@ -20,7 +21,8 @@ router.post(
   userController.createUser,
   sessionController.startSession,
   (req, res) => {
-    res.status(200).send();
+    const response = res.locals.user;
+    res.status(200).json(response);
   }
 );
 
