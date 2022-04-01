@@ -10,38 +10,30 @@ import Typography from  '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 
-class ReviewPage extends Component{
-    constructor(props) {
-        super(props)
 
-        // have state that holds our input values (initially empty strings)
-        this.state = {
-            title: '',
-            overallRating: 0,
-            respectRating: 0,
-            responsivenessRating: 0,
-            bikeRating: 0,
-            petRating: 0,
-            description: ''
-        };
+export default function ReviewPage() {
+    // handle title input
+    const [title, setTitle] = React.useState('');
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
 
-        // bind necessary methods (send review to database, save values with setstate)
-        this.handleTitleInput = this.handleTitleInput.bind(this)
+    // handle rating inputs
+    const [respect, setRespect] = React.useState(null)
+    const [response, setResponse] = React.useState(null)
+    const [bike, setBike] = React.useState(null)
+    const [pet, setPet] = React.useState(null)
+
+    //handle description input
+    const [description, setDescription] = React.useState('');
+    const handleDescChange = (e) => {
+        setDescription(e.target.value);
     }
-
-    // methods to handle inputs from components
-    handleTitleInput(e){
-        const {value} = e.target;
-        this.setState({title: value})
-    }
-
-    // method to handle submit
-
 
     // method to handle going back
 
-    render() {
-        // will need the Landlord name from props
+
+        // will need the Landlord name from somewhere (props?)
 
         return (
             <Container className="reviewMainContainer" maxwidth="sm">
@@ -58,19 +50,40 @@ class ReviewPage extends Component{
                                 fullWidth 
                                 required 
                                 label="Title"
-                                value={this.state.value}
-                                onChange={this.handleTitleInput}/>
+                                value={title}
+                                onChange={handleTitleChange}
+                                />
                             <Stack direction="row" spacing={2}>
                                 <h2>Overall Rating</h2>
-                                <Rating required size="large" value={ this.state.overallRating } readOnly />
+                                <Rating required size="large" precision={0.5} value={ 5 } readOnly />
                             </Stack>
                             <Stack direction="row" spacing={2}>
                                 <h2>Respectiveness</h2>
-                                <Rating required size="large" value={ this.state.respectRating }/>
+                                <Rating required size="large" precision={0.5} value={ respect } onChange={(e, val) => setRespect(val)}/>
                             </Stack>
-
+                            <Stack direction="row" spacing={2}>
+                                <h2>Responsiveness</h2>
+                                <Rating required size="large" precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
+                            </Stack>
+                            <Stack direction="row" spacing={2}>
+                                <h2>Bike Friendly</h2>
+                                <Rating required size="large" precision={0.5} value={ bike } onChange={(e, val) => setBike(val)}/>
+                            </Stack>                            <Stack direction="row" spacing={2}>
+                                <h2>Pet Friendly</h2>
+                                <Rating required size="large" precision={0.5} value={ pet } onChange={(e, val) => setPet(val)}/>
+                            </Stack>
+                            <TextField
+                                fullWidth
+                                required
+                                label="Additional Comments"
+                                multiline
+                                rows={4}
+                                inputProps={{maxLength:200}}
+                                helperText="Max 200 Characters"
+                                value={ description }
+                                onChange={ handleDescChange}
+                            />
                         </Box>
             </Container>
         )
-    }
 }
