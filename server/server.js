@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const db = require('./models/BFLL.js');
 
 const sessionController = require('./controllers/sessionController');
+const apiRouter = require('./routes/api.js');
 
 const app = express();
 const PORT = 3000;
@@ -32,6 +34,20 @@ app.get('/app', sessionController.checkSession, (req, res) => {
 });
 app.get('/', (req, res) => {
   return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../build/index.html'));
+});
+
+// test route 
+app.get('/test', async (req, res) => {
+  const queryString = `
+  SELECT * FROM users;
+  `;
+
+  try {
+    const results = await db.query(queryString);
+    return res.json(results.rows);
+  } catch (error) {
+    return res.json(error);
+  }
 });
 
 /** 
