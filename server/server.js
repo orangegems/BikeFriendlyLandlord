@@ -5,6 +5,7 @@ const db = require('./models/BFLL.js');
 
 const sessionController = require('./controllers/sessionController');
 const apiRouter = require('./routes/api.js');
+const landlordRouter = require('./routes/landlord.js');
 
 const app = express();
 const PORT = 3000;
@@ -22,9 +23,10 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
 /**
- *  Handle http requests 
+ *  Direct request to appropriate router files
  * */
 app.use('/api', apiRouter);
+app.use('/landlords', landlordRouter);
 
 /** 
  *  Serve the home/login-signup page and the main app on these routes 
