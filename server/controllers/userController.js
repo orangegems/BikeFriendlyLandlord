@@ -12,6 +12,7 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   console.log('entered userController.createUser');
   try {
+    console.log(req.body);
     const {
       username,
       password,
@@ -21,7 +22,7 @@ userController.createUser = async (req, res, next) => {
       email,
       landlordId,
     } = req.body;
-
+    
     // ? validate user input
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -30,7 +31,7 @@ userController.createUser = async (req, res, next) => {
      * if the new user is a landlord, add the new landlord to the 'landlord' table
      * before adding the user to the users table with landlord_id
      */
-    if (!landlordId && !isTenant) {
+    if (landlordId && !isTenant) {
       const landlordQueryString = `
       INSERT INTO users (first_name, last_name, full_name,is_verified) 
       VALUES ($1, $2, $3, $4);
@@ -66,8 +67,8 @@ userController.createUser = async (req, res, next) => {
       landlordId,
     ];
     const userResult = await db.query(userQueryString, userValues);
-    console.log('here')
-    console.log(userResult.rows);
+    // console.log('here')
+    console.log(userResult);
 
     /**
      * Save user to res.locals
@@ -94,7 +95,7 @@ userController.verifyUser = async (req, res, next) => {
 
     const queryString = `
     SELECT * FROM users
-    WHERE users.username = $1
+    WHERE users.username = $1;
     `;
     const result = await db.query(queryString, [username]);
     console.log(result.rows)
@@ -125,7 +126,7 @@ userController.deleteUser = async (req, res, next) => {
 
     const queryString = `
     Delete FROM users
-    WHERE users._id = $1
+    WHERE users._id = $1;
     `;
     const values = [/** userId */];
     const result = await db.query(queryString, values);

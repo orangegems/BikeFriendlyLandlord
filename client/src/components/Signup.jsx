@@ -6,7 +6,9 @@ import TextField from '@mui/material/TextField';
 // import Typography from '@mui/material/Typography';
 
 export function Signup(props) {
-  const [isTenant, setIsTenant] = useState('true');
+  const { handleSubmit } = props;
+
+  const [isTenant, setIsTenant] = useState(true);
   const [formData, setFormData] = useState({
     isTentant: isTenant,
     firstname: '',
@@ -27,7 +29,7 @@ export function Signup(props) {
         }}
         component="form"
         onSubmit={() =>
-          handleSubmit('signup', {...formData, /** landlordId */})
+          handleSubmit('signup', { ...formData /** landlordId */ })
         }
         noValidate>
         <h3>Signup</h3>
@@ -80,7 +82,7 @@ export function Signup(props) {
           }
         />
         <Button variant="contained" type="submit">
-          Login
+          Signup
         </Button>
 
         <Link to="/">Already have an account? Login.</Link>
@@ -88,4 +90,3 @@ export function Signup(props) {
     </>
   );
 }
-

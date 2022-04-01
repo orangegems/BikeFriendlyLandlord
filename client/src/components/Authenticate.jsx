@@ -6,17 +6,16 @@ import { Signup } from './Signup.jsx';
 export function Authenticate() {
   function handleSubmit(source, data) {
     event.preventDefault();
-    fetch(`/api/${source}`, {
+    fetch(`/auth/${source}`, {
       method: 'POST',
-      body: JSON.stringify({ data }),
+      body: JSON.stringify(data),
       // Adding headers to the request
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
       .then((res) => {
-        if (res.status === 200) window.location.href = '/app';
-        else console.log('Unsussesful --> ', res);
+        console.log('res --> ', res);
       })
       .catch((err) => {
         console.log('Error from hadleSubmit --> ', err);
