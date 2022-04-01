@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const db = require('./models/BFLL.js');
 
 const sessionController = require('./controllers/sessionController');
 const apiRouter = require('./routes/api.js');
@@ -12,7 +11,7 @@ const app = express();
 const PORT = 3000;
 
 /** 
- * Parse the body and cookies on all http requests 
+ * Parse the body and cookies on all http requests
  * */
 app.use(express.json());
 app.use(cookieParser());
@@ -30,7 +29,6 @@ app.use('/api', apiRouter);
 app.use('/landlords', landlordRouter);
 app.use('/reviews', reviewsRouter);
 
-
 /** 
  *  Serve the home/login-signup page and the main app on these routes 
  * */
@@ -39,20 +37,6 @@ app.get('/app', sessionController.checkSession, (req, res) => {
 });
 app.get('/', (req, res) => {
   return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../build/index.html'));
-});
-
-// test route 
-app.get('/test', async (req, res) => {
-  const queryString = `
-  SELECT * FROM users;
-  `;
-
-  try {
-    const results = await db.query(queryString);
-    return res.json(results.rows);
-  } catch (error) {
-    return res.json(error);
-  }
 });
 
 /** 
