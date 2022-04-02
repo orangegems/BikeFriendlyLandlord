@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Profile } from 'llprofile.jsx';
@@ -10,5 +10,6 @@ render(
   <BrowserRouter>
     <Profile />
   </BrowserRouter>,
-  document.getElementById('profile')
+  document.getElementById('landlordprofile')
 );
+
