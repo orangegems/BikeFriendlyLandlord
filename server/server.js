@@ -36,9 +36,6 @@ app.get('/', (req, res) => {
   return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../build/index.html'));
 });
 
-app.get('/demoprofile',(req,res) => {
-  return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../client/public/landlordprofile.html'));
-})
 // test route 
 app.get('/test', async (req, res) => {
   const queryString = `

@@ -52,8 +52,8 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000',
       '/app': {
-        // ? understand how this works
-        target: 'http://localhost:3000',
+        // ? understand hov this works
+        // target: 'http://localhost:3000',
         bypass: function (req, res, proxyOptions) {
           if (req.headers.accept.indexOf('html') !== -1) {
             console.log('Skipping proxy for browser request.');
