@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Login from '../../components/Login.jsx';
 import Signup from '../../components/Signup.jsx';
 
-import './authenticate.css'
+import './authenticate.css';
 
 export function Authenticate(props) {
   const { setAuthDisplay, setIsLoggedIn, setUserData } = props;
@@ -37,21 +37,24 @@ export function Authenticate(props) {
   }
 
   return (
-    <div id="loginSignup">
-      {displayLogin && (
-        <Login
-          handleSubmit={handleSubmit}
-          setAuthDisplay={setAuthDisplay}
-          setDisplayLogin={setDisplayLogin}
-        />
-      )}
-      {!displayLogin && (
-        <Signup
-          handleSubmit={handleSubmit}
-          setAuthDisplay={setAuthDisplay}
-          setDisplayLogin={setDisplayLogin}
-        />
-      )}       
-    </div>
+    <>
+      <div id="loginCover"></div>
+      <div id="loginSignup">
+        {displayLogin && (
+          <Login
+            handleSubmit={handleSubmit}
+            setAuthDisplay={setAuthDisplay}
+            setDisplayLogin={setDisplayLogin}
+          />
+        )}
+        {!displayLogin && (
+          <Signup
+            handleSubmit={handleSubmit}
+            setAuthDisplay={setAuthDisplay}
+            setDisplayLogin={setDisplayLogin}
+          />
+        )}
+      </div>
+    </>
   );
 }
