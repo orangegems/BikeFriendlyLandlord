@@ -28,8 +28,14 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
+<<<<<<< HEAD
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+=======
+    "pg": "^8.7.3",
+    "react": "^17.0.0",
+    "react-dom": "^18.0.0",
+>>>>>>> 6fda17a61a8e859a48ca910190c16d1f36261ce7
     "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
