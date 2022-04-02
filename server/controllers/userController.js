@@ -54,19 +54,20 @@ userController.createUser = async (req, res, next) => {
     const userQueryString = `
     INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-    RETURNING _id, username, landlord_id;
+    RETURNING *;
     `;
     const userValues = [
       firstname,
       lastname,
       firstname + ' ' + lastname,
       username,
-      email,
+      email, 
       hashedPassword,
       isLandlord,
       landlordId,
     ];
     const userResult = await db.query(userQueryString, userValues);
+    delete userResult.rows[0].password;
     res.locals.user = userResult.rows[0];
 
     next();
