@@ -1,0 +1,26 @@
+body {
+  margin: 0px;
+}
+#loginSignup {
+  margin:0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  background-color: white;
+  border: 2px black;
+  border-radius: 5px;
+  padding: 25px;
+}
+
+#logo {
+  font-size: xx-large;
+}
+
+#navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: lightgrey;
+  padding: 15px;
+}
