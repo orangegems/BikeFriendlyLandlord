@@ -49,7 +49,7 @@ export function App(props) {
           </Button>
         )}
       </div>
-      This is the app.... Here is some login...
+      This is the app.... 
       {authDisplay && (
         <Authenticate
           setAuthDisplay={setAuthDisplay}

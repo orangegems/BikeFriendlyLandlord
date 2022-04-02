@@ -22,7 +22,6 @@ sessionController.checkSession = (req, res, next) => {
   }
 
   res.locals.user = decryptedToken.payload;
-  console.log('make sure this has username, id, and landlord_id -->', res.locals.user) // ? delete when verified
 
   next();
 };
