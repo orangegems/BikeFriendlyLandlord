@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 // import Typography from '@mui/material/Typography';
 
 export function Signup(props) {
-  const { handleSubmit } = props;
+  const { handleSubmit, setAuthDisplay } = props;
 
   const [isLandlord, setIsLandlord] = useState(false);
   const [formData, setFormData] = useState({
@@ -86,6 +86,7 @@ export function Signup(props) {
         </Button>
 
         <Link to="/">Already have an account? Login.</Link>
+        <button onClick={()=> setAuthDisplay(false)}>Continue without logging in</button>
       </Box>
     </>
   );

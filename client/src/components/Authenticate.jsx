@@ -3,7 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import { Login } from './Login.jsx';
 import { Signup } from './Signup.jsx';
 
-export function Authenticate() {
+
+export function Authenticate(props) {
+  const { setAuthDisplay, setIsLoggedIn } = props;
+
   function handleSubmit(source, data) {
     event.preventDefault();
     fetch(`/auth/${source}`, {
@@ -15,7 +18,12 @@ export function Authenticate() {
       },
     })
       .then((res) => {
-        console.log('res --> ', res);
+        if (res.status === 200) {
+          setIsLoggedIn(true);
+          setAuthDisplay(false);
+        } else {
+          console.log('status not 200 in handle submit --> ', res);
+        }
       })
       .catch((err) => {
         console.log('Error from hadleSubmit --> ', err);
@@ -23,13 +31,27 @@ export function Authenticate() {
   }
 
   return (
-    
-      <div id="loginSignup">
-        <Routes>
-          <Route path="/" element={<Login handleSubmit={handleSubmit} />} />
-          <Route path="signup" element={<Signup handleSubmit={handleSubmit} />} />
-        </Routes>
-      </div>
-    
+    <div id="loginSignup">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Login
+              handleSubmit={handleSubmit}
+              setAuthDisplay={setAuthDisplay}
+            />
+          }
+        />
+        <Route
+          path="signup"
+          element={
+            <Signup
+              handleSubmit={handleSubmit}
+              setAuthDisplay={setAuthDisplay}
+            />
+          }
+        />
+      </Routes>
+    </div>
   );
 }

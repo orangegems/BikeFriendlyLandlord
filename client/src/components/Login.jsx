@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 // import Typography from '@mui/material/Typography';
 
 export function Login(props) {
-  const { handleSubmit } = props;
+  const { handleSubmit, setAuthDisplay } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -43,6 +43,7 @@ export function Login(props) {
           Login
         </Button>
         <Link to="/signup">Need an account? Signup</Link>
+        <button onClick={()=> setAuthDisplay(false)}>Continue without logging in</button>
       </Box>
     </>
   );
