@@ -26,8 +26,14 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/landlord/:landlord_id" element={<Profile />}/> 
-        <Route path="/profile/:user_id" element={<UserProfile />} />
+        <Route path="/landlord/:landlord_id" element={<Profile />} />
+        <Route
+          path="/profile/:user_id"
+          element={
+            <UserProfile userData={userData} setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} setAuthDisplay={setAuthDisplay}/>
+          }
+        />
+        <Route path="*" element={<p>404 - nothing here</p>} />
       </Routes>
       {authDisplay && (
         <Authenticate
