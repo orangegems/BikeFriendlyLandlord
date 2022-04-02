@@ -5,7 +5,7 @@ import { Navbar } from './components/Navbar.jsx';
 import { Home } from './pages/home/Home.jsx';
 import { Profile } from './pages/profile/Profile.jsx';
 import { Search } from './pages/search/Search.jsx';
-
+import { UserProfile } from './pages/user/UserProfile.jsx';
 
 export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,11 +21,13 @@ export function App() {
         setAuthDisplay={setAuthDisplay}
         setIsLoggedIn={setIsLoggedIn}
         setUserData={setUserData}
+        userData={userData}
       />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/landlord/:landlord_id" element={<Profile />}/> 
+        <Route path="/profile/:user_id" element={<UserProfile />} />
       </Routes>
       {authDisplay && (
         <Authenticate

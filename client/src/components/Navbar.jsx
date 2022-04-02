@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import React from 'react';
 
 export function Navbar(props) {
@@ -9,6 +9,7 @@ export function Navbar(props) {
     setAuthDisplay,
     setIsLoggedIn,
     setUserData,
+    userData
   } = props;
 
   function logout() {
@@ -62,6 +63,7 @@ export function Navbar(props) {
             </li>
           </ul>
         </nav>
+
         {!isLoggedIn && (
           <Button
             variant="text"
@@ -73,9 +75,12 @@ export function Navbar(props) {
           </Button>
         )}
         {isLoggedIn && (
-          <Button variant="text" onClick={() => logout()}>
-            Log Out
-          </Button>
+          <div>
+            <Link to={`/profile/${userData.username}`} >My Account</Link>
+            <Button variant="text" onClick={() => logout()}>
+              Log Out
+            </Button>
+          </div>
         )}
       </div>
     </div>
