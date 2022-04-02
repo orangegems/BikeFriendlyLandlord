@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React from 'react'
 
 
-export default function Navbar({isLoggedIn, authDisplay, logout, setAuthDisplay}) {
+export function Navbar({isLoggedIn, authDisplay, logout, setAuthDisplay}) {
   return (
     <div>
       <div id="navBar">

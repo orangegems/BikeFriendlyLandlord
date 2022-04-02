@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import { Authenticate } from "./pages/authenticate/Authenticate.jsx";
-import Navbar from "./components/Navbar.jsx";
+import {Navbar} from "./components/Navbar.jsx";
 import ReviewPage from "./components/ReviewPage.jsx";
 
 export function App() {
