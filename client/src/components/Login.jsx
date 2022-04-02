@@ -38,6 +38,7 @@ export default function Login(props) {
           id="outlined-basic"
           label="Password"
           variant="outlined"
+          type="password"
           vi
           onChange={(event) => setPassword(event.target.value)}
           value={password}
