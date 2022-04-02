@@ -3,12 +3,15 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const sessionController = require('./controllers/sessionController');
+const landlordRouter = require('./routes/landlord.js');
+const reviewsRouter = require('./routes/reviews.js');
+const authRouter = require('./routes/auth.js');
 
 const app = express();
 const PORT = 3000;
 
 /** 
- * Parse the body and cookies on all http requests 
+ * Parse the body and cookies on all http requests
  * */
 app.use(express.json());
 app.use(cookieParser());
@@ -20,9 +23,11 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 
 /**
- *  Handle http requests 
+ *  Direct request to appropriate router files
  * */
-app.use('/api', apiRouter);
+app.use('/landlords', landlordRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/auth', authRouter);
 
 /** 
  *  Serve the home/login-signup page and the main app on these routes 

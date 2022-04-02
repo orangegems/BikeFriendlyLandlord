@@ -5,7 +5,6 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     index: './client/src/index.js',
-    app: './client/src/app.js',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -36,13 +35,7 @@ module.exports = {
       template: './client/public/index.html',
       filename: 'index.html',
       publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
-      chunks: ['index'],
-    }),
-    new HtmlWebpackPlugin({
-      template: './client/public/app.html',
-      filename: 'app.html',
-      publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
-      chunks: ['app'],
+      // chunks: ['index'],
     }),
   ],
   devServer: {
@@ -50,17 +43,7 @@ module.exports = {
     hot: true,
     magicHtml: true,
     proxy: {
-      '/api': 'http://localhost:3000',
-      '/app': {
-        // ? understand how this works
-        target: 'http://localhost:3000',
-        bypass: function (req, res, proxyOptions) {
-          if (req.headers.accept.indexOf('html') !== -1) {
-            console.log('Skipping proxy for browser request.');
-            return '/app.html';
-          }
-        },
-      },
+      '/auth': 'http://localhost:3000',
     },
   },
 };
