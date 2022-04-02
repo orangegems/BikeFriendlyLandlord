@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 // import Typography from '@mui/material/Typography';
 
 export function Signup(props) {
-  const { handleSubmit, setAuthDisplay } = props;
+  const { handleSubmit, setAuthDisplay, setDisplayLogin } = props;
 
   const [isLandlord, setIsLandlord] = useState(false);
   const [formData, setFormData] = useState({
@@ -84,8 +83,7 @@ export function Signup(props) {
         <Button variant="contained" type="submit">
           Signup
         </Button>
-
-        <Link to="/">Already have an account? Login.</Link>
+        <div className="linkButton" onClick={()=> setDisplayLogin(true)}>Already have an account? Login.</div>
         <button onClick={()=> setAuthDisplay(false)}>Continue without logging in</button>
       </Box>
     </>

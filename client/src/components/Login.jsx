@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 // import Typography from '@mui/material/Typography';
 
 export function Login(props) {
-  const { handleSubmit, setAuthDisplay } = props;
+  const { handleSubmit, setAuthDisplay, setDisplayLogin } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,7 +41,7 @@ export function Login(props) {
         <Button variant="contained" type="submit">
           Login
         </Button>
-        <Link to="/signup">Need an account? Signup</Link>
+        <div className="linkButton" onClick={()=> setDisplayLogin(false)}>Need an account? Signup</div>
         <button onClick={()=> setAuthDisplay(false)}>Continue without logging in</button>
       </Box>
     </>

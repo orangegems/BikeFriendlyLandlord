@@ -13,6 +13,15 @@ body {
   padding: 25px;
 }
 
+.linkButton {
+  color:blueviolet;
+  text-decoration: underline;
+}
+
+.linkButton:hover {
+  color:blue;
+}
+
 #logo {
   font-size: xx-large;
 }

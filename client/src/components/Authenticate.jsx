@@ -1,11 +1,10 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Login } from './Login.jsx';
 import { Signup } from './Signup.jsx';
 
-
 export function Authenticate(props) {
   const { setAuthDisplay, setIsLoggedIn } = props;
+  const [displayLogin, setDisplayLogin] = useState(true);
 
   function handleSubmit(source, data) {
     event.preventDefault();
@@ -32,26 +31,20 @@ export function Authenticate(props) {
 
   return (
     <div id="loginSignup">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Login
-              handleSubmit={handleSubmit}
-              setAuthDisplay={setAuthDisplay}
-            />
-          }
+      {displayLogin && (
+        <Login
+          handleSubmit={handleSubmit}
+          setAuthDisplay={setAuthDisplay}
+          setDisplayLogin={setDisplayLogin}
         />
-        <Route
-          path="signup"
-          element={
-            <Signup
-              handleSubmit={handleSubmit}
-              setAuthDisplay={setAuthDisplay}
-            />
-          }
+      )}
+      {!displayLogin && (
+        <Signup
+          handleSubmit={handleSubmit}
+          setAuthDisplay={setAuthDisplay}
+          setDisplayLogin={setDisplayLogin}
         />
-      </Routes>
+      )}       
     </div>
   );
 }

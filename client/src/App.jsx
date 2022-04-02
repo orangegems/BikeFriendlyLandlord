@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Authenticate } from './components/Authenticate.jsx';
 
-export function App(props) {
+export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authDisplay, setAuthDisplay] = useState(false);
 
