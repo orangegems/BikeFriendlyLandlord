@@ -1,8 +1,16 @@
 import { Button } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 export function Navbar(props) {
-  const { isLoggedIn, authDisplay, setAuthDisplay, setIsLoggedIn, setUserData } = props;
+  const {
+    isLoggedIn,
+    authDisplay,
+    setAuthDisplay,
+    setIsLoggedIn,
+    setUserData,
+  } = props;
+
   function logout() {
     event.preventDefault();
     fetch(`/auth/logout`, {
@@ -27,10 +35,33 @@ export function Navbar(props) {
       });
   }
 
+  let activeStyle = {
+    textDecoration: 'underline',
+    color: 'blue',
+  };
+
   return (
     <div>
       <div id="navBar">
         <div id="logo">BikeFriendlyLandlord</div>
+        <nav>
+          <ul>
+            <li>
+              <NavLink
+                to="/"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/search"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                Search
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
         {!isLoggedIn && (
           <Button
             variant="text"
