@@ -45,6 +45,9 @@ nav ul li {
   margin-left: 20px;
   margin-right: 50px;
 }
+a:hover {
+  color: darkblue;
+} 
 a {
   text-decoration: none;
   color: black;
