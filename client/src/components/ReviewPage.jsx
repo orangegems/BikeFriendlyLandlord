@@ -18,6 +18,13 @@ export default function ReviewPage() {
         setTitle(e.target.value);
     };
 
+    // calculate overall rating
+    const overallCalc = (respec, respo, biker, petr) => {
+        const arr = [respec, respo, biker, petr];
+        const newArr = arr.filter(val => val !== null);
+        if (newArr.length === 0) return 0;
+        return (newArr.reduce((a,b) => a+b)/(newArr.length))
+    }
     // handle rating inputs
     const [respect, setRespect] = React.useState(null)
     const [response, setResponse] = React.useState(null)
@@ -31,7 +38,18 @@ export default function ReviewPage() {
     }
 
     // method to handle form submission
-
+    const sendReview = () => {
+        // build req body
+        const formBody = {
+            title: title,
+            overall_rating: overallCalc(respect,response,bike,pet),
+            respect_rating: respect,
+            responsiveness_rating: response,
+            bike_rating: bike,
+            pet_friendly_rating: pet
+        }
+        
+    }
 
         // will need the Landlord name from somewhere (props?)
 
@@ -58,7 +76,7 @@ export default function ReviewPage() {
                                 />
                             <Stack direction="row" spacing={2} justifyContent="center">
                                 <h2>Overall Rating</h2>
-                                <Rating required size="large" precision={0.5} value={ 5 } readOnly />
+                                <Rating required size="large" precision={0.5} value={ overallCalc(respect,response,bike,pet) } readOnly />
                             </Stack>
                             <Stack direction="row" spacing={2} justifyContent="center">
                                 <h2>Respectiveness</h2>
