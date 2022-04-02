@@ -22,7 +22,7 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 /**
  *  Handle http requests 
  * */
-app.use('/api', apiRouter);
+// app.use('/api', apiRouter);
 
 /** 
  *  Serve the home/login-signup page and the main app on these routes 
@@ -33,6 +33,10 @@ app.get('/app', sessionController.checkSession, (req, res) => {
 app.get('/', (req, res) => {
   return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../build/index.html'));
 });
+
+app.get('/demoprofile',(req,res) => {
+  return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../client/public/landlordprofile.html'));
+})
 
 /** 
  * Catch all  route handler 
