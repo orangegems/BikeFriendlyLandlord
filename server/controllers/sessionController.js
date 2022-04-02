@@ -12,14 +12,17 @@ sessionController.checkSession = (req, res, next) => {
   const jwtToken = req.cookies.ssid;
   // check if the cookie exists. return status code 401 if it doesn't
   if (!jwtToken) return res.status(401).send();
-  const payload = jwt.verify(jwtToken, process.env.jwts, {
+  const decryptedToken = jwt.verify(jwtToken, process.env.jwts, {
     complete: true,
   });
-  // check if the jxt verified. return status code 401 if it doesn't
-  if (!payload) return res.status(401).send();
+  // check if the jxt verified. return status code 401 if it doesn't. 
+  if (!decryptedToken) {
+    res.clearCookie('ssid');
+    return res.status(401).send();
+  }
 
-  // ! saving userId to res.locals. need to configure with new database
-  // res.locals.userId = payload.payload.userId;
+  res.locals.user = decryptedToken.payload;
+
   next();
 };
 
@@ -28,12 +31,19 @@ sessionController.checkSession = (req, res, next) => {
  */
 sessionController.startSession = (req, res, next) => {
   console.log('entered sessionController.startSession');
+  const userInfo = res.locals.user;
+
+  const jwtData = {
+    _id: userInfo._id,
+    username: userInfo.username,
+    landlord_id: userInfo.landlord_id
+  }
   // create the json web token
   const jwtToken = jwt.sign(
-    { /** userId: res.locals.user._id */ }, // ! encrypting userId in jwt. need to configure with new database
+    jwtData, 
     process.env.jwts,
     {
-      expiresIn: 30000000, // a long time
+      expiresIn: 7200000, // 2 hours
     }
   );
   // save the json web token as a cookie named 'ssid'

@@ -2,13 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Index } from './Index.jsx';
+import { App } from './App.jsx';
 
-// * import styles
+// import styles from '../public/app.css';
+import './app.css';
 
 render(
   <BrowserRouter>
-    <Index />
+    <App />
   </BrowserRouter>,
   document.getElementById('app')
 );

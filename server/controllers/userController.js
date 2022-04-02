@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
+const db = require('../models/BFLL.js');
 
 const saltRounds = 10;
 
@@ -8,77 +9,133 @@ const userController = {};
 /**
  * hashes the password with bcryptjs and saves the user to the database
  */
-userController.createUser = (req, res, next) => {
+userController.createUser = async (req, res, next) => {
   console.log('entered userController.createUser');
-  // * what data do we need
-  const { username, password, name } = req.body; // !
+  try {
+    const {
+      username,
+      password,
+      firstname,
+      lastname,
+      isLandlord,
+      email,
+      landlordId,
+    } = req.body;
 
-  // ? validate user input
+    // ? validate user input
 
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) {
-      return next({
-        log: `Error in userController.createUser hashing the password -> Error: ${err}`,
-        message: {
-          err: 'error creating new user',
-        },
-      });
-    }
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     /**
-     * save user to data base with hashed password
-     *
-     *
-     *
+     * if the new user is a landlord, add the new landlord to the 'landlord' table
+     * before adding the user to the users table with landlord_id
      */
-  });
+    // if (landlordId && !isTenant) {
+    //   const landlordQueryString = `
+    //   INSERT INTO users (first_name, last_name, full_name,is_verified) 
+    //   VALUES ($1, $2, $3, $4);
+    //   `;
+    //   const landlordValues = [
+    //     firstname,
+    //     lastname,
+    //     firstname + ' ' + lastname,
+    //     true,
+    //   ];
+    //   const landlordResult = await db.query(
+    //     landlordQueryString,
+    //     landlordValues
+    //   );
+    //   console.log(landlordResult.rows);
+    // }
+
+    /**
+     * database query to add the new user to the users table
+     */
+    const userQueryString = `
+    INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING _id, username, landlord_id;
+    `;
+    const userValues = [
+      firstname,
+      lastname,
+      firstname + ' ' + lastname,
+      username,
+      email,
+      hashedPassword,
+      isLandlord,
+      landlordId,
+    ];
+    const userResult = await db.query(userQueryString, userValues);
+    res.locals.user = userResult.rows[0];
+
+    next();
+
+  } catch (err) {
+    return next({
+      log: `Error in userController.createUser adding new user -> Error: ${err}`,
+      message: {
+        err: 'Error creating new user',
+      },
+    });
+  }
 };
 
-userController.verifyUser = (req, res, next) => {
+userController.verifyUser = async (req, res, next) => {
   console.log('entered userController.verifyUser');
-  const { username, password } = req.body; // !
+  try {
+    const { username, password } = req.body;
 
-  /**
-   * search the user in the data base
-   *
-   *
-   *
-   */
+    const queryString = `
+    SELECT * FROM users
+    WHERE users.username = $1;
+    `;
+    const result = await db.query(queryString, [username]);
 
-  //  compare the passmords with bcrypt - return error if passwords don't match (200?)
-  bcrypt.compare(password, hash, (err, result) => {
-    if (err) {
-      return next({
-        log: `Error in userController.verifyUser comparing the passwords -> Error: ${err}`,
-        message: {
-          err: 'error verifying passwords',
-        },
-      });
-    }
-    if (result === false) res.status(401).send('passwords do not match');
+    const hash = result.rows[0].password 
 
-    /**
-     * Save user to res.locals
-     *
-     *
-     *
-     */
+    //  compare the passmords with bcrypt - return error if passwords don't match (200?)
+    const match = await bcrypt.compare(password, hash);
+    if (!match) res.status(401).send('passwords do not match');
+
+    res.locals.user = result.rows[0] 
 
     return next();
-  });
+  } catch (err) {
+    return next({
+      log: `Error in userController.verifyUser verifying the user -> Error: ${err}`,
+      message: {
+        err: 'Error verifying user',
+      },
+    });
+  }
 };
 
-
-
+// ! not tested
 userController.deleteUser = async (req, res, next) => {
   console.log('entered userController.deleteUser');
-  /** 
-   * Delete user from the database
-   * 
-   * 
-   * 
-  */
-  return next();
+  try {
+    // pull username form cookie
+
+    const queryString = `
+    Delete FROM users
+    WHERE users._id = $1;
+    `;
+    const values = [/** userId */];
+    const result = await db.query(queryString, values);
+    console.log(result.rows)
+
+    // res.locals.user = result.rows.something // !
+
+    return next();
+  } catch (err) {
+    return next({
+      log: `Error in userController.deleteUser removing the user -> Error: ${err}`,
+      message: {
+        err: 'Error deleting user',
+      },
+    });
+  }
 };
 
 module.exports = userController;
