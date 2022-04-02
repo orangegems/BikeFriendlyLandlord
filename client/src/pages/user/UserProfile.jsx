@@ -3,10 +3,12 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export function UserProfile(props) {
   const { userData, setUserData, setIsLoggedIn, setAuthDisplay } = props;
-  const [reviews, setReviews] = props;
+  const [reviews, setReviews] = useState([]);
   let navigate = useNavigate();
+  // let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    console.log('here')
     fetch('/auth/check', {
       method: 'POST',
     })
@@ -28,6 +30,7 @@ export function UserProfile(props) {
           setAuthDisplay(true);
           navigate('/');
         } else {
+          console.log(res)
           return res.json();
         }
       })
@@ -40,13 +43,21 @@ export function UserProfile(props) {
       });
   }, []);
 
-  // let [searchParams, setSearchParams] = useSearchParams();
+  const allReviews = [];
+  /**
+   * iterate through the reviews array and crate individual reviews compents
+   */
+
   return (
     <div>
       <p>
         Hello {userData.full_name}
         {','}
       </p>
+      <div>
+        <h3>Your Reviews</h3>
+        {allReviews}
+      </div>
     </div>
   );
 }

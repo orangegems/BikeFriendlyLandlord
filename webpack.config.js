@@ -44,6 +44,7 @@ module.exports = {
     magicHtml: true,
     proxy: {
       '/auth': 'http://localhost:3000',
+      '/reviews': 'http://localhost:3000',
     },
   },
 };

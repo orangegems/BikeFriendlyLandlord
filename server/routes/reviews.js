@@ -22,7 +22,7 @@ router.get(
     const response = {
       reviews: res.locals.reviews
     };
-    return res.json(response);
+    return res.type('application/json').json(response);
   }
 );
 
