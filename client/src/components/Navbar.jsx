@@ -2,7 +2,30 @@ import { Button } from '@mui/material';
 import React from 'react'
 
 
-export function Navbar({isLoggedIn, authDisplay, logout, setAuthDisplay}) {
+export function Navbar({isLoggedIn, authDisplay, setAuthDisplay}) {
+  function logout() {
+    event.preventDefault();
+    fetch(`/auth/logout`, {
+      method: "POST",
+      // Adding headers to the request
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          // if successfully logged out, reset login state to false
+          setIsLoggedIn(false);
+          setAuthDisplay(false);
+        } else {
+          console.log("logout status not 200 -->", res);
+        }
+      })
+      .catch((err) => {
+        console.log("Error from logout --> ", err);
+      });
+  }
+
   return (
     <div>
       <div id="navBar">
