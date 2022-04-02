@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const db = require('./models/BFLL.js');
 
 const sessionController = require('./controllers/sessionController');
+const apiRouter = require('./routes/api.js');
 
 const app = express();
 const PORT = 3000;
@@ -37,6 +39,19 @@ app.get('/', (req, res) => {
 app.get('/demoprofile',(req,res) => {
   return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../client/public/landlordprofile.html'));
 })
+// test route 
+app.get('/test', async (req, res) => {
+  const queryString = `
+  SELECT * FROM users;
+  `;
+
+  try {
+    const results = await db.query(queryString);
+    return res.json(results.rows);
+  } catch (error) {
+    return res.json(error);
+  }
+});
 
 /** 
  * Catch all  route handler 
