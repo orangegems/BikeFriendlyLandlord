@@ -20,6 +20,7 @@ app.use(cookieParser());
  * serve static filse from assets and build folder 
  * */
 app.use('/build', express.static(path.join(__dirname, '../build')));
+app.use('/images', express.static(path.resolve(__dirname, './images')));
 
 
 /**
