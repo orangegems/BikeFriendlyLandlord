@@ -1,15 +1,15 @@
 import { Button } from '@mui/material';
-import React from 'react'
+import React from 'react';
 
-
-export function Navbar({isLoggedIn, authDisplay, setAuthDisplay}) {
+export function Navbar(props) {
+  const { isLoggedIn, authDisplay, setAuthDisplay, setIsLoggedIn, setUserData } = props;
   function logout() {
     event.preventDefault();
     fetch(`/auth/logout`, {
-      method: "POST",
+      method: 'POST',
       // Adding headers to the request
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        'Content-type': 'application/json; charset=UTF-8',
       },
     })
       .then((res) => {
@@ -17,12 +17,13 @@ export function Navbar({isLoggedIn, authDisplay, setAuthDisplay}) {
           // if successfully logged out, reset login state to false
           setIsLoggedIn(false);
           setAuthDisplay(false);
+          setUserData({});
         } else {
-          console.log("logout status not 200 -->", res);
+          console.log('logout status not 200 -->', res);
         }
       })
       .catch((err) => {
-        console.log("Error from logout --> ", err);
+        console.log('Error from logout --> ', err);
       });
   }
 
@@ -47,5 +48,5 @@ export function Navbar({isLoggedIn, authDisplay, setAuthDisplay}) {
         )}
       </div>
     </div>
-  )
+  );
 }
