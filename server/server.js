@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-
+const cors = require('cors')
 const sessionController = require('./controllers/sessionController');
 const landlordRouter = require('./routes/landlord.js');
 const reviewsRouter = require('./routes/reviews.js');
@@ -15,6 +15,7 @@ const PORT = 3000;
  * */
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 /** 
  * serve static filse from assets and build folder 

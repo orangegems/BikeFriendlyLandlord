@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { Authenticate } from "./pages/authenticate/Authenticate.jsx";
 import Navbar from "./components/Navbar.jsx";
+import ReviewPage from "./components/ReviewPage.jsx";
 
 export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,13 +34,14 @@ export function App() {
   return (
     <>
       <Navbar isLoggedIn={isLoggedIn} authDisplay={authDisplay} logout={logout} setAuthDisplay={setAuthDisplay}/>
-      This is the app....
+      {/* This is the app....
       {authDisplay && (
         <Authenticate
           setAuthDisplay={setAuthDisplay}
           setIsLoggedIn={setIsLoggedIn}
         />
-      )}
+      )} */}
+      <ReviewPage/>
     </>
   );
 }

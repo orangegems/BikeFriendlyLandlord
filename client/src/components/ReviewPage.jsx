@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
-import { Link } from 'reacter-router-dom';
+import React, { Component, useEffect } from 'react';
+// import { Link } from 'reacter-router-dom';
 
 // import MUI components
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Typography from  '@mui/material/Typography';
+// import Typography from  '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack'
 
 
-
-export default function ReviewPage() {
+export default function ReviewPage({username, user_id, landlord_id}) {
     // handle title input (limit 100)
     const [title, setTitle] = React.useState('');
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
+
 
     // calculate overall rating
     const overallCalc = (respec, respo, biker, petr) => {
@@ -42,13 +43,25 @@ export default function ReviewPage() {
         // build req body
         const formBody = {
             title: title,
+            username: 'evanmcneely',
             overall_rating: overallCalc(respect,response,bike,pet),
             respect_rating: respect,
             responsiveness_rating: response,
             bike_rating: bike,
-            pet_friendly_rating: pet
+            pet_friendly_rating: pet,
+            description: description,
+            user_id: 15,
+            landlord_id: 1
         }
-        
+
+        fetch(`http://localhost:3000/reviews/1`, {
+            method: 'POST',
+            body: JSON.stringify(formBody),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (res => console.log(res));
     }
 
         // will need the Landlord name from somewhere (props?)
@@ -113,6 +126,7 @@ export default function ReviewPage() {
                                 </Button>
                                 <Button
                                     variant="contained"
+                                    onClick={(sendReview)}
                                 >
                                     Submit
                                 </Button>

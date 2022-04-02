@@ -3,6 +3,7 @@ const db = require("../models/BFLL.js");
 const reviewsController = {};
 
 reviewsController.addReview = async (req, res, next) => {
+  console.log(req.body)
   const {
     title,
     username,
