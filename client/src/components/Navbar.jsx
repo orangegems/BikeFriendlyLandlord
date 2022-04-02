@@ -37,7 +37,6 @@ export function Navbar(props) {
   }
 
   let activeStyle = {
-    textDecoration: 'underline',
     color: 'blue',
   };
 

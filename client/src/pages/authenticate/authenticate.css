@@ -11,7 +11,7 @@
 }
 
 .linkButton {
-  color:blueviolet;
+  color:purple;
   text-decoration: underline;
 }
 
@@ -28,8 +28,8 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: lightgrey;
-  padding: 15px;
   align-items: center;
+  padding: 15px 50px 15px 50px;
 }
 nav ul {
   list-style-type: none;  
@@ -37,9 +37,16 @@ nav ul {
   flex-direction: row;
   justify-content: space-between;
   width: 150px;
+  align-self: center;
+  transform: translate(-70%);
 }
 nav ul li {
+  font-size: x-large;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+a {
   text-decoration: none;
   color: black;
-  font-size: x-large;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
