@@ -2,14 +2,11 @@ import React from "react";
 import HomeCard from "../homeCard/HomeCard.jsx";
 import "./homeCards.css";
 
-export default function homeCards() {
+export default function homeCards({topFour}) {
   return (
     <div className="homeCardsWrapper">
       <div className="homeCards" data-aos="fade-up" data-aos-duration="1000">
-        <HomeCard data-aos="fade-in" />
-        <HomeCard data-aos="fade-in" />
-        <HomeCard data-aos="fade-in" />
-        <HomeCard data-aos="fade-in" />
+        {topFour.map((landlordObj, index) => <HomeCard landlord={landlordObj} key={index}/>)}
       </div>
       <div className="homeCardsUserFeedbackWrapper" data-aos="fade-up" data-aos-duration="1000">
         <div className="homeCardsUserFeedback">

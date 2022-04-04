@@ -7,70 +7,82 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import "./homeCard.css";
-import Icon from '@mui/material/Icon';
-import CheckIcon from '@mui/icons-material/Check';
+import Icon from "@mui/material/Icon";
+import CheckIcon from "@mui/icons-material/Check";
+import ClearIcon from "@mui/icons-material/Clear";
 
-
-export default function HomeCard() {
+export default function HomeCard({ landlord }) {
+  console.log("landlord", landlord);
   return (
-      <Card
-        sx={{ width: 245, background: "rgba(0, 0, 0, 0.5)", margin: "20px" }}
-      >
-        <CardMedia
-          component="img"
-          alt="landlord pic"
-          height="200"
-          image="https://images.unsplash.com/photo-1499887142886-791eca5918cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-        />
-        <CardContent>
-          <div className="homeCardContents">
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              style={{ fontFamily: "Nunito" }}
-              color="#fff"
-            >
-              Landy McLandlord
-            </Typography>
-            <Typography
-              variant="body2"
-              className="homeCardTitle"
-              style={{ fontFamily: "Nunito" }}
-              color="#ddd"
-            >
-              Location: Los Angeles
-              <br />
-              <div className="homeCardRating">
-                <span style={{ color: "#ddd" }}>Rating:</span>
-                <Rating
-                  required
-                  size="small"
-                  precision={0.1}
-                  value={4.4}
-                  readOnly
-                  style={{color: "tomato"}}
-                />
-              </div>
-              <div className="bikePetFriendlyRating">
-                  <label>Bike Friendly</label>
-                  <Icon>
-                      <CheckIcon style={{color: "tomato", fontSize: "20px"}}></CheckIcon>
-                  </Icon>
-              </div>
-              <div className="bikePetFriendlyRating">
-                  <label>Pet Friendly</label>
-                  <Icon>
-                      <CheckIcon style={{color: "tomato", fontSize: "20px"}}></CheckIcon>
-                  </Icon>
-              </div>
-            </Typography>
-          </div>
-        </CardContent>
-        {/* <CardActions>
+    <Card sx={{ width: 245, background: "rgba(0, 0, 0, 0.5)", margin: "20px" }}>
+      <CardMedia
+        component="img"
+        alt="landlord pic"
+        height="200"
+        image="https://images.unsplash.com/photo-1499887142886-791eca5918cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+      />
+      <CardContent>
+        <div className="homeCardContents">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="span"
+            style={{ fontFamily: "Nunito" }}
+            color="#fff"
+          >
+            {landlord.full_name}
+          </Typography>
+          <Typography
+            variant="span"
+            className="homeCardTitle"
+            style={{ fontFamily: "Nunito" }}
+            color="#ddd"
+          >
+            Location:{" "}
+            {landlord.city ? landlord.city + ", " + landlord.state : "N/A"}
+            <br />
+            <div className="homeCardRating">
+              <span style={{ color: "#ddd" }}>Rating:</span>
+              <Rating
+                required
+                size="small"
+                precision={0.1}
+                value={Number(landlord.overall_rating)}
+                readOnly
+                style={{ color: "tomato" }}
+              />
+            </div>
+            <div className="bikePetFriendlyRating">
+              <label>Bike Friendly</label>
+              <Icon>
+                {landlord.bike_friendly ? (
+                  <CheckIcon
+                    style={{ color: "limeGreen", fontSize: "20px" }}
+                  ></CheckIcon>
+                ) : (
+                  <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                )}
+              </Icon>
+            </div>
+            <div className="bikePetFriendlyRating">
+              <label>Pet Friendly</label>
+              <Icon>
+                {landlord.pet_friendly ? (
+                  <CheckIcon
+                    style={{ color: "limeGreen", fontSize: "20px" }}
+                  ></CheckIcon>
+                ) : (
+                  <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                )}
+              </Icon>
+            </div>
+          </Typography>
+        </div>
+      </CardContent>
+      {/* <CardActions>
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
     </CardActions> */}
-      </Card>
+    </Card>
   );
 }

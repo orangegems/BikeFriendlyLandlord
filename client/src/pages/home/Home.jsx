@@ -4,11 +4,17 @@ import React, { useEffect, useState } from "react";
 import { Collapse, IconButton, makeStyles } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+const axios = require('axios');
 
 export default function Home() {
   const [checked, setChecked] = useState(false);
+  const [topFour, setTopFour] = useState([]);
   useEffect(() => {
     setChecked(true);
+    
+    axios.get('http://localhost:3000/landlords/topFour')
+    .then(res => setTopFour(res.data))
+    .catch(error => console.log(error));
   }, []);
 
   return (
@@ -28,7 +34,7 @@ export default function Home() {
           </IconButton>
         </div>
       </div>
-      <HomeCards />
+      <HomeCards topFour={topFour}/>
     </div>
   );
 }
