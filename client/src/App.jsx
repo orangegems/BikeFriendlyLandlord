@@ -7,7 +7,7 @@ export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authDisplay, setAuthDisplay] = useState(false);
 
-  function logout() {
+  function logout(event) {
     event.preventDefault();
     fetch(`/auth/logout`, {
       method: "POST",
