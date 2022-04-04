@@ -15,26 +15,20 @@ export default function Home() {
     <div className="home">
       <div className="homeBanner">
         <CssBaseline />
-        <Collapse
-          in={checked}
-          {...(checked ? { timeout: 1000 } : {})}
-          collapsedHeight={true}
-        >
-          <div className="homeTitle">
-            <h1>
-              Welcome to <br />{" "}
-              <span className="homeTitleText">Bike Friendly Landlord</span>
-            </h1>
-            <IconButton>
-              <KeyboardArrowDownIcon
-                className="homeTitleIcon"
-                style={{ fontSize: 40 }}
-              />
-            </IconButton>
-          </div>
-        </Collapse>
+        <div className="homeTitle" data-aos="fade-up" data-aos-duration="1000">
+          <h1>
+            Welcome to <br />{" "}
+            <span className="homeTitleText">Bike Friendly Landlord</span>
+          </h1>
+          <IconButton>
+            <KeyboardArrowDownIcon
+              className="homeTitleIcon"
+              style={{ fontSize: 40 }}
+            />
+          </IconButton>
+        </div>
       </div>
-        <HomeCards />
+      <HomeCards />
     </div>
   );
 }
