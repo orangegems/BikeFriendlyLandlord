@@ -8,7 +8,7 @@ export default function homeCards({topFour}) {
       <div className="homeCards" data-aos="fade-up" data-aos-duration="1000">
         {topFour.map((landlordObj, index) => <HomeCard landlord={landlordObj} key={index}/>)}
       </div>
-      <div className="homeCardsUserFeedbackWrapper" data-aos="fade-up" data-aos-duration="1000">
+      <div className="homeCardsUserFeedbackWrapper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
         <div className="homeCardsUserFeedback">
           <p className="feedbackDesc">
             I found the perfect place for my family and our bikes in record

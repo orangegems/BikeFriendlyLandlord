@@ -21,7 +21,7 @@ export default function Home() {
     <div className="home">
       <div className="homeBanner">
         <CssBaseline />
-        <div className="homeTitle" data-aos="fade-up" data-aos-duration="1000">
+        <div className="homeTitle" data-aos="fade-up" data-aos-duration="1000" data-aos-mirror={true}>
           <h1>
             Welcome to <br />{" "}
             <span className="homeTitleText">Bike Friendly Landlord</span>
