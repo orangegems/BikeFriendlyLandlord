@@ -42,7 +42,7 @@ landlordController.getLandlordsByCity = async (req, res, next) => {
 };
 
 landlordController.getTopFour = async (req, res, next) => {
-  const queryString = `SELECT * FROM landlords ORDER BY overall_rating DESC LIMIT 4;`;
+  const queryString = `SELECT landlords.*, addresses.city, addresses.state FROM landlords LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id ORDER BY overall_rating DESC LIMIT 4;`;
 
   try {
     const results = await db.query(queryString);

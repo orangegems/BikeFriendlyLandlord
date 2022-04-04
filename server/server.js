@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const sessionController = require('./controllers/sessionController');
 const landlordRouter = require('./routes/landlord.js');
@@ -14,6 +15,7 @@ const PORT = 3000;
  * Parse the body and cookies on all http requests
  * */
 app.use(express.json());
+app.use(cors());
 app.use(cookieParser());
 
 /** 
