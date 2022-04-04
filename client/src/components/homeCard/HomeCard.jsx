@@ -14,7 +14,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 export default function HomeCard({ landlord }) {
   console.log("landlord", landlord);
   return (
-    <Card sx={{ width: 245, background: "rgba(0, 0, 0, 0.5)", margin: "20px" }}>
+    <Card sx={{ width: 245, background: "rgba(0, 0, 0, 0.5)", margin: "20px", cursor: "pointer"}}>
       <CardMedia
         component="img"
         alt="landlord pic"
