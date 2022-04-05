@@ -3,8 +3,10 @@ import Login from '../../components/login/Login.jsx';
 import Signup from '../../components/Signup.jsx';
 import './authenticate.css';
 
+import './authenticate.css';
+
 export function Authenticate(props) {
-  const { setAuthDisplay, setIsLoggedIn } = props;
+  const { setAuthDisplay, setIsLoggedIn, setUserData } = props;
   const [displayLogin, setDisplayLogin] = useState(true);
 
   function handleSubmit(source, data) {
@@ -21,9 +23,14 @@ export function Authenticate(props) {
         if (res.status === 200) {
           setIsLoggedIn(true);
           setAuthDisplay(false);
+          return res.json();
         } else {
           console.log('status not 200 in handle submit --> ', res);
         }
+      })
+      .then((json) => {
+        setUserData(json);
+        console.log(json);
       })
       .catch((err) => {
         console.log('Error from hadleSubmit --> ', err);
@@ -31,21 +38,24 @@ export function Authenticate(props) {
   }
 
   return (
-    <div id="loginSignup">
-      {displayLogin && (
-        <Login
-          handleSubmit={handleSubmit}
-          setAuthDisplay={setAuthDisplay}
-          setDisplayLogin={setDisplayLogin}
-        />
-      )}
-      {!displayLogin && (
-        <Signup
-          handleSubmit={handleSubmit}
-          setAuthDisplay={setAuthDisplay}
-          setDisplayLogin={setDisplayLogin}
-        />
-      )}       
-    </div>
+    <>
+      <div id="loginCover"></div>
+      <div id="loginSignup">
+        {displayLogin && (
+          <Login
+            handleSubmit={handleSubmit}
+            setAuthDisplay={setAuthDisplay}
+            setDisplayLogin={setDisplayLogin}
+          />
+        )}
+        {!displayLogin && (
+          <Signup
+            handleSubmit={handleSubmit}
+            setAuthDisplay={setAuthDisplay}
+            setDisplayLogin={setDisplayLogin}
+          />
+        )}
+      </div>
+    </>
   );
 }
