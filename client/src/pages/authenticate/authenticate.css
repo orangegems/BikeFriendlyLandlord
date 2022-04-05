@@ -1,4 +1,4 @@
-#loginCover{
+/* #loginCover{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -20,7 +20,7 @@
   transform: translate(-50%, -70%);
   background-color: white;
   /* border: 2px black; */
-  border-radius: 5px;
+  /* border-radius: 5px;
   padding: 25px;
 }
 
@@ -35,6 +35,10 @@
 
 #logo {
   font-size: xx-large;
+  font-family: "Nunito", sans-serif;
+  font-style: bold;
+  color: tomato;
+  font-weight: 700; 
 }
 
 #navBar {
@@ -58,13 +62,19 @@ nav ul li {
   font-size: x-large;
   margin-left: 20px;
   margin-right: 50px;
+  list-style: none;
+  margin-left: 50px;
+  color: #666;
 }
 a:hover {
-  color: darkblue;
+  color: tomato;
 } 
 a {
   text-decoration: none;
-  color: black;
+   color: black; 
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   padding-right: 10px;
-}
+  list-style: none;
+  /* margin-left: 50px; 
+  color: #666;
+} */

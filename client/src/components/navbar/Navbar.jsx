@@ -38,7 +38,7 @@ export function Navbar(props) {
   }
 
   let activeStyle = {
-    color: 'blue',
+    color: 'tomato',
   };
 
   return (
