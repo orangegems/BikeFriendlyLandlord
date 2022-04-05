@@ -18,29 +18,6 @@ landlordController.getAllLandlords = async (req, res, next) => {
   }
 };
 
-landlordController.getLandlordsByCity = async (req, res, next) => {
-  const queryString = `
-        SELECT landlords.*, addresses.city, addresses.state 
-        FROM landlords 
-        INNER JOIN addresses ON landlords._id = addresses.landlord_id
-        WHERE addresses.city = $1;
-    `;
-
-  const { city } = req.body;
-  try {
-    const results = await db.query(queryString, [city]);
-    res.locals.landlords = results.rows;
-    return next();
-  } catch (error) {
-    return next({
-      message:
-        "An error occured attempting to fetch landlords by city in landlordController.getLandlordsByCity",
-      log: "Error: " + error,
-      status: 500,
-    });
-  }
-};
-
 landlordController.getTopFour = async (req, res, next) => {
   const queryString = `SELECT landlords.*, addresses.city, addresses.state FROM landlords LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id ORDER BY overall_rating DESC LIMIT 4;`;
 
@@ -91,6 +68,31 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
   } catch (error) {
     return next({
       message: 'An error occured attempting to update database with new ratings in landlordController.updateLandlordReviews',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+};
+
+landlordController.searchLandlords = async (req, res, next) => {
+  const { city, bike_friendly, pet_friendly } = req.body;
+  let queryString = `
+    SELECT landlords.*, addresses.street_num, addresses.street, addresses.city, addresses.state, addresses.zip_code FROM landlords 
+    INNER JOIN addresses ON landlords._id = addresses.landlord_id
+    WHERE addresses.city = $1
+  `;
+
+  if (bike_friendly) queryString += ' AND bike_friendly = true';
+  if (pet_friendly) queryString += ' AND pet_friendly = true';
+  queryString += ';';
+
+  try {
+    const results = await db.query(queryString, [city]);
+    res.locals.landlords = results.rows;
+    return next();
+  } catch (error) {
+    return next({
+      message: 'An error occured attempting to search landlords in landlordController.searchLandlords',
       log: 'Error: ' + error,
       status: 500
     });
