@@ -1,11 +1,7 @@
 import { Button } from '@mui/material';
-<<<<<<< HEAD:client/src/components/navbar/Navbar.jsx
 import React from 'react'
 import './navbar.css';
-=======
 import { NavLink, Link } from 'react-router-dom';
-import React from 'react';
->>>>>>> dev:client/src/components/Navbar.jsx
 
 export function Navbar(props) {
   const {
@@ -17,7 +13,7 @@ export function Navbar(props) {
     userData
   } = props;
 
-  function logout() {
+  function logout(event) {
     event.preventDefault();
     fetch(`/auth/logout`, {
       method: 'POST',
@@ -45,15 +41,7 @@ export function Navbar(props) {
     color: 'blue',
   };
 
-<<<<<<< HEAD:client/src/components/navbar/Navbar.jsx
-export function Navbar({isLoggedIn, authDisplay, logout, setAuthDisplay}) {
-return (
-    <div>
-    <div id="navBar">
-        <div id="logo">BFL</div>
-=======
   return (
-    <div>
       <div id="navBar">
         <div id="logo">BikeFriendlyLandlord</div>
         <nav>
@@ -75,7 +63,6 @@ return (
           </ul>
         </nav>
 
->>>>>>> dev:client/src/components/Navbar.jsx
         {!isLoggedIn && (
         <Button
             variant="text"
@@ -87,25 +74,13 @@ return (
         </Button>
         )}
         {isLoggedIn && (
-<<<<<<< HEAD:client/src/components/navbar/Navbar.jsx
-        <Button variant="text" onClick={() => logout()}>
-            Log Out
-        </Button>
-=======
           <div>
             <Link to={`/profile/${userData.username}`} >My Account</Link>
             <Button variant="text" onClick={() => logout()}>
               Log Out
             </Button>
           </div>
->>>>>>> dev:client/src/components/Navbar.jsx
         )}
     </div>
-<<<<<<< HEAD:client/src/components/navbar/Navbar.jsx
-    </div>
-)
-}
-=======
   );
 }
->>>>>>> dev:client/src/components/Navbar.jsx

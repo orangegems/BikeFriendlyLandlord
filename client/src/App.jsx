@@ -7,7 +7,6 @@ import { Profile } from './pages/profile/Profile.jsx';
 import { Search } from './pages/search/Search.jsx';
 import { UserProfile } from './pages/user/UserProfile.jsx';
 import { Route, Routes, Link } from 'react-router-dom';
-import React, { useState } from 'react';
 
 export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,8 +42,7 @@ export function App() {
           setIsLoggedIn={setIsLoggedIn}
           setUserData={setUserData}
         />
-      )} */}
-      <Home />
+      )} 
     </>
   );
 }

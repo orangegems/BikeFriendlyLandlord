@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-<<<<<<< HEAD:client/src/components/login/Login.jsx
 import './login.css';
-=======
 // import { InputAdornment, IconButton } from "@material-ui/core";
 // import Visibility from "@material-ui/icons/Visibility";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // import Typography from '@mui/material/Typography';
 
->>>>>>> dev:client/src/components/Login.jsx
 
 export default function Login(props) {
   const { handleSubmit, setAuthDisplay, setDisplayLogin } = props;
