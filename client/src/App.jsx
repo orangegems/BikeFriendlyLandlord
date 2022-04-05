@@ -27,6 +27,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/landlord/:landlord_id" element={<Profile />} />
+        <Route path="/review/:landlord_id" /**element={ Jonathans page }*/ /> 
         <Route
           path="/profile/:user_id"
           element={

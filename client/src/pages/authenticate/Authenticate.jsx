@@ -5,8 +5,10 @@ import Signup from '../../components/Signup.jsx';
 import './authenticate.css';
 
 export function Authenticate(props) {
-  const { setAuthDisplay, setIsLoggedIn, setUserData } = props;
+  const {setAuthDisplay, setIsLoggedIn, setUserData } = props;
   const [displayLogin, setDisplayLogin] = useState(true);
+  const [loginError, setLoginError] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   function handleSubmit(source, data) {
     event.preventDefault();
@@ -19,7 +21,10 @@ export function Authenticate(props) {
       },
     })
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 401 && source === 'login') {
+          setLoginError(true);
+          setLoginErrorMessage('Username or password is not correct.');
+        } else if (res.status === 200) {
           setIsLoggedIn(true);
           setAuthDisplay(false);
           return res.json();
@@ -42,6 +47,8 @@ export function Authenticate(props) {
       <div id="loginSignup">
         {displayLogin && (
           <Login
+          loginErrorMessage={loginErrorMessage}
+            loginError={loginError}
             handleSubmit={handleSubmit}
             setAuthDisplay={setAuthDisplay}
             setDisplayLogin={setDisplayLogin}
