@@ -58,4 +58,17 @@ landlordController.getTopFour = async (req, res, next) => {
   }
 };
 
+landlordController.updateLandlordReviews = async (req, res, next) => {
+  const {
+    overall_rating,
+    respect_rating,
+    responsiveness_rating,
+    bike_friendly,
+    pet_friendly,
+    description,
+    user_id,
+    landlord_id,
+  } = req.body;
+}
+
 module.exports = landlordController;
