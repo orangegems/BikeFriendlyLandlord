@@ -74,6 +74,7 @@ export default function Signup(props) {
         <TextField
           id="outlined-basic"
           label="Password"
+          type="password"
           variant="outlined"
           onChange={(event) =>
             setFormData({ ...formData, password: event.target.value })
