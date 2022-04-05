@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Authenticate } from "./pages/authenticate/Authenticate.jsx";
-import { Navbar } from "./components/Navbar.jsx";
+import ClearNavbar, { Navbar } from "./components/clearNavbar/ClearNavbar.jsx";
 import Home from "./pages/home/Home.jsx";
 
 export function App() {
@@ -32,7 +32,8 @@ export function App() {
 
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} authDisplay={authDisplay} logout={logout} setAuthDisplay={setAuthDisplay}/>
+      {/* <Navbar isLoggedIn={isLoggedIn} authDisplay={authDisplay} logout={logout} setAuthDisplay={setAuthDisplay}/> */}
+      <ClearNavbar isLoggedIn={isLoggedIn} authDisplay={authDisplay} logout={logout} setAuthDisplay={setAuthDisplay}/>
       {/* This is the app.... */}
       {/* {authDisplay && (
         <Authenticate
