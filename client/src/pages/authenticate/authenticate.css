@@ -1,4 +1,4 @@
-#loginCover{
+#loginCover {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -9,11 +9,10 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
   box-shadow: 0 0 10px 20px grey;
-
 }
 #loginSignup {
   opacity: 1;
-  margin:0px;
+  margin: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -25,12 +24,12 @@
 }
 
 .linkButton {
-  color:purple;
+  color: purple;
   text-decoration: underline;
 }
 
 .linkButton:hover {
-  color:blue;
+  color: blue;
 }
 
 #logo {
@@ -46,7 +45,7 @@
   padding: 15px 50px 15px 50px;
 }
 nav ul {
-  list-style-type: none;  
+  list-style-type: none;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -61,10 +60,10 @@ nav ul li {
 }
 a:hover {
   color: darkblue;
-} 
+}
 a {
   text-decoration: none;
   color: black;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   padding-right: 10px;
 }

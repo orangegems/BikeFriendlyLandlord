@@ -3,6 +3,7 @@ const db = require('../models/BFLL.js');
 const reviewsController = {};
 
 reviewsController.addReview = async (req, res, next) => {
+  console.log(req.body)
   const {
     title,
     username,
@@ -17,7 +18,7 @@ reviewsController.addReview = async (req, res, next) => {
   } = req.body;
 
   const queryString = `
-        INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_rating, pet_friendly_rating, description, user_id, landlord_id)
+        INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_friendly, pet_friendly, description, user_id, landlord_id)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
     `;
 

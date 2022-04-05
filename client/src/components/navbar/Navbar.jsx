@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
+import React from 'react'
+import './navbar.css';
 import { NavLink, Link } from 'react-router-dom';
-import React from 'react';
 
 export function Navbar(props) {
   const {
@@ -12,7 +13,7 @@ export function Navbar(props) {
     userData
   } = props;
 
-  function logout() {
+  function logout(event) {
     event.preventDefault();
     fetch(`/auth/logout`, {
       method: 'POST',
@@ -41,7 +42,6 @@ export function Navbar(props) {
   };
 
   return (
-    <div>
       <div id="navBar">
         <div id="logo">BikeFriendlyLandlord</div>
         <nav>
@@ -64,14 +64,14 @@ export function Navbar(props) {
         </nav>
 
         {!isLoggedIn && (
-          <Button
+        <Button
             variant="text"
             onClick={() => {
-              if (authDisplay === true) setAuthDisplay(false);
-              else setAuthDisplay(true);
+            if (authDisplay === true) setAuthDisplay(false);
+            else setAuthDisplay(true);
             }}>
             Login/Signup
-          </Button>
+        </Button>
         )}
         {isLoggedIn && (
           <div>
@@ -81,7 +81,6 @@ export function Navbar(props) {
             </Button>
           </div>
         )}
-      </div>
     </div>
   );
 }
