@@ -7,7 +7,7 @@ import { Stack } from '@mui/material';
 import Rating from '@material-ui/lab/Rating';
 
 
-export default function Review (
+export function Review (
     {title,
     overall_rating,
     respect_rating,

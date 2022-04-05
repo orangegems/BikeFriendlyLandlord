@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Link } from "react-router-dom";
 
-import Review from '../../components/Review.jsx';
+import { Review } from '../../components/Review.jsx';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
