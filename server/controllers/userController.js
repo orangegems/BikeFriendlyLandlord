@@ -32,7 +32,7 @@ userController.createUser = async (req, res, next) => {
      */
     // if (landlordId && !isTenant) {
     //   const landlordQueryString = `
-    //   INSERT INTO users (first_name, last_name, full_name,is_verified) 
+    //   INSERT INTO users (first_name, last_name, full_name,is_verified)
     //   VALUES ($1, $2, $3, $4);
     //   `;
     //   const landlordValues = [
@@ -54,23 +54,23 @@ userController.createUser = async (req, res, next) => {
     const userQueryString = `
     INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-    RETURNING _id, username, landlord_id;
+    RETURNING *;
     `;
     const userValues = [
       firstname,
       lastname,
       firstname + ' ' + lastname,
       username,
-      email,
+      email, 
       hashedPassword,
       isLandlord,
       landlordId,
     ];
     const userResult = await db.query(userQueryString, userValues);
+    delete userResult.rows[0].password;
     res.locals.user = userResult.rows[0];
 
     next();
-
   } catch (err) {
     return next({
       log: `Error in userController.createUser adding new user -> Error: ${err}`,
@@ -92,13 +92,14 @@ userController.verifyUser = async (req, res, next) => {
     `;
     const result = await db.query(queryString, [username]);
 
-    const hash = result.rows[0].password 
+    const hash = result.rows[0].password;
 
     //  compare the passmords with bcrypt - return error if passwords don't match (200?)
     const match = await bcrypt.compare(password, hash);
     if (!match) res.status(401).send('passwords do not match');
 
-    res.locals.user = result.rows[0] 
+    delete result.rows[0].password;
+    res.locals.user = result.rows[0];
 
     return next();
   } catch (err) {
@@ -121,9 +122,11 @@ userController.deleteUser = async (req, res, next) => {
     Delete FROM users
     WHERE users._id = $1;
     `;
-    const values = [/** userId */];
+    const values = [
+      /** userId */
+    ];
     const result = await db.query(queryString, values);
-    console.log(result.rows)
+    console.log(result.rows);
 
     // res.locals.user = result.rows.something // !
 
