@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
+import { Review } from '../compontents/Review.jsx'
+
 export function UserProfile(props) {
   const { userData, setUserData, setIsLoggedIn, setAuthDisplay } = props;
   const [reviews, setReviews] = useState([]);
@@ -8,20 +10,19 @@ export function UserProfile(props) {
   // let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    console.log('here')
-    fetch('/auth/check', {
-      method: 'POST',
-    })
-      .then((res) => {
-        if (res.status === 401) {
-          setIsLoggedIn(false);
-          setAuthDisplay(true);
-          navigate('/');
-        }
-      })
-      .catch((err) => {
-        console.log('Error check login -->', err);
-      });
+    // fetch('/auth/check', {
+    //   method: 'POST',
+    // })
+    //   .then((res) => {
+    //     if (res.status === 401) {
+    //       setIsLoggedIn(false);
+    //       setAuthDisplay(true);
+    //       navigate('/');
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error check login -->', err);
+    //   });
 
     fetch(`/reviews/${userData._id}`)
       .then((res) => {
@@ -30,7 +31,7 @@ export function UserProfile(props) {
           setAuthDisplay(true);
           navigate('/');
         } else {
-          console.log(res)
+          console.log(res);
           return res.json();
         }
       })
@@ -43,11 +44,6 @@ export function UserProfile(props) {
       });
   }, []);
 
-  const allReviews = [];
-  /**
-   * iterate through the reviews array and crate individual reviews compents
-   */
-
   return (
     <div>
       <p>
@@ -56,7 +52,9 @@ export function UserProfile(props) {
       </p>
       <div>
         <h3>Your Reviews</h3>
-        {allReviews}
+        {reviews.map(review => {
+          // <Review /** props*/>;
+        })}
       </div>
     </div>
   );

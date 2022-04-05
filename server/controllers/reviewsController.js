@@ -50,15 +50,13 @@ reviewsController.getReviews = async (req, res, next) => {
   console.log('Entered reviewsController.getReviews');
   try {
     const userId = req.params.userId;
-    console.log(userId);
 
     const query = `
     SELECT * FROM reviews
-    WHERE reviews.user_id = $1;
+    WHERE user_id = $1;
     `;
 
-    const result = db.query(query, [userId])
-    console.log(result.rows);
+    const result = await db.query(query, [userId])
     res.locals.reviews = result.rows;
     next();
   } catch (error) {
