@@ -7,7 +7,7 @@ export function Navbar(props) {
   const {
     isLoggedIn,
     authDisplay,
-    setAuthDisplay,
+    setAuthDisplay, 
     setIsLoggedIn,
     setUserData,
     userData
@@ -38,22 +38,22 @@ export function Navbar(props) {
   }
 
   let activeStyle = {
-    color: 'blue',
+    color: 'tomato',
   };
 
   return (
       <div id="navBar">
         <div id="logo">BikeFriendlyLandlord</div>
         <nav>
-          <ul>
-            <li>
+          <ul className="navBarListItems">
+            <li className="navBarListItem">
               <NavLink
                 to="/"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Home
               </NavLink>
             </li>
-            <li>
+            <li className="navBarListItem">
               <NavLink
                 to="/search"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}>
@@ -76,7 +76,7 @@ export function Navbar(props) {
         {isLoggedIn && (
           <div>
             <Link to={`/profile/${userData.username}`} >My Account</Link>
-            <Button variant="text" onClick={() => logout()}>
+            <Button variant="text" onClick={(e) => logout(e)}>
               Log Out
             </Button>
           </div>

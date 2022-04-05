@@ -8,11 +8,11 @@ import './login.css';
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // import Typography from '@mui/material/Typography';
 
-
 export default function Login(props) {
-  const { handleSubmit, setAuthDisplay, setDisplayLogin } = props;
+  const { handleSubmit, setAuthDisplay, setDisplayLogin, loginError, loginErrorMessage } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   return (
     <>
       <Box
@@ -40,16 +40,21 @@ export default function Login(props) {
           label="Password"
           variant="outlined"
           type="password"
-          vi
+          error={loginError}
+          helperText={loginErrorMessage}
           onChange={(event) => setPassword(event.target.value)}
           value={password}
         />
         <Button variant="contained" type="submit">
           Login
         </Button>
-        <div className="linkButton" onClick={()=> setDisplayLogin(false)}>Need an account? Signup</div>
-        <button onClick={()=> setAuthDisplay(false)}>Continue without logging in</button>
+        <div className="linkButton" onClick={() => setDisplayLogin(false)}>
+          Need an account? Signup
+        </div>
+        <button onClick={() => setAuthDisplay(false)}>
+          Continue without logging in
+        </button>
       </Box>
     </>
-  )
+  );
 }

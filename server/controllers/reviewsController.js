@@ -3,6 +3,7 @@ const db = require("../models/BFLL.js");
 const reviewsController = {};
 
 reviewsController.addReview = async (req, res, next) => {
+  console.log(req.body)
   const {
     title,
     username,
@@ -51,10 +52,14 @@ reviewsController.getReviews = async (req, res, next) => {
 
     const query = `
     SELECT * FROM reviews
-    WHERE reviews.user_id = $1;
+    WHERE user_id = $1;
     `;
 
+<<<<<<< HEAD
     const result = db.query(query, [userId]);
+=======
+    const result = await db.query(query, [userId])
+>>>>>>> dev
     res.locals.reviews = result.rows;
     next();
   } catch (error) {
