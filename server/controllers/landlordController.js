@@ -59,16 +59,42 @@ landlordController.getTopFour = async (req, res, next) => {
 };
 
 landlordController.updateLandlordReviews = async (req, res, next) => {
-  const {
-    overall_rating,
-    respect_rating,
-    responsiveness_rating,
-    bike_friendly,
-    pet_friendly,
-    description,
-    user_id,
-    landlord_id,
-  } = req.body;
-}
+  const { landlord_id } = req.body;
+
+  let newOverall = newRespect = newResponsiveness = newBike = newPet = 0;
+
+  // add up total for each review category
+  res.locals.landlordReviews.forEach(review => {
+    newOverall += Number(review.overall_rating);
+    newRespect += Number(review.respect_rating);
+    newResponsiveness += Number(review.responsiveness_rating);
+    if (review.bike_friendly) newBike += 1;
+    if (review.pet_friendly) newPet += 1;
+  });
+
+  // calculate new average for each review category
+  newOverall /= res.locals.landlordReviews.length;
+  newRespect /= res.locals.landlordReviews.length;
+  newResponsiveness /= res.locals.landlordReviews.length;
+  newBike = (newBike >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false);
+  newPet = (newPet >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false);
+
+  // push new values to database
+  const queryString = `
+    UPDATE landlords
+    SET overall_rating = $1, respect_rating = $2, responsiveness_rating = $3, bike_friendly = $4, pet_friendly = $5
+    WHERE _id = $6;
+  `;
+  try {
+    await db.query(queryString, [newOverall, newRespect, newResponsiveness, newBike, newPet, landlord_id]);
+    return next();
+  } catch (error) {
+    return next({
+      message: 'An error occured attempting to update database with new ratings in landlordController.updateLandlordReviews',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+};
 
 module.exports = landlordController;
