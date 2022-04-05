@@ -1,0 +1,11 @@
+#logo {
+  font-size: xx-large;
+}
+
+#navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: lightgrey;
+  padding: 15px;
+}

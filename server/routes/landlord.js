@@ -12,4 +12,8 @@ router.get('/byCity', landlordController.getLandlordsByCity, (req, res) => {
     return res.json(res.locals.landlords);
 });
 
+router.get('/topFour', landlordController.getTopFour, (req, res) => {
+    return res.json(res.locals.topLandlords);
+});
+
 module.exports = router;
