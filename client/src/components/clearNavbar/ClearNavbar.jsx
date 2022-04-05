@@ -8,7 +8,7 @@ export default function ClearNavbar({ isLoggedIn, authDisplay, logout, setAuthDi
       <div id="clearNavBar">
         <div className="clearNavBarLeft">
           <div id="logo">BFL</div>
-        </div>
+        </div> 
         <div className="clearNavBarCenter">
           <ul className="clearNavBarListItems">
             <li className="clearNavBarListItem">Home</li>
@@ -17,7 +17,7 @@ export default function ClearNavbar({ isLoggedIn, authDisplay, logout, setAuthDi
         </div>
         <div className="clearNavBarRight">
           {!isLoggedIn && (
-            <Button
+            <Button 
               variant="text"
               style={{color: "tomato"}}
               onClick={() => {
