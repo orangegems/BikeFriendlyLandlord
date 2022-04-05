@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Authenticate } from "./pages/authenticate/Authenticate.jsx";
 import {Navbar} from "./components/Navbar.jsx";
 import ReviewPage from "./components/ReviewPage.jsx";
+import SearchPage from "./pages/search/Search.jsx";
 
 export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,7 +41,7 @@ export function App() {
           setIsLoggedIn={setIsLoggedIn}
         />
       )} */}
-      <ReviewPage/>
+      <SearchPage/>
     </>
   );
 }

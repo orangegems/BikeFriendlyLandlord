@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from 'react';
-// import { Link } from 'reacter-router-dom';
+// import { Link } from 'react-router-dom';
 
 // import MUI components
 import Button from '@mui/material/Button';
