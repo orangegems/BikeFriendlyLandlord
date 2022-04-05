@@ -75,8 +75,8 @@ export function Navbar(props) {
         )}
         {isLoggedIn && (
           <div>
-            <div className="navBarListItem"><Link to={`/profile/${userData.username}`} >My Account</Link></div>
-            <Button variant="text" onClick={() => logout()}>
+            <Link to={`/profile/${userData.username}`} >My Account</Link>
+            <Button variant="text" onClick={(e) => logout(e)}>
               Log Out
             </Button>
           </div>

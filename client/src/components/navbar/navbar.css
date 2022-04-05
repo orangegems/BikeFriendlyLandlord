@@ -1,4 +1,4 @@
-#logo {
+/* #logo {
   font-family: "Nunito", sans-serif;
   font-size: xx-large;
   font-style: bold;
@@ -11,8 +11,8 @@
   justify-content: space-between;
   background-color: none;
   padding: 15px;
-  position: absolute;
-  width: 100%;
+  /* position: absolute; */
+  /* width: 100%;
 }
 
 .navBarListItems {
@@ -25,4 +25,4 @@
   list-style: none;
   margin-left: 50px;
   color: #666;
-}
+} */ 
