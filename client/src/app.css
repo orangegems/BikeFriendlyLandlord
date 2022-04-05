@@ -2,7 +2,7 @@ body {
   margin: 0px;
 }
 #loginSignup {
-  margin:0px;
+  margin: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -14,12 +14,12 @@ body {
 }
 
 .linkButton {
-  color:blueviolet;
+  color: blueviolet;
   text-decoration: underline;
 }
 
 .linkButton:hover {
-  color:blue;
+  color: blue;
 }
 
 #logo {
