@@ -55,11 +55,7 @@ reviewsController.getReviews = async (req, res, next) => {
     WHERE user_id = $1;
     `;
 
-<<<<<<< HEAD
-    const result = db.query(query, [userId]);
-=======
     const result = await db.query(query, [userId])
->>>>>>> dev
     res.locals.reviews = result.rows;
     next();
   } catch (error) {
