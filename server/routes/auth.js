@@ -29,12 +29,16 @@ router.post(
 // post -> logout
 router.post(
   '/logout',
-  sessionController.checkSession,
   sessionController.endSession,
   (req, res) => {
     res.status(200).send();
   }
 );
+
+// just if the user is logged in
+router.post('/check', sessionController.checkSession, (req,res) => {
+  res.sendStatus(200);
+})
 
 module.exports = router;
 

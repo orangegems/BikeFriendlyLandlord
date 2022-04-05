@@ -39,11 +39,12 @@ module.exports = {
     }),
   ],
   devServer: {
-    // historyApiFallback: true,
+    historyApiFallback: true,
     hot: true,
     magicHtml: true,
     proxy: {
       '/auth': 'http://localhost:3000',
+      '/reviews': 'http://localhost:3000',
     },
   },
 };
