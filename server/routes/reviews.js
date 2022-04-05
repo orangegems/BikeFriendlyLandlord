@@ -7,8 +7,9 @@ const sessionController = require('../controllers/sessionController.js');
 
 router.post(
   '/:landlordId',
-  sessionController.checkSession,
+  // sessionController.checkSession,
   reviewsController.addReview,
+  reviewsController.getAllLandlordReviews,
   (req, res) => {
     return res.send('Review added successfully!');
   }

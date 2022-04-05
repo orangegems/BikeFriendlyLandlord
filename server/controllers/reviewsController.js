@@ -17,7 +17,7 @@ reviewsController.addReview = async (req, res, next) => {
   } = req.body;
 
   const queryString = `
-        INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_rating, pet_friendly_rating, description, user_id, landlord_id)
+        INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_friendly, pet_friendly, description, user_id, landlord_id)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
     `;
 
@@ -34,7 +34,6 @@ reviewsController.addReview = async (req, res, next) => {
       user_id,
       landlord_id,
     ]);
-    console.log(result);
     return next();
   } catch (error) {
     return next({
@@ -47,10 +46,8 @@ reviewsController.addReview = async (req, res, next) => {
 };
 
 reviewsController.getReviews = async (req, res, next) => {
-  console.log("Entered reviewsController.getReviews");
   try {
     const userId = req.params.userId;
-    console.log(userId);
 
     const query = `
     SELECT * FROM reviews
@@ -58,7 +55,6 @@ reviewsController.getReviews = async (req, res, next) => {
     `;
 
     const result = db.query(query, [userId]);
-    console.log(result.rows);
     res.locals.reviews = result.rows;
     next();
   } catch (error) {
@@ -72,14 +68,14 @@ reviewsController.getReviews = async (req, res, next) => {
 };
 
 reviewsController.getAllLandlordReviews = async (req, res, next) => {
-  const { landlordId } = req.query;
+  const { landlord_id } = req.body;
   const queryString = `
     SELECT * FROM reviews 
     WHERE landlord_id = $1;
   `;
 
   try {
-    const results = await db.query(queryString, [landlordId]);
+    const results = await db.query(queryString, [landlord_id]);
     res.locals.landlordReviews = results.rows;
     return next();
   } catch (error) {
