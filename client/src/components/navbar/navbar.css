@@ -1,11 +1,28 @@
 #logo {
+  font-family: "Nunito", sans-serif;
   font-size: xx-large;
+  font-style: bold;
+  color: tomato;
+  font-weight: 700;
 }
 
 #navBar {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  background-color: lightgrey;
+  background-color: none;
   padding: 15px;
+  position: absolute;
+  width: 100%;
+}
+
+.navBarListItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarListItem {
+  list-style: none;
+  margin-left: 50px;
+  color: #666;
 }

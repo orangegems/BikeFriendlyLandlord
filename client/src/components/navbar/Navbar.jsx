@@ -7,7 +7,7 @@ export function Navbar(props) {
   const {
     isLoggedIn,
     authDisplay,
-    setAuthDisplay,
+    setAuthDisplay, 
     setIsLoggedIn,
     setUserData,
     userData
@@ -45,15 +45,15 @@ export function Navbar(props) {
       <div id="navBar">
         <div id="logo">BikeFriendlyLandlord</div>
         <nav>
-          <ul>
-            <li>
+          <ul className="navBarListItems">
+            <li className="navBarListItem">
               <NavLink
                 to="/"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Home
               </NavLink>
             </li>
-            <li>
+            <li className="navBarListItem">
               <NavLink
                 to="/search"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}>
@@ -75,7 +75,7 @@ export function Navbar(props) {
         )}
         {isLoggedIn && (
           <div>
-            <Link to={`/profile/${userData.username}`} >My Account</Link>
+            <div className="navBarListItem"><Link to={`/profile/${userData.username}`} >My Account</Link></div>
             <Button variant="text" onClick={() => logout()}>
               Log Out
             </Button>
