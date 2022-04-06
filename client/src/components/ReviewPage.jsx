@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // import MUI components
 import Button from '@mui/material/Button';
@@ -12,7 +12,14 @@ import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
 
 
-export default function ReviewPage({username, user_id, landlord_id}) {
+export default function ReviewPage({userData}) {
+    // get landlord id
+    const landlordID = useParams()
+
+    //get landlordName
+    const [landlordName, setlandlordName] = React.useState('');
+    
+
     // handle title input (limit 100)
     const [title, setTitle] = React.useState('');
     const handleTitleChange = (e) => {
@@ -50,21 +57,22 @@ export default function ReviewPage({username, user_id, landlord_id}) {
 
     // method to handle form submission
     const sendReview = () => {
+
         // build req body
         const formBody = {
             title: title,
-            username: 'evanmcneely',
+            username: userData.username,
             overall_rating: overallCalc(respect,response),
             respect_rating: respect,
             responsiveness_rating: response,
             bike_friendly: bike,
             pet_friendly: pet,
             description: description,
-            user_id: 15,
-            landlord_id: 1
+            user_id: userData.user_id,
+            landlord_id: landlordID
         }
 
-        fetch(`http://localhost:3000/reviews/1`, {
+        fetch(`http://localhost:3000/reviews/${landlordID}`, {
             method: 'POST',
             body: JSON.stringify(formBody),
             headers:{

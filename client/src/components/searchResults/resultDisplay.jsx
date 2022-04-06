@@ -24,9 +24,6 @@ export default function ResultDisplay( {resultsArr} ) {
                 borderRadius: 1
             }}
         >
-            <div>
-                {/* {resultsArr.map((landlordObj, index) => <HomeCard landlord={landlordObj} key={index}/>)} */}
-            </div>
         </Box>
     )}
     else {
