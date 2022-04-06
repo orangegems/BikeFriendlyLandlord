@@ -7,6 +7,7 @@ const sessionController = require('./controllers/sessionController');
 const landlordRouter = require('./routes/landlord.js');
 const reviewsRouter = require('./routes/reviews.js');
 const authRouter = require('./routes/auth.js');
+const addressRouter = require('./routes/address.js');
 
 const app = express();
 const PORT = 3000;
@@ -32,6 +33,7 @@ app.use('/images', express.static(path.resolve(__dirname, './images')));
 app.use('/landlords', landlordRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/auth', authRouter);
+app.use('/address', addressRouter);
 
 /** 
  *  Serve the home/login-signup page and the main app on these routes 
