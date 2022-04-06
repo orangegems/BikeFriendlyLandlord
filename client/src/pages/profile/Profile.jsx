@@ -28,16 +28,16 @@ import axios from 'axios';
 
 
 
-// const landlordData = {
-//     landlord_id: 1,
-//     full_name : "demoLandlord",
-//     overall_rating : 3,
-//     respect_rating : 2,
-//     responsiveness_rating: 2,
-//     bike_rating : true,
-//     pet_friendly_rating : true,
-//     is_verified: true
-// }
+const landlordData = {
+    landlord_id: 1,
+    full_name : "demoLandlord",
+    overall_rating : 3,
+    respect_rating : 2,
+    responsiveness_rating: 2,
+    bike_rating : true,
+    pet_friendly_rating : true,
+    is_verified: true
+}
 
 const reviewData = [
         {
@@ -57,16 +57,16 @@ const reviewData = [
 
 export default function ProfilePage() {
 
-    const [landlordData,setLandlordData] = React.useState({})
+    // const [landlordData,setLandlordData] = React.useState({})
 
-    const landlordId = useParams();
-    React.useEffect(() => {
-        axios.get(`http://localhost:3000/landlords/getById/${landordId}`)
-        .then (res => {res.json()})
-        .then (landlordObject => {
-            setLandlordData(landlordObject)
-        })
-    })
+    // const landlordId = useParams();
+    // React.useEffect(() => {
+    //     axios.get(`http://localhost:3000/landlords/getById/${landordId}`)
+    //     .then (res => {res.json()})
+    //     .then (landlordObject => {
+    //         setLandlordData(landlordObject)
+    //     })
+    // })
 
     return (
         <Container className="MainContainer" sx={{m:2,pt:3,pr:4, justifyContent: 'center'}}>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
                     Reviews
                     </Typography>
                     <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
-                        <Link to={`/reviews/${landlordId}/`}><Button variant="contained">Create Review</Button></Link>
+                        <Link to={`/reviews/${landlordData.landlord_id}/`}><Button variant="contained">Create Review</Button></Link>
                     </Stack>
                 </Stack>
                 <Stack>
