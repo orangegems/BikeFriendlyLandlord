@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import { Review } from '../../compontents/Review.jsx';
+import { Review } from '../../components/Review.jsx';
 
 export function UserProfile(props) {
   const { userData, setUserData, setIsLoggedIn, setAuthDisplay } = props;
@@ -54,9 +54,14 @@ export function UserProfile(props) {
       <div>
         <h4>Your Reviews</h4>
         {reviews.map((review) => {
-          <Review
+          return <Review
             title={review.title}
             overall_rating={review.overall_rating}
+            respect_rating={review.respect_rating}
+            responsiveness_rating={review.responsiveness_rating}
+            bike_rating={review.bike_rating}
+            pet_friendly_rating={review.pet_friendly}
+            description={review.description}
           />;
         })}
       </div>
