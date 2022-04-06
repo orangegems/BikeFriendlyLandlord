@@ -12,7 +12,7 @@ router.get('/topFour', landlordController.getTopFour, (req, res) => {
     return res.json(res.locals.topLandlords);
 });
 
-router.get('/search', landlordController.searchLandlords, (req, res) => {
+router.post('/search', landlordController.searchLandlords, (req, res) => {
     return res.json(res.locals.landlords);
 })
 
