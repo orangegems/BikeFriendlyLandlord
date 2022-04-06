@@ -1,5 +1,4 @@
 import React, {Component, useEffect } from 'react';
-import axios from 'axios'
 // import { Link } from 'react-router-dom'
 
 // import MUI components
@@ -11,9 +10,14 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import  Checkbox  from '@mui/material/Checkbox';
 
+// import result component
+import ResultDisplay from "../../components/searchResults/resultDisplay.jsx"
 
 
 export default function Search() {
+    // handle search results
+    const [searchResults, setSearchResults] = React.useState([]);
+
     // handle city input
     const [city, setCity] = React.useState('');
 
@@ -30,7 +34,7 @@ export default function Search() {
 
     // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
     let options = [];
-    useEffect(() => {
+
     fetch(`http://localhost:3000/address/uniqueCities`,{
         method: 'GET'
     })
@@ -40,7 +44,7 @@ export default function Search() {
             options.push(parsed[i].city)
         }
     })
-    }, [])
+    
     // method to handle search :fetch request using all fields
     const handleSearch = () => {
         // build req body
@@ -62,6 +66,7 @@ export default function Search() {
         // response will need to be assigned to a variable to be sent to our results display
         .then (parsed => {
             console.log(parsed)
+            setSearchResults(parsed)
         })
     }
     return (
@@ -103,6 +108,7 @@ export default function Search() {
                             Search
                         </Button>
                     </Stack>
+                <ResultDisplay resultsArr={searchResults} />
                 </Box>
         </Container>
     )
