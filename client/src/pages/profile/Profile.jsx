@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Link } from "react-router-dom";
 
 import { Review } from '../../components/Review.jsx';
+import { LandlordInfoCard } from '../../components/LandlordInfoCard.jsx'
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -20,31 +21,32 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import Button from '@mui/material/Button';
-import TableHead from '@mui/material/TableHead';
-import { styled } from '@mui/material/styles';
-import Rating from '@material-ui/lab/Rating';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 
-//need to create query to gather data
-//like one here for the tables below
 
-const landlordData = {
-    full_name : "",
-    overall_rating : "",
-    respect_rating : '',
-    bike_rating : '',
-    pet_friendly_rating : ''
-}
+
+// const landlordData = {
+//     landlord_id: 1,
+//     full_name : "demoLandlord",
+//     overall_rating : 3,
+//     respect_rating : 2,
+//     responsiveness_rating: 2,
+//     bike_rating : true,
+//     pet_friendly_rating : true,
+//     is_verified: true
+// }
 
 const reviewData = [
         {
         title: 'Promises not kept',
-        overall_rating: '3',
-        respect_rating: '4',
-        responsiveness_rating: '2',
-        bike_rating:'true',
-        pet_friendly_rating:'false',
+        overall_rating: 2,
+        respect_rating: 3,
+        responsiveness_rating: 2,
+        bike_rating:true,
+        pet_friendly_rating:false,
         description:'He was the worst. Promised me that my roommate and I can bring bikes. Ended up not letting us.'
         }
     ];
@@ -54,6 +56,18 @@ const reviewData = [
 
 
 export default function ProfilePage() {
+
+    const [landlordData,setLandlordData] = React.useState({})
+
+    const landlordId = useParams();
+    React.useEffect(() => {
+        axios.get(`http://localhost:3000/landlords/getById/${landordId}`)
+        .then (res => {res.json()})
+        .then (landlordObject => {
+            setLandlordData(landlordObject)
+        })
+    })
+
     return (
         <Container className="MainContainer" sx={{m:2,pt:3,pr:4, justifyContent: 'center'}}>
             <Stack className="LandlordInfo" sx={{pb:5, pl:5}} direction="row" justifyContent="space-around">
@@ -100,26 +114,7 @@ export default function ProfilePage() {
                     </Card>
                 </Stack>
                 <Stack>
-                    <Card>
-                            <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
-                                <Typography variant= 'h5'>Overall Rating</Typography>
-                                <Rating required size="large" precision={0.5} value='2' />
-                            </Stack>
-                            <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
-                                <Typography variant= 'h5'>Respectful</Typography>
-                                <Rating required size="large" precision={0.5} value='2' />  
-                            </Stack>
-                            <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
-                                <Typography variant= 'h5'>Responsiveness</Typography>
-                                <Rating required size="large" precision={0.5} value='2' />
-                            </Stack>
-                            <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
-                                <Typography variant= 'h5'>Bike</Typography>
-                            </Stack>
-                            <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
-                                <Typography variant= 'h5'>Pet Friendly</Typography>
-                            </Stack>  
-                    </Card>
+                    <LandlordInfoCard {...landlordData}/>
                 </Stack>
             </Stack>
             <Container>
@@ -128,11 +123,15 @@ export default function ProfilePage() {
                     Reviews
                     </Typography>
                     <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
-                        <Link to="/review/:landlord_id"><Button variant="contained">Create Review</Button></Link>
+                        <Link to={`/reviews/${landlordId}/`}><Button variant="contained">Create Review</Button></Link>
                     </Stack>
                 </Stack>
                 <Stack>
-                    <Review />
+                    <div>
+                        {reviewData.map(eachReview => (
+                            <Review { ...eachReview}/>
+                        ))}
+                    </div>
                 </Stack>
             </Container>
       </Container>

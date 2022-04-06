@@ -25,7 +25,7 @@ export function App() {
         userData={userData}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Profile />} />
         <Route path="/search" element={<Search />} />
         <Route path="/landlord/:landlord_id" element={<Profile />} />
         <Route path="/review/:landlord_id" /**element={ Jonathans page }*/ /> 
