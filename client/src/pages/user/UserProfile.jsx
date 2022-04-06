@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-// import { Review } from '../compontents/Review.jsx'
+import { Review } from '../../compontents/Review.jsx';
 
 export function UserProfile(props) {
   const { userData, setUserData, setIsLoggedIn, setAuthDisplay } = props;
@@ -46,14 +46,18 @@ export function UserProfile(props) {
 
   return (
     <div>
-      <p>
+      <h1>Your Account</h1>
+      <h3>
         Hello {userData.full_name}
         {','}
-      </p>
+      </h3>
       <div>
-        <h3>Your Reviews</h3>
-        {reviews.map(review => {
-          // <Review /** props*/>;
+        <h4>Your Reviews</h4>
+        {reviews.map((review) => {
+          <Review
+            title={review.title}
+            overall_rating={review.overall_rating}
+          />;
         })}
       </div>
     </div>
