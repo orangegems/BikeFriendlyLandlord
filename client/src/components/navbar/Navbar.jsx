@@ -88,7 +88,7 @@ export function Navbar(props) {
       <div className="navBarRight">
         {!isLoggedIn && (
           <Button
-            sx={{fontFamily: 'Nunito', color: "#666"}}
+            sx={{fontFamily: 'Nunito', color: "#666", "&:hover": {backgroundColor: "rgba(253, 143, 124, 0.577)"}}}
             variant="text"
             onClick={(e) => {
               toggleAuthDisplay(e);
