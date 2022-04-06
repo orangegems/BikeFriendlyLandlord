@@ -1,17 +1,23 @@
 import { Button } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react';
 import './navbar.css';
 import { NavLink, Link } from 'react-router-dom';
+import { Authenticate } from '../../pages/authenticate/Authenticate.jsx';
 
 export function Navbar(props) {
   const {
     isLoggedIn,
     authDisplay,
-    setAuthDisplay, 
+    setAuthDisplay,
     setIsLoggedIn,
     setUserData,
-    userData
+    userData,
   } = props;
+
+  const [authPosition, setAuthPosition] = useState({
+    top: '',
+    left: '',
+  });
 
   function logout(event) {
     event.preventDefault();
@@ -37,50 +43,72 @@ export function Navbar(props) {
       });
   }
 
+  function toggleAuthDisplay(e) {
+    const top = e.pageY + 20;
+    const left = e.pageX - 200;
+    if (authDisplay === true) setAuthDisplay(false);
+    else {
+      setAuthDisplay(true);
+      setAuthPosition({
+        top: `${top}px`,
+        left: `${left}px`,
+      });
+    }
+  }
+
   let activeStyle = {
     color: 'tomato',
   };
 
   return (
-      <div id="navBar">
-        <div id="logo">BikeFriendlyLandlord</div>
-        <nav>
-          <ul className="navBarListItems">
-            <li className="navBarListItem">
-              <NavLink
-                to="/"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                Home
-              </NavLink>
-            </li>
-            <li className="navBarListItem">
-              <NavLink
-                to="/search"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                Search
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+    <div id="navBar">
+      <div id="logo">BikeFriendlyLandlord</div>
+      <nav>
+        <ul className="navBarListItems">
+          <li className="navBarListItem">
+            <NavLink
+              to="/"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              Home
+            </NavLink>
+          </li>
+          <li className="navBarListItem">
+            <NavLink
+              to="/search"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              Search
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
 
-        {!isLoggedIn && (
+      {!isLoggedIn && (
         <Button
-            variant="text"
-            onClick={() => {
-            if (authDisplay === true) setAuthDisplay(false);
-            else setAuthDisplay(true);
-            }}>
-            Login/Signup
+          variant="text"
+          onClick={(e) => {
+            toggleAuthDisplay(e);
+            // if (authDisplay === true) setAuthDisplay(false);
+            // else setAuthDisplay(true);
+          }}>
+          Login/Signup
         </Button>
-        )}
-        {isLoggedIn && (
-          <div>
-            <Link to={`/profile/${userData.username}`} >My Account</Link>
-            <Button variant="text" onClick={(e) => logout(e)}>
-              Log Out
-            </Button>
-          </div>
-        )}
+      )}
+      {isLoggedIn && (
+        <div>
+          <Link to={`/profile/${userData.username}`}>My Account</Link>
+          <Button variant="text" onClick={(e) => logout(e)}>
+            Log Out
+          </Button>
+        </div>
+      )}
+      {authDisplay && (
+        <Authenticate
+          setAuthDisplay={setAuthDisplay}
+          setIsLoggedIn={setIsLoggedIn}
+          setUserData={setUserData}
+          position={authPosition}
+        />
+      )}
     </div>
   );
 }
