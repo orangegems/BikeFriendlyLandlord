@@ -11,8 +11,6 @@ export function Authenticate(props) {
   const [loginError, setLoginError] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
-  console.log(position)
-
   function handleSubmit(source, data) {
     event.preventDefault();
     fetch(`/auth/${source}`, {

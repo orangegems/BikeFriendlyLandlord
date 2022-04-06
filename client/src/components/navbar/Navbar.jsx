@@ -44,7 +44,7 @@ export function Navbar(props) {
   }
 
   function toggleAuthDisplay(e) {
-    const top = e.pageY + 20;
+    const top = e.pageY + 30;
     const left = e.pageX - 200;
     if (authDisplay === true) setAuthDisplay(false);
     else {
