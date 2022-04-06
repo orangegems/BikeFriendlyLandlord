@@ -79,6 +79,13 @@ export function Navbar(props) {
               Search
             </NavLink>
           </li>
+          <li className="navBarListItem">
+            <NavLink
+              to="/map"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              Map
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
