@@ -18,7 +18,16 @@ export default function ReviewPage({userData}) {
 
     //get landlordName
     const [landlordName, setlandlordName] = React.useState('');
-    
+    fetch(`http://localhost:3000/landlords/getByID/${landlordID}`, {
+        method: 'GET'
+    })
+    .then(res => res.json())
+    .then(parsed => {
+        setlandlordName(parsed.first_name + parsed.last_name)
+    })
+    .catch(error => {
+        console.log(error)
+    })
 
     // handle title input (limit 100)
     const [title, setTitle] = React.useState('');
@@ -79,7 +88,8 @@ export default function ReviewPage({userData}) {
                 'Content-Type': 'application/json'
             }
         })
-        .then (res => console.log(res));
+        .then (res => console.log(res))
+        .catch(error => console.log(error));
     }
 
         // will need the Landlord name from somewhere (props?)
@@ -95,7 +105,7 @@ export default function ReviewPage({userData}) {
                             {p: 2, border: '1px solid grey'}
                         }
                         >
-                            <h2>Review of {'landlordnamehere'}</h2>
+                            <h2>Review of {landlordName}</h2>
                             <TextField 
                                 fullWidth 
                                 required 

@@ -44,6 +44,7 @@ export default function Search() {
             options.push(parsed[i].city)
         }
     })
+    .catch(error => console.log(error));
     
     // method to handle search :fetch request using all fields
     const handleSearch = () => {
@@ -68,6 +69,7 @@ export default function Search() {
             console.log(parsed)
             setSearchResults(parsed)
         })
+        .catch(error => console.log(error));
     }
     return (
         <Container className = "searchMainContainer" maxwidth ="sm" sx={{p:2}}>
