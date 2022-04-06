@@ -30,6 +30,7 @@ export default function Search() {
 
     // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
     let options = [];
+    useEffect(() => {
     fetch(`http://localhost:3000/address/uniqueCities`,{
         method: 'GET'
     })
@@ -39,7 +40,7 @@ export default function Search() {
             options.push(parsed[i].city)
         }
     })
-
+    }, [])
     // method to handle search :fetch request using all fields
     const handleSearch = () => {
         // build req body
@@ -48,9 +49,10 @@ export default function Search() {
             bike_friendly: bikeR,
             pet_friendly: petR
         }
+
         //send request
         fetch('http://localhost:3000/landlords/search', {
-            method: 'GET',
+            method: 'POST',
             body: JSON.stringify(formBody),
             headers:{
                 'Content-Type': 'application/json'
