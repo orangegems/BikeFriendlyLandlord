@@ -31,7 +31,7 @@ export function App() {
         <Route path="/landlord/:landlord_id" element={<Profile />} />
         <Route path="/review/:landlord_id" element={<ReviewPage userData={userData} />}/> 
         <Route
-          path="/profile/:user_id"
+          path="/profile/:username"
           element={
             <UserProfile userData={userData} setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} setAuthDisplay={setAuthDisplay}/>
           }
