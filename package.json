@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/BikeFriendlyLandlord/BikeFriendlyLandlord#readme",
   "dependencies": {
+    "@babel/runtime": "^7.17.9",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@material-ui/core": "^4.12.3",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.4",

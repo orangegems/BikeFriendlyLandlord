@@ -37,6 +37,7 @@ module.exports = {
       publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
       // chunks: ['index'],
     }),
+    // "@babel/plugin-transform-runtime"
   ],
   devServer: {
     historyApiFallback: true,
