@@ -18,19 +18,22 @@ import tomatopalette from "./theme/tomatopalette.jsx"
 
 
 export default function ReviewPage({userData}) {
+
     // get landlord id
     const landlordID = useParams()
-
+    console.log('landlordID:  ',landlordID)
+    console.log('userdata:  ',userData)
     //get landlordName
     const [landlordName, setlandlordName] = React.useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:3000/landlords/getByID/${landlordID}`, {
+        fetch(`http://localhost:3000/landlords/getByID/${landlordID.landlord_id}`, {
             method: 'GET'
         })
         .then(res => res.json())
         .then(parsed => {
-            setlandlordName(parsed.first_name + parsed.last_name)
+            console.log(parsed)
+            setlandlordName(parsed.first_name + ' ' + parsed.last_name)
         })
         .catch(error => {
             console.log(error)
@@ -87,17 +90,19 @@ export default function ReviewPage({userData}) {
             pet_friendly: pet,
             description: description,
             user_id: userData.user_id,
-            landlord_id: landlordID
+            landlord_id: landlordID.landlord_id
         }
 
-        fetch(`http://localhost:3000/reviews/${landlordID}`, {
+        fetch(`http://localhost:3000/reviews/${landlordID.landlord_id}`, {
             method: 'POST',
             body: JSON.stringify(formBody),
             headers:{
                 'Content-Type': 'application/json'
             }
         })
-        .then (res => console.log(res))
+        .then (res => {
+            console.log(res)
+            window.location = `http://localhost:8080/landlord/${landlordID.landlord_id}`})
         .catch(error => console.log(error));
     }
 
@@ -106,7 +111,7 @@ export default function ReviewPage({userData}) {
         return (
         <ThemeProvider theme={tomatopalette}>
         <div className= "reviewPageGlobalContainer">
-            <Container className="reviewMainContainer" maxwidth="sm">
+            <Container className="reviewMainContainer" maxwidth="sm" sx={{p:2}}>
                     <Box
                         className="reviewformContainer"
                         sx={
@@ -115,15 +120,17 @@ export default function ReviewPage({userData}) {
                         >
                             <h2>Review of {landlordName}</h2>
                             <TextField 
-                                fullWidth 
+                                fullWidth
                                 required 
                                 label="Title"
                                 value={title}
                                 onChange={handleTitleChange}
                                 inputProps={{maxLength:100}}
                                 helperText="Max 100 Characters"
+                                sx={{mb:2, mt:2}}
                                 />
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                            <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
+                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" >
                                 <h3>Overall Rating</h3>
                                 <Rating required size="large" precision={0.5} value={ overallCalc(respect,response) } readOnly />
                             </Stack>
@@ -143,6 +150,7 @@ export default function ReviewPage({userData}) {
                                 <h3>Pet Friendly?</h3>
                                 <Checkbox checked={pet} onChange={handlePetChange} size="large"/>
                             </Stack>
+                            </Stack>
                             <TextField
                                 fullWidth
                                 required
@@ -153,6 +161,7 @@ export default function ReviewPage({userData}) {
                                 helperText="Max 1000 Characters"
                                 value={ description }
                                 onChange={ handleDescChange}
+                                sx={{mb:2, mt:2}}
                             />
                             <Stack direction="row" spacing={2} justifyContent="flex-end">
                                 <Button

@@ -5,7 +5,7 @@ import HomeCard from '../../components/homeCard/HomeCard.jsx';
 
 import './mapSearch.css';
 
-export function MapSearch(props) {
+export default function MapSearch(props) {
   const [pins, setPins] = useState([]);
 
   useEffect(() => {
