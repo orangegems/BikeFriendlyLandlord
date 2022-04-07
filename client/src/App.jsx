@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Navbar } from "./components/navbar/Navbar.jsx";
 import ClearNavbar from "./components/clearNavbar/ClearNavbar.jsx";
 import Home from "./pages/home/Home.jsx";
-import { MapSearch } from "./pages/map/MapSearch.jsx"
+import MapSearch from "./pages/map/MapSearch.jsx"
 import Profile from './pages/profile/Profile.jsx';
 import  Search  from './pages/search/Search.jsx';
 import ReviewPage from "./components/ReviewPage.jsx";
