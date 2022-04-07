@@ -1,15 +1,20 @@
 import React, { Component, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import './reviewpage.css'
 
 // import MUI components
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-// import Typography from  '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
+import { ThemeProvider } from '@mui/material/styles';
+
+
+// import theme
+import tomatopalette from "./theme/tomatopalette.jsx"
 
 
 export default function ReviewPage({userData}) {
@@ -99,14 +104,13 @@ export default function ReviewPage({userData}) {
         // will need the Landlord name from somewhere (props?)
 
         return (
+        <ThemeProvider theme={tomatopalette}>
+        <div className= "reviewPageGlobalContainer">
             <Container className="reviewMainContainer" maxwidth="sm">
-                <div>
-                    <h1>Leave a Review</h1>
-                </div>
                     <Box
                         className="reviewformContainer"
                         sx={
-                            {p: 2, border: '1px solid grey'}
+                            {p: 2}
                         }
                         >
                             <h2>Review of {landlordName}</h2>
@@ -166,5 +170,7 @@ export default function ReviewPage({userData}) {
                     </Box>
 
             </Container>
+        </div>
+        </ThemeProvider>
         )
 }
