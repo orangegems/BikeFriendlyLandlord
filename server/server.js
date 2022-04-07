@@ -41,15 +41,10 @@ app.use('/address', addressRouter);
 app.get('/app', sessionController.checkSession, (req, res) => {
   res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../build/app.html'));
 });
-app.get('/', (req, res) => {
-  return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../build/index.html'));
-});
 
-/** 
- * Catch all  route handler 
- * */
-app.use('*', (req, res) => {
-  return res.status(404).send('Error');
+// catch all handler to send request back to client side to allow refreshes when using react router
+app.get('/*', (req, res) => {
+  return res.setHeader("Content-Type", "text/html").sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 /** 

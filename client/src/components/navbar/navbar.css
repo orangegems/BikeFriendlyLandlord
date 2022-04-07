@@ -32,37 +32,60 @@
 }
 
 #navBar {
+  height: 50px;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   background-color: lightgrey;
+  /* background: none; */
   align-items: center;
-  padding: 15px 50px 15px 50px;
+  /* position: absolute; */
 }
-nav ul {
-  list-style-type: none;  
+
+.navBarLeft {
+  flex: 1;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 150px;
-  align-self: center;
-  transform: translate(-70%);
+  /* justify-content: center; */
+  padding-left: 25px;
+  align-items: center;
 }
-nav ul li {
-  font-size: x-large;
-  margin-left: 20px;
-  margin-right: 50px;
+
+.navBarCenter {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarListItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+}
+
+.navBarListItem {
   list-style: none;
-  margin-left: 50px;
-  color: #666;
+  font-family: 'Nunito', sans-serif;
+  padding: 0 20px;
 }
+
+.navBarRight {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 25px;
+}
+
+
 a:hover {
   color: tomato;
 } 
 a {
   text-decoration: none;
   /* color: black; */
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  /* font-family: "Roboto","Helvetica","Arial",sans-serif; */
   padding-right: 10px;
   list-style: none;
   /* margin-left: 50px; */

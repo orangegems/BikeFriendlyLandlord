@@ -62,8 +62,10 @@ export function Navbar(props) {
 
   return (
     <div id="navBar">
-      <div id="logo">BikeFriendlyLandlord</div>
-      <nav>
+      <div className="navBarLeft">
+        <div id="logo">BFL</div>
+      </div>
+      <div className="navBarCenter">
         <ul className="navBarListItems">
           <li className="navBarListItem">
             <NavLink
@@ -79,36 +81,56 @@ export function Navbar(props) {
               Search
             </NavLink>
           </li>
+          <li className="navBarListItem">
+            <NavLink
+              to="/map"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              Map
+            </NavLink>
+          </li>
         </ul>
-      </nav>
-
-      {!isLoggedIn && (
-        <Button
-          variant="text"
-          onClick={(e) => {
-            toggleAuthDisplay(e);
-            // if (authDisplay === true) setAuthDisplay(false);
-            // else setAuthDisplay(true);
-          }}>
-          Login/Signup
-        </Button>
-      )}
-      {isLoggedIn && (
-        <div>
-          <Link to={`/profile/${userData.username}`}>My Account</Link>
-          <Button variant="text" onClick={(e) => logout(e)}>
-            Log Out
+      </div>
+      <div className="navBarRight">
+        {!isLoggedIn && (
+          <Button
+            sx={{
+              fontFamily: 'Nunito',
+              color: '#666',
+              '&:hover': { backgroundColor: 'rgba(253, 143, 124, 0.577)' },
+            }}
+            variant="text"
+            onClick={(e) => {
+              toggleAuthDisplay(e);
+              // if (authDisplay === true) setAuthDisplay(false);
+              // else setAuthDisplay(true);
+            }}>
+            Login/Signup
           </Button>
-        </div>
-      )}
-      {authDisplay && (
-        <Authenticate
-          setAuthDisplay={setAuthDisplay}
-          setIsLoggedIn={setIsLoggedIn}
-          setUserData={setUserData}
-          position={authPosition}
-        />
-      )}
+        )}
+        {isLoggedIn && (
+          <div>
+            <Link to={`/profile/${userData.username}`}>My Account</Link>
+            <Button
+              variant="text"
+              sx={{
+                fontFamily: 'Nunito',
+                color: '#666',
+                '&:hover': { backgroundColor: 'rgba(253, 143, 124, 0.577)' },
+              }}
+              onClick={(e) => logout(e)}>
+              Log Out
+            </Button>
+          </div>
+        )}
+        {authDisplay && (
+          <Authenticate
+            setAuthDisplay={setAuthDisplay}
+            setIsLoggedIn={setIsLoggedIn}
+            setUserData={setUserData}
+            position={authPosition}
+          />
+        )}
+      </div>
     </div>
   );
 }

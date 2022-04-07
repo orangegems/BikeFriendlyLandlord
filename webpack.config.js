@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
     // publicPath: '/build'
   },
   module: {
@@ -37,6 +37,7 @@ module.exports = {
       publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
       // chunks: ['index'],
     }),
+    // "@babel/plugin-transform-runtime"
   ],
   devServer: {
     historyApiFallback: true,
@@ -45,6 +46,7 @@ module.exports = {
     proxy: {
       '/auth': 'http://localhost:3000',
       '/reviews': 'http://localhost:3000',
+      '/landlords': 'http://localhost:3000',
     },
   },
 };
