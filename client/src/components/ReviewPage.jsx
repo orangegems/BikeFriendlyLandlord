@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 
 
@@ -129,28 +130,38 @@ export default function ReviewPage({userData}) {
                                 helperText="Max 100 Characters"
                                 sx={{mb:2, mt:2}}
                                 />
-                            <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" >
-                                <h3>Overall Rating</h3>
-                                <Rating required size="large" precision={0.5} value={ overallCalc(respect,response) } readOnly />
-                            </Stack>
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-                                <h3>Respectiveness</h3>
-                                <Rating required size="large" precision={0.5} value={ respect } onChange={(e, val) => setRespect(val)}/>
-                            </Stack>
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-                                <h3>Responsiveness</h3>
-                                <Rating required size="large" precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
-                            </Stack>
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-                                <h3>Bike Friendly?</h3>
-                                <Checkbox checked={bike} onChange={handleBikeChange} size="large"/>
-                            </Stack>                            
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-                                <h3>Pet Friendly?</h3>
-                                <Checkbox checked={pet} onChange={handlePetChange} size="large"/>
-                            </Stack>
-                            </Stack>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}> 
+                                    <h3 className="reviewLabel">Overall Rating</h3>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Rating required size="large" precision={0.5} value={ overallCalc(respect,response) } readOnly />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <h3 className="reviewLabel">Respectfulness</h3>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Rating required size="large" precision={0.5} value={ respect } onChange={(e, val) => setRespect(val)}/>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <h3 className="reviewLabel">Responsiveness</h3>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Rating required size="large" precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <h3 className="reviewLabel">Bike Friendly?</h3>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Checkbox checked={bike} onChange={handleBikeChange} size="medium" style={{paddingTop:4, paddingLeft:0}}/>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <h3 className="reviewLabel">Pet Friendly?</h3>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Checkbox checked={pet} onChange={handlePetChange} size="medium" style={{paddingTop:4, paddingLeft:0}}/>
+                                </Grid>
+                            </Grid>
                             <TextField
                                 fullWidth
                                 required
