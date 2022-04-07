@@ -22,15 +22,15 @@ export function Review (props){
                         <Stack spacing={5} direction="row" >
                             <Stack spacing={2} direction="row" >
                                 <Typography variant= 'h7'>Overall Rating</Typography>
-                                <Rating name="read-only" required size="small" precision={0.5} value={Number(props.overall_rating)} readOnly/>
+                                <Rating style={{ color: "tomato" }} name="read-only" required size="small" precision={0.5} value={Number(props.overall_rating)} readOnly/>
                             </Stack>
                             <Stack spacing={2} direction="row" >
                                 <Typography variant= 'h7'>Respectful</Typography>
-                                <Rating name="read-only" required size="small" precision={0.5} value={Number(props.respect_rating)} readOnly/>  
+                                <Rating style={{ color: "tomato" }} name="read-only" required size="small" precision={0.5} value={Number(props.respect_rating)} readOnly/>  
                             </Stack>
                             <Stack spacing={2} direction="row">
                                 <Typography variant= 'h7'>Responsiveness</Typography>
-                                <Rating name="read-only" required size="small" precision={0.5} value={Number(props.responsiveness_rating)} readOnly/>
+                                <Rating style={{ color: "tomato" }} name="read-only" required size="small" precision={0.5} value={Number(props.responsiveness_rating)} readOnly/>
                             </Stack>
                             <Stack spacing={2} direction="row">
                                 <Typography variant= 'h7'>Bike</Typography>

@@ -21,17 +21,17 @@ export function LandlordInfoCard (props){
                             </Stack>
                             <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
                                 <Typography variant= 'h5'>Overall Rating</Typography>
-                                <Rating required size="large" precision={0.5} value={Number(props.overall_rating)}>
+                                <Rating style={{ color: "tomato" }} required size="large" precision={0.5} value={Number(props.overall_rating)} readOnly>
                                     
                                 </Rating>
                             </Stack>
                             <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
                                 <Typography variant= 'h5'>Respectful</Typography>
-                                <Rating required size="large" precision={0.5} value={Number(props.respect_rating)}/>  
+                                <Rating style={{ color: "tomato" }} required size="large" precision={0.5} value={Number(props.respect_rating)} readOnly/>  
                             </Stack>
                             <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
                                 <Typography variant= 'h5'>Responsiveness</Typography>
-                                <Rating required size="large" precision={0.5} value={Number(props.responsiveness_rating)}/>
+                                <Rating style={{ color: "tomato" }} required size="large" precision={0.5} value={Number(props.responsiveness_rating)} readOnly/>
                             </Stack>
                             <Stack spacing={5} direction="row" sx={{m: 3, width: 'auto', justifyContent:'space-between'}}>
                                 <Typography variant= 'h5'>Bike Friendly</Typography>

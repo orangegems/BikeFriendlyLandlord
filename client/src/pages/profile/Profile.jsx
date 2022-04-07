@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {Link } from "react-router-dom";
-
 import { Review } from '../../components/Review.jsx';
 import { LandlordInfoCard } from '../../components/LandlordInfoCard.jsx'
-
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -23,36 +21,10 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import {  ThemeProvider } from '@mui/material/styles';
 
 
-
-
-
-// const landlordData = {
-//     landlord_id: 1,
-//     full_name : "demoLandlord",
-//     overall_rating : 3,
-//     respect_rating : 2,
-//     responsiveness_rating: 2,
-//     bike_rating : true,
-//     pet_friendly_rating : true,
-//     is_verified: true
-// }
-
-// const reviewData = [
-//         {
-//         title: 'Promises not kept',
-//         overall_rating: 2,
-//         respect_rating: 3,
-//         responsiveness_rating: 2,
-//         bike_rating:true,
-//         pet_friendly_rating:false,
-//         description:'He was the worst. Promised me that my roommate and I can bring bikes. Ended up not letting us.'
-//         }
-//     ];
-
-
-
+import tomatopalette from "../../components/theme/tomatopalette.jsx"
 
 
 export default function ProfilePage() {
@@ -79,73 +51,75 @@ export default function ProfilePage() {
 
     // console.log(landlordData)
     return (
-        <Container className="MainContainer" sx={{m:2,pt:3,pr:4, justifyContent: 'center'}}>
-            <Stack className="LandlordInfo" sx={{pb:5, pl:5}} direction="row" justifyContent="space-around">
-                <Stack>
-                    <Card sx={{ minWidth: 275 }}>
-                        <CardContent>
-                            <div className="ProfilePicture">
-                                <img style={{height:'100px'}} src={`http://localhost:3000/images/${landlordData.profile_pic}`}/>
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                        <nav aria-label="main mailbox folders">
-                            <List>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                <ListItemIcon>
-                                    <EmailIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Email" />
-                                <ListItemText />
-                                </ListItemButton>
-                            </ListItem>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                <ListItemIcon>
-                                    <LocalPhoneIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Phone Number" />
-                                </ListItemButton>
-                            </ListItem>
-                            </List>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                <ListItemIcon>
-                                    <ApartmentIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Office Location" />
-                                </ListItemButton>
-                            </ListItem>
-                        </nav>
-                        </Box>
-                    </Card>
-                </Stack>
-                <Stack>
-                    <LandlordInfoCard {...landlordData}/>
-                </Stack>
-            </Stack>
-            <Container>
-                <Stack spacing={2} direction="row" >
-                    <Typography variant="h3" gutterBottom component="div">
-                    Reviews
-                    </Typography>
-                    <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
-                        <Link to={`/review/${landlordId.landlord_id}/`}><Button variant="contained">Create Review</Button></Link>
+        <ThemeProvider theme={tomatopalette}>
+            <Container className="MainContainer" sx={{m:2,pt:3,pr:4, justifyContent: 'center'}}>
+                <Stack className="LandlordInfo" sx={{pb:5, pl:5}} direction="row" justifyContent="space-around">
+                    <Stack>
+                        <Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <div className="ProfilePicture">
+                                    <img style={{height:'100px'}} src={`http://localhost:3000/images/${landlordData.profile_pic}`}/>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                            <nav aria-label="main mailbox folders">
+                                <List>
+                                <ListItem disablePadding>
+                                    <ListItemButton>
+                                    <ListItemIcon>
+                                        <EmailIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Email" />
+                                    <ListItemText />
+                                    </ListItemButton>
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemButton>
+                                    <ListItemIcon>
+                                        <LocalPhoneIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Phone Number" />
+                                    </ListItemButton>
+                                </ListItem>
+                                </List>
+                                <ListItem disablePadding>
+                                    <ListItemButton>
+                                    <ListItemIcon>
+                                        <ApartmentIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Office Location" />
+                                    </ListItemButton>
+                                </ListItem>
+                            </nav>
+                            </Box>
+                        </Card>
+                    </Stack>
+                    <Stack>
+                        <LandlordInfoCard {...landlordData}/>
                     </Stack>
                 </Stack>
-            </Container>
-            <Container>
-                <Stack>
-                    <div>
-                        {reviewData.map((eachReview, i) => (
-                            <Review key={i} {...eachReview}/>
-                        ))}
-                    </div>
-                </Stack>
-            </Container>
-      </Container>
+                <Container>
+                    <Stack spacing={2} direction="row" >
+                        <Typography variant="h3" gutterBottom component="div">
+                        Reviews
+                        </Typography>
+                        <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
+                            <Link to={`/review/${landlordId.landlord_id}/`}><Button variant="contained">Create Review</Button></Link>
+                        </Stack>
+                    </Stack>
+                </Container>
+                <Container>
+                    <Stack>
+                        <div>
+                            {reviewData.map((eachReview, i) => (
+                                <Review key={i} {...eachReview}/>
+                                ))}
+                        </div>
+                    </Stack>
+                </Container>
+        </Container>
+        </ThemeProvider>
     )
 }
