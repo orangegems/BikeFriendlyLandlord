@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+require('dotenv').config();
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import HomeCard from '../../components/homeCard/HomeCard.jsx';
@@ -27,7 +28,7 @@ export default function MapSearch(props) {
             ${landlord.street_num}
             +${landlord.street.replaceAll(' ', '+')},
             +${landlord.city.replaceAll(' ', '+')},
-            +${landlord.state}&key=AIzaSyA8xvmHOnmmcJV9quqyMv_bT6toHJmrgrU`
+            +${landlord.state}&key=${process.env.google_API_key}`
           );
           const geoCode = await response.json();
           // strip coordinates off the response from google
