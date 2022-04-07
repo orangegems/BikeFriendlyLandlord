@@ -28,16 +28,16 @@ import axios from 'axios';
 
 
 
-const landlordData = {
-    landlord_id: 1,
-    full_name : "demoLandlord",
-    overall_rating : 3,
-    respect_rating : 2,
-    responsiveness_rating: 2,
-    bike_rating : true,
-    pet_friendly_rating : true,
-    is_verified: true
-}
+// const landlordData = {
+//     landlord_id: 1,
+//     full_name : "demoLandlord",
+//     overall_rating : 3,
+//     respect_rating : 2,
+//     responsiveness_rating: 2,
+//     bike_rating : true,
+//     pet_friendly_rating : true,
+//     is_verified: true
+// }
 
 const reviewData = [
         {
@@ -57,30 +57,42 @@ const reviewData = [
 
 export default function ProfilePage() {
 
-    // const [landlordData,setLandlordData] = React.useState({})
+    const [landlordData,setLandlordData] = React.useState({})
+    const [reviewData, setReviewData] = React.useState([])
 
-    // const landlordId = useParams();
+    const landlordId = useParams();
+    React.useEffect(() => {
+        axios.get(`http://localhost:3000/landlords/getById/${landlordId}`)
+        .then (res => {res.json()})
+        .then (landlordObject => {
+            console.log(landlordObject)
+            setLandlordData(landlordObject)
+        })
+    }, [])
+    
     // React.useEffect(() => {
-    //     axios.get(`http://localhost:3000/landlords/getById/${landordId}`)
+    //     axios.get(`http://localhost:3000/landlords/getById/${landlordId}`)
     //     .then (res => {res.json()})
-    //     .then (landlordObject => {
-    //         setLandlordData(landlordObject)
+    //     .then (reviewArray => {
+    //         setReviewData(reviewData = reviewArray)
     //     })
     // })
 
+
+    console.log(landlordData)
     return (
         <Container className="MainContainer" sx={{m:2,pt:3,pr:4, justifyContent: 'center'}}>
             <Stack className="LandlordInfo" sx={{pb:5, pl:5}} direction="row" justifyContent="space-around">
                 <Stack>
                     <Card sx={{ minWidth: 275 }}>
                         <CardContent>
-                            <div class="ProfilePicture">
+                            <div className="ProfilePicture">
                                 <img src="img/doglord.jpeg"/>
                             </div>
                         </CardContent>
                     </Card>
                     <Card>
-                    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                         <nav aria-label="main mailbox folders">
                             <List>
                             <ListItem disablePadding>
@@ -123,13 +135,15 @@ export default function ProfilePage() {
                     Reviews
                     </Typography>
                     <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
-                        <Link to={`/reviews/${landlordData.landlord_id}/`}><Button variant="contained">Create Review</Button></Link>
+                        <Link to={`/reviews/${landlordId}/`}><Button variant="contained">Create Review</Button></Link>
                     </Stack>
                 </Stack>
+            </Container>
+            <Container>
                 <Stack>
                     <div>
                         {reviewData.map(eachReview => (
-                            <Review { ...eachReview}/>
+                            <Review key={i} { ...eachReview}/>
                         ))}
                     </div>
                 </Stack>
