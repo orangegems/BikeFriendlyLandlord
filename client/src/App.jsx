@@ -6,6 +6,7 @@ import Home from "./pages/home/Home.jsx";
 import { MapSearch } from "./pages/map/MapSearch.jsx"
 import Profile from './pages/profile/Profile.jsx';
 import  Search  from './pages/search/Search.jsx';
+import ReviewPage from "./components/ReviewPage.jsx";
 import { UserProfile } from './pages/user/UserProfile.jsx';
 import { Route, Routes, Link } from 'react-router-dom';
 
@@ -28,11 +29,11 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/landlord/:landlord_id" element={<Profile />} />
-        <Route path="/review/:landlord_id" /**element={ Jonathans page }*/ /> 
         <Route path="/map" element={<MapSearch />} />
+        <Route path="/landlord/:landlord_id" element={<Profile />} />
+        <Route path="/review/:landlord_id" element={<ReviewPage userData={userData} />}/> 
         <Route
-          path="/profile/:user_id"
+          path="/profile/:username"
           element={
             <UserProfile userData={userData} setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} setAuthDisplay={setAuthDisplay}/>
           }

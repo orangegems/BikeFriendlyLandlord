@@ -2,6 +2,22 @@ const db = require("../models/BFLL.js");
 
 const landlordController = {};
 
+landlordController.getById = async (req, res, next) => {
+  const queryString = `SELECT * FROM landlords WHERE _id = $1`;
+
+  try {
+    const results = await db.query(queryString, [req.params.landlord_id]);
+    res.locals.landlord = results.rows[0];
+    return next();
+  } catch (error) {
+    return next({
+      message: 'Error occured attempting to get landlord from database in landlordController.getById',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+};
+
 landlordController.getAllLandlords = async (req, res, next) => {
   const queryString = `SELECT * FROM landlords;`;
   try {
