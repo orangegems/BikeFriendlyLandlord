@@ -21,6 +21,7 @@ export function MapSearch(props) {
         const pinsToSet = [];
         for (let i = 0; i < json.length; i++) {
           const landlord = json[i];
+          
           const response = await fetch(
             `https://maps.googleapis.com/maps/api/geocode/json?address=${
               landlord.street_num
@@ -36,7 +37,6 @@ export function MapSearch(props) {
             geoCode.results[0].geometry.location.lat,
             geoCode.results[0].geometry.location.lng,
           ];
-          // console.log(coordinates);
 
           pinsToSet.push(
             <Marker key={i} position={coordinates}>
@@ -51,6 +51,7 @@ export function MapSearch(props) {
       .catch((err) => console.log('error getting all landlords ->', err));
   }, []);
 
+  /** Display the map positioned over the USA by default */  
   return (
     <div id="map">
       <MapContainer center={[37.09024, -95.712891]} zoom={4}>
