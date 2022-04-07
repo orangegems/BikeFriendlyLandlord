@@ -14,7 +14,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 
 // import theme
-import tomatopalette from "./theme/tomatopalette.jsx"
+import tomatopalette from '../../components/theme/tomatopalette.jsx'
 
 
 export default function ReviewPage({userData}) {
