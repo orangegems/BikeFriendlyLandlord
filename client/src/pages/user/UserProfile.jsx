@@ -36,7 +36,6 @@ export function UserProfile(props) {
         }
       })
       .then((json) => {
-        console.log('check response -->', json);
         setReviews(json.reviews);
       })
       .catch((err) => {

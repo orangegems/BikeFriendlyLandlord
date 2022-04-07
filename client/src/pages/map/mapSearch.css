@@ -1,5 +1,6 @@
-#map { height: 500px; }
+#map { height: 80vh; }
 
 .leaflet-container {
   height: 100%;
+
 }
