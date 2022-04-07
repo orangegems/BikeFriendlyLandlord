@@ -99,4 +99,24 @@ landlordController.searchLandlords = async (req, res, next) => {
   }
 };
 
+landlordController.getLandlordsAndAddresses = async (req, res, next) => {
+  try {
+    const queryString = `
+    SELECT * FROM landlords l
+    INNER JOIN addresses a ON l._id = a.landlord_id;
+    `;
+
+    const results = await db.query(queryString);
+    // console.log(results.rows)
+    res.locals.landlords = results.rows;
+    return next();
+  } catch (error) {
+    return next({
+      message: 'An error occured attempting to search landlords in landlordController.searchLandlords',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+}
+
 module.exports = landlordController;

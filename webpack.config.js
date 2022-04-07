@@ -45,6 +45,7 @@ module.exports = {
     proxy: {
       '/auth': 'http://localhost:3000',
       '/reviews': 'http://localhost:3000',
+      '/landlords': 'http://localhost:3000',
     },
   },
 };
