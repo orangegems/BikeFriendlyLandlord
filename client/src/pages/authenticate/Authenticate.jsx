@@ -6,7 +6,7 @@ import './authenticate.css';
 import './authenticate.css';
 
 export function Authenticate(props) {
-  const {setAuthDisplay, setIsLoggedIn, setUserData } = props;
+  const { setAuthDisplay, setIsLoggedIn, setUserData, position } = props;
   const [displayLogin, setDisplayLogin] = useState(true);
   const [loginError, setLoginError] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
@@ -43,12 +43,10 @@ export function Authenticate(props) {
   }
 
   return (
-    <>
-      <div id="loginCover"></div>
-      <div id="loginSignup">
+      <div id="loginSignup" style={position}>
         {displayLogin && (
           <Login
-          loginErrorMessage={loginErrorMessage}
+            loginErrorMessage={loginErrorMessage}
             loginError={loginError}
             handleSubmit={handleSubmit}
             setAuthDisplay={setAuthDisplay}
@@ -63,6 +61,5 @@ export function Authenticate(props) {
           />
         )}
       </div>
-    </>
   );
 }

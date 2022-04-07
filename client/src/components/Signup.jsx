@@ -16,15 +16,23 @@ export default function Signup(props) {
     password: '',
     email: '',
   });
+
+  const formStyle = {
+    // marginTop: 8,
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  };
+
+  const inputButtonStyle = {
+    marginBottom: '10px',
+  };
+
   return (
     <>
       <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+        sx={formStyle}
         component="form"
         onSubmit={() =>
           handleSubmit('signup', { ...formData /** landlordId */ })
@@ -40,6 +48,7 @@ export default function Signup(props) {
           </Button>
         </div> */}
         <TextField
+          sx={inputButtonStyle}
           id="outlined-basic"
           label="First Name"
           variant="outlined"
@@ -48,6 +57,7 @@ export default function Signup(props) {
           }
         />
         <TextField
+          sx={inputButtonStyle}
           id="outlined-basic"
           label="Last Name"
           variant="outlined"
@@ -56,6 +66,7 @@ export default function Signup(props) {
           }
         />
         <TextField
+          sx={inputButtonStyle}
           id="outlined-basic"
           label="username"
           variant="outlined"
@@ -64,6 +75,7 @@ export default function Signup(props) {
           }
         />
         <TextField
+          sx={inputButtonStyle}
           id="outlined-basic"
           label="Email"
           variant="outlined"
@@ -72,6 +84,7 @@ export default function Signup(props) {
           }
         />
         <TextField
+          sx={inputButtonStyle}
           id="outlined-basic"
           label="Password"
           type="password"
@@ -80,12 +93,16 @@ export default function Signup(props) {
             setFormData({ ...formData, password: event.target.value })
           }
         />
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" sx={inputButtonStyle}>
           Signup
         </Button>
-        <div className="linkButton" onClick={()=> setDisplayLogin(true)}>Already have an account? Login.</div>
-        <button onClick={()=> setAuthDisplay(false)}>Continue without logging in</button>
+        <div className="linkButton" onClick={() => setDisplayLogin(true)}>
+          Already have an account? Login.
+        </div>
+        <button className="exitButton" onClick={() => setAuthDisplay(false)}>
+          Continue without logging in
+        </button>
       </Box>
     </>
-  )
+  );
 }

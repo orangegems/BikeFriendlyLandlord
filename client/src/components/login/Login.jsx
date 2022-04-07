@@ -13,15 +13,22 @@ export default function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const formStyle = {
+    // marginTop: 8,
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  };
+
+  const inputButtonStyle={
+    marginBottom: '10px',
+  }
+
   return (
     <>
       <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+        sx={formStyle}
         component="form"
         onSubmit={() =>
           handleSubmit('login', { username: username, password: password })
@@ -34,6 +41,7 @@ export default function Login(props) {
           variant="outlined"
           onChange={(event) => setUsername(event.target.value)}
           value={username}
+          sx={inputButtonStyle}
         />
         <TextField
           id="outlined-basic"
@@ -44,14 +52,15 @@ export default function Login(props) {
           helperText={loginErrorMessage}
           onChange={(event) => setPassword(event.target.value)}
           value={password}
+          sx={inputButtonStyle}
         />
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" sx={inputButtonStyle}>
           Login
         </Button>
         <div className="linkButton" onClick={() => setDisplayLogin(false)}>
           Need an account? Signup
         </div>
-        <button onClick={() => setAuthDisplay(false)}>
+        <button className="exitButton" onClick={() => setAuthDisplay(false)}>
           Continue without logging in
         </button>
       </Box>

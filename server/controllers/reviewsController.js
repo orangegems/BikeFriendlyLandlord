@@ -1,4 +1,4 @@
-const db = require('../models/BFLL.js');
+const db = require("../models/BFLL.js");
 
 const reviewsController = {};
 
@@ -35,20 +35,18 @@ reviewsController.addReview = async (req, res, next) => {
       user_id,
       landlord_id,
     ]);
-    console.log(result);
     return next();
   } catch (error) {
     return next({
       message:
-        'Error occured attempting to add review to database in reviewController.addReview',
-      log: 'Error: ' + error,
+        "Error occured attempting to add review to database in reviewController.addReview",
+      log: "Error: " + error,
       status: 500,
     });
   }
 };
 
 reviewsController.getReviews = async (req, res, next) => {
-  console.log('Entered reviewsController.getReviews');
   try {
     const userId = req.params.userId;
 
@@ -63,8 +61,29 @@ reviewsController.getReviews = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'Error occured attempting to get reviews from database in reviewController.getReviews',
-      log: 'Error: ' + error,
+        "Error occured attempting to get reviews from database in reviewController.getReviews",
+      log: "Error: " + error,
+      status: 500,
+    });
+  }
+};
+
+reviewsController.getAllLandlordReviews = async (req, res, next) => {
+  const { landlord_id } = req.body;
+  const queryString = `
+    SELECT * FROM reviews 
+    WHERE landlord_id = $1;
+  `;
+
+  try {
+    const results = await db.query(queryString, [landlord_id]);
+    res.locals.landlordReviews = results.rows;
+    return next();
+  } catch (error) {
+    return next({
+      message:
+        "Error occured attempting to fetch all landlord reviews from backend in reviewsController.getAllLandlordReviews",
+      log: "Error: " + error,
       status: 500,
     });
   }
