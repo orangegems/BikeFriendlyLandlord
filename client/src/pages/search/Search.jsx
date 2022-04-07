@@ -10,10 +10,20 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import  Checkbox  from '@mui/material/Checkbox';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 // import result component
 import ResultDisplay from "../../components/searchResults/resultDisplay.jsx"
 
+// create our color palette
+const tomatopalette = createTheme({
+    palette: {
+        primary: {
+            main: '#ff6347',
+            contrastText: '#fff'
+        }
+    }
+})
 
 export default function Search() {
     // handle search results
@@ -78,6 +88,7 @@ export default function Search() {
         .catch(error => console.log(error));
     }
     return (
+    <ThemeProvider theme={tomatopalette}>
     <div className="searchPageMain">
         <Container className = "searchMainContainer" maxwidth ="sm" sx={{p:2}}>
             <Box
@@ -113,7 +124,6 @@ export default function Search() {
                             variant="contained"
                             fullWidth  
                             onClick={(handleSearch)}
-                            color='warning'
                         >
                             Search
                         </Button>
@@ -122,5 +132,6 @@ export default function Search() {
                 </Box>
         </Container>
     </div>
+    </ThemeProvider>
     )
 }
