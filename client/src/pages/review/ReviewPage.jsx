@@ -166,6 +166,7 @@ export default function ReviewPage({userData}) {
                             <Stack direction="row" spacing={2} justifyContent="flex-end">
                                 <Button
                                     variant="outlined"
+                                    onClick={() => window.location.replace(`/landlord/${landlordID.landlord_id}`)}
                                 >
                                     Cancel
                                 </Button>
