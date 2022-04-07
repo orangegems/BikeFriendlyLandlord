@@ -69,7 +69,7 @@ reviewsController.getReviews = async (req, res, next) => {
 };
 
 reviewsController.getAllLandlordReviews = async (req, res, next) => {
-  const { landlord_id } = req.body;
+  const { landlord_id } = req.params;
   const queryString = `
     SELECT * FROM reviews 
     WHERE landlord_id = $1;

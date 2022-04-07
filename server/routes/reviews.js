@@ -29,7 +29,7 @@ router.get(
   }
 );
 
-router.get('/', reviewsController.getAllLandlordReviews, (req, res) => {
+router.get('/landlordReviews/:landlord_id', reviewsController.getAllLandlordReviews, (req, res) => {
   return res.json(res.locals.landlordReviews);
 });
 

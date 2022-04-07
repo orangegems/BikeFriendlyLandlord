@@ -5,6 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import Rating from '@mui/material/Rating';
+import CheckIcon from "@mui/icons-material/Check";
+import ClearIcon from "@mui/icons-material/Clear";
+import Icon from "@mui/material/Icon";
 
 
 export function Review (props){
@@ -19,23 +22,39 @@ export function Review (props){
                         <Stack spacing={5} direction="row" >
                             <Stack spacing={2} direction="row" >
                                 <Typography variant= 'h7'>Overall Rating</Typography>
-                                <Rating name="read-only" required size="small" precision={0.5} value={props.overall_rating} readOnly/>
+                                <Rating name="read-only" required size="small" precision={0.5} value={Number(props.overall_rating)} readOnly/>
                             </Stack>
                             <Stack spacing={2} direction="row" >
                                 <Typography variant= 'h7'>Respectful</Typography>
-                                <Rating name="read-only" required size="small" precision={0.5} value={props.respect_rating} readOnly/>  
+                                <Rating name="read-only" required size="small" precision={0.5} value={Number(props.respect_rating)} readOnly/>  
                             </Stack>
                             <Stack spacing={2} direction="row">
                                 <Typography variant= 'h7'>Responsiveness</Typography>
-                                <Rating name="read-only" required size="small" precision={0.5} value={props.responsiveness_rating} readOnly/>
+                                <Rating name="read-only" required size="small" precision={0.5} value={Number(props.responsiveness_rating)} readOnly/>
                             </Stack>
                             <Stack spacing={2} direction="row">
                                 <Typography variant= 'h7'>Bike</Typography>
-                                    {props.bike_rating}
+                                <Icon>
+                                    {props.bike_friendly ? (
+                                        <CheckIcon
+                                        style={{ color: "limeGreen", fontSize: "20px" }}
+                                        ></CheckIcon>
+                                    ) : (
+                                        <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                                    )}
+                                </Icon>
                             </Stack>
                             <Stack spacing={2} direction="row">
                                 <Typography variant= 'h7'>Pet Friendly</Typography>
-                                    {props.pet_friendly_rating}
+                                <Icon>
+                                    {props.pet_friendly ? (
+                                        <CheckIcon
+                                        style={{ color: "limeGreen", fontSize: "20px" }}
+                                        ></CheckIcon>
+                                    ) : (
+                                        <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                                    )}
+                                </Icon>
                             </Stack>  
                         </Stack>
                         <Typography className="Description" variant="h7">
