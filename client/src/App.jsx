@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Navbar } from "./components/navbar/Navbar.jsx";
 import ClearNavbar from "./components/clearNavbar/ClearNavbar.jsx";
@@ -15,6 +15,20 @@ export function App() {
   const [authDisplay, setAuthDisplay] = useState(false);
 
   const [userData, setUserData] = useState({});
+
+  useEffect(()=> {
+    fetch('/user/getUser')
+    .then(res => {
+      if(res.status === 200) {
+        setIsLoggedIn(true);
+        return res.json();
+      }
+    })
+    .then(json=> {
+      console.log(json);
+      setUserData(json);
+    })
+  }, [])
 
   return (
     <>

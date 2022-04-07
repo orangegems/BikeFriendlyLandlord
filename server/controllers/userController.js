@@ -141,4 +141,32 @@ userController.deleteUser = async (req, res, next) => {
   }
 };
 
+userController.getUserData = async (req,res,next) => {
+  try {
+    const userId = res.locals.user;
+    console.log(userId)
+
+    const queryString = `
+    SELECT * FROM users
+    WHERE users._id = $1;
+    `;
+
+    const result = await db.query(queryString, [userId._id]);
+    console.log(result.rows[0]);
+
+    delete result.rows[0].password;
+
+    res.locals.userData = result.rows[0];
+
+    return next();
+  } catch (err) {
+    return next({
+      log: `Error in userController.getUserData getting user data -> Error: ${err}`,
+      message: {
+        err: 'Error getting data',
+      },
+    });
+  }
+}
+
 module.exports = userController;
