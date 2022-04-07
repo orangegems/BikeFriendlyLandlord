@@ -1,5 +1,6 @@
 import React, {Component, useEffect } from 'react';
 // import { Link } from 'react-router-dom'
+import './search.css'
 
 // import MUI components
 import Button from '@mui/material/Button';
@@ -33,18 +34,23 @@ export default function Search() {
     }
 
     // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
-    let options = [];
+    const [options, setOptions] = React.useState([]);
+    useEffect(() => {
+        const opArr = [];
+        fetch(`http://localhost:3000/address/uniqueCities`,{
+            method: 'GET'
+        })
+        .then (res => res.json())
+        .then (parsed => {
+            console.log('Fetching cities...')
+            for (let i = 0; i < parsed.length; i++){
+                opArr.push(parsed[i].city)
+            }
+            setOptions(opArr);
+        })
+        .catch(error => console.log(error));
+    }, []);
 
-    fetch(`http://localhost:3000/address/uniqueCities`,{
-        method: 'GET'
-    })
-    .then (res => res.json())
-    .then (parsed => {
-        for (let i = 0; i < parsed.length; i++){
-            options.push(parsed[i].city)
-        }
-    })
-    .catch(error => console.log(error));
     
     // method to handle search :fetch request using all fields
     const handleSearch = () => {
@@ -72,6 +78,7 @@ export default function Search() {
         .catch(error => console.log(error));
     }
     return (
+    <div className="searchPageMain">
         <Container className = "searchMainContainer" maxwidth ="sm" sx={{p:2}}>
             <Box
                 className = "searchContainer"
@@ -106,6 +113,7 @@ export default function Search() {
                             variant="contained"
                             fullWidth  
                             onClick={(handleSearch)}
+                            color='warning'
                         >
                             Search
                         </Button>
@@ -113,5 +121,6 @@ export default function Search() {
                 <ResultDisplay resultsArr={searchResults} />
                 </Box>
         </Container>
+    </div>
     )
 }

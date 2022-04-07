@@ -7,7 +7,7 @@ import HomeCard from "../homeCard/HomeCard.jsx"
 
 export default function ResultDisplay( {resultsArr} ) {
 
-    console.log(resultsArr)
+    // console.log(resultsArr)
     // set up onclick to route to the respective landlord id
     // render our cards out
 

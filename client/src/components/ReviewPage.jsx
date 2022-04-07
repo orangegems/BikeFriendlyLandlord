@@ -18,16 +18,20 @@ export default function ReviewPage({userData}) {
 
     //get landlordName
     const [landlordName, setlandlordName] = React.useState('');
-    fetch(`http://localhost:3000/landlords/getByID/${landlordID}`, {
-        method: 'GET'
-    })
-    .then(res => res.json())
-    .then(parsed => {
-        setlandlordName(parsed.first_name + parsed.last_name)
-    })
-    .catch(error => {
-        console.log(error)
-    })
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/landlords/getByID/${landlordID}`, {
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(parsed => {
+            setlandlordName(parsed.first_name + parsed.last_name)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }, []);
+
 
     // handle title input (limit 100)
     const [title, setTitle] = React.useState('');

@@ -1,0 +1,13 @@
+.searchFields {
+    text-decoration: none;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    color: #666;
+}
+
+.searchPageMain {
+    margin: 0;
+    min-height: 100vh;
+    background-image: url("http://localhost:3000/images/marten-bjork-4WBIyO_2SbU-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
