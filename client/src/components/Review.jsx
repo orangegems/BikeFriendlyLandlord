@@ -13,7 +13,7 @@ import Icon from "@mui/material/Icon";
 export function Review (props){
   console.log(props.username)
     return(
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 275,  marginBottom: '10px'}}>
                     <CardContent direction="row">
                         <Stack direction= "row" sx={{justifyContent:'space-between'}}>
                             <Typography className="Title" variant="h5" >
