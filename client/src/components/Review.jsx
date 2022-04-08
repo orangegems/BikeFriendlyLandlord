@@ -11,12 +11,16 @@ import Icon from "@mui/material/Icon";
 
 
 export function Review (props){
+  console.log(props.username)
     return(
         <Card sx={{ minWidth: 275 }}>
                     <CardContent direction="row">
                         <Stack direction= "row" sx={{justifyContent:'space-between'}}>
                             <Typography className="Title" variant="h5" >
                             {props.title}
+                            </Typography>
+                            <Typography className="username" >
+                            {'posted by '}{props.username}
                             </Typography>
                         </Stack>
                         <Stack spacing={5} direction="row" >
