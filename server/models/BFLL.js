@@ -1,9 +1,11 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
+const path = require('path');
 
-const PG_URI = 'postgres://hgopngtf:H1NH-lEkGXVvn5kGbJxgKbnj0QrnBO7d@ruby.db.elephantsql.com/hgopngtf';
+dotenv.config({path: path.resolve(__dirname, '../../.env')});
 
 const pool = new Pool({
-    connectionString: PG_URI
+    connectionString: process.env.PG_URI
   });
 
   module.exports = {
