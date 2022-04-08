@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-require('dotenv').config();
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import HomeCard from '../../components/homeCard/HomeCard.jsx';
@@ -17,7 +16,9 @@ export default function MapSearch(props) {
         /**  iterate through the returned array of landlords with addresses
          *   use the google maps geocoding api to convert address to gpl coordinates
          */
-
+        
+        // keep google API key in the backend (safe)
+        const google_API_key = await fetch('/googleAPIKey');
         const pinsToSet = [];
         for (let i = 0; i < json.length; i++) {
           const landlord = json[i];
@@ -28,7 +29,7 @@ export default function MapSearch(props) {
             ${landlord.street_num}
             +${landlord.street.replaceAll(' ', '+')},
             +${landlord.city.replaceAll(' ', '+')},
-            +${landlord.state}&key=${process.env.google_API_key}`
+            +${landlord.state}&key=${google_API_key}`
           );
           const geoCode = await response.json();
           // strip coordinates off the response from google
