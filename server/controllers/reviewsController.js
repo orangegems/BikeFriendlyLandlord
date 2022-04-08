@@ -3,7 +3,6 @@ const db = require("../models/BFLL.js");
 const reviewsController = {};
 
 reviewsController.addReview = async (req, res, next) => {
-  console.log(req.body)
   const {
     title,
     username,
@@ -69,15 +68,17 @@ reviewsController.getReviews = async (req, res, next) => {
 };
 
 reviewsController.getAllLandlordReviews = async (req, res, next) => {
-  const { landlord_id } = req.params;
+  const { landlordId } = req.params;
+  // console.log('landlord id: ',landlord_id)
   const queryString = `
     SELECT * FROM reviews 
     WHERE landlord_id = $1;
   `;
 
   try {
-    const results = await db.query(queryString, [landlord_id]);
+    const results = await db.query(queryString, [landlordId]);
     res.locals.landlordReviews = results.rows;
+    // console.log('landlord Reviews: ', results);
     return next();
   } catch (error) {
     return next({

@@ -8,7 +8,7 @@ const landlordController = require('../controllers/landlordController.js');
 
 router.post(
   '/:landlordId',
-  sessionController.checkSession,
+  // sessionController.checkSession,
   reviewsController.addReview,
   reviewsController.getAllLandlordReviews,
   landlordController.updateLandlordReviews,

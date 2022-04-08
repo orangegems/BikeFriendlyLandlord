@@ -59,7 +59,7 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
   const { landlord_id } = req.body;
 
   let newOverall = newRespect = newResponsiveness = newBike = newPet = 0;
-
+  // console.log('landlord Reviews: ', res.locals.landlordReviews);
   // add up total for each review category
   res.locals.landlordReviews.forEach(review => {
     newOverall += Number(review.overall_rating);
@@ -127,7 +127,6 @@ landlordController.getLandlordsAndAddresses = async (req, res, next) => {
     `;
 
     const results = await db.query(queryString);
-    console.log(results.rows)
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {
