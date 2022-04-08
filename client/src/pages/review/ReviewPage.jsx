@@ -22,8 +22,8 @@ export default function ReviewPage({userData}) {
 
     // get landlord id
     const landlordID = useParams()
-    console.log('landlordID:  ',landlordID)
-    console.log('userdata:  ',userData)
+    // console.log('landlordID:  ',landlordID)
+    // console.log('userdata:  ',userData)
     //get landlordName
     const [landlordName, setlandlordName] = React.useState('');
 
@@ -94,7 +94,7 @@ export default function ReviewPage({userData}) {
             landlord_id: landlordID.landlord_id
         }
 
-        fetch(`http://localhost:3000/reviews/${landlordID.landlord_id}`, {
+        fetch(`/reviews/${landlordID.landlord_id}`, {
             method: 'POST',
             body: JSON.stringify(formBody),
             headers:{
@@ -103,7 +103,8 @@ export default function ReviewPage({userData}) {
         })
         .then (res => {
             console.log(res)
-            window.location = `http://localhost:8080/landlord/${landlordID.landlord_id}`})
+            window.location = `http://localhost:8080/landlord/${landlordID.landlord_id}`
+        })
         .catch(error => console.log(error));
     }
 
