@@ -18,7 +18,12 @@ export default function MapSearch(props) {
          */
         
         // keep google API key in the backend (safe)
-        const google_API_key = await fetch('/googleAPIKey');
+        const apiKey = await (await fetch('http://localhost:3000/apiKey')).json();
+
+
+        // const google_API_key = await fetch('/apiKey');
+        // const apiKey = await google_API_key.json()
+
         const pinsToSet = [];
         for (let i = 0; i < json.length; i++) {
           const landlord = json[i];
@@ -29,7 +34,7 @@ export default function MapSearch(props) {
             ${landlord.street_num}
             +${landlord.street.replaceAll(' ', '+')},
             +${landlord.city.replaceAll(' ', '+')},
-            +${landlord.state}&key=${google_API_key}`
+            +${landlord.state}&key=${apiKey}`
           );
           const geoCode = await response.json();
           // strip coordinates off the response from google

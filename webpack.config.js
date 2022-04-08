@@ -52,6 +52,7 @@ module.exports = {
     hot: true,
     magicHtml: true,
     proxy: {
+      'apiKey':'http://localhost:3000',
       '/auth': 'http://localhost:3000',
       '/reviews': 'http://localhost:3000',
       '/landlords': 'http://localhost:3000',

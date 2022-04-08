@@ -90,7 +90,7 @@ export function ReviewPage({userData}) {
             bike_friendly: bike,
             pet_friendly: pet,
             description: description,
-            user_id: userData.user_id,
+            user_id: userData._id,
             landlord_id: landlordID.landlord_id
         }
 

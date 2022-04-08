@@ -43,7 +43,7 @@ app.use('/user', userRouter);
  *  Serve sheltered google api key
  * */
 app.get('/apiKey', (req, res) => {
-  return res.send(process.env.google_API_key);
+  return res.json(process.env.google_API_key);
 });
 
 /** 
