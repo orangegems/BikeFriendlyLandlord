@@ -16,6 +16,7 @@ export default function MapSearch(props) {
         /**  iterate through the returned array of landlords with addresses
          *   use the google maps geocoding api to convert address to gpl coordinates
          */
+        console.log(json)
         
         // keep google API key in the backend (safe)
         const apiKey = await (await fetch('http://localhost:3000/apiKey')).json();
