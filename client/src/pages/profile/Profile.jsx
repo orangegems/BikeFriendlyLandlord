@@ -41,7 +41,7 @@ export default function ProfilePage() {
         })
         axios.get(`http://localhost:3000/reviews/landlordReviews/${landlordId.landlord_id}`)
         .then (reviewArray => {
-            console.log(reviewArray)
+            // console.log(reviewArray)
             setReviewData(reviewArray.data)
         })
     }, [])
