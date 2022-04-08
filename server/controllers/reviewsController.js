@@ -103,7 +103,23 @@ reviewsController.updateReview = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: 'Error attempting to update reviews in the database',
+      message: 'Error attempting to update reviews in the database in reviewsController.updateReview',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+};
+
+reviewsController.deleteReview = async (req, res, next) => {
+  const {reviewId} = req.params;
+  const queryString = `DELETE FROM reviews WHERE _id = $1;`;
+
+  try {
+    await db.query(queryString, [reviewId]);
+    return next();
+  } catch (error) {
+    return next({
+      message: 'Error attempting to delete post from database in reviewsController.deleteReview',
       log: 'Error: ' + error,
       status: 500
     });

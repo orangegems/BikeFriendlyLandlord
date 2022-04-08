@@ -35,6 +35,10 @@ router.get('/landlordReviews/:landlordId', reviewsController.getAllLandlordRevie
 
 router.put('/', reviewsController.updateReview, (req, res) => {
   return res.send('Post updated!');
+});
+
+router.delete('/:reviewId', reviewsController.deleteReview, (req, res) => {
+  return res.send('Post deleted!');
 })
 
 module.exports = router;
