@@ -7,7 +7,7 @@
 }
 
 .reviewformContainer{
-    background: rgba(241, 241, 241, 0.4);
+    background: rgba(241, 241, 241, 0.6);
 }
 
 .reviewMainContainer {
@@ -16,6 +16,11 @@
     color: rgb(68, 67, 67);
 }
 
-h3{
+
+.reviewLabel{
     margin: 0;
+    text-align: end;
+    justify-content: center;
+    align-items: center;
+    padding-top:4px
 }
