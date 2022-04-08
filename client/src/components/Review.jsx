@@ -14,6 +14,9 @@ export function Review (props){
     return(
         <Card sx={{ minWidth: 275 }}>
                     <CardContent direction="row">
+                        <div className="userDisplay" style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <Typography sx={{color: "#666"}} variant='subtitle1'>Posted by: {props.username}</Typography>
+                        </div>
                         <Stack direction= "row" sx={{justifyContent:'space-between'}}>
                             <Typography className="Title" variant="h5" >
                             {props.title}
