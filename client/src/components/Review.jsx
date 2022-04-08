@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -18,16 +18,22 @@ export function Review(props) {
   const [description, setDescription] = useState(props.description);
 
   const handleSave = () => {
-      axios.put('/reviews/', {reviewId: props._id, title: title, description: description})
-      .then(res => window.location.reload())
-      .catch(error => console.log(error));
-  }
+    axios
+      .put("/reviews/", {
+        reviewId: props._id,
+        title: title,
+        description: description,
+      })
+      .then((res) => window.location.reload())
+      .catch((error) => console.log(error));
+  };
 
   const handleDelete = () => {
-    axios.delete(`/reviews/${props._id}`)
-    .then(() => window.location.reload())
-    .catch(error => console.log(error));
-  }
+    axios
+      .delete(`/reviews/${props._id}`)
+      .then(() => window.location.reload())
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -49,35 +55,37 @@ export function Review(props) {
                   Posted by: {props.username}
                 </Typography>
               </div>
-              <div
-                className="userActions"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: "15px",
-                }}
-              >
-                <Icon>
-                  <EditIcon
-                    style={{
-                      color: "teal",
-                      fontSize: "20px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setUpdateMode(true)}
-                  ></EditIcon>
-                </Icon>
-                <Icon>
-                  <DeleteIcon
-                    style={{
-                      color: "tomato",
-                      fontSize: "20px",
-                      cursor: "pointer",
-                    }}
-                    onClick={handleDelete}
-                  ></DeleteIcon>
-                </Icon>
-              </div>
+              {props.userData.username === props.username && (
+                <div
+                  className="userActions"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "15px",
+                  }}
+                >
+                  <Icon>
+                    <EditIcon
+                      style={{
+                        color: "teal",
+                        fontSize: "20px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setUpdateMode(true)}
+                    ></EditIcon>
+                  </Icon>
+                  <Icon>
+                    <DeleteIcon
+                      style={{
+                        color: "tomato",
+                        fontSize: "20px",
+                        cursor: "pointer",
+                      }}
+                      onClick={handleDelete}
+                    ></DeleteIcon>
+                  </Icon>
+                </div>
+              )}
             </div>
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
               <Typography className="Title" variant="h5">
