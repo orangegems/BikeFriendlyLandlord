@@ -11,6 +11,14 @@ module.exports = {
     filename: 'bundle.js',
     // publicPath: '/build'
   },
+  resolve: {
+    fallback: {
+      "http": false,
+      "fs": false,
+      "os": false,
+      "path": false
+    }
+  },
   module: {
     rules: [
       {
@@ -51,3 +59,4 @@ module.exports = {
     },
   },
 };
+
