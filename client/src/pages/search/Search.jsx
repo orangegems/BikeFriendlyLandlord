@@ -1,5 +1,6 @@
 import React, {Component, useEffect } from 'react';
 // import { Link } from 'react-router-dom'
+import './search.css'
 
 // import MUI components
 import Button from '@mui/material/Button';
@@ -9,10 +10,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import  Checkbox  from '@mui/material/Checkbox';
+import {  ThemeProvider } from '@mui/material/styles';
 
 // import result component
 import ResultDisplay from "../../components/searchResults/resultDisplay.jsx"
-
+//import theme 
+import tomatopalette from "../../components/theme/tomatopalette.jsx"
 
 export default function Search() {
     // handle search results
@@ -33,17 +36,23 @@ export default function Search() {
     }
 
     // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
-    let options = [];
+    const [options, setOptions] = React.useState([]);
+    useEffect(() => {
+        const opArr = [];
+        fetch(`http://localhost:3000/address/uniqueCities`,{
+            method: 'GET'
+        })
+        .then (res => res.json())
+        .then (parsed => {
+            console.log('Fetching cities...')
+            for (let i = 0; i < parsed.length; i++){
+                opArr.push(parsed[i].city)
+            }
+            setOptions(opArr);
+        })
+        .catch(error => console.log(error));
+    }, []);
 
-    fetch(`http://localhost:3000/address/uniqueCities`,{
-        method: 'GET'
-    })
-    .then (res => res.json())
-    .then (parsed => {
-        for (let i = 0; i < parsed.length; i++){
-            options.push(parsed[i].city)
-        }
-    })
     
     // method to handle search :fetch request using all fields
     const handleSearch = () => {
@@ -68,15 +77,18 @@ export default function Search() {
             console.log(parsed)
             setSearchResults(parsed)
         })
+        .catch(error => console.log(error));
     }
     return (
+    <ThemeProvider theme={tomatopalette}>
+    <div className="searchPageMain">
         <Container className = "searchMainContainer" maxwidth ="sm" sx={{p:2}}>
             <Box
                 className = "searchContainer"
                 sx = {
-                    {p: 2, border: '1px solid grey'}
+                    {p: 2}
                 }
-                >
+                > 
                     <Stack className="searchFields" direction="column" spacing={3} justifyContent="center" alignItems="center" >
                         <Stack direction="row" spacing={10} justifyContent="center" alignItems="center">
                             <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
@@ -111,5 +123,7 @@ export default function Search() {
                 <ResultDisplay resultsArr={searchResults} />
                 </Box>
         </Container>
+    </div>
+    </ThemeProvider>
     )
 }

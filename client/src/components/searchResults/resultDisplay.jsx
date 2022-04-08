@@ -7,7 +7,7 @@ import HomeCard from "../homeCard/HomeCard.jsx"
 
 export default function ResultDisplay( {resultsArr} ) {
 
-    console.log(resultsArr)
+    // console.log(resultsArr)
     // set up onclick to route to the respective landlord id
     // render our cards out
 
@@ -24,9 +24,6 @@ export default function ResultDisplay( {resultsArr} ) {
                 borderRadius: 1
             }}
         >
-            <div>
-                {/* {resultsArr.map((landlordObj, index) => <HomeCard landlord={landlordObj} key={index}/>)} */}
-            </div>
         </Box>
     )}
     else {

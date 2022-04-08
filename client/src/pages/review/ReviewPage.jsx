@@ -1,18 +1,46 @@
 import React, { Component, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import './reviewpage.css'
 
 // import MUI components
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-// import Typography from  '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
+import { ThemeProvider } from '@mui/material/styles';
 
 
-export default function ReviewPage({username, user_id, landlord_id}) {
+// import theme
+import tomatopalette from '../../components/theme/tomatopalette.jsx'
+
+
+export default function ReviewPage({userData}) {
+
+    // get landlord id
+    const landlordID = useParams()
+    console.log('landlordID:  ',landlordID)
+    console.log('userdata:  ',userData)
+    //get landlordName
+    const [landlordName, setlandlordName] = React.useState('');
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/landlords/getByID/${landlordID.landlord_id}`, {
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(parsed => {
+            console.log(parsed)
+            setlandlordName(parsed.first_name + ' ' + parsed.last_name)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }, []);
+
+
     // handle title input (limit 100)
     const [title, setTitle] = React.useState('');
     const handleTitleChange = (e) => {
@@ -50,54 +78,59 @@ export default function ReviewPage({username, user_id, landlord_id}) {
 
     // method to handle form submission
     const sendReview = () => {
+
         // build req body
         const formBody = {
             title: title,
-            username: 'evanmcneely',
+            username: userData.username,
             overall_rating: overallCalc(respect,response),
             respect_rating: respect,
             responsiveness_rating: response,
             bike_friendly: bike,
             pet_friendly: pet,
             description: description,
-            user_id: 15,
-            landlord_id: 1
+            user_id: userData.user_id,
+            landlord_id: landlordID.landlord_id
         }
 
-        fetch(`http://localhost:3000/reviews/1`, {
+        fetch(`http://localhost:3000/reviews/${landlordID.landlord_id}`, {
             method: 'POST',
             body: JSON.stringify(formBody),
             headers:{
                 'Content-Type': 'application/json'
             }
         })
-        .then (res => console.log(res));
+        .then (res => {
+            console.log(res)
+            window.location = `http://localhost:8080/landlord/${landlordID.landlord_id}`})
+        .catch(error => console.log(error));
     }
 
         // will need the Landlord name from somewhere (props?)
 
         return (
-            <Container className="reviewMainContainer" maxwidth="sm">
-                <div>
-                    <h1>Leave a Review</h1>
-                </div>
+        <ThemeProvider theme={tomatopalette}>
+        <div className= "reviewPageGlobalContainer">
+            <Container className="reviewMainContainer" maxwidth="sm" sx={{p:2}}>
                     <Box
                         className="reviewformContainer"
                         sx={
-                            {p: 2, border: '1px solid grey'}
+                            {p: 2}
                         }
                         >
-                            <h2>Review of {'landlordnamehere'}</h2>
+                            <h2>Review of {landlordName}</h2>
                             <TextField 
-                                fullWidth 
+                                fullWidth
                                 required 
                                 label="Title"
                                 value={title}
                                 onChange={handleTitleChange}
                                 inputProps={{maxLength:100}}
                                 helperText="Max 100 Characters"
+                                sx={{mb:2, mt:2}}
                                 />
-                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                            <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
+                            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" >
                                 <h3>Overall Rating</h3>
                                 <Rating required size="large" precision={0.5} value={ overallCalc(respect,response) } readOnly />
                             </Stack>
@@ -117,6 +150,7 @@ export default function ReviewPage({username, user_id, landlord_id}) {
                                 <h3>Pet Friendly?</h3>
                                 <Checkbox checked={pet} onChange={handlePetChange} size="large"/>
                             </Stack>
+                            </Stack>
                             <TextField
                                 fullWidth
                                 required
@@ -127,10 +161,12 @@ export default function ReviewPage({username, user_id, landlord_id}) {
                                 helperText="Max 1000 Characters"
                                 value={ description }
                                 onChange={ handleDescChange}
+                                sx={{mb:2, mt:2}}
                             />
                             <Stack direction="row" spacing={2} justifyContent="flex-end">
                                 <Button
                                     variant="outlined"
+                                    onClick={() => window.location.replace(`/landlord/${landlordID.landlord_id}`)}
                                 >
                                     Cancel
                                 </Button>
@@ -144,5 +180,7 @@ export default function ReviewPage({username, user_id, landlord_id}) {
                     </Box>
 
             </Container>
+        </div>
+        </ThemeProvider>
         )
 }

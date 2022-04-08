@@ -4,66 +4,63 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
-import Rating from '@material-ui/lab/Rating';
+import Rating from '@mui/material/Rating';
+import CheckIcon from "@mui/icons-material/Check";
+import ClearIcon from "@mui/icons-material/Clear";
+import Icon from "@mui/material/Icon";
 
-export function Review({
-  title,
-  overall_rating,
-  respect_rating,
-  responsiveness_rating,
-  bike_rating,
-  pet_friendly_rating,
-  description,
-}) {
-  return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent direction="row">
-        <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
-          <Typography className="Title" variant="h5" value={title}>
-            {title}
-          </Typography>
-        </Stack>
-        <Stack spacing={5} direction="row">
-          <Stack spacing={2} direction="row">
-            <Typography variant="h7">Overall Rating</Typography>
-            <Rating
-              required
-              size="small"
-              precision={0.5}
-              value={overall_rating}
-            />
-          </Stack>
-          <Stack spacing={2} direction="row">
-            <Typography variant="h7">Respectful</Typography>
-            <Rating
-              required
-              size="small"
-              precision={0.5}
-              value={respect_rating}
-            />
-          </Stack>
-          <Stack spacing={2} direction="row">
-            <Typography variant="h7">Responsiveness</Typography>
-            <Rating
-              required
-              size="small"
-              precision={0.5}
-              value={responsiveness_rating}
-            />
-          </Stack>
-          <Stack spacing={2} direction="row">
-            <Typography variant="h7">Bike</Typography>
-            <div value={bike_rating}></div>
-          </Stack>
-          <Stack spacing={2} direction="row">
-            <Typography variant="h7">Pet Friendly</Typography>
-            <div value={pet_friendly_rating}></div>
-          </Stack>
-        </Stack>
-        <Typography className="Description" variant="h7" value={description}>
-          {description}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
+
+export function Review (props){
+    return(
+        <Card sx={{ minWidth: 275 }}>
+                    <CardContent direction="row">
+                        <Stack direction= "row" sx={{justifyContent:'space-between'}}>
+                            <Typography className="Title" variant="h5" >
+                            {props.title}
+                            </Typography>
+                        </Stack>
+                        <Stack spacing={5} direction="row" >
+                            <Stack spacing={2} direction="row" >
+                                <Typography variant= 'h7'>Overall Rating</Typography>
+                                <Rating style={{ color: "tomato" }} name="read-only" required size="small" precision={0.5} value={Number(props.overall_rating)} readOnly/>
+                            </Stack>
+                            <Stack spacing={2} direction="row" >
+                                <Typography variant= 'h7'>Respectful</Typography>
+                                <Rating style={{ color: "tomato" }} name="read-only" required size="small" precision={0.5} value={Number(props.respect_rating)} readOnly/>  
+                            </Stack>
+                            <Stack spacing={2} direction="row">
+                                <Typography variant= 'h7'>Responsiveness</Typography>
+                                <Rating style={{ color: "tomato" }} name="read-only" required size="small" precision={0.5} value={Number(props.responsiveness_rating)} readOnly/>
+                            </Stack>
+                            <Stack spacing={2} direction="row">
+                                <Typography variant= 'h7'>Bike</Typography>
+                                <Icon>
+                                    {props.bike_friendly ? (
+                                        <CheckIcon
+                                        style={{ color: "limeGreen", fontSize: "20px" }}
+                                        ></CheckIcon>
+                                    ) : (
+                                        <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                                    )}
+                                </Icon>
+                            </Stack>
+                            <Stack spacing={2} direction="row">
+                                <Typography variant= 'h7'>Pet Friendly</Typography>
+                                <Icon>
+                                    {props.pet_friendly ? (
+                                        <CheckIcon
+                                        style={{ color: "limeGreen", fontSize: "20px" }}
+                                        ></CheckIcon>
+                                    ) : (
+                                        <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                                    )}
+                                </Icon>
+                            </Stack>  
+                        </Stack>
+                        <Typography className="Description" variant="h7">
+                            {props.description}
+                        </Typography>
+                    </CardContent>
+            </Card>
+    );
 }

@@ -1,0 +1,21 @@
+.reviewPageGlobalContainer {
+    margin: 0;
+    min-height: 100vh;
+    background-image: url("http://localhost:3000/images/marten-bjork-4WBIyO_2SbU-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.reviewformContainer{
+    background: rgba(241, 241, 241, 0.4);
+}
+
+.reviewMainContainer {
+    text-decoration: none;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    color: rgb(68, 67, 67);
+}
+
+h3{
+    margin: 0;
+}
