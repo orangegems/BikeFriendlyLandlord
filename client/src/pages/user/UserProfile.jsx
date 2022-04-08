@@ -38,6 +38,7 @@ export function UserProfile(props) {
         }
       })
       .then((json) => {
+        console.log('response from fetch: ', json)
         setReviews(json.reviews);
       })
       .catch((err) => {
@@ -54,7 +55,7 @@ export function UserProfile(props) {
       </h3>
       <div>
         <h4>Your Reviews</h4>
-        {reviews.map((review) => {
+        {reviews?.map((review, index) => {
           return <Review
             title={review.title}
             overall_rating={review.overall_rating}
@@ -63,6 +64,8 @@ export function UserProfile(props) {
             bike_rating={review.bike_rating}
             pet_friendly_rating={review.pet_friendly}
             description={review.description}
+            userData={userData}
+            key={index}
           />;
         })}
       </div>
