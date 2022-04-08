@@ -17,10 +17,16 @@ export function Review(props) {
   const [title, setTitle] = useState(props.title);
   const [description, setDescription] = useState(props.description);
 
-  const handleSave = (event) => {
+  const handleSave = () => {
       axios.put('/reviews/', {reviewId: props._id, title: title, description: description})
       .then(res => window.location.reload())
       .catch(error => console.log(error));
+  }
+
+  const handleDelete = () => {
+    axios.delete(`/reviews/${props._id}`)
+    .then(() => window.location.reload())
+    .catch(error => console.log(error));
   }
 
   return (
@@ -68,6 +74,7 @@ export function Review(props) {
                       fontSize: "20px",
                       cursor: "pointer",
                     }}
+                    onClick={handleDelete}
                   ></DeleteIcon>
                 </Icon>
               </div>
