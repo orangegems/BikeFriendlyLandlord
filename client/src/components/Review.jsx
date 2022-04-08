@@ -34,7 +34,7 @@ export function Review(props) {
       .then(() => window.location.reload())
       .catch((error) => console.log(error));
   };
-  console.log('values to compare: ', props.userData.username, props.username);
+  // console.log('values to compare: ', props.userData.username, props.username);
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent direction="row">
@@ -55,7 +55,7 @@ export function Review(props) {
                   Posted by: {props.username}
                 </Typography>
               </div>
-              {props.userData.username === props.username && (
+              {props.userData?.username === props.username && (
                 <div
                   className="userActions"
                   style={{

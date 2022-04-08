@@ -18,17 +18,19 @@ export function App() {
 
   useEffect(() => {
     fetch('/user/getUser')
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          // break the promise chain from updating state
-          return { then: function () {} };
-        }
-      })
+      // .then((res) => {
+      //   if (res.status === 200) {
+      //     return res.json();
+      //   } else {
+      //     // break the promise chain from updating state
+      //     return { then: function () {} };
+      //   }
+      // })
       .then((json) => {
-        console.log(json);
-        setUserData(json);
+        return json.json()
+      })
+      .then(res => {
+        setUserData(res);
         setIsLoggedIn(true);
       })
       .catch((err) => console.log(err));

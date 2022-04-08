@@ -25,26 +25,26 @@ export function UserProfile(props) {
     //   .catch((err) => {
     //     console.log('Error check login -->', err);
     //   });
-
-    fetch(`/reviews/${userData._id}`)
-      .then((res) => {
-        if (res.status === 401) {
-          setIsLoggedIn(false);
-          setAuthDisplay(true);
-          navigate('/');
-        } else {
-          console.log(res);
-          return res.json();
-        }
-      })
-      .then((json) => {
-        console.log('response from fetch: ', json)
-        setReviews(json.reviews);
-      })
-      .catch((err) => {
-        console.log('Error fenching users reviews -->', err);
-      });
-  }, []);
+    if (userData._id) {
+      fetch(`/reviews/${userData._id}`)
+        .then((res) => {
+          if (res.status === 401) {
+            setIsLoggedIn(false);
+            setAuthDisplay(true);
+            navigate('/');
+          } else {
+            console.log(res);
+            return res.json();
+          }
+        })
+        .then((json) => {
+          setReviews(json.reviews);
+        })
+        .catch((err) => {
+          console.log('Error fenching users reviews -->', err);
+        });
+    }
+  }, [userData]);
 
   return (
     <div id="userProfile">
@@ -55,7 +55,7 @@ export function UserProfile(props) {
       </h3>
       <div>
         <h4>Your Reviews</h4>
-        {reviews?.map((review, index) => {
+        {reviews.map((review, index) => {
           return <Review
             title={review.title}
             overall_rating={review.overall_rating}
@@ -64,7 +64,6 @@ export function UserProfile(props) {
             bike_rating={review.bike_rating}
             pet_friendly_rating={review.pet_friendly}
             description={review.description}
-            userData={userData}
             key={index}
           />;
         })}
