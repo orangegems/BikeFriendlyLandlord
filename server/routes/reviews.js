@@ -33,4 +33,8 @@ router.get('/landlordReviews/:landlordId', reviewsController.getAllLandlordRevie
   return res.json(res.locals.landlordReviews);
 });
 
+router.put('/', reviewsController.updateReview, (req, res) => {
+  return res.send('Post updated!');
+})
+
 module.exports = router;

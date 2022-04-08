@@ -90,4 +90,24 @@ reviewsController.getAllLandlordReviews = async (req, res, next) => {
   }
 };
 
+reviewsController.updateReview = async (req, res, next) => {
+  const {reviewId, title, description} = req.body;
+
+  const queryString = `
+    UPDATE reviews SET title = $2, description = $3 WHERE _id = $1;
+  `;
+
+  try {
+    const result = await db.query(queryString, [reviewId, title, description]);
+    console.log(result);
+    return next();
+  } catch (error) {
+    return next({
+      message: 'Error attempting to update reviews in the database',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+};
+
 module.exports = reviewsController;
