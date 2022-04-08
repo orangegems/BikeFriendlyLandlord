@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -17,7 +18,9 @@ export function Review(props) {
   const [description, setDescription] = useState("");
 
   const handleSave = (event) => {
-      console.log(title, description)
+      axios.put('/reviews/', {reviewId: props._id, title: title, description: description})
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   }
   return (
     <Card sx={{ minWidth: 275 }}>
