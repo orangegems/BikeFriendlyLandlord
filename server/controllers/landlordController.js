@@ -36,7 +36,11 @@ landlordController.getAllLandlords = async (req, res, next) => {
 };
 
 landlordController.getTopFour = async (req, res, next) => {
-  const queryString = `SELECT landlords.*, addresses.city, addresses.state FROM landlords LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id ORDER BY overall_rating DESC LIMIT 4;`;
+  const queryString = `SELECT landlords.*, addresses.city, addresses.state FROM landlords 
+                       LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id 
+                       WHERE landlords.overall_rating != 'NaN'
+                       ORDER BY overall_rating 
+                       DESC LIMIT 4;`
 
   try {
     const results = await db.query(queryString);
@@ -55,8 +59,8 @@ landlordController.getTopFour = async (req, res, next) => {
 landlordController.updateLandlordReviews = async (req, res, next) => {
   const { landlord_id } = req.body;
 
-  let newOverall = (newRespect = newResponsiveness = newBike = newPet = 0);
-
+  let newOverall = newRespect = newResponsiveness = newBike = newPet = 0;
+  // console.log('landlord Reviews: ', res.locals.landlordReviews);
   // add up total for each review category
   res.locals.landlordReviews.forEach((review) => {
     newOverall += Number(review.overall_rating);
@@ -137,7 +141,6 @@ landlordController.getLandlordsAndAddresses = async (req, res, next) => {
     `;
 
     const results = await db.query(queryString);
-    console.log(results.rows);
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {

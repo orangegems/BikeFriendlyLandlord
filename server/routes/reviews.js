@@ -8,7 +8,7 @@ const landlordController = require('../controllers/landlordController.js');
 
 router.post(
   '/:landlordId',
-  sessionController.checkSession,
+  // sessionController.checkSession,
   reviewsController.addReview,
   reviewsController.getAllLandlordReviews,
   landlordController.updateLandlordReviews,
@@ -29,7 +29,7 @@ router.get(
   }
 );
 
-router.get('/landlordReviews/:landlord_id', reviewsController.getAllLandlordReviews, (req, res) => {
+router.get('/landlordReviews/:landlordId', reviewsController.getAllLandlordReviews, (req, res) => {
   return res.json(res.locals.landlordReviews);
 });
 
