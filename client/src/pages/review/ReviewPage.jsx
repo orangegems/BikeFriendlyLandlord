@@ -135,19 +135,19 @@ export default function ReviewPage({userData}) {
                                     <h3 className="reviewLabel">Overall Rating</h3>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Rating required size="large" precision={0.5} value={ overallCalc(respect,response) } readOnly />
+                                    <Rating required size="large" style={{color:"tomato"}} precision={0.5} value={ overallCalc(respect,response) } readOnly />
                                 </Grid>
                                 <Grid item xs={6}>
                                     <h3 className="reviewLabel">Respectfulness</h3>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Rating required size="large" precision={0.5} value={ respect } onChange={(e, val) => setRespect(val)}/>
+                                    <Rating required size="large" style={{color:"tomato"}} precision={0.5} value={ respect } onChange={(e, val) => setRespect(val)}/>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <h3 className="reviewLabel">Responsiveness</h3>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Rating required size="large" precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
+                                    <Rating required size="large" style={{color:"tomato"}} precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <h3 className="reviewLabel">Bike Friendly?</h3>
