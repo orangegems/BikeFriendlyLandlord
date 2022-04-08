@@ -72,7 +72,8 @@ reviewsController.getAllLandlordReviews = async (req, res, next) => {
   // console.log('landlord id: ',landlord_id)
   const queryString = `
     SELECT * FROM reviews 
-    WHERE landlord_id = $1;
+    WHERE landlord_id = $1
+    ORDER BY created_at DESC;
   `;
 
   try {
