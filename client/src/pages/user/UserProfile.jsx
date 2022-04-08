@@ -3,6 +3,8 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { Review } from '../../components/Review.jsx';
 
+import './userprofile.css'
+
 export function UserProfile(props) {
   const { userData, setUserData, setIsLoggedIn, setAuthDisplay } = props;
   const [reviews, setReviews] = useState([]);
@@ -44,8 +46,8 @@ export function UserProfile(props) {
   }, []);
 
   return (
-    <div>
-      <h1>Your Account</h1>
+    <div id="userProfile">
+      <div id="userProfileTitle">Your Account</div>
       <h3>
         Hello {userData.full_name}
         {','}

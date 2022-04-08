@@ -9,6 +9,7 @@ const landlordRouter = require('./routes/landlord.js');
 const reviewsRouter = require('./routes/reviews.js');
 const authRouter = require('./routes/auth.js');
 const addressRouter = require('./routes/address.js');
+const userRouter = require('./routes/user.js');
 
 const app = express();
 dotenv.config({path: path.resolve(__dirname, '../.env')});
@@ -36,12 +37,13 @@ app.use('/landlords', landlordRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/auth', authRouter);
 app.use('/address', addressRouter);
+app.use('/user', userRouter);
 
 /**
  *  Serve sheltered google api key
  * */
 app.get('/apiKey', (req, res) => {
-  return res.send(process.env.google_API_key);
+  return res.json(process.env.google_API_key);
 });
 
 /** 

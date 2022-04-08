@@ -11,6 +11,14 @@ module.exports = {
     filename: 'bundle.js',
     // publicPath: '/build'
   },
+  resolve: {
+    fallback: {
+      "http": false,
+      "fs": false,
+      "os": false,
+      "path": false
+    }
+  },
   module: {
     rules: [
       {
@@ -44,9 +52,12 @@ module.exports = {
     hot: true,
     magicHtml: true,
     proxy: {
+      'apiKey':'http://localhost:3000',
       '/auth': 'http://localhost:3000',
       '/reviews': 'http://localhost:3000',
       '/landlords': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
     },
   },
 };
+

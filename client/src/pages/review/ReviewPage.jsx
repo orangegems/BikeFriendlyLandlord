@@ -18,7 +18,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import tomatopalette from '../../components/theme/tomatopalette.jsx'
 
 
-export default function ReviewPage({userData}) {
+export function ReviewPage({userData}) {
 
     // get landlord id
     const landlordID = useParams()

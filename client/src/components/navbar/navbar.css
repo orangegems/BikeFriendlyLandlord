@@ -83,11 +83,9 @@ a:hover {
   color: tomato;
 } 
 a {
+  font-family: 'Nunito';
   text-decoration: none;
-  /* color: black; */
-  /* font-family: "Roboto","Helvetica","Arial",sans-serif; */
   padding-right: 10px;
   list-style: none;
-  /* margin-left: 50px; */
   color: #666;
 }
