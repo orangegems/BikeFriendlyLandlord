@@ -14,14 +14,15 @@ import Icon from "@mui/material/Icon";
 
 export function Review(props) {
   const [updateMode, setUpdateMode] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(props.title);
+  const [description, setDescription] = useState(props.description);
 
   const handleSave = (event) => {
       axios.put('/reviews/', {reviewId: props._id, title: title, description: description})
-      .then(res => console.log(res))
+      .then(res => window.location.reload())
       .catch(error => console.log(error));
   }
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent direction="row">
