@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const dotenv = require('dotenv');
 
 const sessionController = require('./controllers/sessionController');
 const landlordRouter = require('./routes/landlord.js');
@@ -10,6 +11,7 @@ const authRouter = require('./routes/auth.js');
 const addressRouter = require('./routes/address.js');
 
 const app = express();
+dotenv.config({path: path.resolve(__dirname, '../.env')});
 const PORT = 3000;
 
 /** 
@@ -34,6 +36,13 @@ app.use('/landlords', landlordRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/auth', authRouter);
 app.use('/address', addressRouter);
+
+/**
+ *  Serve sheltered google api key
+ * */
+app.get('/apiKey', (req, res) => {
+  return res.send(process.env.google_API_key);
+});
 
 /** 
  *  Serve the home/login-signup page and the main app on these routes 
