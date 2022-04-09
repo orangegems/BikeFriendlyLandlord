@@ -36,7 +36,7 @@ export function Review(props) {
   };
   // console.log('values to compare: ', props.userData.username, props.username);
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275, marginBottom: '10px' }}>
       <CardContent direction="row">
         {updateMode ? (
           <input

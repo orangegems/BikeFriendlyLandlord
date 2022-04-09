@@ -28,12 +28,12 @@ export function UserProfile(props) {
     if (userData._id) {
       fetch(`/reviews/${userData._id}`)
         .then((res) => {
+          // if the user is not authenticated, navigate them back to the hamepage and prompt them to login
           if (res.status === 401) {
             setIsLoggedIn(false);
             setAuthDisplay(true);
             navigate('/');
           } else {
-            console.log(res);
             return res.json();
           }
         })
@@ -57,6 +57,8 @@ export function UserProfile(props) {
         <h4>Your Reviews</h4>
         {reviews.map((review, index) => {
           return <Review
+            userData={userData}
+            username={review.username}
             title={review.title}
             overall_rating={review.overall_rating}
             respect_rating={review.respect_rating}

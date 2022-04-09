@@ -26,11 +26,12 @@ export function App() {
       //     return { then: function () {} };
       //   }
       // })
-      .then((json) => {
-        return json.json()
+      .then((res) => {
+        // parsing the response will error if the user is not authenticated and no data got returned
+        return res.json()
       })
-      .then(res => {
-        setUserData(res);
+      .then(json => {
+        setUserData(json);
         setIsLoggedIn(true);
       })
       .catch((err) => console.log(err));
