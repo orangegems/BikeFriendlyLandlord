@@ -1,12 +1,16 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 import {Link } from "react-router-dom";
 import { Review } from '../../components/Review.jsx';
 import { LandlordInfoCard } from '../../components/LandlordInfoCard.jsx'
+import "./profile.css"
+
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper';
 import { Stack } from '@mui/material';
@@ -19,8 +23,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import Button from '@mui/material/Button';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import {  ThemeProvider } from '@mui/material/styles';
 
 
@@ -52,7 +54,8 @@ export default function ProfilePage({userData}) {
     // console.log(landlordData)
     return (
         <ThemeProvider theme={tomatopalette}>
-            <Container className="MainContainer" sx={{m:2,pt:3,pr:4, justifyContent: 'center'}}>
+        <div id ='background'>
+            <Container className="MainContainer" >
                 <Stack className="LandlordInfo" sx={{pb:5, pl:5}} direction="row" justifyContent="space-around">
                     <Stack>
                         <Card sx={{ minWidth: 275 }}>
@@ -120,6 +123,7 @@ export default function ProfilePage({userData}) {
                     </Stack>
                 </Container>
         </Container>
+        </div>
         </ThemeProvider>
     )
 }
