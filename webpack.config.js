@@ -11,14 +11,7 @@ module.exports = {
     filename: 'bundle.js',
     // publicPath: '/build'
   },
-  resolve: {
-    fallback: {
-      "http": false,
-      "fs": false,
-      "os": false,
-      "path": false
-    }
-  },
+  
   module: {
     rules: [
       {
@@ -43,9 +36,7 @@ module.exports = {
       template: './client/public/index.html',
       filename: 'index.html',
       publicPath: process.env.NODE_ENV === 'production' ? 'build' : 'auto',
-      // chunks: ['index'],
     }),
-    // "@babel/plugin-transform-runtime"
   ],
   devServer: {
     historyApiFallback: true,

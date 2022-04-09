@@ -1,7 +1,3 @@
 {
-  "plugins": ["@babel/transform-runtime",
-    ["babel-plugin-dotenv", {
-      "replacedModuleName": "babel-dotenv"
-    }]
-  ]
+  "plugins": ["@babel/transform-runtime"]
 }
