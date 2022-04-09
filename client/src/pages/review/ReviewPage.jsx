@@ -103,7 +103,7 @@ export function ReviewPage({userData}) {
         })
         .then (res => {
             console.log(res)
-            window.location = `http://localhost:8080/landlord/${landlordID.landlord_id}`
+            window.location = `/landlord/${landlordID.landlord_id}`
         })
         .catch(error => console.log(error));
     }
