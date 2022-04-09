@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
-import {Link } from "react-router-dom";
+import { useState} from 'react';
+import {Link, useNavigate, useParams } from "react-router-dom";
 import { Review } from '../../components/Review.jsx';
 import { LandlordInfoCard } from '../../components/LandlordInfoCard.jsx'
+import axios from 'axios'
 import "./profile.css"
 
 import Box from '@mui/material/Box';
@@ -25,12 +24,11 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import Button from '@mui/material/Button';
 import {  ThemeProvider } from '@mui/material/styles';
 
-
 import tomatopalette from "../../components/theme/tomatopalette.jsx"
 
 
-export default function ProfilePage({userData}) {
-
+export default function ProfilePage({userData, isLoggedIn}) {
+    const navigate = useNavigate();
     const [landlordData,setLandlordData] = React.useState({})
     const [reviewData, setReviewData] = React.useState([])
 
@@ -49,6 +47,15 @@ export default function ProfilePage({userData}) {
     }, [])
     
     
+    //onclick for button
+    const handleReview = (e) => {
+        if (isLoggedIn) {
+            navigate(`/review/${landlordId.landlord_id}/`)
+        }
+        else {
+            alert('Please log in to submit a review')
+        }
+    }
 
 
     // console.log(landlordData)
@@ -109,7 +116,7 @@ export default function ProfilePage({userData}) {
                         Reviews
                         </Typography>
                         <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
-                            <Link to={`/review/${landlordId.landlord_id}/`}><Button variant="contained">Create Review</Button></Link>
+                            <Button variant="contained" onClick = {handleReview}>Create Review</Button>
                         </Stack>
                     </Stack>
                 </Container>
