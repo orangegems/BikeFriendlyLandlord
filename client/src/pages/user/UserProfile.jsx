@@ -48,7 +48,7 @@ export function UserProfile(props) {
 
   return (
     <div id="userProfile">
-      <div id="userProfileTitle">Your Account</div>
+      <h1 id="userProfileTitle">Your Account</h1>
       <h3>
         Hello {userData.full_name}
         {','}
