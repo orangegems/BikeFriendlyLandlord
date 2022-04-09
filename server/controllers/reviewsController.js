@@ -72,7 +72,8 @@ reviewsController.getAllLandlordReviews = async (req, res, next) => {
   // console.log('landlord id: ',landlord_id)
   const queryString = `
     SELECT * FROM reviews 
-    WHERE landlord_id = $1;
+    WHERE landlord_id = $1
+    ORDER BY created_at DESC;
   `;
 
   try {
@@ -86,6 +87,42 @@ reviewsController.getAllLandlordReviews = async (req, res, next) => {
         "Error occured attempting to fetch all landlord reviews from backend in reviewsController.getAllLandlordReviews",
       log: "Error: " + error,
       status: 500,
+    });
+  }
+};
+
+reviewsController.updateReview = async (req, res, next) => {
+  const {reviewId, title, description} = req.body;
+
+  const queryString = `
+    UPDATE reviews SET title = $2, description = $3 WHERE _id = $1;
+  `;
+
+  try {
+    const result = await db.query(queryString, [reviewId, title, description]);
+    console.log(result);
+    return next();
+  } catch (error) {
+    return next({
+      message: 'Error attempting to update reviews in the database in reviewsController.updateReview',
+      log: 'Error: ' + error,
+      status: 500
+    });
+  }
+};
+
+reviewsController.deleteReview = async (req, res, next) => {
+  const {reviewId} = req.params;
+  const queryString = `DELETE FROM reviews WHERE _id = $1;`;
+
+  try {
+    await db.query(queryString, [reviewId]);
+    return next();
+  } catch (error) {
+    return next({
+      message: 'Error attempting to delete post from database in reviewsController.deleteReview',
+      log: 'Error: ' + error,
+      status: 500
     });
   }
 };

@@ -25,37 +25,40 @@ export function UserProfile(props) {
     //   .catch((err) => {
     //     console.log('Error check login -->', err);
     //   });
-
-    fetch(`/reviews/${userData._id}`)
-      .then((res) => {
-        if (res.status === 401) {
-          setIsLoggedIn(false);
-          setAuthDisplay(true);
-          navigate('/');
-        } else {
-          console.log(res);
-          return res.json();
-        }
-      })
-      .then((json) => {
-        setReviews(json.reviews);
-      })
-      .catch((err) => {
-        console.log('Error fenching users reviews -->', err);
-      });
-  }, []);
+    if (userData._id) {
+      fetch(`/reviews/${userData._id}`)
+        .then((res) => {
+          // if the user is not authenticated, navigate them back to the hamepage and prompt them to login
+          if (res.status === 401) {
+            setIsLoggedIn(false);
+            setAuthDisplay(true);
+            navigate('/');
+          } else {
+            return res.json();
+          }
+        })
+        .then((json) => {
+          setReviews(json.reviews);
+        })
+        .catch((err) => {
+          console.log('Error fenching users reviews -->', err);
+        });
+    }
+  }, [userData]);
 
   return (
     <div id="userProfile">
-      <div id="userProfileTitle">Your Account</div>
+      <h1 id="userProfileTitle">Your Account</h1>
       <h3>
         Hello {userData.full_name}
         {','}
       </h3>
       <div>
         <h4>Your Reviews</h4>
-        {reviews.map((review) => {
+        {reviews.map((review, index) => {
           return <Review
+            userData={userData}
+            username={review.username}
             title={review.title}
             overall_rating={review.overall_rating}
             respect_rating={review.respect_rating}
@@ -63,6 +66,7 @@ export function UserProfile(props) {
             bike_rating={review.bike_rating}
             pet_friendly_rating={review.pet_friendly}
             description={review.description}
+            key={index}
           />;
         })}
       </div>

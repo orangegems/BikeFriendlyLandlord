@@ -9,6 +9,7 @@ import Search from './pages/search/Search.jsx';
 import { ReviewPage } from './pages/review/ReviewPage.jsx';
 import { UserProfile } from './pages/user/UserProfile.jsx';
 import { Route, Routes, Link } from 'react-router-dom';
+import Footer from "./components/footer/Footer.jsx";
 
 export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,16 +19,19 @@ export function App() {
 
   useEffect(() => {
     fetch('/user/getUser')
+      // .then((res) => {
+      //   if (res.status === 200) {
+      //     return res.json();
+      //   } else {
+      //     // break the promise chain from updating state
+      //     return { then: function () {} };
+      //   }
+      // })
       .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          // break the promise chain from updating state
-          return { then: function () {} };
-        }
+        // parsing the response will error if the user is not authenticated and no data got returned
+        return res.json()
       })
-      .then((json) => {
-        console.log(json);
+      .then(json => {
         setUserData(json);
         setIsLoggedIn(true);
       })
@@ -48,7 +52,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/map" element={<MapSearch />} />
-        <Route path="/landlord/:landlord_id" element={<Profile isLoggedIn={isLoggedIn}/>} />
+        <Route path="/landlord/:landlord_id" element={<Profile userData={userData} isLoggedIn={isLoggedIn}/>} />
         <Route
           path="/review/:landlord_id"
           element={<ReviewPage userData={userData} />}
@@ -66,6 +70,7 @@ export function App() {
         />
         <Route path="*" element={<p>404 - nothing here</p>} />
       </Routes>
+      <Footer />
     </>
   );
 }

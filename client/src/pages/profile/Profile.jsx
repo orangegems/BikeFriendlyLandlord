@@ -27,7 +27,7 @@ import {  ThemeProvider } from '@mui/material/styles';
 import tomatopalette from "../../components/theme/tomatopalette.jsx"
 
 
-export default function ProfilePage({isLoggedIn, authDisplay, setAuthDisplay}) {
+export default function ProfilePage({userData, isLoggedIn}) {
     const navigate = useNavigate();
     const [landlordData,setLandlordData] = React.useState({})
     const [reviewData, setReviewData] = React.useState([])
@@ -123,7 +123,7 @@ export default function ProfilePage({isLoggedIn, authDisplay, setAuthDisplay}) {
                     <Stack>
                         <div>
                             {reviewData.map((eachReview, i) => (
-                                <Review key={i} {...eachReview}/>
+                                <Review key={i} {...eachReview} userData={userData}/>
                                 ))}
                         </div>
                     </Stack>

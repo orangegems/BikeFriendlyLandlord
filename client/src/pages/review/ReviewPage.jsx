@@ -28,7 +28,7 @@ export function ReviewPage({userData}) {
     const [landlordName, setlandlordName] = React.useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:3000/landlords/getByID/${landlordID.landlord_id}`, {
+        fetch(`/landlords/getByID/${landlordID.landlord_id}`, {
             method: 'GET'
         })
         .then(res => res.json())
@@ -103,7 +103,7 @@ export function ReviewPage({userData}) {
         })
         .then (res => {
             console.log(res)
-            window.location = `http://localhost:8080/landlord/${landlordID.landlord_id}`
+            window.location = `/landlord/${landlordID.landlord_id}`
         })
         .catch(error => console.log(error));
     }
