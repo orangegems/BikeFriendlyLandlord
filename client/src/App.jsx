@@ -18,17 +18,19 @@ export function App() {
 
   useEffect(() => {
     fetch('/user/getUser')
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          // break the promise chain from updating state
-          return { then: function () {} };
-        }
-      })
+      // .then((res) => {
+      //   if (res.status === 200) {
+      //     return res.json();
+      //   } else {
+      //     // break the promise chain from updating state
+      //     return { then: function () {} };
+      //   }
+      // })
       .then((json) => {
-        console.log(json);
-        setUserData(json);
+        return json.json()
+      })
+      .then(res => {
+        setUserData(res);
         setIsLoggedIn(true);
       })
       .catch((err) => console.log(err));
@@ -48,7 +50,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/map" element={<MapSearch />} />
-        <Route path="/landlord/:landlord_id" element={<Profile />} />
+        <Route path="/landlord/:landlord_id" element={<Profile userData={userData}/>} />
         <Route
           path="/review/:landlord_id"
           element={<ReviewPage userData={userData} />}

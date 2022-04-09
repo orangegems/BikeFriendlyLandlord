@@ -39,8 +39,8 @@ landlordController.getTopFour = async (req, res, next) => {
   const queryString = `SELECT landlords.*, addresses.city, addresses.state FROM landlords 
                        LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id 
                        WHERE landlords.overall_rating != 'NaN'
-                       ORDER BY overall_rating 
-                       DESC LIMIT 4;`
+                       ORDER BY overall_rating DESC 
+                       LIMIT 4;`
 
   try {
     const results = await db.query(queryString);

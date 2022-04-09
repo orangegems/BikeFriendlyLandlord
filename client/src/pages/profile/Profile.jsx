@@ -27,7 +27,7 @@ import {  ThemeProvider } from '@mui/material/styles';
 import tomatopalette from "../../components/theme/tomatopalette.jsx"
 
 
-export default function ProfilePage() {
+export default function ProfilePage({userData}) {
 
     const [landlordData,setLandlordData] = React.useState({})
     const [reviewData, setReviewData] = React.useState([])
@@ -114,7 +114,7 @@ export default function ProfilePage() {
                     <Stack>
                         <div>
                             {reviewData.map((eachReview, i) => (
-                                <Review key={i} {...eachReview}/>
+                                <Review key={i} {...eachReview} userData={userData}/>
                                 ))}
                         </div>
                     </Stack>
