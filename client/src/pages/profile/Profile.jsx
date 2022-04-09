@@ -48,26 +48,12 @@ export default function ProfilePage({isLoggedIn, authDisplay, setAuthDisplay}) {
     
     
     //onclick for button
-    const [authPosition, setAuthPosition] = useState({
-        top: '',
-        left: '',
-      });
     const handleReview = (e) => {
         if (isLoggedIn) {
             navigate(`/review/${landlordId.landlord_id}/`)
         }
         else {
-            const top = e.pageY + 30;
-            const left = e.pageX - 200;
-            if (authDisplay === true) setAuthDisplay(false);
-            else {
-              setAuthDisplay(true);
-              setAuthPosition({
-                top: `${top}px`,
-                left: `${left}px`,
-              });
-            }
-
+            alert('Please log in to submit a review')
         }
     }
 
