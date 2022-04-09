@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Link } from "react-router-dom";
+import { useState} from 'react';
+import {Link, useNavigate } from "react-router-dom";
 import { Review } from '../../components/Review.jsx';
 import { LandlordInfoCard } from '../../components/LandlordInfoCard.jsx'
 import Box from '@mui/material/Box';
@@ -23,12 +24,11 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import {  ThemeProvider } from '@mui/material/styles';
 
-
 import tomatopalette from "../../components/theme/tomatopalette.jsx"
 
 
-export default function ProfilePage() {
-
+export default function ProfilePage({isLoggedIn, authDisplay, setAuthDisplay}) {
+    const navigate = useNavigate();
     const [landlordData,setLandlordData] = React.useState({})
     const [reviewData, setReviewData] = React.useState([])
 
@@ -47,6 +47,29 @@ export default function ProfilePage() {
     }, [])
     
     
+    //onclick for button
+    const [authPosition, setAuthPosition] = useState({
+        top: '',
+        left: '',
+      });
+    const handleReview = (e) => {
+        if (isLoggedIn) {
+            navigate(`/review/${landlordId.landlord_id}/`)
+        }
+        else {
+            const top = e.pageY + 30;
+            const left = e.pageX - 200;
+            if (authDisplay === true) setAuthDisplay(false);
+            else {
+              setAuthDisplay(true);
+              setAuthPosition({
+                top: `${top}px`,
+                left: `${left}px`,
+              });
+            }
+
+        }
+    }
 
 
     // console.log(landlordData)
@@ -106,7 +129,7 @@ export default function ProfilePage() {
                         Reviews
                         </Typography>
                         <Stack sx={{display: 'flex', alignItems: 'center', p: 1, m: 1,}}>
-                            <Link to={`/review/${landlordId.landlord_id}/`}><Button variant="contained">Create Review</Button></Link>
+                            <Button variant="contained" onClick = {handleReview}>Create Review</Button>
                         </Stack>
                     </Stack>
                 </Container>

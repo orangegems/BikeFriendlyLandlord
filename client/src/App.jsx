@@ -48,7 +48,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/map" element={<MapSearch />} />
-        <Route path="/landlord/:landlord_id" element={<Profile />} />
+        <Route path="/landlord/:landlord_id" element={<Profile isLoggedIn={isLoggedIn} setAuthDisplay={setAuthDisplay} authDisplay={authDisplay}/>} />
         <Route
           path="/review/:landlord_id"
           element={<ReviewPage userData={userData} />}

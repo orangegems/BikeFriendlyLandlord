@@ -10,7 +10,7 @@ const sessionController = {};
 sessionController.checkSession = (req, res, next) => {
   console.log('entered sessionController.checkSession');
   const jwtToken = req.cookies.ssid;
-  console.log('req.cookies: ', req.cookies)
+  // console.log('req.cookies: ', req.cookies)
   // check if the cookie exists. return status code 401 if it doesn't
   if (!jwtToken) return res.status(401).send();
   const decryptedToken = jwt.verify(jwtToken, process.env.jwts, {
