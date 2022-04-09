@@ -21,13 +21,16 @@ export default function MapSearch(props) {
         // keep google API key in the backend (safe)
         const apiKey = await (await fetch('http://localhost:3000/apiKey')).json();
 
-
-        // const google_API_key = await fetch('/apiKey');
-        // const apiKey = await google_API_key.json()
-
         const pinsToSet = [];
         for (let i = 0; i < json.length; i++) {
           const landlord = json[i];
+
+          /**
+           * todo: REFACTOR this to store the coordinates in the database when a a new address is added.
+           * Making the requests to google everytime is expensive in bothh money and time
+           * 
+           * 
+           */
 
           // query string that sends the landlord address to the google geocoding API
           const response = await fetch(
