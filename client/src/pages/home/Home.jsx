@@ -5,7 +5,7 @@ import { Collapse, IconButton, makeStyles } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link as Scroll } from "react-scroll";
-import Footer from "../../components/footer/Footer.jsx";
+
 const axios = require("axios");
 
 export default function Home() {
@@ -45,7 +45,7 @@ export default function Home() {
         </div>
       </div>
       <HomeCards topFour={topFour} />
-      <Footer />
+      
     </div>
   );
 }

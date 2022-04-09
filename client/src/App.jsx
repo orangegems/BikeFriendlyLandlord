@@ -9,6 +9,7 @@ import Search from './pages/search/Search.jsx';
 import { ReviewPage } from './pages/review/ReviewPage.jsx';
 import { UserProfile } from './pages/user/UserProfile.jsx';
 import { Route, Routes, Link } from 'react-router-dom';
+import Footer from "./components/footer/Footer.jsx";
 
 export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -69,6 +70,7 @@ export function App() {
         />
         <Route path="*" element={<p>404 - nothing here</p>} />
       </Routes>
+      <Footer />
     </>
   );
 }
