@@ -1,4 +1,4 @@
-const db = require('../models/BFLL.js');
+const db = require("../models/BFLL.js");
 
 const landlordController = {};
 
@@ -12,8 +12,8 @@ landlordController.getById = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'Error occured attempting to get landlord from database in landlordController.getById',
-      log: 'Error: ' + error,
+        "Error occured attempting to get landlord from database in landlordController.getById",
+      log: "Error: " + error,
       status: 500,
     });
   }
@@ -28,8 +28,8 @@ landlordController.getAllLandlords = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'An error occured attempting to query all landlords in landlordController.getAllLandlords',
-      log: 'Error: ' + error,
+        "An error occured attempting to query all landlords in landlordController.getAllLandlords",
+      log: "Error: " + error,
       status: 500,
     });
   }
@@ -40,7 +40,7 @@ landlordController.getTopFour = async (req, res, next) => {
                        LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id 
                        WHERE landlords.overall_rating != 'NaN'
                        ORDER BY overall_rating DESC 
-                       LIMIT 4;`
+                       LIMIT 4;`;
 
   try {
     const results = await db.query(queryString);
@@ -49,8 +49,8 @@ landlordController.getTopFour = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'An error occured attempting to fetch the top 4 landlords in landlordController.getTopFour',
-      log: 'Error: ' + error,
+        "An error occured attempting to fetch the top 4 landlords in landlordController.getTopFour",
+      log: "Error: " + error,
       status: 500,
     });
   }
@@ -59,7 +59,7 @@ landlordController.getTopFour = async (req, res, next) => {
 landlordController.updateLandlordReviews = async (req, res, next) => {
   const { landlord_id } = req.body;
 
-  let newOverall = newRespect = newResponsiveness = newBike = newPet = 0;
+  let newOverall = (newRespect = newResponsiveness = newBike = newPet = 0);
   // console.log('landlord Reviews: ', res.locals.landlordReviews);
   // add up total for each review category
   res.locals.landlordReviews.forEach((review) => {
@@ -75,9 +75,7 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
   newRespect /= res.locals.landlordReviews.length;
   newResponsiveness /= res.locals.landlordReviews.length;
   newBike =
-    newBike >= Math.floor(res.locals.landlordReviews.length / 2)
-      ? true
-      : false;
+    newBike >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
   newPet =
     newPet >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
 
@@ -100,8 +98,8 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'An error occured attempting to update database with new ratings in landlordController.updateLandlordReviews',
-      log: 'Error: ' + error,
+        "An error occured attempting to update database with new ratings in landlordController.updateLandlordReviews",
+      log: "Error: " + error,
       status: 500,
     });
   }
@@ -115,9 +113,9 @@ landlordController.searchLandlords = async (req, res, next) => {
     WHERE addresses.city = $1
   `;
 
-  if (bike_friendly) queryString += ' AND bike_friendly = true';
-  if (pet_friendly) queryString += ' AND pet_friendly = true';
-  queryString += ';';
+  if (bike_friendly) queryString += " AND bike_friendly = true";
+  if (pet_friendly) queryString += " AND pet_friendly = true";
+  queryString += ";";
 
   try {
     const results = await db.query(queryString, [city]);
@@ -126,8 +124,8 @@ landlordController.searchLandlords = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'An error occured attempting to search landlords in landlordController.searchLandlords',
-      log: 'Error: ' + error,
+        "An error occured attempting to search landlords in landlordController.searchLandlords",
+      log: "Error: " + error,
       status: 500,
     });
   }
@@ -146,8 +144,8 @@ landlordController.getLandlordsAndAddresses = async (req, res, next) => {
   } catch (error) {
     return next({
       message:
-        'An error occured attempting to search landlords in landlordController.searchLandlords',
-      log: 'Error: ' + error,
+        "An error occured attempting to search landlords in landlordController.searchLandlords",
+      log: "Error: " + error,
       status: 500,
     });
   }

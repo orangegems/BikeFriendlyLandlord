@@ -1,8 +1,8 @@
-import { Button } from '@mui/material';
-import React, { useState } from 'react';
-import './navbar.css';
-import { NavLink, Link } from 'react-router-dom';
-import { Authenticate } from '../../pages/authenticate/Authenticate.jsx';
+import { Button } from "@mui/material";
+import React, { useState } from "react";
+import "./navbar.css";
+import { NavLink, Link } from "react-router-dom";
+import { Authenticate } from "../../pages/authenticate/Authenticate.jsx";
 
 export function Navbar(props) {
   const {
@@ -15,17 +15,17 @@ export function Navbar(props) {
   } = props;
 
   const [authPosition, setAuthPosition] = useState({
-    top: '',
-    left: '',
+    top: "",
+    left: "",
   });
 
   function logout(event) {
     event.preventDefault();
     fetch(`/auth/logout`, {
-      method: 'POST',
+      method: "POST",
       // Adding headers to the request
       headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+        "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((res) => {
@@ -35,12 +35,12 @@ export function Navbar(props) {
           setAuthDisplay(false);
           setUserData({});
         } else {
-          console.log('logout status not 200 -->', res);
+          console.log("logout status not 200 -->", res);
         }
       })
-      .then(() => window.location.replace('/'))
+      .then(() => window.location.replace("/"))
       .catch((err) => {
-        console.log('Error from logout --> ', err);
+        console.log("Error from logout --> ", err);
       });
   }
 
@@ -58,7 +58,7 @@ export function Navbar(props) {
   }
 
   let activeStyle = {
-    color: 'tomato',
+    color: "tomato",
   };
 
   return (
@@ -71,21 +71,24 @@ export function Navbar(props) {
           <li className="navBarListItem">
             <NavLink
               to="/"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
               Home
             </NavLink>
           </li>
           <li className="navBarListItem">
             <NavLink
               to="/search"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
               Search
             </NavLink>
           </li>
           <li className="navBarListItem">
             <NavLink
               to="/map"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
               Map
             </NavLink>
           </li>
@@ -95,16 +98,17 @@ export function Navbar(props) {
         {!isLoggedIn && (
           <Button
             sx={{
-              fontFamily: 'Nunito',
-              color: '#666',
-              '&:hover': { backgroundColor: 'rgba(253, 143, 124, 0.577)' },
+              fontFamily: "Nunito",
+              color: "#666",
+              "&:hover": { backgroundColor: "rgba(253, 143, 124, 0.577)" },
             }}
             variant="text"
             onClick={(e) => {
               toggleAuthDisplay(e);
               // if (authDisplay === true) setAuthDisplay(false);
               // else setAuthDisplay(true);
-            }}>
+            }}
+          >
             Login/Signup
           </Button>
         )}
@@ -114,11 +118,12 @@ export function Navbar(props) {
             <Button
               variant="text"
               sx={{
-                fontFamily: 'Nunito',
-                color: '#666',
-                '&:hover': { backgroundColor: 'rgba(253, 143, 124, 0.577)' },
+                fontFamily: "Nunito",
+                color: "#666",
+                "&:hover": { backgroundColor: "rgba(253, 143, 124, 0.577)" },
               }}
-              onClick={(e) => logout(e)}>
+              onClick={(e) => logout(e)}
+            >
               Log Out
             </Button>
           </div>
