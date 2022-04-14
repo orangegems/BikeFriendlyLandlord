@@ -11,3 +11,8 @@ export const resetUserData = () => ({
   type: types.RESET_USER,
   payload: null,
 });
+
+export const toggleAuthDisplay = () => ({
+  type: types.TOGGLE_AUTH_DISPLAY,
+  payload: null
+})

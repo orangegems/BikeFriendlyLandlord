@@ -1,29 +1,35 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import './login.css';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import "./login.css";
 // import { InputAdornment, IconButton } from "@material-ui/core";
 // import Visibility from "@material-ui/icons/Visibility";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // import Typography from '@mui/material/Typography';
 
 export default function Login(props) {
-  const { handleSubmit, setAuthDisplay, setDisplayLogin, loginError, loginErrorMessage } = props;
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    handleSubmit,
+    setAuthDisplay,
+    setDisplayLogin,
+    loginError,
+    loginErrorMessage,
+  } = props;
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const formStyle = {
     // marginTop: 8,
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    backgroundColor: "white",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   };
 
-  const inputButtonStyle={
-    marginBottom: '10px',
-  }
+  const inputButtonStyle = {
+    marginBottom: "10px",
+  };
 
   return (
     <>
@@ -31,9 +37,10 @@ export default function Login(props) {
         sx={formStyle}
         component="form"
         onSubmit={() =>
-          handleSubmit('login', { username: username, password: password })
+          handleSubmit("login", { username: username, password: password })
         }
-        noValidate>
+        noValidate
+      >
         <h3>Login</h3>
         <TextField
           id="outlined-basic"

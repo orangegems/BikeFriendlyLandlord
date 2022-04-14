@@ -4,7 +4,11 @@ import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { Authenticate } from "../../pages/authenticate/Authenticate.jsx";
 
-export function Navbar(props) {
+const mapStateToProps = (state) => ({
+  authDisplay: state.display.authDisplay,
+});
+
+const Navbar = (props) => {
   const {
     isLoggedIn,
     authDisplay,
@@ -140,3 +144,6 @@ export function Navbar(props) {
     </div>
   );
 }
+
+export default connect(mapStateToProps, null)(Navbar);
+
