@@ -1,7 +1,7 @@
-import * as types from './actionTypes';
+import * as types from "./actionTypes";
 
 // updates state to hold current user data
-export const setUserData = user => ({
+export const setUserData = (user) => ({
   type: types.SET_USER,
   payload: user,
 });
@@ -14,14 +14,15 @@ export const resetUserData = () => ({
 
 export const toggleAuthDisplay = () => ({
   type: types.TOGGLE_AUTH_DISPLAY,
-  payload: null
-})
+  payload: null,
+});
 
 export const searchResults = (searchResults) => ({
   type: types.POPULATE_SEARCH_RESULTS,
-  payload: searchResult,
-})
+  payload: searchResults,
+});
+
 export const populateTopFour = (topFour) => ({
-  type: types.POPULATE_TOP_FOUR, 
-  payload: topFour
-})
+  type: types.POPULATE_TOP_FOUR,
+  payload: topFour,
+});
