@@ -28,7 +28,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const App = (props) => {
-  const isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
+  let isLoggedIn;
+
+  useEffect(() => {
+    isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
+  }, [props.userData]);
 
   useEffect(() => {
     fetch("/user/getUser")
