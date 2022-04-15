@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (userData) => dispatch(actions.setUserData(userData)),
   resetUserData: () => dispatch(actions.resetUserData()),
-  toggleAuthDisplay: () => dispatch(actions.toggleAuthDisplay())
+  toggleAuthDisplay: () => dispatch(actions.toggleAuthDisplay()),
 });
 
 const App = (props) => {
