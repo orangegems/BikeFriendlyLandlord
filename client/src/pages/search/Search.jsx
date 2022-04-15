@@ -16,10 +16,15 @@ import {  ThemeProvider } from '@mui/material/styles';
 import ResultDisplay from "../../components/searchResults/resultDisplay.jsx"
 //import theme 
 import tomatopalette from "../../components/theme/tomatopalette.jsx"
+import { connect } from 'react-redux';
+import * as actions from '../../actions/actions.js';
 
-export default function Search() {
+const mapsDispatchToProps = (dispatch) => ({
+    setSearchResults: (searchResults) => dispatch(actions.searchResults(searchResults))
+})
+
+function Search(props) {
     // handle search results
-    const [searchResults, setSearchResults] = React.useState([]);
 
     // handle city input
     const [city, setCity] = React.useState('');
@@ -75,7 +80,7 @@ export default function Search() {
         // response will need to be assigned to a variable to be sent to our results display
         .then (parsed => {
             console.log(parsed)
-            setSearchResults(parsed)
+            props.setSearchResults(parsed)
         })
         .catch(error => console.log(error));
     }
@@ -120,10 +125,12 @@ export default function Search() {
                             Search
                         </Button>
                     </Stack>
-                <ResultDisplay resultsArr={searchResults} />
+                <ResultDisplay resultsArr={props.searchResults} />
                 </Box>
         </Container>
     </div>
     </ThemeProvider>
     )
 }
+
+export default connect(null, mapsDispatchToProps)(Search)

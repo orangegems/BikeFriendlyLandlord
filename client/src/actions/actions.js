@@ -16,3 +16,8 @@ export const toggleAuthDisplay = () => ({
   type: types.TOGGLE_AUTH_DISPLAY,
   payload: null
 })
+
+export const searchResults = (searchResults) => ({
+  type: types.POPULATE_SEARCH_RESULTS,
+  payload: searchResult,
+})
