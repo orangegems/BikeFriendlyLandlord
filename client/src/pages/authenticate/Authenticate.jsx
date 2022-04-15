@@ -6,7 +6,7 @@ import './authenticate.css';
 import './authenticate.css';
 
 export function Authenticate(props) {
-  const { setAuthDisplay, setIsLoggedIn, setUserData, position } = props;
+  const { setAuthDisplay, setUserData, position } = props;
   const [displayLogin, setDisplayLogin] = useState(true);
   const [loginError, setLoginError] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
@@ -26,7 +26,6 @@ export function Authenticate(props) {
           setLoginError(true);
           setLoginErrorMessage('Username or password is not correct.');
         } else if (res.status === 200) {
-          setIsLoggedIn(true);
           setAuthDisplay(false);
           return res.json();
         } else {
