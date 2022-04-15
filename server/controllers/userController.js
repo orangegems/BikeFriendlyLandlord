@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 const db = require('../models/BFLL.js');
+const queries = require('../models/queries');
 
 const saltRounds = 10;
 
@@ -86,11 +87,7 @@ userController.verifyUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const queryString = `
-    SELECT * FROM users
-    WHERE users.username = $1;
-    `;
-    const result = await db.query(queryString, [username]);
+    const result = await db.query(queries.verifyUser, [username]);
 
     const hash = result.rows[0].password;
 
@@ -118,14 +115,10 @@ userController.deleteUser = async (req, res, next) => {
   try {
     // pull username form cookie
 
-    const queryString = `
-    Delete FROM users
-    WHERE users._id = $1;
-    `;
     const values = [
       /** userId */
     ];
-    const result = await db.query(queryString, values);
+    const result = await db.query(queries.deleteUser, values);
     console.log(result.rows);
 
     // res.locals.user = result.rows.something // !
@@ -146,12 +139,7 @@ userController.getUserData = async (req,res,next) => {
     const userId = res.locals.user;
     console.log(userId)
 
-    const queryString = `
-    SELECT * FROM users
-    WHERE users._id = $1;
-    `;
-
-    const result = await db.query(queryString, [userId._id]);
+    const result = await db.query(queries.getUser, [userId._id]);
     console.log(result.rows[0]);
 
     delete result.rows[0].password;

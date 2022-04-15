@@ -1,12 +1,12 @@
 const db = require('../models/BFLL.js');
+const queries = require('../models/queries');
 
 const addressController = {};
 
 addressController.getUniqueCities = async (req, res, next) => {
-    const queryString = `SELECT DISTINCT city FROM addresses;`;
 
     try {
-        const results = await db.query(queryString);
+        const results = await db.query(queries.getCity);
         res.locals.cities = results.rows;
         return next();
     } catch (error) {
