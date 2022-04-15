@@ -2,11 +2,15 @@ import React from "react";
 import HomeCard from "../homeCard/HomeCard.jsx";
 import "./homeCards.css";
 
-export default function homeCards({topFour}) {
+const mapStateToProps = (state) => ({
+  topFour: state.display.topFourLandlords
+})
+
+function homeCards(props) {
   return (
     <div className="homeCardsWrapper">
       <div className="homeCards" data-aos="fade-up" data-aos-duration="1000" id="homeCards">
-        {topFour.map((landlordObj, index) => <HomeCard landlord={landlordObj} key={index}/>)}
+        {props.topFour.map((landlordObj, index) => <HomeCard landlord={landlordObj} key={index}/>)}
       </div>
       <div className="homeCardsUserFeedbackWrapper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">
         <div className="homeCardsUserFeedback">
@@ -26,3 +30,5 @@ export default function homeCards({topFour}) {
     </div>
   );
 }
+
+export default connect(mapStatetoProps, null)(homeCards);

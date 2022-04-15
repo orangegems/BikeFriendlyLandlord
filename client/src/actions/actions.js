@@ -21,3 +21,7 @@ export const searchResults = (searchResults) => ({
   type: types.POPULATE_SEARCH_RESULTS,
   payload: searchResult,
 })
+export const populateTopFour = (topFour) => ({
+  type: types.POPULATE_TOP_FOUR, 
+  payload: topFour
+})

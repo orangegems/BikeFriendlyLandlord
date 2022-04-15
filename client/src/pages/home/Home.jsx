@@ -5,16 +5,21 @@ import { Collapse, IconButton, makeStyles } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link as Scroll } from "react-scroll";
+import { connect } from "react-redux";
+import * as actions from '../../actions/actions.js';
 
 const axios = require("axios");
 
-export default function Home() {
-  const [topFour, setTopFour] = useState([]);
+const mapDispatchToProps = (dispatch) => ({
+  setTopFour: (topFour) => dispatch(actions.populateTopFour(topFour))
+})
+
+function Home(props) {
   
   useEffect(() => {
     axios
       .get("http://localhost:3000/landlords/topFour")
-      .then((res) => setTopFour(res.data))
+      .then((res) => props.setTopFour(res.data))
       .catch((error) => console.log(error));
   }, []);
 
@@ -42,8 +47,11 @@ export default function Home() {
           </Scroll>
         </div>
       </div>
-      <HomeCards topFour={topFour} />
+      <HomeCards />
       
     </div>
   );
 }
+
+
+export default connect(null, mapDispatchtoProps)(Home);
