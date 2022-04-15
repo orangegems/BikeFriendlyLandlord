@@ -16,3 +16,8 @@ export const toggleAuthDisplay = () => ({
   type: types.TOGGLE_AUTH_DISPLAY,
   payload: null
 })
+
+export const populateTopFour = (topFour) => ({
+  type: types.POPULATE_TOP_FOUR, 
+  payload: topFour
+})
