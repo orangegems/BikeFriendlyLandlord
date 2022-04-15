@@ -24,9 +24,8 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import tomatopalette from "../../components/theme/tomatopalette.jsx";
 
-export default function ProfilePage({ userData }) {
+export default function ProfilePage({ userData, isLoggedIn }) {
   const navigate = useNavigate();
-  const isLoggedIn = JSON.stringify(userData) !== JSON.stringify({});
   const [landlordData, setLandlordData] = React.useState({});
   const [reviewData, setReviewData] = React.useState([]);
 

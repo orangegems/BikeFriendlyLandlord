@@ -16,9 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Navbar = (props) => {
-  const { setAuthDisplay, setUserData, userData } = props;
-
-  const isLoggedIn = JSON.stringify(userData) !== JSON.stringify({});
+  const { setAuthDisplay, setUserData, userData, isLoggedIn } = props;
 
   const [authPosition, setAuthPosition] = useState({
     top: "",

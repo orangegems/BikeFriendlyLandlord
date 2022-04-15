@@ -28,6 +28,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const App = (props) => {
+  const isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
+
   useEffect(() => {
     fetch("/user/getUser")
       .then((res) => {
@@ -45,6 +47,7 @@ const App = (props) => {
         setAuthDisplay={props.setAuthDisplay}
         setUserData={props.setUserData}
         userData={props.userData}
+        isLoggedIn={isLoggedIn}
       />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -52,7 +55,9 @@ const App = (props) => {
         <Route path="/map" element={<MapSearch />} />
         <Route
           path="/landlord/:landlord_id"
-          element={<Profile userData={props.userData}/>}
+          element={
+            <Profile userData={props.userData} isLoggedIn={isLoggedIn} />
+          }
         />
         <Route
           path="/review/:landlord_id"
