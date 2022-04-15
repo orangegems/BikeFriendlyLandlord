@@ -9,11 +9,9 @@ import { Link as Scroll } from "react-scroll";
 const axios = require("axios");
 
 export default function Home() {
-  const [checked, setChecked] = useState(false);
   const [topFour, setTopFour] = useState([]);
+  
   useEffect(() => {
-    setChecked(true);
-
     axios
       .get("http://localhost:3000/landlords/topFour")
       .then((res) => setTopFour(res.data))
