@@ -2,19 +2,24 @@ import * as types from "../actions/actionTypes";
 
 const initState = {
   authDisplay: false,
+  topFourLandlords: []
 };
 
 export default displayReducer = (state = initState, action) => {
   // pull data from initState,
   // create newState to manipulate
-  const {authDisplay} = state;
-  const newState = {authDisplay};
+  const {authDisplay, topFourLandlords} = state;
+  const newState = {authDisplay, topFourLandlords};
 
   switch (action.type) {
     // set user data upon login
     case types.TOGGLE_AUTH_DISPLAY:
       // newState mutation here
       newState.authDisplay = !authDisplay;
+      return newState;
+    
+    case types.POPULATE_TOP_FOUR:
+      newState.topFourLandlords = action.payload;
       return newState;
 
     default:
