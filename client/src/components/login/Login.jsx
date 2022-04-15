@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -8,7 +10,7 @@ import "./login.css";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // import Typography from '@mui/material/Typography';
 
-export default function Login(props) {
+export default Login = (props) => {
   const {
     handleSubmit,
     setAuthDisplay,
@@ -16,6 +18,7 @@ export default function Login(props) {
     loginError,
     loginErrorMessage,
   } = props;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

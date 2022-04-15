@@ -6,7 +6,7 @@ import { Review } from '../../components/Review.jsx';
 import './userprofile.css'
 
 export function UserProfile(props) {
-  const { userData, setUserData, setIsLoggedIn, setAuthDisplay } = props;
+  const { userData, setUserData, setAuthDisplay } = props;
   const [reviews, setReviews] = useState([]);
   let navigate = useNavigate();
   // let [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +30,6 @@ export function UserProfile(props) {
         .then((res) => {
           // if the user is not authenticated, navigate them back to the hamepage and prompt them to login
           if (res.status === 401) {
-            setIsLoggedIn(false);
             setAuthDisplay(true);
             navigate('/');
           } else {

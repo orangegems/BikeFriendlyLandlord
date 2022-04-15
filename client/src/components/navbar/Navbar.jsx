@@ -3,20 +3,22 @@ import React, { useState } from "react";
 import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { Authenticate } from "../../pages/authenticate/Authenticate.jsx";
+import * as actions from "../../actions/actions.js";
 
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  resetUserData: dispatch(() => {
+    actions.resetUserData();
+  }),
+});
+
 const Navbar = (props) => {
-  const {
-    isLoggedIn,
-    authDisplay,
-    setAuthDisplay,
-    setIsLoggedIn,
-    setUserData,
-    userData,
-  } = props;
+  const { setAuthDisplay, setUserData, userData } = props;
+
+  const isLoggedIn = JSON.stringify(userData) !== JSON.stringify({});
 
   const [authPosition, setAuthPosition] = useState({
     top: "",
@@ -35,9 +37,8 @@ const Navbar = (props) => {
       .then((res) => {
         if (res.status === 200) {
           // if successfully logged out, reset login state to false
-          setIsLoggedIn(false);
           setAuthDisplay(false);
-          setUserData({});
+          resetUserData();
         } else {
           console.log("logout status not 200 -->", res);
         }
@@ -51,7 +52,7 @@ const Navbar = (props) => {
   function toggleAuthDisplay(e) {
     const top = e.pageY + 30;
     const left = e.pageX - 250;
-    if (authDisplay === true) setAuthDisplay(false);
+    if (props.authDisplay === true) setAuthDisplay(false);
     else {
       setAuthDisplay(true);
       setAuthPosition({
@@ -109,8 +110,6 @@ const Navbar = (props) => {
             variant="text"
             onClick={(e) => {
               toggleAuthDisplay(e);
-              // if (authDisplay === true) setAuthDisplay(false);
-              // else setAuthDisplay(true);
             }}
           >
             Login/Signup
@@ -132,10 +131,9 @@ const Navbar = (props) => {
             </Button>
           </div>
         )}
-        {authDisplay && (
+        {props.authDisplay && (
           <Authenticate
             setAuthDisplay={setAuthDisplay}
-            setIsLoggedIn={setIsLoggedIn}
             setUserData={setUserData}
             position={authPosition}
           />
@@ -143,7 +141,6 @@ const Navbar = (props) => {
       </div>
     </div>
   );
-}
+};
 
-export default connect(mapStateToProps, null)(Navbar);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

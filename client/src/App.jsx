@@ -24,24 +24,17 @@ const mapStateToProps = (state) => ({
 // dispatches action upon invokation
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (userData) => dispatch(actions.setUserData(userData)),
-  resetUserData: () => dispatch(actions.resetUserData()),
-  toggleAuthDisplay: () => dispatch(actions.toggleAuthDisplay()),
+  setAuthDisplay: () => dispatch(actions.toggleAuthDisplay()),
 });
 
 const App = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [authDisplay, setAuthDisplay] = useState(false);
-
-  const [userData, setUserData] = useState({});
-
   useEffect(() => {
     fetch("/user/getUser")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
-        setUserData(json);
-        setIsLoggedIn(true);
+        props.setUserData(json);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -49,12 +42,9 @@ const App = (props) => {
   return (
     <>
       <Navbar
-        isLoggedIn={isLoggedIn}
-        authDisplay={authDisplay}
-        setAuthDisplay={setAuthDisplay}
-        setIsLoggedIn={setIsLoggedIn}
-        setUserData={setUserData}
-        userData={userData}
+        setAuthDisplay={props.setAuthDisplay}
+        setUserData={props.setUserData}
+        userData={props.userData}
       />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -62,20 +52,19 @@ const App = (props) => {
         <Route path="/map" element={<MapSearch />} />
         <Route
           path="/landlord/:landlord_id"
-          element={<Profile userData={userData} isLoggedIn={isLoggedIn} />}
+          element={<Profile userData={props.userData}/>}
         />
         <Route
           path="/review/:landlord_id"
-          element={<ReviewPage userData={userData} />}
+          element={<ReviewPage userData={props.userData} />}
         />
         <Route
           path="/profile/:username"
           element={
             <UserProfile
-              userData={userData}
-              setUserData={setUserData}
-              setIsLoggedIn={setIsLoggedIn}
-              setAuthDisplay={setAuthDisplay}
+              userData={props.userData}
+              setUserData={props.setUserData}
+              setAuthDisplay={props.setAuthDisplay}
             />
           }
         />

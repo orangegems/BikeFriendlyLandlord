@@ -7,8 +7,8 @@ const initState = {
 export default displayReducer = (state = initState, action) => {
   // pull data from initState,
   // create newState to manipulate
-  const {authDisplay} = state;
-  const newState = {authDisplay};
+  const { authDisplay } = state;
+  const newState = { authDisplay };
 
   switch (action.type) {
     // set user data upon login
