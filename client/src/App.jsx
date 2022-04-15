@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "./actions/actions.js";
 
 // components
-import { Navbar } from "./components/navbar/Navbar.jsx";
+import Navbar from "./components/navbar/Navbar.jsx";
 import Home from "./pages/home/Home.jsx";
 import MapSearch from "./pages/map/MapSearch.jsx";
 import Profile from "./pages/profile/Profile.jsx";
