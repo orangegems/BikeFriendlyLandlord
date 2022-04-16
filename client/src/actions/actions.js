@@ -17,6 +17,11 @@ export const toggleAuthDisplay = () => ({
   payload: null,
 });
 
+export const setIsLoggedIn = (boolean) => ({
+  type: types.TOGGLE_IS_LOGGED_IN,
+  payload: boolean,
+});
+
 export const searchResults = (searchResults) => ({
   type: types.POPULATE_SEARCH_RESULTS,
   payload: searchResults,

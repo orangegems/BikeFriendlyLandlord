@@ -18,6 +18,7 @@ import { UserProfile } from "./pages/UserProfile.jsx";
 // references global redux state
 const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
+  isLoggedIn: state.display.isLoggedIn,
 });
 
 // called with this.props.[setUserData],
@@ -25,30 +26,27 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (userData) => dispatch(actions.setUserData(userData)),
   setAuthDisplay: () => dispatch(actions.toggleAuthDisplay()),
+  setIsLoggedIn: (boolean) => dispatch(actions.setIsLoggedIn(boolean)),
 });
 
 const App = (props) => {
-  let isLoggedIn;
-  
-  const populateUser = async() => {
+  const populateUser = async () => {
     await fetch("/user/getUser")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
         props.setUserData(json);
-        isLoggedIn = true;
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   useEffect(populateUser, []);
 
   useEffect(() => {
-    console.log("USER DATA: \n" + JSON.stringify(props.userData))
-    isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
+    props.setIsLoggedIn(JSON.stringify(props.userData) !== JSON.stringify({}));
+    console.log(props.isLoggedIn);
   }, [props.userData]);
-
 
   return (
     <>
@@ -56,7 +54,7 @@ const App = (props) => {
         setAuthDisplay={props.setAuthDisplay}
         setUserData={props.setUserData}
         userData={props.userData}
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={props.isLoggedIn}
       />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -65,7 +63,7 @@ const App = (props) => {
         <Route
           path="/landlord/:landlord_id"
           element={
-            <Profile userData={props.userData} isLoggedIn={isLoggedIn} />
+            <Profile userData={props.userData} isLoggedIn={props.isLoggedIn} />
           }
         />
         <Route
