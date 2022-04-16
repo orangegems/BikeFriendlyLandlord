@@ -54,4 +54,4 @@ function Home(props) {
 }
 
 
-export default connect(null, mapDispatchtoProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);

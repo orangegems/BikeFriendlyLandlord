@@ -9,7 +9,7 @@ import "./login.css";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // import Typography from '@mui/material/Typography';
 
-export default Login = (props) => {
+export default function Login (props) {
   const {
     handleSubmit,
     setAuthDisplay,

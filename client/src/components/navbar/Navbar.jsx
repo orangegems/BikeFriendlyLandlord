@@ -4,7 +4,9 @@ import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 import { Authenticate } from "../../pages/authenticate/Authenticate.jsx";
 import * as actions from "../../actions/actions.js";
-
+import { connect } from 'react-redux';
+  
+  
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
 });
