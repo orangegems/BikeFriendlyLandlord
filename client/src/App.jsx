@@ -8,7 +8,7 @@ import * as actions from "./actions/actions.js";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import MapSearch from "./pages/MapSearch.jsx";
-import Profile from "./pages/Profile.jsx";
+import Profile from "./pages/LandlordProfile.jsx";
 import Search from "./pages/Search.jsx";
 import Footer from "./components/Footer.jsx";
 import { ReviewPage } from "./pages/ReviewPage.jsx";
@@ -18,6 +18,7 @@ import { UserProfile } from "./pages/UserProfile.jsx";
 // references global redux state
 const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
+  isLoggedIn: state.display.isLoggedIn,
 });
 
 // called with this.props.[setUserData],
@@ -25,17 +26,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (userData) => dispatch(actions.setUserData(userData)),
   setAuthDisplay: () => dispatch(actions.toggleAuthDisplay()),
+  setIsLoggedIn: (boolean) => dispatch(actions.setIsLoggedIn(boolean)),
 });
 
 const App = (props) => {
-  let isLoggedIn;
-
-  useEffect(() => {
-    isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
-  }, [props.userData]);
-
-  useEffect(() => {
-    fetch("/user/getUser")
+  const populateUser = async () => {
+    await fetch("/user/getUser")
       .then((res) => {
         return res.json();
       })
@@ -43,7 +39,14 @@ const App = (props) => {
         props.setUserData(json);
       })
       .catch((err) => console.log(err));
-  }, []);
+  };
+
+  useEffect(populateUser, []);
+
+  useEffect(() => {
+    props.setIsLoggedIn(JSON.stringify(props.userData) !== JSON.stringify({}));
+    console.log(props.isLoggedIn);
+  }, [props.userData]);
 
   return (
     <>
@@ -51,7 +54,7 @@ const App = (props) => {
         setAuthDisplay={props.setAuthDisplay}
         setUserData={props.setUserData}
         userData={props.userData}
-        isLoggedIn={isLoggedIn}
+        isLoggedIn={props.isLoggedIn}
       />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -60,7 +63,7 @@ const App = (props) => {
         <Route
           path="/landlord/:landlord_id"
           element={
-            <Profile userData={props.userData} isLoggedIn={isLoggedIn} />
+            <Profile userData={props.userData} isLoggedIn={props.isLoggedIn} />
           }
         />
         <Route

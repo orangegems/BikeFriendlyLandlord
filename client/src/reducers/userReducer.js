@@ -14,7 +14,7 @@ export default function userReducer(state = initState, action) {
     // set user data upon login
     case types.SET_USER:
       // newState mutation here
-      newState.data = action.payload.user;
+      newState.data = action.payload;
       return newState;
 
     // reset user to blank upon logout
