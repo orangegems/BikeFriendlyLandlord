@@ -98,12 +98,13 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
 landlordController.searchLandlords = async (req, res, next) => {
   const { city, bike_friendly, pet_friendly } = req.body;
 
-  if (bike_friendly) queries.getBikeAndPetFriendlyLandlords += " AND bike_friendly = true";
-  if (pet_friendly) queries.getBikeAndPetFriendlyLandlords += " AND pet_friendly = true";
-  queries.getBikeAndPetFriendlyLandlords += ";";
+  let getBikeAndPetFriendlyLandlords = queries.getBikeAndPetFriendlyLandlords;
+  if (bike_friendly) getBikeAndPetFriendlyLandlords += " AND bike_friendly = true";
+  if (pet_friendly) getBikeAndPetFriendlyLandlords += " AND pet_friendly = true";
+  getBikeAndPetFriendlyLandlords += ";";
 
   try {
-    const results = await db.query(queries.getBikeAndPetFriendlyLandlords, [city]);
+    const results = await db.query(getBikeAndPetFriendlyLandlords, [city]);
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {
