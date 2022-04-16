@@ -1,0 +1,150 @@
+#footer {
+  height: 40px;
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.514);
+  font-size: 0.75em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* homeCard.jsx */
+
+.homeCardContents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeCardRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.bikePetFriendlyRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* homeCards.jsx */
+
+.homeCardsWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeCards {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.homeCardsUserFeedbackWrapper,
+.homeCardsUserFeedback {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeCardsUserFeedback {
+  margin-bottom: 25px;
+}
+
+.feedbackDesc,
+.feedbackUser {
+  color: white;
+  font-family: "Nunito", sans-serif;
+}
+
+.feedbackDesc {
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+/* Login.jsx */
+.linkButton {
+  color: blueviolet;
+  text-decoration: underline;
+}
+
+.linkButton:hover {
+  color: blue;
+}
+
+/* Navbar.jsx */
+#logo {
+  font-size: xx-large;
+  font-family: "Nunito", sans-serif;
+  /* font-style: bold; */
+  color: tomato;
+  font-weight: 700; 
+}
+
+#navBar {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: lightgrey;
+  /* background: none; */
+  align-items: center;
+  /* position: absolute; */
+}
+
+.navBarLeft {
+  flex: 1;
+  display: flex;
+  /* justify-content: center; */
+  padding-left: 25px;
+  align-items: center;
+}
+
+.navBarCenter {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarListItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+}
+
+.navBarListItem {
+  list-style: none;
+  font-family: 'Nunito', sans-serif;
+  padding: 0 20px;
+}
+
+.navBarRight {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 25px;
+}
+
+a:hover {
+  color: tomato;
+} 
+a {
+  font-family: 'Nunito';
+  text-decoration: none;
+  padding-right: 10px;
+  list-style: none;
+  color: #666;
+}
+
+
