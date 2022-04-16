@@ -34,14 +34,15 @@ const Navbar = (props) => {
     })
       .then((res) => {
         if (res.status === 200) {
+          window.location.replace("/")
           // if successfully logged out, reset login state to false
-          setAuthDisplay(false);
-          resetUserData();
+          // setAuthDisplay(false);
+          // resetUserData();
         } else {
           console.log("logout status not 200 -->", res);
         }
       })
-      .then(() => window.location.replace("/"))
+      // .then(() => window.location.replace("/"))
       .catch((err) => {
         console.log("Error from logout --> ", err);
       });
