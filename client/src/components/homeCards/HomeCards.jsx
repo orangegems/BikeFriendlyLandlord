@@ -1,6 +1,7 @@
 import React from "react";
 import HomeCard from "../homeCard/HomeCard.jsx";
 import "./homeCards.css";
+import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
   topFour: state.display.topFourLandlords
@@ -31,4 +32,4 @@ function homeCards(props) {
   );
 }
 
-export default connect(mapStatetoProps, null)(homeCards);
+export default connect(mapStateToProps, null)(homeCards);

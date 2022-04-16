@@ -6,7 +6,7 @@ const initState = {
   topFourLandlords: [],
 };
 
-export default displayReducer = (state = initState, action) => {
+export default function displayReducer(state = initState, action) {
   // pull data from initState,
   // create newState to manipulate
 
