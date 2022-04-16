@@ -21,6 +21,7 @@ CREATE TABLE landlords(
   pet_friendly boolean,
   is_verified boolean DEFAULT false,
   FOREIGN KEY (_id) REFERENCES users(_id),
+  -- user_id INT NOT NULL FOREIGN KEY REFERENCES users(_id)
 );
 
 CREATE TABLE addresses(
