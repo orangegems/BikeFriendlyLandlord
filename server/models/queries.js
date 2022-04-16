@@ -18,7 +18,7 @@ queries.updateLandlordRating = `UPDATE landlords
 SET overall_rating = $1, respect_rating = $2, responsiveness_rating = $3, bike_friendly = $4, pet_friendly = $5
 WHERE _id = $6`;
 
-queries.bikeAndPetFriendlyLandlords = `SELECT landlords.*, addresses.street_num, addresses.street, addresses.city, addresses.state, addresses.zip_code FROM landlords 
+queries.getBikeAndPetFriendlyLandlords = `SELECT landlords.*, addresses.street_num, addresses.street, addresses.city, addresses.state, addresses.zip_code FROM landlords 
 INNER JOIN addresses ON landlords._id = addresses.landlord_id
 WHERE addresses.city = $1`;
 
@@ -41,13 +41,17 @@ queries.updateReview = `UPDATE reviews SET title = $2, description = $3 WHERE _i
 queries.deleteReview = `DELETE FROM reviews WHERE _id = $1`;
 
 //Users
-queries.verifyUser = `SELECT * FROM users
+queries.createUser =`INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+RETURNING *`;
+
+queries.getVerifiedUser = `SELECT * FROM users
 WHERE users.username = $1`;
 
 queries.deleteUser = `DELETE FROM users
 WHERE users._id = $1`;
 
-queries.getUser = `SELECT * FROM users
+queries.getUserData = `SELECT * FROM users
 WHERE users._id = $1`;
 
 module.exports = queries;
