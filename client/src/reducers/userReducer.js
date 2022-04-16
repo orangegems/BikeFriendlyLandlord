@@ -4,7 +4,7 @@ const initState = {
   data: {},
 };
 
-export default userReducer = (state = initState, action) => {
+export default function userReducer(state = initState, action) {
   // pull data from initState,
   // create newState to manipulate
   const { data } = state;

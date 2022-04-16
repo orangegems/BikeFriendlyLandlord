@@ -1,5 +1,6 @@
 import React from "react";
 import HomeCard from "./HomeCard.jsx";
+import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
   topFour: state.display.topFourLandlords
