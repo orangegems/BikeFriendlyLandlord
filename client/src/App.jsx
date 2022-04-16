@@ -8,7 +8,7 @@ import * as actions from "./actions/actions.js";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import MapSearch from "./pages/MapSearch.jsx";
-import Profile from "./pages/Profile.jsx";
+import Profile from "./pages/LandlordProfile.jsx";
 import Search from "./pages/Search.jsx";
 import Footer from "./components/Footer.jsx";
 import { ReviewPage } from "./pages/ReviewPage.jsx";
@@ -29,21 +29,26 @@ const mapDispatchToProps = (dispatch) => ({
 
 const App = (props) => {
   let isLoggedIn;
-
-  useEffect(() => {
-    isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
-  }, [props.userData]);
-
-  useEffect(() => {
-    fetch("/user/getUser")
+  
+  const populateUser = async() => {
+    await fetch("/user/getUser")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
         props.setUserData(json);
+        isLoggedIn = true;
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
+
+  useEffect(populateUser, []);
+
+  useEffect(() => {
+    console.log("USER DATA: \n" + JSON.stringify(props.userData))
+    isLoggedIn = JSON.stringify(props.userData) !== JSON.stringify({});
+  }, [props.userData]);
+
 
   return (
     <>
