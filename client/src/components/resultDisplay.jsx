@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
   searchResults: state.display.searchResults,
 });
 
-function ResultDisplay(props) {
-  if (!resultsArr) {
+function ResultDisplay({ searchResults }) {
+  if (!searchResults) {
     return (
       <Box
         sx={{
@@ -32,7 +32,7 @@ function ResultDisplay(props) {
         data-aos-duration="1000"
         id="homeCards"
       >
-        {props.searchResults.map((landlordObj, index) => (
+        {searchResults.map((landlordObj, index) => (
           <HomeCard landlord={landlordObj} key={index} />
         ))}
       </div>

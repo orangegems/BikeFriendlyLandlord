@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import { ThemeProvider } from "@mui/material/styles";
 
-import ResultDisplay from "../components/resultDisplay.jsx";
+import ResultDisplay from "../components/ResultDisplay.jsx";
 import * as actions from "../actions/actions.js";
 
 //import theme
@@ -152,7 +152,7 @@ function Search(props) {
                 Search
               </Button>
             </Stack>
-            <ResultDisplay resultsArr={props.searchResults} />
+            <ResultDisplay />
           </Box>
         </Container>
       </div>
