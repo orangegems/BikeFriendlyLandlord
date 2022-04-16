@@ -1,12 +1,12 @@
 const db = require("../models/BFLL.js");
+const queries = require('../models/queries');
 
 const landlordController = {};
 
 landlordController.getById = async (req, res, next) => {
-  const queryString = `SELECT * FROM landlords WHERE _id = $1`;
-
+  
   try {
-    const results = await db.query(queryString, [req.params.landlord_id]);
+    const results = await db.query(queries.getLandlord, [req.params.landlord_id]);
     res.locals.landlord = results.rows[0];
     return next();
   } catch (error) {
@@ -20,9 +20,9 @@ landlordController.getById = async (req, res, next) => {
 };
 
 landlordController.getAllLandlords = async (req, res, next) => {
-  const queryString = `SELECT * FROM landlords;`;
+
   try {
-    const results = await db.query(queryString);
+    const results = await db.query(queries.getAllLandlords);
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {
@@ -36,14 +36,9 @@ landlordController.getAllLandlords = async (req, res, next) => {
 };
 
 landlordController.getTopFour = async (req, res, next) => {
-  const queryString = `SELECT landlords.*, addresses.city, addresses.state FROM landlords 
-                       LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id 
-                       WHERE landlords.overall_rating != 'NaN'
-                       ORDER BY overall_rating DESC 
-                       LIMIT 4;`;
-
+ 
   try {
-    const results = await db.query(queryString);
+    const results = await db.query(queries.getTopFourLandlords);
     res.locals.topLandlords = results.rows;
     return next();
   } catch (error) {
@@ -80,13 +75,8 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
     newPet >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
 
   // push new values to database
-  const queryString = `
-    UPDATE landlords
-    SET overall_rating = $1, respect_rating = $2, responsiveness_rating = $3, bike_friendly = $4, pet_friendly = $5
-    WHERE _id = $6;
-  `;
   try {
-    await db.query(queryString, [
+    await db.query(queries.updateLandlordRating, [
       newOverall,
       newRespect,
       newResponsiveness,
@@ -107,18 +97,13 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
 
 landlordController.searchLandlords = async (req, res, next) => {
   const { city, bike_friendly, pet_friendly } = req.body;
-  let queryString = `
-    SELECT landlords.*, addresses.street_num, addresses.street, addresses.city, addresses.state, addresses.zip_code FROM landlords 
-    INNER JOIN addresses ON landlords._id = addresses.landlord_id
-    WHERE addresses.city = $1
-  `;
 
-  if (bike_friendly) queryString += " AND bike_friendly = true";
-  if (pet_friendly) queryString += " AND pet_friendly = true";
-  queryString += ";";
+  if (bike_friendly) queries.getBikeAndPetFriendlyLandlords += " AND bike_friendly = true";
+  if (pet_friendly) queries.getBikeAndPetFriendlyLandlords += " AND pet_friendly = true";
+  queries.getBikeAndPetFriendlyLandlords += ";";
 
   try {
-    const results = await db.query(queryString, [city]);
+    const results = await db.query(queries.getBikeAndPetFriendlyLandlords, [city]);
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {
@@ -133,12 +118,7 @@ landlordController.searchLandlords = async (req, res, next) => {
 
 landlordController.getLandlordsAndAddresses = async (req, res, next) => {
   try {
-    const queryString = `
-    SELECT l.*, a.city, a.street_num, a.street, a.state, a.zip_code, a.landlord_id FROM landlords l
-    INNER JOIN addresses a ON l._id = a.landlord_id;
-    `;
-
-    const results = await db.query(queryString);
+    const results = await db.query(queries.getLandlordsAndAddresses);
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {
