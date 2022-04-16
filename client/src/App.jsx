@@ -10,7 +10,7 @@ import Home from "./pages/home/Home.jsx";
 import MapSearch from "./pages/map/MapSearch.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Search from "./pages/search/Search.jsx";
-import Footer from "./components/footer/Footer.jsx";
+import Footer from "./components/Footer.jsx";
 import { ReviewPage } from "./pages/review/ReviewPage.jsx";
 import { UserProfile } from "./pages/user/UserProfile.jsx";
 

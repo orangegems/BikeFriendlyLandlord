@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 
 // import Homecard component
-import HomeCard from "../homeCard/HomeCard.jsx";
+import HomeCard from "../HomeCard.jsx";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({

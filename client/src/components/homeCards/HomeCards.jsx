@@ -1,5 +1,5 @@
 import React from "react";
-import HomeCard from "../homeCard/HomeCard.jsx";
+import HomeCard from "../HomeCard.jsx";
 import "./homeCards.css";
 
 const mapStateToProps = (state) => ({

@@ -1,3 +1,36 @@
+#footer {
+  height: 40px;
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.514);
+  font-size: 0.75em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* homeCard.js */
+
+.homeCardContents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeCardRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.bikePetFriendlyRating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* homeCards.js */
+
 .homeCardsWrapper {
   height: 100vh;
   display: flex;
@@ -36,3 +69,5 @@
   font-style: italic;
   font-size: 1.1em;
 }
+
+/*  */

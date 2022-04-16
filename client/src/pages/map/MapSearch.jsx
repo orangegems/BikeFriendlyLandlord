@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import HomeCard from '../../components/homeCard/HomeCard.jsx';
+import HomeCard from '../../components/HomeCard.jsx';
 
 import './mapSearch.css';
 
