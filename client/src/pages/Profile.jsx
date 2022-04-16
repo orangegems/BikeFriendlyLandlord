@@ -1,9 +1,8 @@
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Review } from "../../components/Review.jsx";
-import { LandlordInfoCard } from "../../components/LandlordInfoCard.jsx";
+import { Review } from "../components/Review.jsx";
+import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
 import axios from "axios";
-import "./profile.css";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -22,7 +21,7 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
 
-import tomatopalette from "../../components/theme/tomatopalette.jsx";
+import tomatopalette from "../theme/tomatopalette.jsx";
 
 export default function ProfilePage({ userData, isLoggedIn }) {
   const navigate = useNavigate();

@@ -3,11 +3,6 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import "./login.css";
-// import { InputAdornment, IconButton } from "@material-ui/core";
-// import Visibility from "@material-ui/icons/Visibility";
-// import VisibilityOff from "@material-ui/icons/VisibilityOff";
-// import Typography from '@mui/material/Typography';
 
 export default Login = (props) => {
   const {

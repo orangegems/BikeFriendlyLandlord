@@ -1,6 +1,5 @@
-import React, { Component, useEffect } from "react";
-// import { Link } from 'react-router-dom'
-import "./search.css";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
 // import MUI components
 import Button from "@mui/material/Button";
@@ -12,12 +11,11 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import { ThemeProvider } from "@mui/material/styles";
 
-// import result component
-import ResultDisplay from "../../components/searchResults/resultDisplay.jsx";
+import ResultDisplay from "../components/resultDisplay.jsx";
+import * as actions from "../actions/actions.js";
+
 //import theme
-import tomatopalette from "../../components/theme/tomatopalette.jsx";
-import { connect } from "react-redux";
-import * as actions from "../../actions/actions.js";
+import tomatopalette from "../theme/tomatopalette.jsx";
 
 const mapsDispatchToProps = (dispatch) => ({
   setSearchResults: (searchResults) =>

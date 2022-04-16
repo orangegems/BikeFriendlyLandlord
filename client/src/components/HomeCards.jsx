@@ -1,6 +1,5 @@
 import React from "react";
-import HomeCard from "../HomeCard.jsx";
-import "./homeCards.css";
+import HomeCard from "./HomeCard.jsx";
 
 const mapStateToProps = (state) => ({
   topFour: state.display.topFourLandlords
@@ -31,4 +30,4 @@ function homeCards(props) {
   );
 }
 
-export default connect(mapStatetoProps, null)(homeCards);
+export default connect(mapStateToProps, null)(homeCards);
