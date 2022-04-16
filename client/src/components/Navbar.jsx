@@ -1,12 +1,10 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
-import { Authenticate } from "../../pages/authenticate/Authenticate.jsx";
-import * as actions from "../../actions/actions.js";
-import { connect } from 'react-redux';
-  
-  
+import { Authenticate } from "../pages/Authenticate.jsx";
+import { connect } from "react-redux";
+import * as actions from "../actions/actions.js";
+
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
 });

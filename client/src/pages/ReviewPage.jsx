@@ -1,6 +1,5 @@
-import React, { Component, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import './reviewpage.css'
 
 // import MUI components
 import Button from '@mui/material/Button';
@@ -15,7 +14,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 
 // import theme
-import tomatopalette from '../../components/theme/tomatopalette.jsx'
+import tomatopalette from '../theme/tomatopalette.jsx'
 
 
 export function ReviewPage({userData}) {

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-// import Typography from '@mui/material/Typography';
 
 export default function Signup(props) {
   const { handleSubmit, setAuthDisplay, setDisplayLogin } = props;

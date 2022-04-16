@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 
 // import Homecard component
-import HomeCard from "../homeCard/HomeCard.jsx";
+import HomeCard from "./HomeCard.jsx";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
   searchResults: state.display.searchResults,
 });
 
-function ResultDisplay(props) {
-  if (!resultsArr) {
+function ResultDisplay({ searchResults }) {
+  if (!searchResults) {
     return (
       <Box
         sx={{
@@ -32,7 +32,7 @@ function ResultDisplay(props) {
         data-aos-duration="1000"
         id="homeCards"
       >
-        {props.searchResults.map((landlordObj, index) => (
+        {searchResults.map((landlordObj, index) => (
           <HomeCard landlord={landlordObj} key={index} />
         ))}
       </div>

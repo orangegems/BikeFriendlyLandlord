@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import * as actions from "./actions/actions.js";
 
 // components
-import Navbar from "./components/navbar/Navbar.jsx";
-import Home from "./pages/home/Home.jsx";
-import MapSearch from "./pages/map/MapSearch.jsx";
-import Profile from "./pages/profile/Profile.jsx";
-import Search from "./pages/search/Search.jsx";
-import Footer from "./components/footer/Footer.jsx";
-import { ReviewPage } from "./pages/review/ReviewPage.jsx";
-import { UserProfile } from "./pages/user/UserProfile.jsx";
+import Navbar from "./components/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import MapSearch from "./pages/MapSearch.jsx";
+import Profile from "./pages/Profile.jsx";
+import Search from "./pages/Search.jsx";
+import Footer from "./components/Footer.jsx";
+import { ReviewPage } from "./pages/ReviewPage.jsx";
+import { UserProfile } from "./pages/UserProfile.jsx";
 
 // called with this.props.[currentUser],
 // references global redux state

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import Login from '../../components/login/Login.jsx';
-import Signup from '../../components/Signup.jsx';
-import './authenticate.css';
-
-import './authenticate.css';
+import Login from '../components/Login.jsx';
+import Signup from '../components/Signup.jsx';
 
 export function Authenticate(props) {
   const { setAuthDisplay, setUserData, position } = props;

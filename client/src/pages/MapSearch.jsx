@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import HomeCard from '../../components/homeCard/HomeCard.jsx';
-
-import './mapSearch.css';
+import HomeCard from '../components/HomeCard.jsx';
 
 export default function MapSearch(props) {
   // 'pins' is an array of pins to post on the map based on address from the database
