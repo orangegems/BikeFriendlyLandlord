@@ -6,19 +6,13 @@ export const setUserData = (user) => ({
   payload: user,
 });
 
-// removes current user from state upon logout
-export const resetUserData = () => ({
-  type: types.RESET_USER,
-  payload: null,
-});
-
-export const toggleAuthDisplay = () => ({
-  type: types.TOGGLE_AUTH_DISPLAY,
-  payload: null,
+export const setAuthDisplay = (boolean) => ({
+  type: types.SET_AUTH_DISPLAY,
+  payload: boolean,
 });
 
 export const setIsLoggedIn = (boolean) => ({
-  type: types.TOGGLE_IS_LOGGED_IN,
+  type: types.SET_IS_LOGGED_IN,
   payload: boolean,
 });
 

@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
 // dispatches action upon invokation
 const mapDispatchToProps = (dispatch) => ({
   setUserData: (userData) => dispatch(actions.setUserData(userData)),
-  setAuthDisplay: () => dispatch(actions.toggleAuthDisplay()),
+  setAuthDisplay: (boolean) => dispatch(actions.setAuthDisplay(boolean)),
   setIsLoggedIn: (boolean) => dispatch(actions.setIsLoggedIn(boolean)),
 });
 
@@ -45,7 +45,6 @@ const App = (props) => {
 
   useEffect(() => {
     props.setIsLoggedIn(JSON.stringify(props.userData) !== JSON.stringify({}));
-    console.log(props.isLoggedIn);
   }, [props.userData]);
 
   return (
