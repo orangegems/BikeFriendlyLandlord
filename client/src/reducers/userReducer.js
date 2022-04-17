@@ -17,12 +17,7 @@ export default function userReducer(state = initState, action) {
       newState.data = action.payload;
       return newState;
 
-    // reset user to blank upon logout
-    case types.RESET_USER:
-      newState.data = {};
-      return newState;
-
     default:
       return state;
   }
-};
+}

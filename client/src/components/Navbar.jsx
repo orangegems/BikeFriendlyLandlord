@@ -9,12 +9,6 @@ const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  resetUserData: dispatch(() => {
-    actions.resetUserData();
-  }),
-});
-
 const Navbar = (props) => {
   const { setAuthDisplay, setUserData, userData, isLoggedIn } = props;
 
@@ -36,12 +30,12 @@ const Navbar = (props) => {
         if (res.status === 200) {
           // if successfully logged out, reset login state to false
           setAuthDisplay(false);
-          resetUserData();
+          setUserData({});
         } else {
           console.log("logout status not 200 -->", res);
         }
       })
-      .then(() => window.location.replace("/"))
+      .then(() => window.location.replace('/'))
       .catch((err) => {
         console.log("Error from logout --> ", err);
       });
@@ -141,4 +135,4 @@ const Navbar = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, null)(Navbar);
