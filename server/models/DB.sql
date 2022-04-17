@@ -1,5 +1,3 @@
--- psql -d "postgres://qayxanvh:be-OLsDbQe_tt0lgKWlFTjRwjJv-yd-O@heffalump.db.elephantsql.com/qayxanvh" -f ./server/models/DB.sql
-
 DROP TABLE reviews;
 DROP TABLE landlordAddresses;
 DROP TABLE addresses;
