@@ -28,28 +28,6 @@ userController.createUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     /**
-     * if the new user is a landlord, add the new landlord to the 'landlord' table
-     * before adding the user to the users table with landlord_id
-     */
-    // if (landlordId && !isTenant) {
-    //   const landlordQueryString = `
-    //   INSERT INTO users (first_name, last_name, full_name,is_verified)
-    //   VALUES ($1, $2, $3, $4);
-    //   `;
-    //   const landlordValues = [
-    //     firstname,
-    //     lastname,
-    //     firstname + ' ' + lastname,
-    //     true,
-    //   ];
-    //   const landlordResult = await db.query(
-    //     landlordQueryString,
-    //     landlordValues
-    //   );
-    //   console.log(landlordResult.rows);
-    // }
-
-    /**
      * database query to add the new user to the users table
      */
     const userValues = [
