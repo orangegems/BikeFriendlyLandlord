@@ -8,8 +8,10 @@ export default function Signup(props) {
 
   const [formData, setFormData] = useState({
     isLandlord: null,
+    isCompany: null,
     firstname: "",
     lastname: "",
+    companyName: "",
     username: "",
     password: "",
     email: "",
@@ -42,7 +44,7 @@ export default function Signup(props) {
     >
       {formData.isLandlord === null ? (
         <div id="roleOption">
-          Are you a
+          I am a...
           <Button
             variant="contained"
             onClick={() => {
@@ -53,7 +55,6 @@ export default function Signup(props) {
           >
             Tenant
           </Button>
-          or
           <Button
             variant="contained"
             onClick={() => {
@@ -64,7 +65,6 @@ export default function Signup(props) {
           >
             Landlord
           </Button>
-          ?
         </div>
       ) : (
         <>
