@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Review } from "../components/Review.jsx";
 
 export function UserProfile(props) {
-  const { userData, setAuthDisplay } = props;
+  const { userData, setAuthDisplay, isLandlord } = props;
   const [reviews, setReviews] = useState([]);
   let navigate = useNavigate();
 
@@ -27,6 +27,7 @@ export function UserProfile(props) {
           console.log("Error fenching users reviews -->", err);
         });
     }
+
   }, [userData]);
 
   return (
@@ -36,6 +37,9 @@ export function UserProfile(props) {
         Hello {userData.full_name}
         {","}
       </h3>
+
+
+
       <div>
         <h4>Your Reviews</h4>
         {reviews.map((review, index) => {
