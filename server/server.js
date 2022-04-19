@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(cors());
 
 /** 
- * serve static filse from assets and build folder 
+ * serve static files from assets and build folder 
  * */
 app.use('/build', express.static(path.join(__dirname, '../build')));
 app.use('/images', express.static(path.resolve(__dirname, './images')));
