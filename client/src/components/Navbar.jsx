@@ -108,7 +108,7 @@ const Navbar = (props) => {
         )}
         {isLoggedIn && (
           <div>
-            <Link to={`/profile/${userData.username}`}>My Account</Link>
+            {/* <Link to={`/profile/${userData.username}`}>My Account</Link> */}
             <Button
               variant="text"
               sx={{
