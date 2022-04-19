@@ -19,11 +19,11 @@ CREATE TABLE users (
 
 CREATE TABLE landlords(
   _id SERIAL PRIMARY KEY,
-  overall_rating DECIMAL,
-  respect_rating DECIMAL,
-  responsiveness_rating DECIMAL,
-  bike_friendly BOOLEAN,
-  pet_friendly BOOLEAN,
+  overall_rating DECIMAL DEFAULT 0,
+  respect_rating DECIMAL DEFAULT 0,
+  responsiveness_rating DECIMAL DEFAULT 0,
+  bike_friendly BOOLEAN DEFAULT false,
+  pet_friendly BOOLEAN DEFAULT false,
   is_verified BOOLEAN DEFAULT false,
   user_id INTEGER NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(_id)

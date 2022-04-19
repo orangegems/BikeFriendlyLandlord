@@ -3,6 +3,21 @@ const queries = require('../models/queries');
 
 const landlordController = {};
 
+//add landlord controller - check if req body isLandlord, if yes, post landlord; 
+landlordController.postLandlord = async (req, res, next) => {
+  try {
+    await db.query(queries.postLandlord);
+    return next();
+  } catch (error) {
+    return next({
+      message:
+        "Error occured attempting to get landlord from database in landlordController.postLandlord",
+      log: "Error: " + error,
+      status: 500,
+    });
+  }
+}
+
 landlordController.getById = async (req, res, next) => {
   
   try {

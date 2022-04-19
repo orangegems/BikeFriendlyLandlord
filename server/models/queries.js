@@ -25,8 +25,7 @@ WHERE addresses.city = $1`;
 queries.getLandlordsAndAddresses = `SELECT l.*, a.city, a.street_num, a.street, a.state, a.zip_code, a.landlord_id FROM landlords l
 INNER JOIN addresses a ON l._id = a.landlord_id`;
 
-queries.postLandlord = `INSERT INTO landlords (overall_rating, respect_rating, responsiveness_rating, bike_friendly, pet_friendly, is_verified, user_id) 
-VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+queries.postLandlord = `INSERT INTO landlords (user_id) VALUES ($1)`;
 
 //Reviews
 queries.addReview =`INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_friendly, pet_friendly, description, user_id, landlord_id)

@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/userController');
 const sessionController = require('../controllers/sessionController');
+const landlordController = require('../controllers/landlordController')
 
 const router = express.Router();
 
@@ -20,6 +21,13 @@ router.post(
   '/signup',
   userController.createUser,
   sessionController.startSession,
+  (req, res) => {
+    if (res.locals.user.isLandlord) {
+      landlordController.postLandlord
+    } else {
+      return next();
+    }
+  },
   (req, res) => {
     const response = res.locals.user;
     res.status(200).json(response);
