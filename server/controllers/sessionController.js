@@ -37,7 +37,6 @@ sessionController.startSession = (req, res, next) => {
   const jwtData = {
     _id: userInfo._id,
     username: userInfo.username,
-    landlord_id: userInfo.landlord_id
   }
   // create the json web token
   const jwtToken = jwt.sign(

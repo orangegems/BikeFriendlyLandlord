@@ -19,8 +19,7 @@ userController.createUser = async (req, res, next) => {
       firstname,
       lastname,
       isLandlord,
-      email,
-      landlordId,
+      email
     } = req.body;
 
     // ? validate user input
@@ -37,8 +36,7 @@ userController.createUser = async (req, res, next) => {
       username,
       email, 
       hashedPassword,
-      isLandlord,
-      landlordId,
+      isLandlord
     ];
     const userResult = await db.query(queries.createUser, userValues);
     delete userResult.rows[0].password;

@@ -44,8 +44,8 @@ queries.updateReview = `UPDATE reviews SET title = $2, description = $3 WHERE _i
 queries.deleteReview = `DELETE FROM reviews WHERE _id = $1`;
 
 //Users
-queries.createUser =`INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord, landlord_id) 
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+queries.createUser =`INSERT INTO users (first_name, last_name, full_name, username, email, password, is_landlord) 
+VALUES ($1, $2, $3, $4, $5, $6, $7)
 RETURNING *`;
 
 queries.getVerifiedUser = `SELECT * FROM users
