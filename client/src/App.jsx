@@ -18,7 +18,7 @@ import { ReviewPage } from "./pages/ReviewPage.jsx";
 const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
   isLandlord: state.currentUser.isLandlord,
-  isLoggedIn: state.display.isLoggedIn,
+  isLoggedIn: state.currentUser.isLoggedIn,
 });
 
 // called with this.props.[setUserData],

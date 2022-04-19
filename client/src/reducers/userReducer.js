@@ -3,13 +3,14 @@ import * as types from "../actions/actionTypes";
 const initState = {
   data: {},
   isLandlord: null,
+  isLoggedIn: false,
 };
 
 export default function userReducer(state = initState, action) {
   // pull data from initState,
   // create newState to manipulate
-  const { data, isLandlord } = state;
-  const newState = { data, isLandlord };
+  const { data, isLandlord, isLoggedIn } = state;
+  const newState = { data, isLandlord, isLoggedIn };
 
   switch (action.type) {
     // set user data upon login
@@ -22,7 +23,12 @@ export default function userReducer(state = initState, action) {
       } else {
         newState.isLandlord = false;
       }
-      
+
+      return newState;
+
+    case types.SET_IS_LOGGED_IN:
+      // newState mutation here
+      newState.isLoggedIn = action.payload;
       return newState;
 
     default:
