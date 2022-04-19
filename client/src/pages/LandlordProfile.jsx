@@ -28,6 +28,7 @@ export default function ProfilePage({ userData, isLoggedIn }) {
   const [landlordData, setLandlordData] = React.useState({});
   const [reviewData, setReviewData] = React.useState([]);
 
+  // change to userId
   const landlordId = useParams();
   React.useEffect(() => {
     axios

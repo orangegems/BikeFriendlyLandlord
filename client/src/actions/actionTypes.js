@@ -1,5 +1,4 @@
 export const SET_USER = 'SET_USER';
-export const RESET_USER = 'RESET_USER';
 
 export const SET_AUTH_DISPLAY = 'SET_AUTH_DISPLAY';
 export const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';

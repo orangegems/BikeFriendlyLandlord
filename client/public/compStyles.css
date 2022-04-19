@@ -86,7 +86,7 @@
   font-family: "Nunito", sans-serif;
   /* font-style: bold; */
   color: tomato;
-  font-weight: 700; 
+  font-weight: 700;
 }
 
 #navBar {
@@ -121,7 +121,7 @@
 
 .navBarListItem {
   list-style: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   padding: 0 20px;
 }
 
@@ -135,9 +135,9 @@
 
 a:hover {
   color: tomato;
-} 
+}
 a {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   text-decoration: none;
   padding-right: 10px;
   list-style: none;
@@ -146,7 +146,7 @@ a {
 
 /* Signup.jsx */
 
-#roleOption{
+#roleOption {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,4 +156,16 @@ a {
   padding: 30px;
 }
 
+#tenantButton {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
+#compRoleGroup {
+  margin-bottom: 10px;
+}
+
+#individualButton{
+  padding-left: 15px;
+  padding-right: 15px;
+}
