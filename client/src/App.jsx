@@ -18,6 +18,7 @@ import { UserProfile } from "./pages/UserProfile.jsx";
 // references global redux state
 const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
+  isLandlord: state.currentUser.isLandlord,
   isLoggedIn: state.display.isLoggedIn,
 });
 
@@ -76,6 +77,7 @@ const App = (props) => {
               userData={props.userData}
               setUserData={props.setUserData}
               setAuthDisplay={props.setAuthDisplay}
+              isLandlord={props.isLandlord}
             />
           }
         />

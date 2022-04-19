@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -17,7 +16,6 @@ export default function Login (props) {
   const [password, setPassword] = useState("");
 
   const formStyle = {
-    // marginTop: 8,
     backgroundColor: "white",
     display: "flex",
     flexDirection: "column",
@@ -62,11 +60,8 @@ export default function Login (props) {
           Login
         </Button>
         <div className="linkButton" onClick={() => setDisplayLogin(false)}>
-          Need an account? Signup
+          Need an account? Signup.
         </div>
-        <button className="exitButton" onClick={() => setAuthDisplay(false)}>
-          Continue without logging in
-        </button>
       </Box>
     </>
   );
