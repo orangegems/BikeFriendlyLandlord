@@ -46,9 +46,7 @@ export default function Signup(props) {
           <Button
             variant="contained"
             onClick={() => {
-              const newFormData = JSON.parse(JSON.stringify(formData));
-              newFormData.isLandlord = false;
-              setFormData(newFormData);
+              setFormData({...formData, isLandlord: false});
             }}
           >
             Tenant
@@ -57,9 +55,7 @@ export default function Signup(props) {
           <Button
             variant="contained"
             onClick={() => {
-              const newFormData = JSON.parse(JSON.stringify(formData));
-              newFormData.isLandlord = true;
-              setFormData(newFormData);
+              setFormData({...formData, isLandlord: true});
             }}
           >
             Landlord
