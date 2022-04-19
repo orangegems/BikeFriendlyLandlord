@@ -25,7 +25,7 @@ import tomatopalette from "../theme/tomatopalette.jsx";
 export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
   const navigate = useNavigate();
   const [landlordData, setLandlordData] = React.useState(null);
-  const [reviewData, setReviewData] = React.useState([]);
+  const [reviewData, setReviewData] = React.useState(null);
 
   const { landlordId } = useParams();
 
@@ -38,7 +38,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
 
       // fetches landlord data to populate profile
       fetch(
-        `http://localhost:3000/landlords/getById/${
+        `/landlords/getById/${
           landlordId || userData.landlord_id
         }`
       )
@@ -47,7 +47,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
 
       // fetches reviews submitted about the user
       fetch(
-        `http://localhost:3000/reviews/landlordReviews/${
+        `/reviews/landlordReviews/${
           landlordId || userData.landlord_id
         }`
       )
@@ -93,7 +93,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           {
             // if id is in URL or if logged in user is a landlord
             // AND landlord info loaded from database
-            (landlordId || (isLandlord && isLoggedIn)) && landlordData ? (
+            landlordId || (isLandlord && isLoggedIn && landlordData) ? (
               <Stack
                 className="LandlordInfo"
                 sx={{ pb: 5, pl: 5 }}
@@ -151,7 +151,9 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
               </Stack>
             ) : (
               // if logged in user is a tenant
-              isLoggedIn && (
+              isLoggedIn &&
+              !isLandlord &&
+              !landlordId && (
                 <>
                   <h1 id="userProfileTitle">Your Account</h1>
                   <h3>
@@ -167,7 +169,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
             // reviews only visible if landlord ID in URL
             // or if user is logged in
 
-            (isLoggedIn || landlordId) && landlordData && (
+            (isLoggedIn || (landlordId && landlordData)) && reviewData && (
               <>
                 <Container>
                   <Stack spacing={2} direction="row">
@@ -201,6 +203,14 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
                   </Stack>
                 </Container>
               </>
+            )
+          }
+
+          {
+            // if review data fails to load when user is logged in
+            // or URL specifies correct landlordId
+            !reviewData && (isLoggedIn || landlordId) && (
+              <div>Error 500: Loading reviews failed.</div>
             )
           }
         </Container>
