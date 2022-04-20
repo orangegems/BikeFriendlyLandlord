@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Review } from "../components/Review.jsx";
 import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
+import AddressCard from "../components/AddressCard.jsx"
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -77,6 +78,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
+          <AddressCard/>
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (

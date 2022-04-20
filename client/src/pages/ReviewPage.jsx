@@ -150,6 +150,12 @@ export function ReviewPage({userData}) {
                                     <Rating required size="large" style={{color:"tomato"}} precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
                                 </Grid>
                                 <Grid item xs={6}>
+                                    <h3 className="reviewLabel"></h3>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Rating required size="large" style={{color:"tomato"}} precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
+                                </Grid>
+                                {/* <Grid item xs={6}>
                                     <h3 className="reviewLabel">Bike Friendly?</h3>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -160,7 +166,7 @@ export function ReviewPage({userData}) {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Checkbox checked={pet} onChange={handlePetChange} size="medium" style={{paddingTop:4, paddingLeft:0}}/>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                             <TextField
                                 fullWidth
