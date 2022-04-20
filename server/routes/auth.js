@@ -21,9 +21,9 @@ router.post(
   '/signup',
   userController.createUser,
   sessionController.startSession,
-  (req, res) => {
-    if (res.locals.user.isLandlord) {
-      landlordController.postLandlord
+  (req, res, next) => {
+    if (res.locals.user.is_landlord) {
+      landlordController.postLandlord(req, res, next);
     } else {
       return next();
     }

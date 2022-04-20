@@ -6,7 +6,8 @@ const landlordController = {};
 //add landlord controller - check if req body isLandlord, if yes, post landlord; 
 landlordController.postLandlord = async (req, res, next) => {
   try {
-    await db.query(queries.postLandlord);
+    console.log('enetered postLandlord')
+    await db.query(queries.postLandlord, [res.locals.user._id]);
     return next();
   } catch (error) {
     return next({
