@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 
 import * as actions from "./actions/actions.js";
@@ -8,18 +8,17 @@ import * as actions from "./actions/actions.js";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import MapSearch from "./pages/MapSearch.jsx";
-import Profile from "./pages/LandlordProfile.jsx";
+import Profile from "./pages/Profile.jsx";
 import Search from "./pages/Search.jsx";
 import Footer from "./components/Footer.jsx";
 import { ReviewPage } from "./pages/ReviewPage.jsx";
-import { UserProfile } from "./pages/UserProfile.jsx";
 
 // called with this.props.[currentUser],
 // references global redux state
 const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
   isLandlord: state.currentUser.isLandlord,
-  isLoggedIn: state.display.isLoggedIn,
+  isLoggedIn: state.currentUser.isLoggedIn,
 });
 
 // called with this.props.[setUserData],
@@ -61,25 +60,28 @@ const App = (props) => {
         <Route path="/search" element={<Search />} />
         <Route path="/map" element={<MapSearch />} />
         <Route
-          path="/landlord/:landlord_id"
+          path="/profile/:landlordId"
           element={
-            <Profile userData={props.userData} isLoggedIn={props.isLoggedIn} />
+            <Profile
+              userData={props.userData}
+              isLoggedIn={props.isLoggedIn}
+              isLandlord={props.isLandlord}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              userData={props.userData}
+              isLoggedIn={props.isLoggedIn}
+              isLandlord={props.isLandlord}
+            />
           }
         />
         <Route
           path="/review/:landlord_id"
           element={<ReviewPage userData={props.userData} />}
-        />
-        <Route
-          path="/profile/:username"
-          element={
-            <UserProfile
-              userData={props.userData}
-              setUserData={props.setUserData}
-              setAuthDisplay={props.setAuthDisplay}
-              isLandlord={props.isLandlord}
-            />
-          }
         />
         <Route path="*" element={<p>404 - nothing here</p>} />
       </Routes>
