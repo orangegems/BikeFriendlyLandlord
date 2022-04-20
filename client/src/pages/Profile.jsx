@@ -32,9 +32,12 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
   useEffect(() => {
     // if the url contains the landlord id
     // or the user is logged in and is a
+
+    console.log(landlordId)
     // landlord role (state will contain ID)
     if (landlordId || (isLoggedIn && isLandlord)) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
+
 
       // fetches landlord data to populate profile
       fetch(
@@ -93,7 +96,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           {
             // if id is in URL or if logged in user is a landlord
             // AND landlord info loaded from database
-            landlordId || (isLandlord && isLoggedIn && landlordData) ? (
+            landlordId || (isLandlord && isLoggedIn) && landlordData ? (
               <Stack
                 className="LandlordInfo"
                 sx={{ pb: 5, pl: 5 }}
@@ -106,7 +109,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
                       <div className="ProfilePicture">
                         <img
                           style={{ height: "100px" }}
-                          src={`/images/${landlordData.profile_pic}`}
+                          src={`http://localhost:8080/images/${landlordData.profile_pic}`}
                         />
                       </div>
                     </CardContent>
