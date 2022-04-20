@@ -29,6 +29,7 @@ export default function userReducer(state = initState, action) {
     case types.SET_IS_LOGGED_IN:
       // newState mutation here
       newState.isLoggedIn = action.payload;
+      if(!newState.isLoggedIn) newState.isLandlord = null;
       return newState;
 
     default:

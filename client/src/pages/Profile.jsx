@@ -33,36 +33,27 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
     // if the url contains the landlord id
     // or the user is logged in and is a
 
-    console.log(landlordId)
+    console.log(landlordId);
     // landlord role (state will contain ID)
-    if (landlordId || (isLoggedIn && isLandlord)) {
+    if (landlordId || isLandlord) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
 
-
       // fetches landlord data to populate profile
-      fetch(
-        `/landlords/getById/${
-          landlordId || userData.landlord_id
-        }`
-      )
+      fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
         .then((landlord) => setLandlordData(landlord.data))
         .catch((err) => console.log("Error fetching landlord data -->", err));
 
-      // fetches reviews submitted about the user
-      fetch(
-        `/reviews/landlordReviews/${
-          landlordId || userData.landlord_id
-        }`
-      )
+      // fetches reviews submitted about the landlord user
+      fetch(`/reviews/landlordReviews/${landlordId || userData.landlord_id}`)
         .then((reviews) => setReviewData(reviews.data))
         .catch((err) =>
           console.log("Error fetching landlord reviews -->", err)
         );
 
       // otherwise, if tenant is logged in and routes
-      //  to /profile/[with no ID endpoint]
+      //  to /profile [with no ID endpoint]
     } else if (isLoggedIn) {
-      // fetches reviews submitted by the user
+      // fetches reviews submitted by the tenant about other landlord users
       fetch(`/reviews/${userData._id}`)
         .then((res) => res.json())
         .then((json) => setReviewData(json.reviews))
@@ -71,7 +62,8 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
   }, []);
 
   //onclick for button
-  const handleReview = () => navigate(`/review/${landlordId.landlord_id}/`);
+  const handleReview = () =>
+    navigate(`/review/${landlordId || userData.landlord_id}/`);
 
   return (
     <ThemeProvider theme={tomatopalette}>
@@ -85,18 +77,17 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           }
 
           {
-            // if landlord data does not populate on page load
-            // either due to database error or no existing landlord
-            // based on ID in URL
-            !landlordData && (
+            // if landlord data is falsy on render
+            // while URL specifies ID or landlord is logged in
+            !landlordData && (landlordId || isLandlord) && (
               <>Error 500: Database Error or Invalid Landlord ID</>
             )
           }
 
           {
-            // if id is in URL or if logged in user is a landlord
-            // AND landlord info loaded from database
-            landlordId || (isLandlord && isLoggedIn) && landlordData ? (
+            // if landlord data loads 
+            // & URL id is specified or user is a landlord
+            landlordData && (landlordId || isLandlord) ? (
               <Stack
                 className="LandlordInfo"
                 sx={{ pb: 5, pl: 5 }}
@@ -109,7 +100,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
                       <div className="ProfilePicture">
                         <img
                           style={{ height: "100px" }}
-                          src={`http://localhost:8080/images/${landlordData.profile_pic}`}
+                          src={`/images/${landlordData.profile_pic}`}
                         />
                       </div>
                     </CardContent>
@@ -154,8 +145,8 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
               </Stack>
             ) : (
               // if logged in user is a tenant
-              isLoggedIn &&
-              !isLandlord &&
+              // & no ID in url
+              isLandlord === false &&
               !landlordId && (
                 <>
                   <h1 id="userProfileTitle">Your Account</h1>
