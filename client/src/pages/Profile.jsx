@@ -72,7 +72,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
-              <div>Please sign in to view your profile</div>
+              <div>Please login to view your profile</div>
             )
           }
 
@@ -85,7 +85,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           }
 
           {
-            // if landlord data loads 
+            // if landlord data loads
             // & URL id is specified or user is a landlord
             landlordData && (landlordId || isLandlord) ? (
               <Stack
@@ -160,50 +160,56 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           }
 
           {
-            // reviews only visible if landlord ID in URL
-            // or if user is logged in
+            // if tenant is logged in & review data loads
+            // or if landlord ID is in url and landlord & review data load
+            // or if landlord is logged in and landlord & review data load
 
-            (isLoggedIn || (landlordId && landlordData)) && reviewData && (
-              <>
-                <Container>
-                  <Stack spacing={2} direction="row">
-                    <Typography variant="h3" gutterBottom component="div">
-                      Reviews
-                    </Typography>
-                    {isLoggedIn && (
-                      <Stack
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          p: 1,
-                          m: 1,
-                        }}
-                      >
-                        <Button variant="contained" onClick={handleReview}>
-                          Create Review
-                        </Button>
-                      </Stack>
-                    )}
-                  </Stack>
-                </Container>
+            (isLoggedIn || ((landlordId || isLandlord) && landlordData)) &&
+              reviewData && (
+                <>
+                  <Container>
+                    <Stack spacing={2} direction="row">
+                      <Typography variant="h3" gutterBottom component="div">
+                        Reviews
+                      </Typography>
+                      {
+                      // user can only add review if
+                      // they're logged in as a tenant
+                      // and on a landlord's page
+                      !isLandlord && landlordId && (
+                        <Stack
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            p: 1,
+                            m: 1,
+                          }}
+                        >
+                          <Button variant="contained" onClick={handleReview}>
+                            Create Review
+                          </Button>
+                        </Stack>
+                      )}
+                    </Stack>
+                  </Container>
 
-                <Container>
-                  <Stack>
-                    <div>
-                      {reviewData.map((eachReview, i) => (
-                        <Review key={i} {...eachReview} userData={userData} />
-                      ))}
-                    </div>
-                  </Stack>
-                </Container>
-              </>
-            )
+                  <Container>
+                    <Stack>
+                      <div>
+                        {reviewData.map((eachReview, i) => (
+                          <Review key={i} {...eachReview} userData={userData} />
+                        ))}
+                      </div>
+                    </Stack>
+                  </Container>
+                </>
+              )
           }
 
           {
             // if review data fails to load when user is logged in
             // or URL specifies correct landlordId
-            !reviewData && (isLoggedIn || landlordId) && (
+            !reviewData && landlordData && (isLoggedIn || landlordId) && (
               <div>Error 500: Loading reviews failed.</div>
             )
           }
