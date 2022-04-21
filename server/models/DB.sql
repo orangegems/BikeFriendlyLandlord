@@ -22,8 +22,6 @@ CREATE TABLE landlords(
   overall_rating DECIMAL DEFAULT 0,
   respect_rating DECIMAL DEFAULT 0,
   responsiveness_rating DECIMAL DEFAULT 0,
-  bike_friendly BOOLEAN DEFAULT false,
-  pet_friendly BOOLEAN DEFAULT false,
   is_verified BOOLEAN DEFAULT false,
   user_id INTEGER NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(_id)
@@ -33,17 +31,25 @@ CREATE TABLE addresses(
   _id SERIAL PRIMARY KEY,
   street_num INTEGER,
   street VARCHAR (25),
+  apt_num VARCHAR (10),
   city VARCHAR (50) NOT NULL,
   state VARCHAR (25) NOT NULL,
-  zip_code INTEGER
-);
-
-CREATE TABLE landlordAddresses(
-  _id SERIAL PRIMARY KEY,
+  zip_code INTEGER,
+  bike_friendly BOOLEAN DEFAULT false,
+  pet_friendly BOOLEAN DEFAULT false,
+  dog_friendly BOOLEAN DEFAULT false,
+  dog_breed_restriction BOOLEAN DEFAULT false,
+  dog_size_max_lbs INTEGER,
+  quiet_hour_start TIMESTAMP,
+  quiet_hour_end TIMESTAMP,
+  overnight_guests BOOLEAN DEFAULT false,
+  smoker_friendly BOOLEAN DEFAULT false,
+  building_type VARCHAR (50),
+  beds INTEGER,
+  baths INTEGER,
+  price INTEGER,
   landlord_id INTEGER NOT NULL,
-  address_id INTEGER NOT NULL,
-  FOREIGN KEY(landlord_id) REFERENCES landlords(_id),
-  FOREIGN KEY(address_id) REFERENCES addresses(_id)
+  FOREIGN KEY(landlord_id) REFERENCES landlords(_id)
 );
 
 CREATE TABLE reviews(

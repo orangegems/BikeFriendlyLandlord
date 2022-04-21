@@ -9,13 +9,24 @@ const sessionController = {};
  */
 sessionController.checkSession = (req, res, next) => {
   console.log('entered sessionController.checkSession');
+  
   const jwtToken = req.cookies.ssid;
   // console.log('req.cookies: ', req.cookies)
   // check if the cookie exists. return status code 401 if it doesn't
-  if (!jwtToken) return res.status(401).send();
+  
+  if (!jwtToken) {
+    const err = {
+      log: 'User has no active session.',
+      status: 401,
+      message: { err: 'User has no active session' },
+    };
+    return next(err);
+  }
+  
   const decryptedToken = jwt.verify(jwtToken, process.env.jwts, {
     complete: true,
   });
+  
   // check if the jxt verified. return status code 401 if it doesn't. 
   if (!decryptedToken) {
     res.clearCookie('ssid');
@@ -23,7 +34,7 @@ sessionController.checkSession = (req, res, next) => {
   }
 
   res.locals.user = decryptedToken.payload;
-
+  
   next();
 };
 

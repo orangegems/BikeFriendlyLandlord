@@ -18,4 +18,10 @@ addressController.getUniqueCities = async (req, res, next) => {
     }
 };
 
+//Allow landlord to add address
+//Edit landlordaddresses table 
+
+//Allow landlord to delete address
+//Edit landlordaddresses table 
+
 module.exports = addressController;
