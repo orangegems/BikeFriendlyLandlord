@@ -36,7 +36,7 @@ function Home(props) {
         >
           <h1>
             Welcome to <br />{" "}
-            <span className="homeTitleText">Bike Friendly Landlord</span>
+            <span className="homeTitleText">Tenancy</span>
           </h1>
           <Scroll to="homeCards" smooth={true}>
             <IconButton>

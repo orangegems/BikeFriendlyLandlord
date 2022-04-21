@@ -60,7 +60,7 @@ const Navbar = (props) => {
   return (
     <div id="navBar">
       <div className="navBarLeft">
-        <div id="logo">BFL</div>
+        <div id="logo">Tenancy</div>
       </div>
       <div className="navBarCenter">
         <ul className="navBarListItems">

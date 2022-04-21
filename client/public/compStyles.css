@@ -165,7 +165,22 @@ a {
   margin-bottom: 10px;
 }
 
-#individualButton{
+#individualButton {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+/* address card */
+#addressInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+#addressPic {
+  display: flex;
+  position: relative;
+}
+
+#reviewInfo {
+  display: flex;
 }
