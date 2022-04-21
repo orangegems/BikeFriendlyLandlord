@@ -55,7 +55,7 @@ export default function AddressCard() {
 
   return (
     <Card
-      sx={{ maxWidth: 370, backgroundColor: "#002147", color: "#ededed" }}
+      sx={{ maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
       id="addressCard"
     >
       {/* title container */}
@@ -65,7 +65,7 @@ export default function AddressCard() {
           flexDirection: "column",
           justifyContent: "flex-end",
           alignItems: "center",
-          padding: "10px 10px 0px 10px",
+          padding: "15px 15px 5px 15px",
           letterSpacing: "2px",
         }}
       >
@@ -122,6 +122,7 @@ export default function AddressCard() {
             opacity: 0.6,
             borderRadius: "0px 0px 0px 5px",
             padding: "0px 0px 5px 5px",
+            width: "70px",
           }}
         >
           <div
@@ -158,7 +159,7 @@ export default function AddressCard() {
               opacity: 0.6,
               dropShadow: "20px 20px 20px black",
               borderRadius: "0px 5px 0px 0px",
-              padding: "2px 5px 0px 0px",
+              padding: "5px 5px 0px 5px",
             }}
           >
             <LinkIcon />
@@ -179,7 +180,7 @@ export default function AddressCard() {
             backgroundColor: "#002147",
             opacity: 0.6,
             borderRadius: "5px 0px 0px 0px",
-            padding: "5px 0px 0px 5px",
+            padding: "5px 5px 5px 5px",
           }}
         >
           <div
@@ -205,16 +206,13 @@ export default function AddressCard() {
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
-          padding: "10px",
+          justifyContent: "space-around",
+          padding: "15px",
         }}
       >
 
         {/* extra info */}
-        <Box>
-          <Typography>
-            {homeInfo.city}, {homeInfo.state} {homeInfo.zip}
-          </Typography>
+        <Box sx={{ marginLeft: "-20px" }}>
           <Typography>
             {homeInfo.city}, {homeInfo.state} {homeInfo.zip}
           </Typography>
