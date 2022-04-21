@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
 #footer {
   height: 40px;
   background-color: #333;
@@ -171,7 +173,7 @@ a {
 }
 
 /* address card */
-#addressInfo {
+#bedsBaths {
   display: flex;
   flex-direction: row;
 }
@@ -183,4 +185,8 @@ a {
 
 #reviewInfo {
   display: flex;
+}
+
+#addressCard{
+  font-family: 'Inter', sans-serif;
 }

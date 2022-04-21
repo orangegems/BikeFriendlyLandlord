@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
-import CardHeader from "@mui/material/CardHeader";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import Icon from "@material-ui/core/Icon";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
+import StarIcon from "@material-ui/icons/Star";
+import LinkIcon from "@mui/icons-material/Link";
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
@@ -21,7 +20,7 @@ export default function AddressCard() {
       addressId: 12345,
       landlordName: "David Palmer",
       streetNum: "4664",
-      street: "Alameda Blvd",
+      street: "Alameda Blvd.",
       apartmentNum: "2b",
       city: "Los Angeles",
       state: "CA",
@@ -29,7 +28,8 @@ export default function AddressCard() {
       buildingType: "Apartment",
       beds: "2",
       baths: "1",
-      price: "$2400",
+      price: "2400",
+      link: "http://zillow.com",
     });
 
     setReviewInfo({
@@ -38,7 +38,6 @@ export default function AddressCard() {
       responsiveness: "5",
       tlc: "4.5",
       personalization: "3",
-      latePayment: "fees included",
     });
 
     setCriteria({
@@ -50,47 +49,155 @@ export default function AddressCard() {
       overnightGuests: true,
       quietHours: "10pm-8am",
       smoking: false,
+      latePayment: "fees included",
     });
   }, []);
 
   return (
-    <Card sx={{ maxWidth: 370 }}>
+    <Card
+      sx={{ maxWidth: 370, backgroundColor: "#002147", color: "#ededed" }}
+      id="addressCard"
+    >
+      {/* title container */}
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
           alignItems: "center",
+          padding: "10px 10px 0px 10px",
+          letterSpacing: "2px",
         }}
       >
         <div style={{ fontSize: "20px" }}>
           {`${homeInfo.streetNum} ${homeInfo.street} #${homeInfo.apartmentNum}`}
         </div>
-        <Typography sx={{ fontSize: "10px" }}>
+        <Typography
+          sx={{ fontSize: "10px", letterSpacing: "5px", color: "#bababa" }}
+        >
           {homeInfo.buildingType}
         </Typography>
       </div>
+
+      {/* picture */}
       <div id="addressPic">
         <CardMedia
           image="/images/address_1.jpg"
           alt="home"
           height="200"
           component="img"
-          sx={{ border: "1px solid grey", zIndex: 0 }}
+          sx={{ zIndex: 0 }}
         />
 
+        {/* price box */}
         <Box
-          id="addressInfo"
+          id="price"
+          sx={{
+            position: "absolute",
+            flexDirection: "column",
+            zIndex: 1,
+            backgroundColor: "#002147",
+            opacity: 0.6,
+            dropShadow: "20px 20px 20px black",
+            borderRadius: "0px 0px 5px 0px",
+            padding: "5px",
+          }}
+        >
+          ${homeInfo.price}
+        </Box>
+
+        {/* beds and baths box */}
+        <Box
+          id="bedsBaths"
           sx={{
             position: "absolute",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1,
+            right: 0,
+            top: 0,
+            backgroundColor: "#002147",
+            opacity: 0.6,
+            borderRadius: "0px 0px 0px 5px",
+            padding: "0px 0px 5px 5px",
+          }}
+        >
+          <div
+            style={{
+              color: "#ededed",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <KingBedOutlinedIcon />
+            {homeInfo.beds}
+            <BathtubOutlinedIcon />
+            {homeInfo.baths}
+          </div>
+        </Box>
+
+        {/* link box */}
+        <a
+          href={homeInfo.link}
+          target="new"
+          style={{ bottom: 0, position: "absolute" }}
+        >
+          <Box
+            id="price"
+            onClick={() => {}}
+            sx={{
+              position: "absolute",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 1,
+              bottom: 0,
+              backgroundColor: "#002147",
+              opacity: 0.6,
+              dropShadow: "20px 20px 20px black",
+              borderRadius: "0px 5px 0px 0px",
+              padding: "2px 5px 0px 0px",
+            }}
+          >
+            <LinkIcon />
+          </Box>
+        </a>
+
+        {/* overall review box */}
+        <Box
+          id="overallReview"
+          sx={{
+            position: "absolute",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
             zIndex: 1,
             right: 0,
             bottom: 0,
+            backgroundColor: "#002147",
+            opacity: 0.6,
+            borderRadius: "5px 0px 0px 0px",
+            padding: "5px 0px 0px 5px",
           }}
         >
-          <KingBedOutlinedIcon /> 2 <BathtubOutlinedIcon /> 1
+          <div
+            style={{ color: "#262626", display: "flex", alignItems: "center" }}
+          >
+            <Rating
+              precision={0.5}
+              value={Number(reviewInfo.overall)}
+              sx={{ opacity: 1, fontSize: "20px" }}
+              readOnly
+              emptyIcon={
+                <StarIcon
+                  style={{ opacity: 0.1, color: "white" }}
+                  fontSize="inherit"
+                />
+              }
+            />
+          </div>
         </Box>
       </div>
 
@@ -99,41 +206,78 @@ export default function AddressCard() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          padding: "10px",
         }}
       >
+
+        {/* extra info */}
         <Box>
+          <Typography>
+            {homeInfo.city}, {homeInfo.state} {homeInfo.zip}
+          </Typography>
           <Typography>
             {homeInfo.city}, {homeInfo.state} {homeInfo.zip}
           </Typography>
         </Box>
 
+        {/* review breakdown */}
         <Box
-            id="reviewInfo"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              boxShadow: 1,
-            }}
-          >
-            <Typography variant="h7">Respectfulness</Typography>
-            <Rating
-              precision={0.5}
-              value={Number(reviewInfo.respectfulness)}
-              readOnly
-            />
-            <Typography variant="h7">Responsiveness</Typography>
-            <Rating
-              precision={0.5}
-              value={Number(reviewInfo.responsiveness)}
-              readOnly
-            />
-            <Typography variant="h7">Respectfulness</Typography>
-            <Rating
-              precision={0.5}
-              value={Number(reviewInfo.respectfulness)}
-              readOnly
-            />
-          </Box>
+          id="reviewInfo"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            boxShadow: 1,
+          }}
+        >
+          <Typography variant="h7">Respectfulness</Typography>
+          <Rating
+            precision={0.5}
+            value={Number(reviewInfo.respectfulness)}
+            readOnly
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.1, color: "white" }}
+                fontSize="inherit"
+              />
+            }
+          />
+          <Typography variant="h7">Responsiveness</Typography>
+          <Rating
+            precision={0.5}
+            value={Number(reviewInfo.responsiveness)}
+            readOnly
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.1, color: "white" }}
+                fontSize="inherit"
+              />
+            }
+          />
+          <Typography variant="h7">TLC</Typography>
+          <Rating
+            precision={0.5}
+            value={Number(reviewInfo.tlc)}
+            readOnly
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.1, color: "white" }}
+                fontSize="inherit"
+              />
+            }
+          />
+          <Typography variant="h7">Personalization</Typography>
+          <Rating
+            precision={0.5}
+            value={Number(reviewInfo.personalization)}
+            readOnly
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.1, color: "white" }}
+                fontSize="inherit"
+              />
+            }
+          />
+        </Box>
       </div>
 
       {/* //picture div
