@@ -85,7 +85,7 @@
   font-size: xx-large;
   font-family: "Nunito", sans-serif;
   /* font-style: bold; */
-  color: rgb(33, 90, 159);
+  color: rgb(237, 232, 251);
   font-weight: 700;
 }
 
@@ -94,7 +94,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: goldenrod; 
+  background-color: #333; 
   align-items: center;
 }
 
@@ -134,14 +134,14 @@
 }
 
 a:hover {
-  color: rgb(33, 90, 159);
+  color: white;
 }
 a {
   font-family: "Nunito";
   text-decoration: none;
   padding-right: 10px;
   list-style: none;
-  color: #666;
+  color: rgb(237, 232, 251);
 }
 
 /* Signup.jsx */

@@ -16,7 +16,7 @@ export default function Login (props) {
   const [password, setPassword] = useState("");
 
   const formStyle = {
-    backgroundColor: "white",
+    backgroundColor: "dark gray",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
