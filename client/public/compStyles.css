@@ -85,7 +85,7 @@
   font-size: xx-large;
   font-family: "Nunito", sans-serif;
   /* font-style: bold; */
-  color: tomato;
+  color: rgb(33, 90, 159);
   font-weight: 700;
 }
 
@@ -94,7 +94,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: lightgrey;
+  background-color: goldenrod; 
   align-items: center;
 }
 
@@ -134,7 +134,7 @@
 }
 
 a:hover {
-  color: tomato;
+  color: rgb(33, 90, 159);
 }
 a {
   font-family: "Nunito";

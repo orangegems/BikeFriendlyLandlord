@@ -31,7 +31,10 @@ h3 {
 /* Home */
 .home {
   min-height: 100vh;
-  background-image: url("http://localhost:3000/images/marten-bjork-4WBIyO_2SbU-unsplash.jpg");
+  /* background-image: url("http://localhost:3000/images/marten-bjork-4WBIyO_2SbU-unsplash.jpg"); */
+  background-image: url("http://localhost:3000/images/ray-gao-nOfXR0cVkg8-unsplash.jpg");
+  /* background-image: url("http://localhost:3000/images/lucia-macedo-i5L_8EHrU-k-unsplash.jpg"); */
+  
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -51,7 +54,7 @@ h3 {
 }
 
 .homeTitleText {
-  color: tomato;
+  color: white;
   font-size: 50px;
 }
 
