@@ -56,4 +56,7 @@ WHERE users._id = $1`;
 queries.getUserData = `SELECT * FROM users
 WHERE users._id = $1`;
 
+//Addresses
+queries.postAddress = `INSERT INTO addresses (street_num, street, apt_num, city, state, zip_code, bike_friendly, pet_friendly, dog_friendly, dog_breed_restriction, dog_size_max_lbs, quiet_hour_start, quiet_hour_end, overnight_guests, smoker_friendly, building_type, beds, baths, price, landlord_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)`;
+
 module.exports = queries;
