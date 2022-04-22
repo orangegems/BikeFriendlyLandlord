@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Authenticate } from "../pages/Authenticate.jsx";
 import { connect } from "react-redux";
+import SearchIcon from '@mui/icons-material/Search';
+import PublicIcon from '@mui/icons-material/Public';
+import { blue } from "@mui/material/colors";
+
 
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
@@ -60,24 +64,24 @@ const Navbar = (props) => {
   return (
     <div id="navBar">
       <div className="navBarLeft">
-        <div id="logo">tenancy.</div>
+        <NavLink
+          to="/"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+          <div id="logo">tenancy.</div>
+        </NavLink>
       </div>
       <div className="navBarCenter">
         <ul className="navBarListItems">
           <li className="navBarListItem">
             <NavLink
-              to="/"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="navBarListItem">
-            <NavLink
               to="/search"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              Search
+        <SearchIcon 
+            fontSize="large" 
+            style={{ marginTop: "10px"}}
+        />
             </NavLink>
           </li>
           <li className="navBarListItem">
@@ -85,7 +89,10 @@ const Navbar = (props) => {
               to="/map"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              Map
+          <PublicIcon
+              fontSize="large"
+              style={{ marginTop: "5px" }}
+          />
             </NavLink>
           </li>
         </ul>
@@ -95,8 +102,8 @@ const Navbar = (props) => {
           <Button
             sx={{
               fontFamily: "Nunito",
-              color: "#666",
-              "&:hover": { backgroundColor: "rgba(253, 143, 124, 0.577)" },
+              color: "rgb(237, 232, 251)",
+              "&:hover": { backgroundColor: "light gray" }
             }}
             variant="text"
             onClick={(e) => {
@@ -114,7 +121,7 @@ const Navbar = (props) => {
               sx={{
                 fontFamily: "Nunito",
                 color: "#666",
-                "&:hover": { backgroundColor: "rgba(253, 143, 124, 0.577)" },
+                "&:hover": { backgroundColor: "light gray" },
               }}
               onClick={(e) => logout(e)}
             >
