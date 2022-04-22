@@ -17,12 +17,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 function Home(props) {
   
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/landlords/topFour")
-      .then((res) => props.setTopFour(res.data))
-      .catch((error) => console.log(error));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/landlords/topFour")
+  //     .then((res) => props.setTopFour(res.data))
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   return (
     <div className="home">
@@ -48,7 +48,7 @@ function Home(props) {
           </Scroll>
         </div>
       </div>
-      <HomeCards />
+      {/* <HomeCards /> */}
       
     </div>
   );
