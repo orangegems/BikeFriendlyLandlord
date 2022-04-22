@@ -36,6 +36,7 @@ reviewsController.addReview = async (req, res, next) => {
       landlord_id,
       address_id
     ]);
+
     return next();
   } catch (error) {
     return next({
@@ -65,8 +66,9 @@ reviewsController.getReviews = async (req, res, next) => {
 };
 
 reviewsController.getAddressReviews = async (req, res, next) => {
+  if(!req.body.addressId) return next();
   try {
-    const addressId = req.params.addressId;
+    const {addressId} = req.body;
     const result = await dq.query(queries.getAddressReviews, [addressId]);
     res.locals.reviews = result.rows;
     return next();

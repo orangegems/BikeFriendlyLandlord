@@ -40,6 +40,7 @@ CREATE TABLE addresses(
   dog_friendly BOOLEAN DEFAULT false,
   dog_breed_restriction VARCHAR (100),
   dog_size_max_lbs INTEGER,
+  overall_rating DECIMAL,
   tlc DECIMAL,
   personalization DECIMAL,
   quiet_hours VARCHAR (50),

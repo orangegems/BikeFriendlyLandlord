@@ -79,38 +79,33 @@ addressController.postAddress = async (req, res, next) => {
         });
     }
 }
+
 addressController.updateAddressReviews = async (req, res, next) => {
-    const { addressId } = req.params;
+    if(!req.body.addressId) return next();
+    
+    const { addressId } = req.body;
   
-    let newOverall = (newRespect = newResponsiveness = newBike = newPet = 0);
-    // console.log('landlord Reviews: ', res.locals.landlordReviews);
+    let newOverall = (newTlc = newPersonalization = 0);
+
     // add up total for each review category
     res.locals.reviews.forEach((review) => {
       newOverall += Number(review.overall_rating);
-      newRespect += Number(review.respect_rating);
-      newResponsiveness += Number(review.responsiveness_rating);
-      if (review.bike_friendly) newBike += 1;
-      if (review.pet_friendly) newPet += 1;
+      newTlc += Number(review.tlc);
+      newPersonalization += Number(review.personalization);
     });
   
     // calculate new average for each review category
-    newOverall /= res.locals.landlordReviews.length;
-    newRespect /= res.locals.landlordReviews.length;
-    newResponsiveness /= res.locals.landlordReviews.length;
-    newBike =
-      newBike >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
-    newPet =
-      newPet >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
-  
+    newOverall /= res.locals.reviews.length;
+    newTlc /= res.locals.reviews.length;
+    newPersonalization /= res.locals.reviews.length;
+    
     // push new values to database
     try {
-      await db.query(queries.updateLandlordRating, [
+      await db.query(queries.updateAddressReviews, [
         newOverall,
-        newRespect,
-        newResponsiveness,
-        newBike,
-        newPet,
-        landlord_id,
+        newTlc,
+        newPersonalization,
+        addressId,
       ]);
       return next();
     } catch (error) {

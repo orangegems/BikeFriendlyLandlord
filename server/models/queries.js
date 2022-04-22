@@ -38,12 +38,13 @@ queries.getAllReviews = `SELECT * FROM reviews
 WHERE landlord_id = $1
 ORDER BY created_at DESC`;
 
-queries.getAddressReviews = `SELECT tlc, personalization FROM addresses 
+queries.getAddressReviews = `SELECT overall_rating,tlc, personalization FROM reviews
+WHERE address_id = $1
 ORDER BY created_at DESC`;
 
 queries.updateAddressReviews = `UPDATE addresses
-SET tlc = $1, personalization = $2
-WHERE _id = $3`;
+SET overall_rating = $1, tlc = $2, personalization = $3
+WHERE _id = $4`;
 
 queries.updateReview = `UPDATE reviews SET title = $2, description = $3 WHERE _id = $1`;
 
