@@ -115,11 +115,12 @@ h3 {
 .searchMainContainer {
   text-decoration: none;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  color: rgb(68, 67, 67);
+  color: white
 }
 
 .searchContainer {
-  background: rgba(241, 241, 241, 0.4);
+  border-radius: 25px;
+  margin-top: 8px;
 }
 .searchPageMain {
   margin: 0;

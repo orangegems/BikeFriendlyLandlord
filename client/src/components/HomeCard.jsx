@@ -49,7 +49,7 @@ export default function HomeCard({ landlord }) {
                   precision={0.1}
                   value={Number(landlord.overall_rating)}
                   readOnly
-                  style={{ color: "tomato" }}
+                  style={{ color: "white" }}
                 />
               </div>
               <div className="bikePetFriendlyRating">
@@ -60,7 +60,7 @@ export default function HomeCard({ landlord }) {
                       style={{ color: "limeGreen", fontSize: "20px" }}
                     ></CheckIcon>
                   ) : (
-                    <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                    <ClearIcon style={{ color: "white", fontSize: "20px" }} />
                   )}
                 </Icon>
               </div>
@@ -72,7 +72,7 @@ export default function HomeCard({ landlord }) {
                       style={{ color: "limeGreen", fontSize: "20px" }}
                     ></CheckIcon>
                   ) : (
-                    <ClearIcon style={{ color: "tomato", fontSize: "20px" }} />
+                    <ClearIcon style={{ color: "white", fontSize: "20px" }} />
                   )}
                 </Icon>
               </div>

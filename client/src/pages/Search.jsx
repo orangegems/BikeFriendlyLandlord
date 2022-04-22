@@ -39,6 +39,11 @@ function Search(props) {
     setPetR(!petR);
   };
 
+  const [topL, setTopL] = React.useState(false);
+  const handleSetLChange = (e) => {
+    setTopL(!topL);
+  }
+
   // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
   const [options, setOptions] = React.useState([]);
   useEffect(() => {
@@ -64,6 +69,7 @@ function Search(props) {
       city: city,
       bike_friendly: bikeR,
       pet_friendly: petR,
+      top_rated_landlords: topL,
     };
 
     //send request
@@ -85,12 +91,12 @@ function Search(props) {
   return (
     <ThemeProvider theme={tomatopalette}>
       <div className="searchPageMain">
-        <Container className="searchMainContainer" maxwidth="sm" sx={{ p: 2 }}>
-          <Box className="searchContainer" sx={{ p: 2 }}>
+        <Container className="searchMainContainer" maxwidth="sm" sx={{ p: 3 }}>
+          <Box className="searchContainer" sx={{ p: 4 }}>
             <Stack
               className="searchFields"
               direction="column"
-              spacing={3}
+              spacing={4}
               justifyContent="center"
               alignItems="center"
             >
@@ -132,6 +138,7 @@ function Search(props) {
                     checked={bikeR}
                     onChange={handleBikeRChange}
                     size="large"
+                    style={{color: "white"}}
                   />
                 </Stack>
                 <Stack
@@ -145,6 +152,21 @@ function Search(props) {
                     checked={petR}
                     onChange={handlePetRChange}
                     size="large"
+                    style={{color: "white"}}
+                  />
+                  </Stack>
+                  <Stack
+                  direction="row"
+                  spacing={1}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <h2>Top Rated Landlords</h2>
+                  <Checkbox
+                    checked={topL}
+                    onChange={handleSetLChange}
+                    size="large"
+                    style={{color: "white"}}
                   />
                 </Stack>
               </Stack>
