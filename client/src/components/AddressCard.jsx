@@ -42,169 +42,221 @@ export default function AddressCard({ addresses, isAddCard }) {
     listing_link,
   } = addresses;
 
-  const postAddress = async() =>{
+  const postAddress = async () => {
     await fetch(`/address/`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(addressForm),
-      headers:{
-        'Content-Type': 'application/json'
-    }
-    });
-  }
-
-  useState(()=>{
-    postAddress();
-  }, [addressForm])
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log("error submitting address ->" + err);
+      });
+  };
 
   return (
     <Card
       sx={{ maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
       id="addressCard"
     >
-      {isAddCard && addPressed &&
-        <div></div>
-      }
-
+      {isAddCard && addPressed ? 
+      <div></div> 
+      : 
+      isAddCard && 
+      
+      <div>
+        Add Icon
+        </div>}
 
       {
-      // if it's a regular address card
-      !isAddCard && (
-        <>
-          {/* title container */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              padding: "15px 15px 5px 15px",
-              letterSpacing: "2px",
-            }}
-          >
-            <div style={{ fontSize: "20px" }}>
-              {`${street_num} ${street} ${"#" + apt_num || ""}`}
-            </div>
-            <Typography
-              sx={{ fontSize: "10px", letterSpacing: "5px", color: "#bababa" }}
-            >
-              {building_type}
-            </Typography>
-          </div>
-
-          {/* picture */}
-          <div id="addressPic">
-            <CardMedia
-              image={`/images/address_${_id}.jpg`}
-              alt="home"
-              height="200"
-              component="img"
-              sx={{ zIndex: 0 }}
-            />
-
-            {/* price box */}
-            <Box
-              id="price"
-              sx={{
-                position: "absolute",
-                flexDirection: "column",
-                zIndex: 1,
-                backgroundColor: "#002147",
-                opacity: 0.6,
-                dropShadow: "20px 20px 20px black",
-                borderRadius: "0px 0px 5px 0px",
-                padding: "5px",
-              }}
-            >
-              ${price}
-            </Box>
-
-            {/* beds and baths box */}
-            <Box
-              id="bedsBaths"
-              sx={{
-                position: "absolute",
+        // if it's a regular address card
+        !isAddCard && (
+          <>
+            {/* title container */}
+            <div
+              style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
+                justifyContent: "flex-end",
                 alignItems: "center",
-                zIndex: 1,
-                right: 0,
-                top: 0,
-                backgroundColor: "#002147",
-                opacity: 0.6,
-                borderRadius: "0px 0px 0px 5px",
-                padding: "0px 0px 5px 5px",
-                width: "70px",
+                padding: "15px 15px 5px 15px",
+                letterSpacing: "2px",
               }}
             >
-              <div
-                style={{
-                  color: "#ededed",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+              <div style={{ fontSize: "20px" }}>
+                {`${street_num} ${street} ${"#" + apt_num || ""}`}
+              </div>
+              <Typography
+                sx={{
+                  fontSize: "10px",
+                  letterSpacing: "5px",
+                  color: "#bababa",
                 }}
               >
-                <KingBedOutlinedIcon />
-                {beds}
-                <BathtubOutlinedIcon />
-                {baths}
-              </div>
-            </Box>
+                {building_type}
+              </Typography>
+            </div>
 
-            {/* link box */}
-            <a
-              href={listing_link}
-              target="new"
-              style={{ bottom: 0, position: "absolute" }}
-            >
+            {/* picture */}
+            <div id="addressPic">
+              <CardMedia
+                image={`/images/address_${_id}.jpg`}
+                alt="home"
+                height="200"
+                component="img"
+                sx={{ zIndex: 0 }}
+              />
+
+              {/* price box */}
               <Box
-                id="link"
+                id="price"
                 sx={{
                   position: "absolute",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  flexDirection: "column",
                   zIndex: 1,
-                  bottom: 0,
                   backgroundColor: "#002147",
                   opacity: 0.6,
                   dropShadow: "20px 20px 20px black",
-                  borderRadius: "0px 5px 0px 0px",
-                  padding: "5px 5px 0px 5px",
+                  borderRadius: "0px 0px 5px 0px",
+                  padding: "5px",
                 }}
               >
-                <LinkIcon />
+                ${price}
               </Box>
-            </a>
 
-            {/* overall review box */}
-            <Box
-              id="overallReview"
-              sx={{
-                position: "absolute",
+              {/* beds and baths box */}
+              <Box
+                id="bedsBaths"
+                sx={{
+                  position: "absolute",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 1,
+                  right: 0,
+                  top: 0,
+                  backgroundColor: "#002147",
+                  opacity: 0.6,
+                  borderRadius: "0px 0px 0px 5px",
+                  padding: "0px 0px 5px 5px",
+                  width: "70px",
+                }}
+              >
+                <div
+                  style={{
+                    color: "#ededed",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <KingBedOutlinedIcon />
+                  {beds}
+                  <BathtubOutlinedIcon />
+                  {baths}
+                </div>
+              </Box>
+
+              {/* link box */}
+              <a
+                href={listing_link}
+                target="new"
+                style={{ bottom: 0, position: "absolute" }}
+              >
+                <Box
+                  id="link"
+                  sx={{
+                    position: "absolute",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    zIndex: 1,
+                    bottom: 0,
+                    backgroundColor: "#002147",
+                    opacity: 0.6,
+                    dropShadow: "20px 20px 20px black",
+                    borderRadius: "0px 5px 0px 0px",
+                    padding: "5px 5px 0px 5px",
+                  }}
+                >
+                  <LinkIcon />
+                </Box>
+              </a>
+
+              {/* overall review box */}
+              <Box
+                id="overallReview"
+                sx={{
+                  position: "absolute",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  zIndex: 1,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: "#002147",
+                  opacity: 0.6,
+                  borderRadius: "5px 0px 0px 0px",
+                  padding: "5px 5px 5px 5px",
+                }}
+              >
+                <div
+                  style={{
+                    color: "#262626",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Rating
+                    precision={0.5}
+                    value={Number(overall_rating)}
+                    sx={{ opacity: 1, fontSize: "20px" }}
+                    readOnly
+                    emptyIcon={
+                      <StarIcon
+                        style={{ opacity: 0.1, color: "white" }}
+                        fontSize="inherit"
+                      />
+                    }
+                  />
+                </div>
+              </Box>
+            </div>
+
+            <div
+              style={{
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                zIndex: 1,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "#002147",
-                opacity: 0.6,
-                borderRadius: "5px 0px 0px 0px",
-                padding: "5px 5px 5px 5px",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                padding: "15px",
               }}
             >
-              <div
-                style={{
-                  color: "#262626",
+              {/* extra info */}
+              <Box sx={{ marginLeft: "-20px" }}>
+                <Typography>
+                  {city}, {state} {zip}
+                </Typography>
+
+                {/* popup modal for extra criteria */}
+              </Box>
+
+              {/* review breakdown */}
+              <Box
+                id="reviewInfo"
+                sx={{
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: "column",
+                  boxShadow: 1,
                 }}
               >
+                <Typography variant="h7">TLC</Typography>
                 <Rating
                   precision={0.5}
-                  value={Number(overall_rating)}
-                  sx={{ opacity: 1, fontSize: "20px" }}
+                  value={Number(tlc)}
                   readOnly
                   emptyIcon={
                     <StarIcon
@@ -213,64 +265,23 @@ export default function AddressCard({ addresses, isAddCard }) {
                     />
                   }
                 />
-              </div>
-            </Box>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              padding: "15px",
-            }}
-          >
-            {/* extra info */}
-            <Box sx={{ marginLeft: "-20px" }}>
-              <Typography>
-                {city}, {state} {zip}
-              </Typography>
-
-              {/* popup modal for extra criteria */}
-            </Box>
-
-            {/* review breakdown */}
-            <Box
-              id="reviewInfo"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                boxShadow: 1,
-              }}
-            >
-              <Typography variant="h7">TLC</Typography>
-              <Rating
-                precision={0.5}
-                value={Number(tlc)}
-                readOnly
-                emptyIcon={
-                  <StarIcon
-                    style={{ opacity: 0.1, color: "white" }}
-                    fontSize="inherit"
-                  />
-                }
-              />
-              <Typography variant="h7">Personalization</Typography>
-              <Rating
-                precision={0.5}
-                value={Number(personalization)}
-                readOnly
-                emptyIcon={
-                  <StarIcon
-                    style={{ opacity: 0.1, color: "white" }}
-                    fontSize="inherit"
-                  />
-                }
-              />
-            </Box>
-          </div>
-        </>
-      )}
+                <Typography variant="h7">Personalization</Typography>
+                <Rating
+                  precision={0.5}
+                  value={Number(personalization)}
+                  readOnly
+                  emptyIcon={
+                    <StarIcon
+                      style={{ opacity: 0.1, color: "white" }}
+                      fontSize="inherit"
+                    />
+                  }
+                />
+              </Box>
+            </div>
+          </>
+        )
+      }
     </Card>
   );
 }

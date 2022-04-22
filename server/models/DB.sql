@@ -22,7 +22,6 @@ CREATE TABLE landlords(
   overall_rating DECIMAL DEFAULT 0,
   respect_rating DECIMAL DEFAULT 0,
   responsiveness_rating DECIMAL DEFAULT 0,
-  is_verified BOOLEAN DEFAULT false,
   is_company BOOLEAN DEFAULT false NOT NULL,
   user_id INTEGER NOT NULL
 );
