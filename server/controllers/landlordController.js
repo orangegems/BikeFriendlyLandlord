@@ -97,7 +97,6 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
 landlordController.searchLandlords = async (req, res, next) => {
   const { city, bike_friendly, pet_friendly } = req.body;
 
-  console.log('bike: ', bike_friendly);
   try {
     const results = await db.query(queries.getBikeAndPetFriendlyLandlords, [city, bike_friendly, pet_friendly]);
     res.locals.landlords = results.rows;

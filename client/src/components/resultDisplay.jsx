@@ -10,7 +10,6 @@ const mapStateToProps = (state) => ({
 });
 
 function ResultDisplay({ searchResults }) {
-  console.log('searchResults: ', searchResults);
   if (!searchResults) {
     return (
       <Box
