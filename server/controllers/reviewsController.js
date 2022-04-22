@@ -10,11 +10,14 @@ reviewsController.addReview = async (req, res, next) => {
     overall_rating,
     respect_rating,
     responsiveness_rating,
+    tlc,
+    personalization,
     bike_friendly,
     pet_friendly,
     description,
     user_id,
     landlord_id,
+    address_id,
   } = req.body;
 
   try {
@@ -26,9 +29,12 @@ reviewsController.addReview = async (req, res, next) => {
       responsiveness_rating,
       bike_friendly,
       pet_friendly,
+      tlc,
+      personalization,
       description,
       user_id,
       landlord_id,
+      address_id
     ]);
     return next();
   } catch (error) {
@@ -58,6 +64,22 @@ reviewsController.getReviews = async (req, res, next) => {
   }
 };
 
+reviewsController.getAddressReviews = async (req, res, next) => {
+  try {
+    const addressId = req.params.addressId;
+    const result = await dq.query(queries.getAddressReviews, [addressId]);
+    res.locals.reviews = result.rows;
+    return next();
+  } catch (error) {
+    return next({
+      message:
+        "Error occured attempting to get reviews from database in reviewController.getAddressReviews",
+      log: "Error: " + error,
+      status: 500,
+    });
+  }
+}
+
 reviewsController.getAllLandlordReviews = async (req, res, next) => {
   const { landlordId } = req.params;
   // console.log('landlord id: ',landlord_id)
@@ -78,7 +100,7 @@ reviewsController.getAllLandlordReviews = async (req, res, next) => {
 };
 
 reviewsController.updateReview = async (req, res, next) => {
-  const {reviewId, title, description} = req.body;
+  const { reviewId, title, description } = req.body;
 
   try {
     const result = await db.query(queries.updateReview, [reviewId, title, description]);
@@ -94,8 +116,8 @@ reviewsController.updateReview = async (req, res, next) => {
 };
 
 reviewsController.deleteReview = async (req, res, next) => {
-  const {reviewId} = req.params;
-s
+  const { reviewId } = req.params;
+  s
   try {
     await db.query(queries.deleteReview, [reviewId]);
     return next();

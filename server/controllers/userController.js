@@ -16,9 +16,9 @@ userController.createUser = async (req, res, next) => {
     const {
       username,
       password,
-      firstname,
-      lastname,
-      isLandlord,
+      first_name,
+      last_name,
+      is_landlord,
       email
     } = req.body;
 
@@ -30,13 +30,13 @@ userController.createUser = async (req, res, next) => {
      * database query to add the new user to the users table
      */
     const userValues = [
-      firstname,
-      lastname,
-      firstname + ' ' + lastname,
+      first_name,
+      last_name,
+      first_name + ' ' + last_name,
       username,
       email, 
       hashedPassword,
-      isLandlord
+      is_landlord
     ];
     const userResult = await db.query(queries.createUser, userValues);
     delete userResult.rows[0].password;

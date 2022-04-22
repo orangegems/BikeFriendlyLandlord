@@ -48,6 +48,7 @@ module.exports = {
       '/reviews': 'http://localhost:3000',
       '/landlords': 'http://localhost:3000',
       '/user': 'http://localhost:3000',
+      '/address': 'http://localhost:3000'
     },
   },
 };

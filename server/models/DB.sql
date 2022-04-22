@@ -12,7 +12,8 @@ CREATE TABLE users (
   username VARCHAR (100) NOT NULL UNIQUE,
   email VARCHAR (50) NOT NULL UNIQUE,
   password VARCHAR (100) NOT NULL,
-  profile_pic VARCHAR DEFAULT 'userProfile.png',	
+  profile_pic VARCHAR DEFAULT 'userProfile.png',
+  company VARCHAR (50) DEFAULT '',	
   is_landlord BOOLEAN DEFAULT false NOT NULL
 );
 
@@ -23,8 +24,7 @@ CREATE TABLE landlords(
   responsiveness_rating DECIMAL DEFAULT 0,
   is_verified BOOLEAN DEFAULT false,
   is_company BOOLEAN DEFAULT false NOT NULL,
-  user_id INTEGER NOT NULL,
-  FOREIGN KEY(user_id) REFERENCES users(_id)
+  user_id INTEGER NOT NULL
 );
 
 CREATE TABLE addresses(
@@ -40,8 +40,9 @@ CREATE TABLE addresses(
   dog_friendly BOOLEAN DEFAULT false,
   dog_breed_restriction VARCHAR (100),
   dog_size_max_lbs INTEGER,
-  quiet_hour_start TIMESTAMP,
-  quiet_hour_end TIMESTAMP,
+  tlc DECIMAL,
+  personalization DECIMAL,
+  quiet_hours VARCHAR (50),
   overnight_guests BOOLEAN DEFAULT false,
   smoker_friendly BOOLEAN DEFAULT false,
   building_type VARCHAR (50),
@@ -49,8 +50,7 @@ CREATE TABLE addresses(
   baths INTEGER,
   price INTEGER,
   late_payments VARCHAR (100),
-  landlord_id INTEGER NOT NULL,
-  FOREIGN KEY(landlord_id) REFERENCES landlords(_id)
+  landlord_id INTEGER NOT NULL
 );
 
 CREATE TABLE reviews(
@@ -67,9 +67,6 @@ CREATE TABLE reviews(
   description VARCHAR (1000) NOT NULL,
   user_id INTEGER NOT NULL, 
   landlord_id INTEGER NOT NULL, 
-  address_id INTEGER NOT NULL,
-  FOREIGN KEY(user_id) REFERENCES users(_id),
-  FOREIGN KEY(landlord_id) REFERENCES landlords(_id),
-  FOREIGN KEY (address_id) REFERENCES addresses(_id),
+  address_id INTEGER,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

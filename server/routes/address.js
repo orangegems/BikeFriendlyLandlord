@@ -15,7 +15,7 @@ router.get('/', addressController.getAddresses, (req, res) => {
     return res.json(res.locals.addresses);
 })
 
-router.get('byLandlord/:landlordId', addressController.getAddressesByLandlord, (req, res) => {
+router.get('/byLandlord/:landlordId', addressController.getAddressesByLandlord, (req, res) => {
     return res.json(res.locals.addresses);
 })
 

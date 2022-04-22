@@ -96,8 +96,6 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
       newOverall,
       newRespect,
       newResponsiveness,
-      newBike,
-      newPet,
       landlord_id,
     ]);
     return next();
