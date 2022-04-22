@@ -6,58 +6,43 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@material-ui/icons/Star";
 import LinkIcon from "@mui/icons-material/Link";
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
 
-export default function AddressCard() {
-  const [homeInfo, setHomeInfo] = useState({});
-  const [reviewInfo, setReviewInfo] = useState({});
-  const [criteria, setCriteria] = useState({});
-
-  useEffect(() => {
-    setHomeInfo({
-      addressId: 12345,
-      landlordName: "David Palmer",
-      streetNum: "4664",
-      street: "Alameda Blvd.",
-      apartmentNum: "2b",
-      city: "Los Angeles",
-      state: "CA",
-      zip: "92118",
-      buildingType: "Apartment",
-      beds: "2",
-      baths: "1",
-      price: "2400",
-      link: "http://zillow.com",
-    });
-
-    setReviewInfo({
-      overall: "4.5",
-      respectfulness: "2",
-      responsiveness: "5",
-      tlc: "4.5",
-      personalization: "3",
-    });
-
-    setCriteria({
-      dogSizeMax: "20lbs",
-      breedRestriction: true,
-      dogsAllowed: true,
-      petsAllowed: true,
-      bikesAllowed: false,
-      overnightGuests: true,
-      quietHours: "10pm-8am",
-      smoking: false,
-      latePayment: "fees included",
-    });
-  }, []);
+export default function AddressCard({ addresses }) {
+  const {
+    _id,
+    street_num,
+    street,
+    apt_num,
+    city,
+    state,
+    zip_code,
+    bike_friendly,
+    pet_friendly,
+    dog_friendly,
+    dog_breed_restriction,
+    dog_size_max_lbs,
+    overall_rating,
+    tlc,
+    personalization,
+    quiet_hours,
+    overnight_guests,
+    smoker_friendly,
+    building_type,
+    beds,
+    baths,
+    price,
+    late_payments,
+    listing_link,
+  } = addresses;
 
   return (
     <Card
-      sx={{maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
+      sx={{ maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
       id="addressCard"
     >
       {/* title container */}
@@ -72,19 +57,19 @@ export default function AddressCard() {
         }}
       >
         <div style={{ fontSize: "20px" }}>
-          {`${homeInfo.streetNum} ${homeInfo.street} #${homeInfo.apartmentNum}`}
+          {`${street_num} ${street} ${"#" + apt_num || ""}`}
         </div>
         <Typography
           sx={{ fontSize: "10px", letterSpacing: "5px", color: "#bababa" }}
         >
-          {homeInfo.buildingType}
+          {building_type}
         </Typography>
       </div>
 
       {/* picture */}
       <div id="addressPic">
         <CardMedia
-          image="/images/address_1.jpg"
+          image={`/images/address_${_id}.jpg`}
           alt="home"
           height="200"
           component="img"
@@ -105,7 +90,7 @@ export default function AddressCard() {
             padding: "5px",
           }}
         >
-          ${homeInfo.price}
+          ${price}
         </Box>
 
         {/* beds and baths box */}
@@ -136,21 +121,20 @@ export default function AddressCard() {
             }}
           >
             <KingBedOutlinedIcon />
-            {homeInfo.beds}
+            {beds}
             <BathtubOutlinedIcon />
-            {homeInfo.baths}
+            {baths}
           </div>
         </Box>
 
         {/* link box */}
         <a
-          href={homeInfo.link}
+          href={listing_link}
           target="new"
           style={{ bottom: 0, position: "absolute" }}
         >
           <Box
-            id="price"
-            onClick={() => {}}
+            id="link"
             sx={{
               position: "absolute",
               justifyContent: "center",
@@ -190,7 +174,7 @@ export default function AddressCard() {
           >
             <Rating
               precision={0.5}
-              value={Number(reviewInfo.overall)}
+              value={Number(overall_rating)}
               sx={{ opacity: 1, fontSize: "20px" }}
               readOnly
               emptyIcon={
@@ -212,17 +196,13 @@ export default function AddressCard() {
           padding: "15px",
         }}
       >
-
         {/* extra info */}
         <Box sx={{ marginLeft: "-20px" }}>
           <Typography>
-            {homeInfo.city}, {homeInfo.state} {homeInfo.zip}
+            {city}, {state} {zip}
           </Typography>
 
-        {/* popup modal for extra criteria */}
-   
-          
-
+          {/* popup modal for extra criteria */}
         </Box>
 
         {/* review breakdown */}
@@ -234,34 +214,10 @@ export default function AddressCard() {
             boxShadow: 1,
           }}
         >
-          <Typography variant="h7">Respectfulness</Typography>
-          <Rating
-            precision={0.5}
-            value={Number(reviewInfo.respectfulness)}
-            readOnly
-            emptyIcon={
-              <StarIcon
-                style={{ opacity: 0.1, color: "white" }}
-                fontSize="inherit"
-              />
-            }
-          />
-          <Typography variant="h7">Responsiveness</Typography>
-          <Rating
-            precision={0.5}
-            value={Number(reviewInfo.responsiveness)}
-            readOnly
-            emptyIcon={
-              <StarIcon
-                style={{ opacity: 0.1, color: "white" }}
-                fontSize="inherit"
-              />
-            }
-          />
           <Typography variant="h7">TLC</Typography>
           <Rating
             precision={0.5}
-            value={Number(reviewInfo.tlc)}
+            value={Number(tlc)}
             readOnly
             emptyIcon={
               <StarIcon
@@ -273,7 +229,7 @@ export default function AddressCard() {
           <Typography variant="h7">Personalization</Typography>
           <Rating
             precision={0.5}
-            value={Number(reviewInfo.personalization)}
+            value={Number(personalization)}
             readOnly
             emptyIcon={
               <StarIcon

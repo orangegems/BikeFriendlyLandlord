@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Review } from "../components/Review.jsx";
 import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
-import AddressCard from "../components/AddressCard.jsx"
+import AddressCard from "../components/AddressCard.jsx";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -27,6 +27,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
   const navigate = useNavigate();
   const [landlordData, setLandlordData] = React.useState(null);
   const [reviewData, setReviewData] = React.useState(null);
+  const [addresses, setAddresses] = React.useState(null);
 
   const { landlordId } = useParams();
 
@@ -51,6 +52,14 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
           console.log("Error fetching landlord reviews -->", err)
         );
 
+      fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
+        .then((addresses) => {
+          setAddresses(addresses.data);
+        })
+        .catch((err) => {
+          console.log("Error fetching landlord addresses -->", err);
+        });
+
       // otherwise, if tenant is logged in and routes
       //  to /profile [with no ID endpoint]
     } else if (isLoggedIn) {
@@ -70,7 +79,7 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
-          <AddressCard/>
+          <AddressCard addresses={addresses}/>
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
@@ -175,23 +184,24 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
                         Reviews
                       </Typography>
                       {
-                      // user can only add review if
-                      // they're logged in as a tenant
-                      // and on a landlord's page
-                      !isLandlord && landlordId && (
-                        <Stack
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            p: 1,
-                            m: 1,
-                          }}
-                        >
-                          <Button variant="contained" onClick={handleReview}>
-                            Create Review
-                          </Button>
-                        </Stack>
-                      )}
+                        // user can only add review if
+                        // they're logged in as a tenant
+                        // and on a landlord's page
+                        !isLandlord && landlordId && (
+                          <Stack
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              p: 1,
+                              m: 1,
+                            }}
+                          >
+                            <Button variant="contained" onClick={handleReview}>
+                              Create Review
+                            </Button>
+                          </Stack>
+                        )
+                      }
                     </Stack>
                   </Container>
 

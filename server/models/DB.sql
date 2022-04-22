@@ -30,6 +30,7 @@ CREATE TABLE landlords(
 
 CREATE TABLE reviews(
   _id SERIAL PRIMARY KEY,
+<<<<<<< Updated upstream
   title varchar (100) NOT NULL,
   username varchar (100) NOT NULL,
   overall_rating decimal,
@@ -41,6 +42,32 @@ CREATE TABLE reviews(
   user_id integer NOT NULL,
   landlord_id integer NOT NULL, 
   created_at timestamp DEFAULT CURRENT_TIMESTAMP
+=======
+  street_num INTEGER,
+  street VARCHAR (25),
+  apt_num VARCHAR (10),
+  city VARCHAR (50) NOT NULL,
+  state VARCHAR (25) NOT NULL,
+  zip_code INTEGER,
+  bike_friendly BOOLEAN DEFAULT false,
+  pet_friendly BOOLEAN DEFAULT false,
+  dog_friendly BOOLEAN DEFAULT false,
+  dog_breed_restriction VARCHAR (100),
+  dog_size_max_lbs INTEGER,
+  overall_rating DECIMAL,
+  tlc DECIMAL,
+  personalization DECIMAL,
+  quiet_hours VARCHAR (50),
+  overnight_guests BOOLEAN DEFAULT false,
+  smoker_friendly BOOLEAN DEFAULT false,
+  building_type VARCHAR (50),
+  beds INTEGER,
+  baths INTEGER,
+  price INTEGER,
+  late_payments VARCHAR (100),
+  listing_link VARCHAR (100),
+  landlord_id INTEGER NOT NULL
+>>>>>>> Stashed changes
 );
 
 CREATE TABLE addresses(
