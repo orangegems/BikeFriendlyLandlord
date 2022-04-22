@@ -16,11 +16,10 @@ userController.createUser = async (req, res, next) => {
     const {
       username,
       password,
-      firstname,
-      lastname,
-      isLandlord,
-      email,
-      landlordId,
+      first_name,
+      last_name,
+      is_landlord,
+      email
     } = req.body;
 
     // ? validate user input
@@ -28,39 +27,16 @@ userController.createUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     /**
-     * if the new user is a landlord, add the new landlord to the 'landlord' table
-     * before adding the user to the users table with landlord_id
-     */
-    // if (landlordId && !isTenant) {
-    //   const landlordQueryString = `
-    //   INSERT INTO users (first_name, last_name, full_name,is_verified)
-    //   VALUES ($1, $2, $3, $4);
-    //   `;
-    //   const landlordValues = [
-    //     firstname,
-    //     lastname,
-    //     firstname + ' ' + lastname,
-    //     true,
-    //   ];
-    //   const landlordResult = await db.query(
-    //     landlordQueryString,
-    //     landlordValues
-    //   );
-    //   console.log(landlordResult.rows);
-    // }
-
-    /**
      * database query to add the new user to the users table
      */
     const userValues = [
-      firstname,
-      lastname,
-      firstname + ' ' + lastname,
+      first_name,
+      last_name,
+      first_name + ' ' + last_name,
       username,
       email, 
       hashedPassword,
-      isLandlord,
-      landlordId,
+      is_landlord
     ];
     const userResult = await db.query(queries.createUser, userValues);
     delete userResult.rows[0].password;
@@ -135,6 +111,7 @@ userController.getUserData = async (req,res,next) => {
     console.log(userId)
 
     const result = await db.query(queries.getUserData, [userId._id]);
+    console.log('here in getUserData');
     console.log(result.rows[0]);
 
     delete result.rows[0].password;

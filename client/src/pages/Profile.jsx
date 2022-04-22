@@ -79,7 +79,8 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
-          <AddressCard addresses={addresses}/>
+          <AddressCard addresses={addresses} isAddCard={false}/>
+          <AddressCard addresses={null} isAddCard={true}/>
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (

@@ -1,48 +1,34 @@
+DROP TABLE reviews;
+DROP TABLE addresses;
+DROP TABLE landlords;
+DROP TABLE users;
 
 
 CREATE TABLE users (
   _id SERIAL PRIMARY KEY,
-  first_name varchar (50) NOT NULL,
-  last_name varchar (50) NOT NULL,
-  full_name varchar (100) NOT NULL,
-  username varchar (100) NOT NULL UNIQUE,
-  email varchar (50) NOT NULL UNIQUE,
-  password varchar (100) NOT NULL,
-  is_landlord boolean DEFAULT false,
-  landlord_id integer,
-  created_at timestamp DEFAULT CURRENT_TIMESTAMP
+  first_name VARCHAR (50) NOT NULL,
+  last_name VARCHAR (50) NOT NULL,
+  full_name VARCHAR (100) NOT NULL,
+  username VARCHAR (100) NOT NULL UNIQUE,
+  email VARCHAR (50) NOT NULL UNIQUE,
+  password VARCHAR (100) NOT NULL,
+  profile_pic VARCHAR DEFAULT 'userProfile.png',
+  company VARCHAR (50) DEFAULT '',	
+  is_landlord BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE landlords(
   _id SERIAL PRIMARY KEY,
-  first_name varchar (50) NOT NULL,
-  last_name varchar (50) NOT NULL,
-  full_name varchar (100) NOT NULL,
-  profile_pic VARCHAR DEFAULT 'userProfile.png',	
-  overall_rating decimal,
-  respect_rating decimal,
-  responsiveness_rating decimal,
-  bike_friendly boolean,
-  pet_friendly boolean,
-  is_verified boolean DEFAULT false,
-  created_at timestamp DEFAULT CURRENT_TIMESTAMP
+  overall_rating DECIMAL DEFAULT 0,
+  respect_rating DECIMAL DEFAULT 0,
+  responsiveness_rating DECIMAL DEFAULT 0,
+  is_verified BOOLEAN DEFAULT false,
+  is_company BOOLEAN DEFAULT false NOT NULL,
+  user_id INTEGER NOT NULL
 );
 
-CREATE TABLE reviews(
+CREATE TABLE addresses(
   _id SERIAL PRIMARY KEY,
-<<<<<<< Updated upstream
-  title varchar (100) NOT NULL,
-  username varchar (100) NOT NULL,
-  overall_rating decimal,
-  respect_rating decimal,
-  responsiveness_rating decimal,
-  bike_friendly boolean,
-  pet_friendly boolean,
-  description varchar (1000) NOT NULL,
-  user_id integer NOT NULL,
-  landlord_id integer NOT NULL, 
-  created_at timestamp DEFAULT CURRENT_TIMESTAMP
-=======
   street_num INTEGER,
   street VARCHAR (25),
   apt_num VARCHAR (10),
@@ -65,17 +51,23 @@ CREATE TABLE reviews(
   baths INTEGER,
   price INTEGER,
   late_payments VARCHAR (100),
-  listing_link VARCHAR (100),
   landlord_id INTEGER NOT NULL
->>>>>>> Stashed changes
 );
 
-CREATE TABLE addresses(
+CREATE TABLE reviews(
   _id SERIAL PRIMARY KEY,
-  street_num integer,
-  street varchar (25),
-  city varchar (50) NOT NULL,
-  state varchar (25) NOT NULL,
-  zip_code integer,
-  landlord_id integer
+  title VARCHAR (100) NOT NULL,
+  username VARCHAR (100) NOT NULL,
+  overall_rating DECIMAL,
+  respect_rating DECIMAL,
+  responsiveness_rating DECIMAL,
+  bike_friendly BOOLEAN,
+  pet_friendly BOOLEAN,
+  tlc DECIMAL,
+  personalization DECIMAL,
+  description VARCHAR (1000) NOT NULL,
+  user_id INTEGER NOT NULL, 
+  landlord_id INTEGER NOT NULL, 
+  address_id INTEGER,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
