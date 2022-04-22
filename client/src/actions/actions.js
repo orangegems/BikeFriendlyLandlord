@@ -1,20 +1,21 @@
 import * as types from "./actionTypes";
 
-// updates state to hold current user data
+// user reducer
 export const setUserData = (user) => ({
   type: types.SET_USER,
   payload: user,
 });
 
-// removes current user from state upon logout
-export const resetUserData = () => ({
-  type: types.RESET_USER,
-  payload: null,
+export const setIsLoggedIn = (boolean) => ({
+  type: types.SET_IS_LOGGED_IN,
+  payload: boolean,
 });
 
-export const toggleAuthDisplay = () => ({
-  type: types.TOGGLE_AUTH_DISPLAY,
-  payload: null,
+
+// display reducer
+export const setAuthDisplay = (boolean) => ({
+  type: types.SET_AUTH_DISPLAY,
+  payload: boolean,
 });
 
 export const searchResults = (searchResults) => ({

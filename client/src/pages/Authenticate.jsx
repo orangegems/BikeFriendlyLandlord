@@ -10,6 +10,7 @@ export function Authenticate(props) {
 
   function handleSubmit(source, data) {
     event.preventDefault();
+    console.log(data);
     fetch(`/auth/${source}`, {
       method: 'POST',
       body: JSON.stringify(data),
