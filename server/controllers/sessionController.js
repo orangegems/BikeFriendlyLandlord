@@ -34,7 +34,7 @@ sessionController.checkSession = (req, res, next) => {
   }
 
   res.locals.user = decryptedToken.payload;
-  
+  console.log('session check success')
   next();
 };
 

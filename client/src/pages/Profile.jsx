@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { connect } from "react-redux";
 import { Review } from "../components/Review.jsx";
 import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
 import AddressCard from "../components/AddressCard.jsx";
@@ -23,7 +24,11 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import tomatopalette from "../theme/tomatopalette.jsx";
 
-export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
+const mapStateToProps = (state) => ({
+  isLandlord: state.currentUser.isLandlord,
+});
+
+const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
   const navigate = useNavigate();
   const [landlordData, setLandlordData] = React.useState(null);
   const [reviewData, setReviewData] = React.useState(null);
@@ -31,30 +36,33 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
 
   const { landlordId } = useParams();
 
-  useEffect(() => {
-    // if the url contains the landlord id
-    // or the user is logged in and is a
-
-    console.log(landlordId);
+  const fetches = async () => {
+    console.log("userData.landlordId: " + userData.landlord_id);
     // landlord role (state will contain ID)
     if (landlordId || isLandlord) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
 
       // fetches landlord data to populate profile
-      fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
+      await fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
         .then((landlord) => setLandlordData(landlord.data))
         .catch((err) => console.log("Error fetching landlord data -->", err));
 
       // fetches reviews submitted about the landlord user
-      fetch(`/reviews/landlordReviews/${landlordId || userData.landlord_id}`)
+      await fetch(
+        `/reviews/landlordReviews/${landlordId || userData.landlord_id}`
+      )
         .then((reviews) => setReviewData(reviews.data))
         .catch((err) =>
           console.log("Error fetching landlord reviews -->", err)
         );
 
-      fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
+      await fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
         .then((addresses) => {
-          setAddresses(addresses.data);
+          return addresses.json();
+        })
+        .then((json) => {
+          // console.log(json[0])
+          setAddresses(json);
         })
         .catch((err) => {
           console.log("Error fetching landlord addresses -->", err);
@@ -64,12 +72,18 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
       //  to /profile [with no ID endpoint]
     } else if (isLoggedIn) {
       // fetches reviews submitted by the tenant about other landlord users
-      fetch(`/reviews/${userData._id}`)
+      await fetch(`/reviews/${userData._id}`)
         .then((res) => res.json())
         .then((json) => setReviewData(json.reviews))
         .catch((err) => console.log("Error fetching user reviews -->", err));
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    // if the url contains the landlord id
+    // or the user is logged in and is a
+    fetches();
+  }, [isLoggedIn]);
 
   //onclick for button
   const handleReview = () =>
@@ -79,8 +93,14 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
-          <AddressCard addresses={addresses} isAddCard={false}/>
-          <AddressCard addresses={null} isAddCard={true}/>
+          {addresses && (
+            <>
+              {addresses.map((address, i) => (
+                <AddressCard address={address} key={i} isAddCard={false} />
+              ))}
+            </>
+          )}
+          <AddressCard addresses={null} isAddCard={true} />
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
@@ -230,4 +250,6 @@ export default function ProfilePage({ userData, isLoggedIn, isLandlord }) {
       </div>
     </ThemeProvider>
   );
-}
+};
+
+export default connect(mapStateToProps, null)(ProfilePage);

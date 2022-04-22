@@ -5,8 +5,6 @@ import { Authenticate } from "../pages/Authenticate.jsx";
 import { connect } from "react-redux";
 import SearchIcon from '@mui/icons-material/Search';
 import PublicIcon from '@mui/icons-material/Public';
-import { blue } from "@mui/material/colors";
-
 
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,

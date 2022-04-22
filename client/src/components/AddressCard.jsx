@@ -8,21 +8,23 @@ import StarIcon from "@material-ui/icons/Star";
 import LinkIcon from "@mui/icons-material/Link";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
 
-export default function AddressCard({ addresses, isAddCard }) {
+export default function AddressCard({ address, isAddCard }) {
   const [addPressed, setAddPressed] = useState(false);
   const [addressForm, setAddressForm] = useState({});
 
   const {
-    _id,
+    address_id,
     street_num,
     street,
     apt_num,
     city,
     state,
+    zip,
     bike_friendly,
     pet_friendly,
     dog_friendly,
@@ -40,7 +42,7 @@ export default function AddressCard({ addresses, isAddCard }) {
     price,
     late_payments,
     listing_link,
-  } = addresses;
+  } = address || {};
 
   const postAddress = async () => {
     await fetch(`/address/`, {
@@ -59,22 +61,39 @@ export default function AddressCard({ addresses, isAddCard }) {
   };
 
   return (
-    <Card
-      sx={{ maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
-      id="addressCard"
-    >
-      {isAddCard && addPressed ? 
-      <div></div> 
-      : 
-      isAddCard && 
-      
-      <div>
-        Add Icon
-        </div>}
-
+    <>
+      {isAddCard &&
+        (addPressed ? (
+          <div>boop</div>
+        ) : (
+          <Card
+            sx={{
+              maxWidth: 390,
+              maxHeight: 800,
+              backgroundColor: "#002147",
+              color: "#ededed",
+              height: 200,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            id="addressCard"
+          >
+            <AddCircleIcon sx={{ fontSize: "40px" }}></AddCircleIcon>
+          </Card>
+        ))}
       {
-        // if it's a regular address card
-        !isAddCard && (
+        // if it's a regular address card !isAddCard && (
+        <Card
+          sx={{
+            maxWidth: 390,
+            maxHeight: 800,
+            backgroundColor: "#002147",
+            color: "#ededed",
+            height: 200,
+          }}
+          id="addressCard"
+        >
           <>
             {/* title container */}
             <div
@@ -104,7 +123,7 @@ export default function AddressCard({ addresses, isAddCard }) {
             {/* picture */}
             <div id="addressPic">
               <CardMedia
-                image={`/images/address_${_id}.jpg`}
+                image={`/images/address_${1 || address_id}.jpg`}
                 alt="home"
                 height="200"
                 component="img"
@@ -280,8 +299,9 @@ export default function AddressCard({ addresses, isAddCard }) {
               </Box>
             </div>
           </>
-        )
+          )
+        </Card>
       }
-    </Card>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -17,7 +17,6 @@ import { ReviewPage } from "./pages/ReviewPage.jsx";
 // references global redux state
 const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
-  isLandlord: state.currentUser.isLandlord,
   isLoggedIn: state.currentUser.isLoggedIn,
 });
 
@@ -33,19 +32,24 @@ const App = (props) => {
   const populateUser = async () => {
     await fetch("/user/getUser")
       .then((res) => {
-        return res.json();
+        if (res.status === 200) {
+          return res.json();
+        } else return {};
       })
       .then((json) => {
         props.setUserData(json);
       })
       .catch((err) => console.log(err));
   };
-
   useEffect(populateUser, []);
 
-  useEffect(() => {
-    props.setIsLoggedIn(JSON.stringify(props.userData) !== JSON.stringify({}));
-  }, [props.userData]);
+  const loggedIn = () => {
+    props.setIsLoggedIn(
+      JSON.stringify(props.userData) !== JSON.stringify({})
+    );
+  };
+
+  useEffect(loggedIn, [props.userData]);
 
   return (
     <>
@@ -63,9 +67,9 @@ const App = (props) => {
           path="/profile/:landlordId"
           element={
             <Profile
+              key={props.userData}
               userData={props.userData}
               isLoggedIn={props.isLoggedIn}
-              isLandlord={props.isLandlord}
             />
           }
         />
@@ -73,9 +77,9 @@ const App = (props) => {
           path="/profile"
           element={
             <Profile
+              key={props.userData}
               userData={props.userData}
               isLoggedIn={props.isLoggedIn}
-              isLandlord={props.isLandlord}
             />
           }
         />
