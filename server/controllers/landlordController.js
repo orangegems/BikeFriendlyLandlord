@@ -51,22 +51,6 @@ landlordController.getAllLandlords = async (req, res, next) => {
   }
 };
 
-landlordController.getTopFour = async (req, res, next) => {
- 
-  try {
-    const results = await db.query(queries.getTopFourLandlords);
-    res.locals.topLandlords = results.rows;
-    return next();
-  } catch (error) {
-    return next({
-      message:
-        "An error occured attempting to fetch the top 4 landlords in landlordController.getTopFour",
-      log: "Error: " + error,
-      status: 500,
-    });
-  }
-};
-
 landlordController.updateLandlordReviews = async (req, res, next) => {
   const { landlord_id } = req.body;
 

@@ -8,12 +8,6 @@ queries.getLandlord = `SELECT * FROM landlords WHERE _id = $1`;
 
 queries.getAllLandlords = `SELECT * FROM landlords`;
 
-queries.getTopFourLandlords = `SELECT landlords.*, addresses.city, addresses.state FROM landlords 
-LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id 
-WHERE landlords.overall_rating != 'NaN'
-ORDER BY overall_rating DESC 
-LIMIT 4;`;
-
 queries.updateLandlordRating = `UPDATE landlords
 SET overall_rating = $1, respect_rating = $2, responsiveness_rating = $3
 WHERE _id = $4`;
