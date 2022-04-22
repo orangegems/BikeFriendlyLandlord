@@ -66,13 +66,14 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
   });
 
   // calculate new average for each review category
-  newOverall /= res.locals.landlordReviews.length;
-  newRespect /= res.locals.landlordReviews.length;
-  newResponsiveness /= res.locals.landlordReviews.length;
+  let landlordReviewCount = res.locals.landlordReviews.length === 0;
+  newOverall = landlordReviewCount === 0 ? 0 : newOverall / landlordReviewCount;
+  newRespect = landlordReviewCount === 0 ? 0 : newRespect / landlordReviewCount;
+  newResponsiveness = landlordReviewCount === 0 ? 0 : newResponsiveness / landlordReviewCount;;
   newBike =
-    newBike >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
+    newBike >= Math.floor(landlordReviewCount / 2) ? true : false;
   newPet =
-    newPet >= Math.floor(res.locals.landlordReviews.length / 2) ? true : false;
+    newPet >= Math.floor(landlordReviewCount / 2) ? true : false;
 
   // push new values to database
   try {
@@ -96,12 +97,9 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
 landlordController.searchLandlords = async (req, res, next) => {
   const { city, bike_friendly, pet_friendly } = req.body;
 
-  if (bike_friendly) queries.getBikeAndPetFriendlyLandlords += " AND bike_friendly = true";
-  if (pet_friendly) queries.getBikeAndPetFriendlyLandlords += " AND pet_friendly = true";
-  queries.getBikeAndPetFriendlyLandlords += ";";
-
+  console.log('bike: ', bike_friendly);
   try {
-    const results = await db.query(queries.getBikeAndPetFriendlyLandlords, [city]);
+    const results = await db.query(queries.getBikeAndPetFriendlyLandlords, [city, bike_friendly, pet_friendly]);
     res.locals.landlords = results.rows;
     return next();
   } catch (error) {

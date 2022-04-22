@@ -11,18 +11,7 @@ import * as actions from '../actions/actions.js';
 
 const axios = require("axios");
 
-const mapDispatchToProps = (dispatch) => ({
-  setTopFour: (topFour) => dispatch(actions.populateTopFour(topFour))
-})
-
-function Home(props) {
-  
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/landlords/topFour")
-  //     .then((res) => props.setTopFour(res.data))
-  //     .catch((error) => console.log(error));
-  // }, []);
+export default function Home(props) {
 
   return (
     <div className="home">
@@ -48,11 +37,7 @@ function Home(props) {
           </Scroll>
         </div>
       </div>
-      {/* <HomeCards /> */}
       
     </div>
   );
 }
-
-
-export default connect(null, mapDispatchToProps)(Home);

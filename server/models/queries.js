@@ -14,7 +14,7 @@ WHERE _id = $4`;
 
 queries.getBikeAndPetFriendlyLandlords = `SELECT landlords.*, addresses.street_num, addresses.street, addresses.city, addresses.state, addresses.zip_code FROM landlords 
 INNER JOIN addresses ON landlords._id = addresses.landlord_id
-WHERE addresses.city = $1`;
+WHERE addresses.city = $1 AND bike_friendly = $2 AND pet_friendly = $3`;
 
 queries.getLandlordsAndAddresses = `SELECT l.*, a.city, a.street_num, a.street, a.state, a.zip_code, a.landlord_id FROM landlords l
 INNER JOIN addresses a ON l._id = a.landlord_id`;

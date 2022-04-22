@@ -31,6 +31,7 @@ function Search(props) {
   // handle bike / pet friendly
   const [bikeR, setBikeR] = React.useState(false);
   const handleBikeRChange = (e) => {
+    console.log(bikeR);
     setBikeR(!bikeR);
   };
 
@@ -42,7 +43,7 @@ function Search(props) {
   // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
   const [options, setOptions] = React.useState([]);
   useEffect(() => {
-    const opArr = [];
+    const optionsArray = [];
     fetch(`http://localhost:3000/address/uniqueCities`, {
       method: "GET",
     })
@@ -50,9 +51,9 @@ function Search(props) {
       .then((parsed) => {
         console.log("Fetching cities...");
         for (let i = 0; i < parsed.length; i++) {
-          opArr.push(parsed[i].city);
+          optionsArray.push(parsed[i].city);
         }
-        setOptions(opArr);
+        setOptions(optionsArray);
       })
       .catch((error) => console.log(error));
   }, []);
