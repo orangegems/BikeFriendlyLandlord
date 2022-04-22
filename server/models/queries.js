@@ -28,8 +28,8 @@ INNER JOIN addresses a ON l._id = a.landlord_id`;
 queries.postLandlord = `INSERT INTO landlords (user_id) VALUES ($1)`;
 
 //Reviews
-queries.addReview =`INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_friendly, pet_friendly, description, user_id, landlord_id)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`;
+queries.addReview =`INSERT INTO reviews (title, username, overall_rating, respect_rating, responsiveness_rating, bike_friendly, pet_friendly, tlc, personalization, description, user_id, landlord_id)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
 
 queries.getReview = `SELECT * FROM reviews
 WHERE user_id = $1`;
@@ -57,6 +57,6 @@ queries.getUserData = `SELECT * FROM users
 WHERE users._id = $1`;
 
 //Addresses
-queries.postAddress = `INSERT INTO addresses (street_num, street, apt_num, city, state, zip_code, bike_friendly, pet_friendly, dog_friendly, dog_breed_restriction, dog_size_max_lbs, quiet_hour_start, quiet_hour_end, overnight_guests, smoker_friendly, building_type, beds, baths, price, landlord_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)`;
+queries.postAddress = `INSERT INTO addresses (street_num, street, apt_num, city, state, zip_code, bike_friendly, pet_friendly, dog_friendly, dog_breed_restriction, dog_size_max_lbs, quiet_hour_start, quiet_hour_end, overnight_guests, smoker_friendly, building_type, beds, baths, price, late_payments, landlord_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)`;
 
 module.exports = queries;

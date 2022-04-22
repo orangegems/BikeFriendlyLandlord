@@ -1,5 +1,4 @@
 DROP TABLE reviews;
-DROP TABLE landlordAddresses;
 DROP TABLE addresses;
 DROP TABLE landlords;
 DROP TABLE users;
@@ -23,6 +22,7 @@ CREATE TABLE landlords(
   respect_rating DECIMAL DEFAULT 0,
   responsiveness_rating DECIMAL DEFAULT 0,
   is_verified BOOLEAN DEFAULT false,
+  is_company BOOLEAN DEFAULT false NOT NULL,
   user_id INTEGER NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(_id)
 );
@@ -38,7 +38,7 @@ CREATE TABLE addresses(
   bike_friendly BOOLEAN DEFAULT false,
   pet_friendly BOOLEAN DEFAULT false,
   dog_friendly BOOLEAN DEFAULT false,
-  dog_breed_restriction BOOLEAN DEFAULT false,
+  dog_breed_restriction VARCHAR (100),
   dog_size_max_lbs INTEGER,
   quiet_hour_start TIMESTAMP,
   quiet_hour_end TIMESTAMP,
@@ -48,6 +48,7 @@ CREATE TABLE addresses(
   beds INTEGER,
   baths INTEGER,
   price INTEGER,
+  late_payments VARCHAR (100),
   landlord_id INTEGER NOT NULL,
   FOREIGN KEY(landlord_id) REFERENCES landlords(_id)
 );
@@ -61,10 +62,14 @@ CREATE TABLE reviews(
   responsiveness_rating DECIMAL,
   bike_friendly BOOLEAN,
   pet_friendly BOOLEAN,
+  tlc DECIMAL,
+  personalization DECIMAL,
   description VARCHAR (1000) NOT NULL,
   user_id INTEGER NOT NULL, 
   landlord_id INTEGER NOT NULL, 
+  address_id INTEGER NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(_id),
   FOREIGN KEY(landlord_id) REFERENCES landlords(_id),
+  FOREIGN KEY (address_id) REFERENCES addresses(_id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

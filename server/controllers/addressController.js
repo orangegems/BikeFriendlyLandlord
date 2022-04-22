@@ -37,5 +37,17 @@ addressController.postAddress = async(req, res, next) => {
 }
 
 //Allow landlord to delete address
+addressController.deleteAddress = async(req, res, next)=> {
+    try {
+        await db.query();
+        return next();
+    } catch (error){
+        return next({
+            message: 'Error occured attempting to delete address',
+            log: 'Error in deleteAddress' + error,
+            status: 500
+        });
+    }
+}
 
 module.exports = addressController;
