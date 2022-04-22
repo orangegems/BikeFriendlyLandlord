@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@material-ui/icons/Star";
 import LinkIcon from "@mui/icons-material/Link";
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
@@ -55,7 +57,7 @@ export default function AddressCard() {
 
   return (
     <Card
-      sx={{ maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
+      sx={{maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
       id="addressCard"
     >
       {/* title container */}
@@ -216,6 +218,11 @@ export default function AddressCard() {
           <Typography>
             {homeInfo.city}, {homeInfo.state} {homeInfo.zip}
           </Typography>
+
+        {/* popup modal for extra criteria */}
+   
+          
+
         </Box>
 
         {/* review breakdown */}
@@ -277,24 +284,6 @@ export default function AddressCard() {
           />
         </Box>
       </div>
-
-      {/* //picture div
-            // picture
-            // link overlay
-            // sqft & info overlay
-        
-        // address div
-            //building type
-            // price
-            // criteria (on other column)
-        
-        // review div
-            // landlord name /w overall stars
-            // respect
-            // response
-            // TLC
-            // flexibility
-         */}
     </Card>
   );
 }
