@@ -10,7 +10,7 @@ export function UserProfile(props) {
 
   useEffect(() => {
     if (userData._id) {
-      fetch(`/reviews/${userData._id}`)
+      fetch('/reviews/${userData._id}')
         .then((res) => {
           // if the user is not authenticated, navigate them back to the hamepage and prompt them to login
           if (res.status === 401) {
@@ -24,7 +24,7 @@ export function UserProfile(props) {
           setReviews(json.reviews);
         })
         .catch((err) => {
-          console.log("Error fenching users reviews -->", err);
+          console.log("Error fetching users reviews -->", err);
         });
     }
   }, [userData]);

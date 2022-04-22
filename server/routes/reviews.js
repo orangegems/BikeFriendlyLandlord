@@ -5,6 +5,7 @@ const router = express.Router();
 const reviewsController = require('../controllers/reviewsController.js');
 const sessionController = require('../controllers/sessionController.js');
 const landlordController = require('../controllers/landlordController.js');
+const addressController = require('../controllers/addressController.js');
 
 router.post(
   '/:landlordId',
@@ -12,6 +13,8 @@ router.post(
   reviewsController.addReview,
   reviewsController.getAllLandlordReviews,
   landlordController.updateLandlordReviews,
+  reviewsController.getAddressReviews,
+  addressController.updateAddressReviews,
   (req, res) => {
     return res.send('Review added successfully!');
   }
@@ -32,6 +35,11 @@ router.get(
 router.get('/landlordReviews/:landlordId', reviewsController.getAllLandlordReviews, (req, res) => {
   return res.json(res.locals.landlordReviews);
 });
+
+router.get('/addressReviews/:addressId', reviewsController.getAddressReviews, (req, res) => {
+  return res.json(res.locals.reviews);
+});
+
 
 router.put('/', reviewsController.updateReview, (req, res) => {
   return res.send('Post updated!');
