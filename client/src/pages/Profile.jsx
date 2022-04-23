@@ -26,6 +26,7 @@ import tomatopalette from "../theme/tomatopalette.jsx";
 
 const mapStateToProps = (state) => ({
   isLandlord: state.currentUser.isLandlord,
+  userData: state.currentUser.data,
 });
 
 const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
@@ -36,12 +37,9 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
 
   const { landlordId } = useParams();
 
-  useEffect(()=>{
-    
-  })
-
   const fetches = async () => {
     console.log("userData.landlordId: " + userData.landlord_id);
+    console.log("landlordId: " + landlordId)
     // landlord role (state will contain ID)
     if (landlordId || isLandlord) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
@@ -106,7 +104,6 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
             <>
               {addresses.map((address, i) => (
                 <>
-                  {console.log(address)}
                   <AddressCard address={address} key={i} isAddCard={false} />
                   <br></br>
                 </>
@@ -143,8 +140,8 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                     <CardContent>
                       <div className="ProfilePicture">
                         <img
-                          style={{ height: "100px" }}
-                          src={`/images/${landlordData.profile_pic}`}
+                          style={{ height: "50px" }}
+                          src={`/images/${userData.profile_pic}`}
                         />
                       </div>
                     </CardContent>
@@ -211,8 +208,8 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
               reviewData && (
                 <>
                   <Container>
-                    <Stack spacing={2} direction="row">
-                      <Typography id="reviewStyling">Reviews:</Typography>
+                    <Stack spacing={2} direction="row" sx={{display:'flex', justifyContent: 'center'}}>
+                      <Typography id="reviewStyling">Reviews</Typography>
                       {
                         // user can only add review if
                         // they're logged in as a tenant

@@ -112,7 +112,7 @@ userController.deleteUser = async (req, res, next) => {
 userController.getUserData = async (req, res, next) => {
   console.log("entered userController.getUserData");
   try {
-    const userId = res.locals.user;
+    const userId = res.locals.user || req.body.user;
     console.log(userId);
 
     const result = await db.query(queries.getUserData, [userId._id]);

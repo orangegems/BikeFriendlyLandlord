@@ -74,7 +74,7 @@ function Search(props) {
     };
 
     //send request
-    fetch("http://localhost:3000/landlords/search", {
+    fetch("/landlords/search", {
       method: "POST",
       body: JSON.stringify(formBody),
       headers: {

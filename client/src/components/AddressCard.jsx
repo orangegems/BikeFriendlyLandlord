@@ -106,7 +106,7 @@ export default function AddressCard({ address, isAddCard }) {
               }}
             >
               <div style={{ fontSize: "20px" }}>
-                {`${street_num} ${street} ${"#" + apt_num || ""}`}
+                {`${street_num} ${street} ${apt_num ? '#' : ''}${apt_num || ""}`}
               </div>
               <Typography
                 sx={{
@@ -298,7 +298,6 @@ export default function AddressCard({ address, isAddCard }) {
               </Box>
             </div>
           </>
-          )
         </Card>
       }
     </>

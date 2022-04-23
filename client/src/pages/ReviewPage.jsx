@@ -102,7 +102,7 @@ export function ReviewPage({userData}) {
         })
         .then (res => {
             console.log(res)
-            window.location = `/landlord/${landlordID.landlord_id}`
+            window.location = `/profile/${landlordID.landlord_id}`
         })
         .catch(error => console.log(error));
     }
