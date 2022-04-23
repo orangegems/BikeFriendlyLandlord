@@ -45,7 +45,7 @@ userController.createUser = async (req, res, next) => {
     const userResult = await db.query(queries.createUser, userValues);
 
     delete userResult.rows[0].password;
-    res.locals.user = user.rows[0];
+    res.locals.user = userResult.rows[0];
     next();
   } catch (err) {
     return next({
