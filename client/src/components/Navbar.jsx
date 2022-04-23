@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Authenticate } from "../pages/Authenticate.jsx";
 import { connect } from "react-redux";
-import SearchIcon from '@mui/icons-material/Search';
-import PublicIcon from '@mui/icons-material/Public';
-
+import SearchIcon from "@mui/icons-material/Search";
+import PublicIcon from "@mui/icons-material/Public";
 
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
@@ -37,7 +36,7 @@ const Navbar = (props) => {
           console.log("logout status not 200 -->", res);
         }
       })
-      .then(() => window.location.replace('/'))
+      .then(() => window.location.replace("/"))
       .catch((err) => {
         console.log("Error from logout --> ", err);
       });
@@ -66,7 +65,7 @@ const Navbar = (props) => {
         <NavLink
           to="/"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
+        >
           <div id="logo">tenancy.</div>
         </NavLink>
       </div>
@@ -77,10 +76,7 @@ const Navbar = (props) => {
               to="/search"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-        <SearchIcon 
-            fontSize="large" 
-            style={{ marginTop: "10px"}}
-        />
+              <SearchIcon fontSize="large" style={{ marginTop: "10px" }} />
             </NavLink>
           </li>
           <li className="navBarListItem">
@@ -88,10 +84,7 @@ const Navbar = (props) => {
               to="/map"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-          <PublicIcon
-              fontSize="large"
-              style={{ marginTop: "5px" }}
-          />
+              <PublicIcon fontSize="large" style={{ marginTop: "5px" }} />
             </NavLink>
           </li>
         </ul>
@@ -102,7 +95,7 @@ const Navbar = (props) => {
             sx={{
               fontFamily: "Nunito",
               color: "rgb(237, 232, 251)",
-              "&:hover": { backgroundColor: "MediumSlateBlue" }
+              "&:hover": { backgroundColor: "MediumSlateBlue" },
             }}
             variant="text"
             onClick={(e) => {

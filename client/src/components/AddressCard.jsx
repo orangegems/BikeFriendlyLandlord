@@ -89,8 +89,7 @@ export default function AddressCard({ address, isAddCard }) {
             maxWidth: 390,
             maxHeight: 800,
             backgroundColor: "#002147",
-            color: "#ededed",
-            height: 200,
+            color: "#ededed"
           }}
           id="addressCard"
         >

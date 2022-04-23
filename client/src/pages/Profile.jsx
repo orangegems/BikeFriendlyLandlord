@@ -61,7 +61,6 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           return addresses.json();
         })
         .then((json) => {
-          // console.log(json[0])
           setAddresses(json);
         })
         .catch((err) => {
@@ -96,11 +95,14 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           {addresses && (
             <>
               {addresses.map((address, i) => (
+                <>
+                {console.log(address)}
                 <AddressCard address={address} key={i} isAddCard={false} />
+                <br></br>
+                </>
               ))}
             </>
           )}
-          <AddressCard addresses={null} isAddCard={true} />
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
