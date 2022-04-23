@@ -126,7 +126,10 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 justifyContent="space-around"
               >
                 <Stack>
-                  <Card sx={{ minWidth: 275 }}>
+                  <Card sx={{
+                    minWidth: 275,
+                    backgroundColor: "whitesmoke"
+                  }}>
                     <CardContent>
                       <div className="ProfilePicture">
                         <img
