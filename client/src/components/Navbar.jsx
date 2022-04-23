@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import SearchIcon from '@mui/icons-material/Search';
 import PublicIcon from '@mui/icons-material/Public';
 
+
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
 });
@@ -56,7 +57,7 @@ const Navbar = (props) => {
   }
 
   let activeStyle = {
-    color: "tomato",
+    color: "MediumSlateBlue",
   };
 
   return (
@@ -101,7 +102,7 @@ const Navbar = (props) => {
             sx={{
               fontFamily: "Nunito",
               color: "rgb(237, 232, 251)",
-              "&:hover": { backgroundColor: "light gray" }
+              "&:hover": { backgroundColor: "MediumSlateBlue" }
             }}
             variant="text"
             onClick={(e) => {
