@@ -96,7 +96,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           {addresses && (
             <>
               {addresses.map((address, i) => (
-                <AddressCard address={address} key={i} isAddCard={false} />
+                <AddressCard address={address} key={address._id} isAddCard={false} />
               ))}
             </>
           )}
