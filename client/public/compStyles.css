@@ -192,11 +192,3 @@ a {
   font-family: 'Inter', sans-serif;
   margin: 10px;
 }
-
-#createReview {
-  color: rgb(237, 232, 251);
-  background-color: #333;
-  margin-left: 800px;
-  margin-top: 30px;
-  border: 5px solid white;
-}

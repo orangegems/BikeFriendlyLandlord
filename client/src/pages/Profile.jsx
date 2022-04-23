@@ -126,10 +126,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 justifyContent="space-around"
               >
                 <Stack>
-                  <Card sx={{
-                    minWidth: 275,
-                    backgroundColor: "whitesmoke"
-                  }}>
+                  <Card sx={{ minWidth: 275 }}>
                     <CardContent>
                       <div className="ProfilePicture">
                         <img
@@ -140,7 +137,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                     </CardContent>
                   </Card>
                   <Card>
-                    <Box sx={{ width: "100%", bgcolor: "WhiteSmoke" }}>
+                    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
                       <nav aria-label="main mailbox folders">
                         <List>
                           <ListItem disablePadding>
@@ -220,7 +217,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                               m: 1,
                             }}
                           >
-                            <Button id="createReview" variant="contained" onClick={handleReview}>
+                            <Button variant="contained" onClick={handleReview}>
                               Create Review
                             </Button>
                           </Stack>
