@@ -45,7 +45,7 @@ userController.createUser = async (req, res, next) => {
     const userResult = await db.query(queries.createUser, userValues);
 
     delete userResult.rows[0].password;
-    res.locals.user = userResult.rows[0];
+    res.locals.user = user.rows[0];
     next();
   } catch (err) {
     return next({
@@ -113,12 +113,13 @@ userController.getUserData = async (req, res, next) => {
   console.log("entered userController.getUserData");
   try {
     res.locals.user = res.locals.user ? res.locals.user._id : null;
-    const userId = res.locals.user || req.params.userId || req.body.user;
+    console.log(res.locals.user);
+    const userId = res.locals.user || req.params.landlordId || req.body.user;
     // console.log(userId);
 
     const result = await db.query(queries.getUserData, [userId]);
 
-    // console.log(result.rows[0])
+    console.log(result.rows[0])
 
     const resultId = await db.query(queries.getLandlordId, [userId]);
 
