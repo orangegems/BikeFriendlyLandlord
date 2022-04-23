@@ -112,11 +112,30 @@ userController.deleteUser = async (req, res, next) => {
 userController.getUserData = async (req, res, next) => {
   console.log("entered userController.getUserData");
   try {
+<<<<<<< Updated upstream
     const userId = res.locals.user;
     console.log(userId);
 
     const result = await db.query(queries.getUserData, [userId._id]);
     console.log(result.rows[0]);
+=======
+    res.locals.user = res.locals.user ? res.locals.user._id : null;
+    const userId = res.locals.user || req.params.userId || req.body.user;
+    // console.log(userId);
+
+    const result = await db.query(queries.getUserData, [userId]);
+
+    // console.log(result.rows[0])
+
+    const resultId = await db.query(queries.getLandlordId, [userId]);
+
+    if (resultId.rows[0]) {
+      result.rows[0].landlord_id = resultId.rows[0]._id;
+    }
+
+    console.log("here in getUserData");
+    // console.log(result.rows[0]);
+>>>>>>> Stashed changes
 
     delete result.rows[0].password;
 
