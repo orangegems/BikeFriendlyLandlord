@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
@@ -68,7 +69,8 @@ export default function AddressCard({ address, isAddCard }) {
         ) : (
           <Card
             sx={{
-              maxWidth: 390,
+              maxWidth: 600,
+              minWidth: 400,
               maxHeight: 800,
               backgroundColor: "#002147",
               color: "#ededed",
@@ -89,7 +91,7 @@ export default function AddressCard({ address, isAddCard }) {
             maxWidth: 390,
             maxHeight: 800,
             backgroundColor: "#002147",
-            color: "#ededed"
+            color: "#ededed",
           }}
           id="addressCard"
         >
@@ -106,7 +108,9 @@ export default function AddressCard({ address, isAddCard }) {
               }}
             >
               <div style={{ fontSize: "20px" }}>
-                {`${street_num} ${street} ${apt_num ? '#' : ''}${apt_num || ""}`}
+                {`${street_num} ${street} ${apt_num ? "#" : ""}${
+                  apt_num || ""
+                }`}
               </div>
               <Typography
                 sx={{

@@ -39,7 +39,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
 
   const fetches = async () => {
     console.log("userData.landlordId: " + userData.landlord_id);
-    console.log("landlordId: " + landlordId)
+    console.log("landlordId: " + landlordId);
     // landlord role (state will contain ID)
     if (landlordId || isLandlord) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
@@ -100,16 +100,6 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
-          {addresses && (
-            <>
-              {addresses.map((address, i) => (
-                <>
-                  <AddressCard address={address} key={i} isAddCard={false} />
-                  <br></br>
-                </>
-              ))}
-            </>
-          )}
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
@@ -208,7 +198,11 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
               reviewData && (
                 <>
                   <Container>
-                    <Stack spacing={2} direction="row" sx={{display:'flex', justifyContent: 'center'}}>
+                    <Stack
+                      spacing={2}
+                      direction="row"
+                      sx={{ display: "flex", justifyContent: "center" }}
+                    >
                       <Typography id="reviewStyling">Reviews</Typography>
                       {
                         // user can only add review if
@@ -244,6 +238,16 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 </>
               )
           }
+
+          {addresses && (
+            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+              {addresses.map((address, i) => (
+                <>
+                  <AddressCard address={address} key={i} isAddCard={false} sx={{margin: '10px'}}/>
+                </>
+              ))}
+            </div>
+          )}
 
           {
             // if review data fails to load when user is logged in

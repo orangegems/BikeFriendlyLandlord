@@ -5,6 +5,8 @@ import { Authenticate } from "../pages/Authenticate.jsx";
 import { connect } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import PublicIcon from "@mui/icons-material/Public";
+import Typography from "@mui/material/Typography";
+
 
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
@@ -66,7 +68,7 @@ const Navbar = (props) => {
           to="/"
           style={({ isActive }) => (isActive ? activeStyle : undefined)}
         >
-          <div id="logo">tenancy.</div>
+          <Typography id="logo" sx={{"&:hover": { color: "MediumSlateBlue !important" }}}>tenancy.</Typography>
         </NavLink>
       </div>
       <div className="navBarCenter">

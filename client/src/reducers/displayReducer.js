@@ -3,7 +3,6 @@ import * as types from "../actions/actionTypes";
 const initState = {
   authDisplay: false,
   searchResults: [],
-  topFourLandlords: [],
 };
 
 export default function displayReducer(state = initState, action) {
