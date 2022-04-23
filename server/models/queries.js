@@ -6,6 +6,8 @@ queries.getCity = `SELECT DISTINCT city FROM addresses`;
 
 queries.getLandlord = `SELECT * FROM landlords WHERE _id = $1`;
 
+queries.getLandlordId = `SELECT _id FROM landlords WHERE user_id = $1`
+
 queries.getAllLandlords = `SELECT * FROM landlords`;
 
 queries.getTopFourLandlords = `SELECT landlords.*, addresses.city, addresses.state FROM landlords 
@@ -14,11 +16,7 @@ WHERE landlords.overall_rating != 'NaN'
 ORDER BY overall_rating DESC 
 LIMIT 4;`;
 
-queries.addLandlord = `INSERT INTO landlords (is_company, user_id)
-VALUES ($1, $2)
-RETURNING _id`
-
-queries.addLandlordId = `UPDATE users SET landlord_id = $1 WHERE _id = $2 RETURNING *`
+queries.postLandlord = `INSERT INTO landlords (user_id) VALUES ($1)`;
 
 queries.updateLandlordRating = `UPDATE landlords
 SET overall_rating = $1, respect_rating = $2, responsiveness_rating = $3
@@ -55,8 +53,8 @@ queries.updateReview = `UPDATE reviews SET title = $2, description = $3 WHERE _i
 queries.deleteReview = `DELETE FROM reviews WHERE _id = $1`;
 
 //Users
-queries.createUser = `INSERT INTO users (first_name, last_name, full_name, username, email, company, password, is_landlord) 
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+queries.createUser = `INSERT INTO users (first_name, last_name, full_name, username, email, password, is_company, company, is_landlord) 
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 RETURNING *`;
 
 queries.getVerifiedUser = `SELECT * FROM users

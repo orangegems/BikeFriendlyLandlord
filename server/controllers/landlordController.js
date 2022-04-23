@@ -3,6 +3,21 @@ const queries = require('../models/queries');
 
 const landlordController = {};
 
+landlordController.postLandlord = async (req, res, next)=>{
+  try {
+    console.log('entered postLandlord')
+    await db.query(queries.postLandlord, [res.locals.user._id]);
+    return next();
+  } catch (error) {
+    return next({
+      message:
+        "Error occured attempting to get landlord from database in landlordController.postLandlord",
+      log: "Error: " + error,
+      status: 500,
+    });
+  }
+}
+
 landlordController.getById = async (req, res, next) => {
   
   try {

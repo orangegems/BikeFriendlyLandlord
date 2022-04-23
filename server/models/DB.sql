@@ -16,7 +16,6 @@ CREATE TABLE users (
   is_company BOOLEAN DEFAULT false NOT NULL,
   company VARCHAR (50) DEFAULT '',	
   is_landlord BOOLEAN DEFAULT false NOT NULL,
-  landlord_id INTEGER DEFAULT NULL
 );
 
 CREATE TABLE landlords(

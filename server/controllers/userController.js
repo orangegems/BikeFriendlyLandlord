@@ -37,25 +37,15 @@ userController.createUser = async (req, res, next) => {
       first_name + " " + last_name,
       username,
       email,
-      company,
       hashedPassword,
+      is_company,
+      company,
       is_landlord,
     ];
     const userResult = await db.query(queries.createUser, userValues);
 
-    //handle landlord creation
-    if (is_landlord) {
-      const landlordValues = [is_company, userResult.rows[0]._id];
-      //adds landlord and returns landlord id
-      const landlordId = await db.query(queries.addLandlord, landlordValues);
-      const user = await db.query(queries.addLandlordId, [
-        landlordId.rows[0]._id,
-        userResult.rows[0]._id,
-      ]);
-      delete user.rows[0].password
-      res.locals.user = user.rows[0];
-    }
-
+    delete userResult.rows[0].password;
+    res.locals.user = user.rows[0];
     next();
   } catch (err) {
     return next({
@@ -120,7 +110,7 @@ userController.deleteUser = async (req, res, next) => {
 };
 
 userController.getUserData = async (req, res, next) => {
-  console.log('entered userController.getUserData')
+  console.log("entered userController.getUserData");
   try {
     const userId = res.locals.user;
     console.log(userId);
@@ -131,7 +121,7 @@ userController.getUserData = async (req, res, next) => {
     delete result.rows[0].password;
 
     res.locals.userData = result.rows[0];
-    console.log('get user data success')
+    console.log("get user data success");
     return next();
   } catch (err) {
     return next({
