@@ -50,6 +50,7 @@ CREATE TABLE addresses(
   baths INTEGER,
   price INTEGER,
   late_payments VARCHAR (100),
+  listing_link VARCHAR (100),
   landlord_id INTEGER NOT NULL
 );
 
