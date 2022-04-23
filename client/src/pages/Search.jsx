@@ -66,7 +66,6 @@ function Search(props) {
       city: city,
       bike_friendly: bikeR,
       pet_friendly: petR,
-      top_rated_landlords: topL,
     };
 
     //send request
