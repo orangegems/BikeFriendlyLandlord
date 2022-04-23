@@ -120,7 +120,7 @@ reviewsController.updateReview = async (req, res, next) => {
 
 reviewsController.deleteReview = async (req, res, next) => {
   const { reviewId } = req.params;
-  s
+  
   try {
     await db.query(queries.deleteReview, [reviewId]);
     return next();

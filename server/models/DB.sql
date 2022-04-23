@@ -15,7 +15,7 @@ CREATE TABLE users (
   profile_pic VARCHAR DEFAULT 'userProfile.png',
   is_company BOOLEAN DEFAULT false NOT NULL,
   company VARCHAR (50) DEFAULT '',	
-  is_landlord BOOLEAN DEFAULT false NOT NULL,
+  is_landlord BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE landlords(
@@ -50,6 +50,7 @@ CREATE TABLE addresses(
   baths INTEGER,
   price INTEGER,
   late_payments VARCHAR (100),
+  listing_link VARCHAR (100),
   landlord_id INTEGER NOT NULL
 );
 

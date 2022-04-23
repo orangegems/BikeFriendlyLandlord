@@ -61,7 +61,6 @@
   margin-bottom: 25px;
 }
 
-.feedbackDesc,
 .feedbackUser {
   color: white;
   font-family: "Nunito", sans-serif;
@@ -69,7 +68,9 @@
 
 .feedbackDesc {
   font-style: italic;
-  font-size: 1.1em;
+  font-size: 1.5em;
+  color: red;
+  box-shadow: 0.5em;
 }
 
 /* Login.jsx */
@@ -189,4 +190,14 @@ a {
 
 #addressCard{
   font-family: 'Inter', sans-serif;
+  margin: 10px;
 }
+
+#createReview {
+  color: rgb(237, 232, 251);
+  background-color: #333;
+  margin-left: 800px;
+  margin-top: 30px;
+  border: 5px solid white;
+}
+

@@ -45,7 +45,7 @@ userController.createUser = async (req, res, next) => {
     const userResult = await db.query(queries.createUser, userValues);
 
     delete userResult.rows[0].password;
-    res.locals.user = user.rows[0];
+    res.locals.user = userResult.rows[0];
     next();
   } catch (err) {
     return next({
@@ -112,13 +112,6 @@ userController.deleteUser = async (req, res, next) => {
 userController.getUserData = async (req, res, next) => {
   console.log("entered userController.getUserData");
   try {
-<<<<<<< Updated upstream
-    const userId = res.locals.user;
-    console.log(userId);
-
-    const result = await db.query(queries.getUserData, [userId._id]);
-    console.log(result.rows[0]);
-=======
     res.locals.user = res.locals.user ? res.locals.user._id : null;
     const userId = res.locals.user || req.params.userId || req.body.user;
     // console.log(userId);
@@ -135,7 +128,6 @@ userController.getUserData = async (req, res, next) => {
 
     console.log("here in getUserData");
     // console.log(result.rows[0]);
->>>>>>> Stashed changes
 
     delete result.rows[0].password;
 

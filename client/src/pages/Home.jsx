@@ -1,28 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as Scroll } from "react-scroll";
-import { connect } from "react-redux";
 
 import { IconButton } from "@mui/material";
 import { CssBaseline } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import HomeCards from "../components/HomeCards.jsx";
-import * as actions from '../actions/actions.js';
+import * as actions from "../actions/actions.js";
 
 const axios = require("axios");
 
-const mapDispatchToProps = (dispatch) => ({
-  setTopFour: (topFour) => dispatch(actions.populateTopFour(topFour))
-})
+export default function Home(props) {
+  const [checked, setChecked] = useState(false);
+  const [topFour, setTopFour] = useState([]);
+  useEffect(() => {
+    setChecked(true);
 
-function Home(props) {
-  
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/landlords/topFour")
-  //     .then((res) => props.setTopFour(res.data))
-  //     .catch((error) => console.log(error));
-  // }, []);
+    axios
+      .get("http://localhost:3000/landlords/topFour")
+      .then((res) => setTopFour(res.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className="home">
@@ -35,24 +32,13 @@ function Home(props) {
           data-aos-mirror={true}
         >
           <h1>
-            Welcome to <br />{" "}
-            <span className="homeTitleText">Tenancy</span>
+            Welcome to <br /> <span className="homeTitleText">tenancy.</span>
           </h1>
-          <Scroll to="homeCards" smooth={true}>
-            <IconButton>
-              <KeyboardArrowDownIcon
-                className="homeTitleIcon"
-                style={{ fontSize: 40 }}
-              />
-            </IconButton>
+          <Scroll to="homeCards" smooth={true}> 
           </Scroll>
         </div>
       </div>
-      {/* <HomeCards /> */}
-      
+      {/* <HomeCards topFour={topFour} /> */}
     </div>
   );
 }
-
-
-export default connect(null, mapDispatchToProps)(Home);

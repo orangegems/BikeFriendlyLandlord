@@ -143,9 +143,28 @@ h3 {
 
 #userProfileTitle {
   font-family: "Nunito";
-  color: rgb(237, 232, 251);
-  margin-bottom: 50px;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  padding: 20px;
+  margin-bottom: 40px;
 }
+#userProfileGreeting {
+  font-family: "Nunito";
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
 h4 {
   margin-bottom: 20px;
+}
+
+#reviewStyling {
+  font-family: "Nunito";
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  margin-left: -50px;
+  margin-top: 50px;
 }

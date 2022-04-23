@@ -10,6 +10,10 @@ const mapStateToProps = (state) => ({
 });
 
 function ResultDisplay({ searchResults }) {
+  // useEffect(()=>{
+  //   const userPicture
+  // }, [])
+
   if (!searchResults) {
     return (
       <Box

@@ -11,4 +11,8 @@ router.get('/getUser', sessionController.checkSession, userController.getUserDat
   res.status(200).json(res.locals.userData);
 })
 
+router.get('/getUserById/:landlordId', userController.getUserData, (req,res)=>{
+  return res.status(200).json(res.locals.userData);
+})
+
 module.exports = router;
