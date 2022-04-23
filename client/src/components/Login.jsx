@@ -40,7 +40,10 @@ export default function Login(props) {
             username: username,
             password: password,
           });
-          navigate('/profile')
+          const landlordIdUrl = userData.landlord_id ? userData.landlord_id : '';
+          console.log('test');
+          console.log('userData', userData);
+          navigate(`/profile/${landlordIdUrl}`);
         }}
         noValidate
       >
