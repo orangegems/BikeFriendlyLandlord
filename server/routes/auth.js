@@ -1,13 +1,13 @@
-const express = require('express');
-const userController = require('../controllers/userController');
-const sessionController = require('../controllers/sessionController');
-const landlordController = require('../controllers/landlordController')
+const express = require("express");
+const userController = require("../controllers/userController");
+const sessionController = require("../controllers/sessionController");
+const landlordController = require("../controllers/landlordController");
 
 const router = express.Router();
 
 // post -> login
 router.post(
-  '/login',
+  "/login",
   userController.verifyUser,
   sessionController.startSession,
   (req, res) => {
@@ -18,7 +18,7 @@ router.post(
 
 // post -> signup
 router.post(
-  '/signup',
+  "/signup",
   userController.createUser,
   sessionController.startSession,
   (req, res, next) => {
@@ -35,18 +35,13 @@ router.post(
 );
 
 // post -> logout
-router.post(
-  '/logout',
-  sessionController.endSession,
-  (req, res) => {
-    res.status(200).send();
-  }
-);
+router.post("/logout", sessionController.endSession, (req, res) => {
+  res.status(200).send();
+});
 
 // just if the user is logged in
-router.post('/check', sessionController.checkSession, (req,res) => {
+router.post("/check", sessionController.checkSession, (req, res) => {
   res.sendStatus(200);
-})
+});
 
 module.exports = router;
-
