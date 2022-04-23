@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
 #footer {
   height: 40px;
   background-color: #333;
@@ -85,8 +87,8 @@
   font-size: xx-large;
   font-family: "Nunito", sans-serif;
   /* font-style: bold; */
-  color: tomato;
-  font-weight: 700; 
+  color: rgb(237, 232, 251);
+  font-weight: 700;
 }
 
 #navBar {
@@ -94,16 +96,13 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: lightgrey;
-  /* background: none; */
+  background-color: #333; 
   align-items: center;
-  /* position: absolute; */
 }
 
 .navBarLeft {
   flex: 1;
   display: flex;
-  /* justify-content: center; */
   padding-left: 25px;
   align-items: center;
 }
@@ -124,7 +123,7 @@
 
 .navBarListItem {
   list-style: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   padding: 0 20px;
 }
 
@@ -137,14 +136,57 @@
 }
 
 a:hover {
-  color: tomato;
-} 
+  color: white;
+}
 a {
-  font-family: 'Nunito';
+  font-family: "Nunito";
   text-decoration: none;
   padding-right: 10px;
   list-style: none;
-  color: #666;
+  color: rgb(237, 232, 251);
 }
 
+/* Signup.jsx */
 
+#roleOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 75%;
+  padding: 30px;
+}
+
+#tenantButton {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#compRoleGroup {
+  margin-bottom: 10px;
+}
+
+#individualButton {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* address card */
+#bedsBaths {
+  display: flex;
+  flex-direction: row;
+}
+
+#addressPic {
+  display: flex;
+  position: relative;
+}
+
+#reviewInfo {
+  display: flex;
+}
+
+#addressCard{
+  font-family: 'Inter', sans-serif;
+}

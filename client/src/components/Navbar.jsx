@@ -3,16 +3,13 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Authenticate } from "../pages/Authenticate.jsx";
 import { connect } from "react-redux";
-import * as actions from "../actions/actions.js";
+import SearchIcon from '@mui/icons-material/Search';
+import PublicIcon from '@mui/icons-material/Public';
+import { blue } from "@mui/material/colors";
+
 
 const mapStateToProps = (state) => ({
   authDisplay: state.display.authDisplay,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  resetUserData: dispatch(() => {
-    actions.resetUserData();
-  }),
 });
 
 const Navbar = (props) => {
@@ -36,12 +33,12 @@ const Navbar = (props) => {
         if (res.status === 200) {
           // if successfully logged out, reset login state to false
           setAuthDisplay(false);
-          resetUserData();
+          setUserData({});
         } else {
           console.log("logout status not 200 -->", res);
         }
       })
-      .then(() => window.location.replace("/"))
+      .then(() => window.location.replace('/'))
       .catch((err) => {
         console.log("Error from logout --> ", err);
       });
@@ -67,24 +64,24 @@ const Navbar = (props) => {
   return (
     <div id="navBar">
       <div className="navBarLeft">
-        <div id="logo">BFL</div>
+        <NavLink
+          to="/"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+          <div id="logo">tenancy.</div>
+        </NavLink>
       </div>
       <div className="navBarCenter">
         <ul className="navBarListItems">
           <li className="navBarListItem">
             <NavLink
-              to="/"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="navBarListItem">
-            <NavLink
               to="/search"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              Search
+        <SearchIcon 
+            fontSize="large" 
+            style={{ marginTop: "10px"}}
+        />
             </NavLink>
           </li>
           <li className="navBarListItem">
@@ -92,7 +89,10 @@ const Navbar = (props) => {
               to="/map"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
-              Map
+          <PublicIcon
+              fontSize="large"
+              style={{ marginTop: "5px" }}
+          />
             </NavLink>
           </li>
         </ul>
@@ -102,8 +102,8 @@ const Navbar = (props) => {
           <Button
             sx={{
               fontFamily: "Nunito",
-              color: "#666",
-              "&:hover": { backgroundColor: "rgba(253, 143, 124, 0.577)" },
+              color: "rgb(237, 232, 251)",
+              "&:hover": { backgroundColor: "light gray" }
             }}
             variant="text"
             onClick={(e) => {
@@ -115,13 +115,13 @@ const Navbar = (props) => {
         )}
         {isLoggedIn && (
           <div>
-            <Link to={`/profile/${userData.username}`}>My Account</Link>
+            {/* <Link to={`/profile/${userData.username}`}>My Account</Link> */}
             <Button
               variant="text"
               sx={{
                 fontFamily: "Nunito",
                 color: "#666",
-                "&:hover": { backgroundColor: "rgba(253, 143, 124, 0.577)" },
+                "&:hover": { backgroundColor: "light gray" },
               }}
               onClick={(e) => logout(e)}
             >
@@ -141,4 +141,4 @@ const Navbar = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, null)(Navbar);
