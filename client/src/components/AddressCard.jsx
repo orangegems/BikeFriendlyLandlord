@@ -6,28 +6,47 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@material-ui/icons/Star";
 import LinkIcon from "@mui/icons-material/Link";
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 >>>>>>> dev
+=======
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
+>>>>>>> Stashed changes
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
 
+<<<<<<< Updated upstream
 export default function AddressCard({ address, isAddCard }) {
   const [addPressed, setAddPressed] = useState(false);
   const [addressForm, setAddressForm] = useState({});
 
   const {
     address_id,
+=======
+export default function AddressCard({ addresses }) {
+  const [homeInfo, setHomeInfo] = useState({});
+  const [reviewInfo, setReviewInfo] = useState({});
+  const [criteria, setCriteria] = useState({});
+
+  const {
+    _id,
+>>>>>>> Stashed changes
     street_num,
     street,
     apt_num,
     city,
     state,
+<<<<<<< Updated upstream
     zip,
+=======
+    zip_code,
+>>>>>>> Stashed changes
     bike_friendly,
     pet_friendly,
     dog_friendly,
@@ -45,7 +64,28 @@ export default function AddressCard({ address, isAddCard }) {
     price,
     late_payments,
     listing_link,
+<<<<<<< Updated upstream
   } = address || {};
+=======
+  } = addresses;
+
+  useEffect(() => {
+    setHomeInfo({
+      addressId: 12345,
+      landlordName: "David Palmer",
+      streetNum: "4664",
+      street: "Alameda Blvd.",
+      apartmentNum: "2b",
+      city: "Los Angeles",
+      state: "CA",
+      zip: "92118",
+      buildingType: "Apartment",
+      beds: "2",
+      baths: "1",
+      price: "2400",
+      link: "http://zillow.com",
+    });
+>>>>>>> Stashed changes
 
   const postAddress = async () => {
     await fetch(`/address/`, {
@@ -64,6 +104,7 @@ export default function AddressCard({ address, isAddCard }) {
   };
 
   return (
+<<<<<<< Updated upstream
     <>
       {isAddCard &&
         (addPressed ? (
@@ -74,9 +115,108 @@ export default function AddressCard({ address, isAddCard }) {
               maxWidth: 390,
               maxHeight: 800,
               backgroundColor: "#002147",
+=======
+    <Card
+      sx={{ maxWidth: 390, backgroundColor: "#002147", color: "#ededed" }}
+      id="addressCard"
+    >
+      {/* title container */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          padding: "15px 15px 5px 15px",
+          letterSpacing: "2px",
+        }}
+      >
+        <div style={{ fontSize: "20px" }}>
+          {`${street_num} ${street} ${"#" + apt_num || ""}`}
+        </div>
+        <Typography
+          sx={{ fontSize: "10px", letterSpacing: "5px", color: "#bababa" }}
+        >
+          {building_type}
+        </Typography>
+      </div>
+
+      {/* picture */}
+      <div id="addressPic">
+        <CardMedia
+          image={`/images/address_${_id}.jpg`}
+          alt="home"
+          height="200"
+          component="img"
+          sx={{ zIndex: 0 }}
+        />
+
+        {/* price box */}
+        <Box
+          id="price"
+          sx={{
+            position: "absolute",
+            flexDirection: "column",
+            zIndex: 1,
+            backgroundColor: "#002147",
+            opacity: 0.6,
+            dropShadow: "20px 20px 20px black",
+            borderRadius: "0px 0px 5px 0px",
+            padding: "5px",
+          }}
+        >
+          ${price}
+        </Box>
+
+        {/* beds and baths box */}
+        <Box
+          id="bedsBaths"
+          sx={{
+            position: "absolute",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1,
+            right: 0,
+            top: 0,
+            backgroundColor: "#002147",
+            opacity: 0.6,
+            borderRadius: "0px 0px 0px 5px",
+            padding: "0px 0px 5px 5px",
+            width: "70px",
+          }}
+        >
+          <div
+            style={{
+>>>>>>> Stashed changes
               color: "#ededed",
               height: 200,
               display: "flex",
+<<<<<<< Updated upstream
+=======
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <KingBedOutlinedIcon />
+            {beds}
+            <BathtubOutlinedIcon />
+            {baths}
+          </div>
+        </Box>
+
+        {/* link box */}
+        <a
+          href={listing_link}
+          target="new"
+          style={{ bottom: 0, position: "absolute" }}
+        >
+          <Box
+            id="link"
+            sx={{
+              position: "absolute",
+>>>>>>> Stashed changes
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -97,6 +237,7 @@ export default function AddressCard({ address, isAddCard }) {
           }}
           id="addressCard"
         >
+<<<<<<< Updated upstream
           <>
             {/* title container */}
             <div
@@ -306,5 +447,79 @@ export default function AddressCard({ address, isAddCard }) {
         </Card>
       }
     </>
+=======
+          <div
+            style={{ color: "#262626", display: "flex", alignItems: "center" }}
+          >
+            <Rating
+              precision={0.5}
+              value={Number(overall_rating)}
+              sx={{ opacity: 1, fontSize: "20px" }}
+              readOnly
+              emptyIcon={
+                <StarIcon
+                  style={{ opacity: 0.1, color: "white" }}
+                  fontSize="inherit"
+                />
+              }
+            />
+          </div>
+        </Box>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          padding: "15px",
+        }}
+      >
+        {/* extra info */}
+        <Box sx={{ marginLeft: "-20px" }}>
+          <Typography>
+            {city}, {state} {zip}
+          </Typography>
+
+          {/* popup modal for extra criteria */}
+        </Box>
+
+        {/* review breakdown */}
+        <Box
+          id="reviewInfo"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            boxShadow: 1,
+          }}
+        >
+          <Typography variant="h7">TLC</Typography>
+          <Rating
+            precision={0.5}
+            value={Number(tlc)}
+            readOnly
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.1, color: "white" }}
+                fontSize="inherit"
+              />
+            }
+          />
+          <Typography variant="h7">Personalization</Typography>
+          <Rating
+            precision={0.5}
+            value={Number(personalization)}
+            readOnly
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.1, color: "white" }}
+                fontSize="inherit"
+              />
+            }
+          />
+        </Box>
+      </div>
+    </Card>
+>>>>>>> Stashed changes
   );
 }

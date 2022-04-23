@@ -56,6 +56,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           console.log("Error fetching landlord reviews -->", err)
         );
 
+<<<<<<< Updated upstream
       await fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
         .then((addresses) => {
           return addresses.json();
@@ -63,6 +64,11 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
         .then((json) => {
           // console.log(json[0])
           setAddresses(json);
+=======
+      fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
+        .then((addresses) => {
+          setAddresses(addresses.data);
+>>>>>>> Stashed changes
         })
         .catch((err) => {
           console.log("Error fetching landlord addresses -->", err);
@@ -93,6 +99,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
+<<<<<<< Updated upstream
           {addresses && (
             <>
               {addresses.map((address, i) => (
@@ -101,6 +108,9 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
             </>
           )}
           <AddressCard addresses={null} isAddCard={true} />
+=======
+          <AddressCard addresses={addresses}/>
+>>>>>>> Stashed changes
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
