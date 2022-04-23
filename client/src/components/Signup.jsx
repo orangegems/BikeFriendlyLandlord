@@ -12,11 +12,11 @@ export default function Signup(props) {
   const [manager, setManager] = useState(null);
 
   const [formData, setFormData] = useState({
-    isLandlord: null,
-    isCompany: null,
-    firstname: "",
-    lastname: "",
-    companyName: "",
+    is_landlord: null,
+    is_company: false,
+    first_name: "",
+    last_name: "",
+    company: "",
     username: "",
     password: "",
     email: "",
@@ -46,7 +46,7 @@ export default function Signup(props) {
         onSubmit={() => handleSubmit("signup", { ...formData })}
         noValidate
       >
-        {formData.isLandlord === null ? (
+        {formData.is_landlord === null ? (
           <div id="roleOption">
             I am a...
             <ToggleButtonGroup
@@ -57,9 +57,9 @@ export default function Signup(props) {
               onChange={(event, newRole) => {
                 setRole(newRole);
                 if (newRole === "tenant") {
-                  setFormData({ ...formData, isLandlord: false });
+                  setFormData({ ...formData, is_landlord: false });
                 } else if (newRole === "landlord") {
-                  setFormData({ ...formData, isLandlord: true });
+                  setFormData({ ...formData, is_landlord: true });
                 }
               }}
             >
@@ -72,7 +72,7 @@ export default function Signup(props) {
         ) : (
           <>
             <h3>Signup</h3>
-            {formData.isLandlord && (
+            {formData.is_landlord && (
               <ToggleButtonGroup
                 color="primary"
                 value={manager}
@@ -81,9 +81,9 @@ export default function Signup(props) {
                 onChange={(event, newManager) => {
                   setManager(newManager);
                   if (newManager === "individual") {
-                    setFormData({ ...formData, isCompany: false });
+                    setFormData({ ...formData, is_company: false });
                   } else if (newManager === "company") {
-                    setFormData({ ...formData, isCompany: true });
+                    setFormData({ ...formData, is_company: true });
                   }
                 }}
               >
@@ -102,7 +102,7 @@ export default function Signup(props) {
                 setFormData({ ...formData, username: event.target.value })
               }
             />
-            {!formData.isCompany ? (
+            {!formData.is_company ? (
               <>
                 <TextField
                   sx={inputButtonStyle}
@@ -110,7 +110,7 @@ export default function Signup(props) {
                   label="First Name"
                   variant="outlined"
                   onChange={(event) =>
-                    setFormData({ ...formData, firstname: event.target.value })
+                    setFormData({ ...formData, first_name: event.target.value })
                   }
                 />
                 <TextField
@@ -119,7 +119,7 @@ export default function Signup(props) {
                   label="Last Name"
                   variant="outlined"
                   onChange={(event) =>
-                    setFormData({ ...formData, lastname: event.target.value })
+                    setFormData({ ...formData, last_name: event.target.value })
                   }
                 />
                 <TextField
@@ -130,7 +130,7 @@ export default function Signup(props) {
                   onChange={(event) =>
                     setFormData({
                       ...formData,
-                      companyName: event.target.value,
+                      company: event.target.value,
                     })
                   }
                 />
@@ -142,7 +142,7 @@ export default function Signup(props) {
                 label="Company"
                 variant="outlined"
                 onChange={(event) =>
-                  setFormData({ ...formData, companyName: event.target.value })
+                  setFormData({ ...formData, company: event.target.value })
                 }
               />
             )}

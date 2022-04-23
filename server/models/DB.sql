@@ -13,9 +13,9 @@ CREATE TABLE users (
   email VARCHAR (50) NOT NULL UNIQUE,
   password VARCHAR (100) NOT NULL,
   profile_pic VARCHAR DEFAULT 'userProfile.png',
-  company VARCHAR (50) DEFAULT '',	
   is_company BOOLEAN DEFAULT false NOT NULL,
-  is_landlord BOOLEAN DEFAULT false NOT NULL
+  company VARCHAR (50) DEFAULT '',	
+  is_landlord BOOLEAN DEFAULT false NOT NULL,
 );
 
 CREATE TABLE landlords(
@@ -23,7 +23,6 @@ CREATE TABLE landlords(
   overall_rating DECIMAL DEFAULT 0,
   respect_rating DECIMAL DEFAULT 0,
   responsiveness_rating DECIMAL DEFAULT 0,
-  is_verified BOOLEAN DEFAULT false,
   user_id INTEGER NOT NULL
 );
 
