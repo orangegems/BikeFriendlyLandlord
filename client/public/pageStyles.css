@@ -162,8 +162,9 @@ h4 {
 
 #reviewStyling {
   font-family: "Nunito";
-  font-size: 25px;
+  font-size: 30px;
   color: white;
+  font-weight: bold;
   margin-left: -50px;
   margin-top: 50px;
 }
