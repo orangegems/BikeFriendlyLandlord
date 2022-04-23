@@ -36,6 +36,10 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
 
   const { landlordId } = useParams();
 
+  useEffect(()=>{
+    
+  })
+
   const fetches = async () => {
     console.log("userData.landlordId: " + userData.landlord_id);
     // landlord role (state will contain ID)
@@ -44,14 +48,20 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
 
       // fetches landlord data to populate profile
       await fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
-        .then((landlord) => setLandlordData(landlord.data))
+        .then((res) => res.json())
+        .then((landlord) => {
+          setLandlordData(landlord);
+        })
         .catch((err) => console.log("Error fetching landlord data -->", err));
 
       // fetches reviews submitted about the landlord user
       await fetch(
         `/reviews/landlordReviews/${landlordId || userData.landlord_id}`
       )
-        .then((reviews) => setReviewData(reviews.data))
+        .then((res) => res.json())
+        .then((reviews) => {
+          setReviewData(reviews);
+        })
         .catch((err) =>
           console.log("Error fetching landlord reviews -->", err)
         );
@@ -82,7 +92,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     // if the url contains the landlord id
     // or the user is logged in and is a
     fetches();
-  }, [isLoggedIn]);
+  }, [userData]);
 
   //onclick for button
   const handleReview = () =>
@@ -96,9 +106,9 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
             <>
               {addresses.map((address, i) => (
                 <>
-                {console.log(address)}
-                <AddressCard address={address} key={i} isAddCard={false} />
-                <br></br>
+                  {console.log(address)}
+                  <AddressCard address={address} key={i} isAddCard={false} />
+                  <br></br>
                 </>
               ))}
             </>
@@ -184,9 +194,8 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
               !landlordId && (
                 <>
                   <h1 id="userProfileTitle">Your Account</h1>
-                  <h3>
-                    Hello {userData.full_name}
-                    {","}
+                  <h3 id="userProfileGreeting">
+                    Hello{","} {userData.full_name}
                   </h3>
                 </>
               )
@@ -203,9 +212,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 <>
                   <Container>
                     <Stack spacing={2} direction="row">
-                      <Typography variant="h3" gutterBottom component="div">
-                        Reviews
-                      </Typography>
+                      <Typography id="reviewStyling">Reviews:</Typography>
                       {
                         // user can only add review if
                         // they're logged in as a tenant

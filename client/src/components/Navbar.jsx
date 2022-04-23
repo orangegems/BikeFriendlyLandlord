@@ -123,6 +123,7 @@ const Navbar = (props) => {
         )}
         {props.authDisplay && (
           <Authenticate
+            userData={userData}
             setAuthDisplay={setAuthDisplay}
             setUserData={setUserData}
             position={authPosition}
