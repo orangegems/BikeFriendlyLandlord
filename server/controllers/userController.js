@@ -116,6 +116,11 @@ userController.getUserData = async (req, res, next) => {
     console.log(userId);
 
     const result = await db.query(queries.getUserData, [userId._id]);
+    const resultId = await db.query(queries.getLandlordId, [userId._id]);
+
+    result.rows[0].landlord_id = resultId.rows[0];
+
+    console.log('here in getUserData');
     console.log(result.rows[0]);
 
     delete result.rows[0].password;
