@@ -3,7 +3,6 @@ import { Link as Scroll } from "react-scroll";
 
 import { IconButton } from "@mui/material";
 import { CssBaseline } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import HomeCards from "../components/HomeCards.jsx";
 import * as actions from "../actions/actions.js";
@@ -35,13 +34,7 @@ export default function Home(props) {
           <h1>
             Welcome to <br /> <span className="homeTitleText">tenancy.</span>
           </h1>
-          <Scroll to="homeCards" smooth={true}>
-            <IconButton>
-              <KeyboardArrowDownIcon
-                className="homeTitleIcon"
-                style={{ fontSize: 40 }}
-              />
-            </IconButton>
+          <Scroll to="homeCards" smooth={true}> 
           </Scroll>
         </div>
       </div>

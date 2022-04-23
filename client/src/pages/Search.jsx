@@ -40,10 +40,6 @@ function Search(props) {
     setPetR(!petR);
   };
 
-  const [topL, setTopL] = React.useState(false);
-  const handleSetLChange = (e) => {
-    setTopL(!topL);
-  }
 
   // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
   const [options, setOptions] = React.useState([]);
@@ -162,13 +158,6 @@ function Search(props) {
                   justifyContent="center"
                   alignItems="center"
                 >
-                  <h2>Top Rated Landlords</h2>
-                  <Checkbox
-                    checked={topL}
-                    onChange={handleSetLChange}
-                    size="large"
-                    style={{color: "white"}}
-                  />
                 </Stack>
               </Stack>
               <Button variant="contained" fullWidth onClick={handleSearch}>
