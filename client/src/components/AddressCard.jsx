@@ -6,8 +6,6 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@material-ui/icons/Star";
 import LinkIcon from "@mui/icons-material/Link";
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
 import BathtubOutlinedIcon from "@material-ui/icons/BathtubOutlined";
