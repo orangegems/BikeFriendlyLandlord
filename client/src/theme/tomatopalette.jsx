@@ -5,8 +5,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const tomatopalette = createTheme({
     palette: {
         primary: {
-            main: '#ff6347',
-            contrastText: '#fff'
+            // main: '#ff6347',
+            main: '#333',
+            contrastText: '#rgb(237, 232, 251)'
         }
     }
 })
