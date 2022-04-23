@@ -37,6 +37,7 @@ const App = (props) => {
         } else return {};
       })
       .then((json) => {
+        console.log("fetched user:" + JSON.stringify(json));
         props.setUserData(json);
       })
       .catch((err) => console.log(err));
@@ -44,9 +45,7 @@ const App = (props) => {
   useEffect(populateUser, []);
 
   const loggedIn = () => {
-    props.setIsLoggedIn(
-      JSON.stringify(props.userData) !== JSON.stringify({})
-    );
+    props.setIsLoggedIn(JSON.stringify(props.userData) !== JSON.stringify({}));
   };
 
   useEffect(loggedIn, [props.userData]);

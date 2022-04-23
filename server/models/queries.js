@@ -10,12 +10,6 @@ queries.getLandlordId = `SELECT _id FROM landlords WHERE user_id = $1`
 
 queries.getAllLandlords = `SELECT * FROM landlords`;
 
-queries.getTopFourLandlords = `SELECT landlords.*, addresses.city, addresses.state FROM landlords 
-LEFT OUTER JOIN addresses on landlords._id = addresses.landlord_id 
-WHERE landlords.overall_rating != 'NaN'
-ORDER BY overall_rating DESC 
-LIMIT 4;`;
-
 queries.postLandlord = `INSERT INTO landlords (user_id) VALUES ($1)`;
 
 queries.updateLandlordRating = `UPDATE landlords
@@ -24,7 +18,7 @@ WHERE _id = $4`;
 
 queries.getBikeAndPetFriendlyLandlords = `SELECT landlords.*, addresses.street_num, addresses.street, addresses.city, addresses.state, addresses.zip_code FROM landlords 
 INNER JOIN addresses ON landlords._id = addresses.landlord_id
-WHERE addresses.city = $1`;
+WHERE addresses.city = $1 AND bike_friendly = $2 AND pet_friendly = $3`;
 
 queries.getLandlordsAndAddresses = `SELECT l.*, a.city, a.street_num, a.street, a.state, a.zip_code, a.landlord_id FROM landlords l
 INNER JOIN addresses a ON l._id = a.landlord_id`;
