@@ -111,6 +111,7 @@ userController.getUserData = async (req,res,next) => {
     console.log(userId)
 
     const result = await db.query(queries.getUserData, [userId._id]);
+    const landlordId = await db.query(queries.getLandlordId, [userId._id]);
     console.log('here in getUserData');
     console.log(result.rows[0]);
 
