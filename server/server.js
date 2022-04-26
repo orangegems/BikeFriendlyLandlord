@@ -4,6 +4,10 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+const {ApolloServer} = require('apollo-server');
+const typeDefs = require('./schema/typeDefs')
+const resolvers = require('./schema/resolvers')
+
 const sessionController = require('./controllers/sessionController');
 const landlordRouter = require('./routes/landlord.js');
 const reviewsRouter = require('./routes/reviews.js');
@@ -14,6 +18,8 @@ const userRouter = require('./routes/user.js');
 const app = express();
 dotenv.config({path: path.resolve(__dirname, '../.env')});
 const PORT = 3000;
+
+const apolloServer = new ApolloServer({typeDefs, resolvers});
 
 /** 
  * Parse the body and cookies on all http requests
@@ -74,8 +80,12 @@ app.use((err, req, res, next) => {
 
 
 // start server
-app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server listening on port: ${PORT}`);
+// });
+
+apolloServer.listen(3000).then(({url})=>{
+  console.log(`Server running on url: ${url}`)
+})
 
 module.exports = app;
