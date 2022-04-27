@@ -14,9 +14,22 @@ const resolvers = {
 
       return user;
     },
+    landlords: async (parent, args, context) => {
+      return await db
+        .query(queries.getAllLandlords)
+        .then((res) => {
+          if (!res.rows[0]) {
+            context.response.status(404);
+            throw new GraphQLError(`Query Error: No landlords found.`);
+          }
+          return res.rows;
+        })
+        .catch((err) => err);
+    },
     landlord: async (parent, args, context) => {
-      await db
-        .query(queries.getLandlord, [args.id])
+      const id = Number(args.id);
+      return await db
+        .query(queries.getLandlord, [id])
         .then((res) => {
           if (!res.rows[0]) {
             context.response.status(404);

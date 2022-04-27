@@ -17,10 +17,10 @@ const typeDefs = gql`
 
   type Landlord {
     _id: ID!
-    overall_rating: Float
-    responsiveness_rating: Float
-    respect_rating: Float
-    user_id: Int
+    overall_rating: String
+    responsiveness_rating: String
+    respect_rating: String
+    user_id: Int!
     addresses: [Address]
     reviews: [Review]
   }
@@ -140,6 +140,7 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     user(id: ID!): User
+    landlords: [Landlord!]!
     landlord(id: ID!): Landlord
     addresses: [Address]
     reviews: [Review]
