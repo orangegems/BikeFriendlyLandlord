@@ -80,11 +80,15 @@ addressController.postAddress = async (req, res, next) => {
 }
 
 addressController.updateAddressReviews = async (req, res, next) => {
-    if(!req.body.addressId) return next();
+    if(!req.body.address_id) return next();
+
+    console.log('entered update address reviews')
     
-    const { addressId } = req.body;
+    const { address_id } = req.body;
   
     let newOverall = (newTlc = newPersonalization = 0);
+
+    console.log(res.locals.reviews);
 
     // add up total for each review category
     res.locals.reviews.forEach((review) => {
@@ -93,10 +97,15 @@ addressController.updateAddressReviews = async (req, res, next) => {
       newPersonalization += Number(review.personalization);
     });
   
+    console.log(newOverall);
+
     // calculate new average for each review category
     newOverall /= res.locals.reviews.length;
     newTlc /= res.locals.reviews.length;
     newPersonalization /= res.locals.reviews.length;
+
+    console.log(newOverall)
+
     
     // push new values to database
     try {
@@ -104,7 +113,7 @@ addressController.updateAddressReviews = async (req, res, next) => {
         newOverall,
         newTlc,
         newPersonalization,
-        addressId,
+        address_id,
       ]);
       return next();
     } catch (error) {

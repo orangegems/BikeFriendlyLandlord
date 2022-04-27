@@ -66,10 +66,11 @@ reviewsController.getReviews = async (req, res, next) => {
 };
 
 reviewsController.getAddressReviews = async (req, res, next) => {
-  if(!req.body.addressId) return next();
+  if(!req.body.address_id) return next();
+
   try {
-    const {addressId} = req.body;
-    const result = await dq.query(queries.getAddressReviews, [addressId]);
+    const {address_id} = req.body;
+    const result = await db.query(queries.getAddressReviews, [address_id]);
     res.locals.reviews = result.rows;
     return next();
   } catch (error) {
@@ -119,7 +120,7 @@ reviewsController.updateReview = async (req, res, next) => {
 
 reviewsController.deleteReview = async (req, res, next) => {
   const { reviewId } = req.params;
-  s
+  
   try {
     await db.query(queries.deleteReview, [reviewId]);
     return next();
