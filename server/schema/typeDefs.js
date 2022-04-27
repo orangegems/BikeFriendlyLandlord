@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -22,6 +22,7 @@ const typeDefs = gql`
     respect_rating: Float
     user_id: Int
     addresses: [Address]
+    reviews: [Review]
   }
 
   type Address {
@@ -68,6 +69,7 @@ const typeDefs = gql`
     landlord_id: Int!
     address_id: Int
     created_at: String!
+    user: User!
   }
 
   input CreateUserInput {
@@ -77,9 +79,9 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    profile_pic: String = 'userProfile.png'
+    profile_pic: String = "userProfile.png"
     is_company: Boolean!
-    company: String = ''
+    company: String = ""
     is_landlord: Boolean!
   }
 
@@ -138,6 +140,9 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     user(id: ID!): User
+    landlord(id: ID!): Landlord
+    addresses: [Address]
+    reviews: [Review]
   }
 
   type Mutation {

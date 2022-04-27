@@ -1,3 +1,7 @@
+const db = require("../models/BFLL.js");
+const queries = require("../models/queries");
+const { GraphQLError } = require("graphql");
+
 const resolvers = {
   Query: {
     users: () => {
@@ -10,13 +14,27 @@ const resolvers = {
 
       return user;
     },
-  },
-  Landlord: {
-    addresses: () => {
-      // db query here, return all address rows with specified landlord id
-      // how is landlord ID specified?
+    landlord: async (parent, args, context) => {
+      await db
+        .query(queries.getLandlord, [args.id])
+        .then((res) => {
+          if (!res.rows[0]) {
+            context.response.status(404);
+            throw new GraphQLError(
+              `Query Error: Landlord with id ${args.id} not found.`
+            );
+          }
+          return res.rows[0];
+        })
+        .catch((err) => err);
     },
   },
+  //   Landlord: {
+  //     addresses: () => {
+  //       // db query here, return all address rows with specified landlord id
+  //       // how is landlord ID specified?
+  //     },
+  //   },
   Mutation: {
     createUser: (parent, args) => {
       const user = args.input;

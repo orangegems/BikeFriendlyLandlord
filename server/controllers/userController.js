@@ -112,16 +112,23 @@ userController.deleteUser = async (req, res, next) => {
 userController.getUserData = async (req, res, next) => {
   console.log("entered userController.getUserData");
   try {
-    const userId = res.locals.user;
-    console.log(userId);
+    res.locals.user = res.locals.user ? res.locals.user._id : null;
+    console.log(res.locals.user);
+    const userId = res.locals.user || req.params.landlordId || req.body.user;
+    // console.log(userId);
 
-    const result = await db.query(queries.getUserData, [userId._id]);
-    const resultId = await db.query(queries.getLandlordId, [userId._id]);
+    const result = await db.query(queries.getUserData, [userId]);
 
-    result.rows[0].landlord_id = resultId.rows[0]._id;
-
-    console.log('here in getUserData');
     console.log(result.rows[0]);
+
+    const resultId = await db.query(queries.getLandlordId, [userId]);
+
+    if (resultId.rows[0]) {
+      result.rows[0].landlord_id = resultId.rows[0]._id;
+    }
+
+    console.log("here in getUserData");
+    // console.log(result.rows[0]);
 
     delete result.rows[0].password;
 

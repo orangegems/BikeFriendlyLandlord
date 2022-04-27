@@ -6,15 +6,6 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@material-ui/icons/Star";
 import LinkIcon from "@mui/icons-material/Link";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import KingBedOutlinedIcon from "@material-ui/icons/KingBedOutlined";
