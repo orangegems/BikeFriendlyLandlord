@@ -27,6 +27,7 @@ const resolvers = {
         .catch((err) => err);
     },
     landlord: async (parent, args, context) => {
+      console.log("entered landlord query");
       const id = Number(args.id);
       return await db
         .query(queries.getLandlord, [id])
@@ -42,12 +43,53 @@ const resolvers = {
         .catch((err) => err);
     },
   },
-  //   Landlord: {
-  //     addresses: () => {
-  //       // db query here, return all address rows with specified landlord id
-  //       // how is landlord ID specified?
-  //     },
-  //   },
+  Landlord: {
+    addresses: async (parent, args, context) => {
+      const id = Number(parent._id);
+      return await db
+        .query(queries.getAddressesByLandlord, [id])
+        .then((res) => {
+          if (!res.rows[0]) {
+            context.response.status(404);
+            throw new GraphQLError(
+              `Query Error: Address with id ${parent._id} not found.`
+            );
+          }
+          return res.rows;
+        })
+        .catch((err) => err);
+    },
+    reviews: async (parent, args, context) => {
+      const id = Number(parent._id);
+      return await db
+        .query(queries.getAllReviews, [id])
+        .then((res) => {
+          if (!res.rows[0]) {
+            context.response.status(404);
+            throw new GraphQLError(
+              `Query Error: Review with id ${parent._id} not found.`
+            );
+          }
+          return res.rows;
+        })
+        .catch((err) => err);
+    },
+  },
+  Review: {
+      user: async (parent, args, context)=>{
+        const userId = parent.user_id;
+        return await db.query(queries.getUserData, [userId]).then((res)=>{
+            if (!res.rows[0]) {
+                context.response.status(404);
+                throw new GraphQLError(
+                  `Query Error: Landlord with id ${args.id} not found.`
+                );
+              }
+              return res.rows[0];
+            })
+            .catch((err) => err);
+      }
+  },
   Mutation: {
     createUser: (parent, args) => {
       const user = args.input;
