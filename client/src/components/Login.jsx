@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function Login (props) {
+export default function Login(props) {
   const {
     handleSubmit,
     setAuthDisplay,
     setDisplayLogin,
     loginError,
     loginErrorMessage,
+    userData,
   } = props;
+
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -31,9 +35,16 @@ export default function Login (props) {
       <Box
         sx={formStyle}
         component="form"
-        onSubmit={() =>
-          handleSubmit("login", { username: username, password: password })
-        }
+        onSubmit={() => {
+          handleSubmit("login", {
+            username: username,
+            password: password,
+          });
+          const landlordIdUrl = userData.landlord_id ? userData.landlord_id : '';
+          console.log('test');
+          console.log('userData', userData);
+          navigate(`/profile/${landlordIdUrl}`);
+        }}
         noValidate
       >
         <h3>Login</h3>

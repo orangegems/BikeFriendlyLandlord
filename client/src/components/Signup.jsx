@@ -122,18 +122,6 @@ export default function Signup(props) {
                     setFormData({ ...formData, last_name: event.target.value })
                   }
                 />
-                <TextField
-                  sx={inputButtonStyle}
-                  id="outlined-basic"
-                  label="Company (optional)"
-                  variant="outlined"
-                  onChange={(event) =>
-                    setFormData({
-                      ...formData,
-                      company: event.target.value,
-                    })
-                  }
-                />
               </>
             ) : (
               <TextField

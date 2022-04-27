@@ -28,6 +28,7 @@ import tomatopalette from "../theme/tomatopalette.jsx";
 
 const mapStateToProps = (state) => ({
   isLandlord: state.currentUser.isLandlord,
+  userData: state.currentUser.data,
 });
 
 const QUERY_LANDLORD_BY_ID = gql`
@@ -84,20 +85,27 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
 
   const fetches = async () => {
     console.log("userData.landlordId: " + userData.landlord_id);
+    console.log("landlordId: " + landlordId);
     // landlord role (state will contain ID)
     if (landlordId || isLandlord) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
 
       // fetches landlord data to populate profile
       await fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
-        .then((landlord) => setLandlordData(landlord.data))
+        .then((res) => res.json())
+        .then((landlord) => {
+          setLandlordData(landlord);
+        })
         .catch((err) => console.log("Error fetching landlord data -->", err));
 
       // fetches reviews submitted about the landlord user
       await fetch(
         `/reviews/landlordReviews/${landlordId || userData.landlord_id}`
       )
-        .then((reviews) => setReviewData(reviews.data))
+        .then((res) => res.json())
+        .then((reviews) => {
+          setReviewData(reviews);
+        })
         .catch((err) =>
           console.log("Error fetching landlord reviews -->", err)
         );
@@ -107,7 +115,6 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           return addresses.json();
         })
         .then((json) => {
-          // console.log(json[0])
           setAddresses(json);
         })
         .catch((err) => {
@@ -129,7 +136,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     // if the url contains the landlord id
     // or the user is logged in and is a
     fetches();
-  }, [isLoggedIn]);
+  }, [userData]);
 
   //onclick for button
   const handleReview = () =>
@@ -139,14 +146,6 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
-          {addresses && (
-            <>
-              {addresses.map((address, i) => (
-                <AddressCard address={address} key={i} isAddCard={false} />
-              ))}
-            </>
-          )}
-          <AddressCard addresses={null} isAddCard={true} />
           {
             // if not logged in and no ID specified in url
             !landlordId && !isLoggedIn && (
@@ -173,18 +172,21 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 justifyContent="space-around"
               >
                 <Stack>
-                  <Card sx={{ minWidth: 275 }}>
+                  <Card sx={{
+                    minWidth: 275,
+                    backgroundColor: "whitesmoke"
+                  }}>
                     <CardContent>
                       <div className="ProfilePicture">
                         <img
-                          style={{ height: "100px" }}
-                          src={`/images/${landlordData.profile_pic}`}
+                          style={{ height: "50px" }}
+                          src={`/images/${userData.profile_pic}`}
                         />
                       </div>
                     </CardContent>
                   </Card>
                   <Card>
-                    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+                    <Box sx={{ width: "100%", bgcolor: "WhiteSmoke" }}>
                       <nav aria-label="main mailbox folders">
                         <List>
                           <ListItem disablePadding>
@@ -228,9 +230,8 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
               !landlordId && (
                 <>
                   <h1 id="userProfileTitle">Your Account</h1>
-                  <h3>
-                    Hello {userData.full_name}
-                    {","}
+                  <h3 id="userProfileGreeting">
+                    Hello{","} {userData.full_name}
                   </h3>
                 </>
               )
@@ -246,10 +247,12 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
               reviewData && (
                 <>
                   <Container>
-                    <Stack spacing={2} direction="row">
-                      <Typography variant="h3" gutterBottom component="div">
-                        Reviews
-                      </Typography>
+                    <Stack
+                      spacing={2}
+                      direction="row"
+                      sx={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <Typography id="reviewStyling">Reviews</Typography>
                       {
                         // user can only add review if
                         // they're logged in as a tenant
@@ -263,7 +266,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                               m: 1,
                             }}
                           >
-                            <Button variant="contained" onClick={handleReview}>
+                            <Button id="createReview" variant="contained" onClick={handleReview}>
                               Create Review
                             </Button>
                           </Stack>
@@ -284,6 +287,16 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 </>
               )
           }
+
+          {addresses && (
+            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+              {addresses.map((address, i) => (
+                <>
+                  <AddressCard address={address} key={i} isAddCard={false} sx={{margin: '10px'}}/>
+                </>
+              ))}
+            </div>
+          )}
 
           {
             // if review data fails to load when user is logged in

@@ -65,7 +65,7 @@ landlordController.updateLandlordReviews = async (req, res, next) => {
   });
 
   // calculate new average for each review category
-  let landlordReviewCount = res.locals.landlordReviews.length === 0;
+  let landlordReviewCount = res.locals.landlordReviews.length;
   newOverall = landlordReviewCount === 0 ? 0 : newOverall / landlordReviewCount;
   newRespect = landlordReviewCount === 0 ? 0 : newRespect / landlordReviewCount;
   newResponsiveness = landlordReviewCount === 0 ? 0 : newResponsiveness / landlordReviewCount;;

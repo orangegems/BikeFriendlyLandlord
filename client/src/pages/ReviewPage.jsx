@@ -102,7 +102,7 @@ export function ReviewPage({userData}) {
         })
         .then (res => {
             console.log(res)
-            window.location = `/landlord/${landlordID.landlord_id}`
+            window.location = `/profile/${landlordID.landlord_id}`
         })
         .catch(error => console.log(error));
     }
@@ -119,11 +119,11 @@ export function ReviewPage({userData}) {
                             {p: 2}
                         }
                         >
-                            <h2>Review of {landlordName}</h2>
+                            <h2>Review of Landlord</h2>
                             <TextField 
                                 fullWidth
                                 required 
-                                label="Title"
+                                label="Address"
                                 value={title}
                                 onChange={handleTitleChange}
                                 inputProps={{maxLength:100}}
@@ -152,21 +152,6 @@ export function ReviewPage({userData}) {
                                 <Grid item xs={6}>
                                     <h3 className="reviewLabel"></h3>
                                 </Grid>
-                                <Grid item xs={6}>
-                                    <Rating required size="large" style={{color:"tomato"}} precision={0.5} value={ response } onChange={(e, val) => setResponse(val)}/>
-                                </Grid>
-                                {/* <Grid item xs={6}>
-                                    <h3 className="reviewLabel">Bike Friendly?</h3>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Checkbox checked={bike} onChange={handleBikeChange} size="medium" style={{paddingTop:4, paddingLeft:0}}/>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <h3 className="reviewLabel">Pet Friendly?</h3>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Checkbox checked={pet} onChange={handlePetChange} size="medium" style={{paddingTop:4, paddingLeft:0}}/>
-                                </Grid> */}
                             </Grid>
                             <TextField
                                 fullWidth
@@ -188,6 +173,7 @@ export function ReviewPage({userData}) {
                                     Cancel
                                 </Button>
                                 <Button
+                                    sx={{color: "rgb(237, 232, 251)" }}
                                     variant="contained"
                                     onClick={(sendReview)}
                                 >

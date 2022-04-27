@@ -13,13 +13,13 @@ import ClearIcon from "@mui/icons-material/Clear";
 export default function HomeCard({ landlord }) {
   // console.log("landlord", landlord);
   return (
-    <Link to={`/landlord/${landlord._id}`} className="link">
+    <Link to={`/profile/${landlord._id}`} className="link">
       <Card sx={{ width: 245, background: "rgba(0, 0, 0, 0.5)", margin: "20px", cursor: "pointer"}}>
         <CardMedia
           component="img"
           alt="landlord pic"
           height="200"
-          image={`http://localhost:3000/images/${landlord.profile_pic}`}
+          image={`http://localhost:3000/images/userProfile.png`}
         />
         <CardContent>
           <div className="homeCardContents">

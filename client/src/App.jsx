@@ -68,7 +68,6 @@ const App = (props) => {
           element={
             <Profile
               key={props.userData}
-              userData={props.userData}
               isLoggedIn={props.isLoggedIn}
             />
           }
@@ -78,7 +77,6 @@ const App = (props) => {
           element={
             <Profile
               key={props.userData}
-              userData={props.userData}
               isLoggedIn={props.isLoggedIn}
             />
           }
