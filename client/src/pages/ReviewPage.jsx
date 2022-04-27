@@ -11,10 +11,7 @@ import Stack from "@mui/material/Stack";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import { ThemeProvider } from "@mui/material/styles";
-<<<<<<< HEAD
-=======
 import Autocomplete from "@mui/material/Autocomplete";
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
 
 // import theme
 import tomatopalette from "../theme/tomatopalette.jsx";
@@ -27,11 +24,8 @@ export function ReviewPage({ userData }) {
   //get landlordName
   const [landlordName, setlandlordName] = React.useState("");
   const [companyName, setCompanyName] = React.useState("");
-<<<<<<< HEAD
-=======
   const [addresses, setAddresses] = React.useState([]);
   const [selected, setSelected] = React.useState("");
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
 
   useEffect(() => {
     fetch(`/landlords/getByID/${landlordID.landlord_id}`, {
@@ -39,88 +33,21 @@ export function ReviewPage({ userData }) {
     })
       .then((res) => res.json())
       .then((parsed) => {
-<<<<<<< HEAD
-        console.log(parsed);
         setlandlordName(parsed.first_name + " " + parsed.last_name);
 
-        console.log('fN' + parsed.first_name + ' ' + parsed.user_id)
-
-=======
-        setlandlordName(parsed.first_name + " " + parsed.last_name);
-
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
         if (!parsed.first_name) {
           fetch(`/user/getUserById/${parsed.user_id}`)
             .then((res) => res.json())
             .then((user) => {
-<<<<<<< HEAD
-                setlandlordName(null);
-                setCompanyName(user.company)});
-=======
               setlandlordName(null);
-              console.log(user.company)
+              console.log(user.company);
               setCompanyName(user.company);
             });
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
         }
       })
       .catch((error) => {
         console.log(error);
       });
-<<<<<<< HEAD
-  }, []);
-
-  // handle title input (limit 100)
-  const [title, setTitle] = React.useState("");
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  // calculate overall rating
-  const overallCalc = (...values) => {
-    const arr = [...values];
-    const newArr = arr.filter((val) => val !== null);
-    if (newArr.length === 0) return 0;
-    return newArr.reduce((a, b) => a + b) / newArr.length;
-  };
-  // handle rating inputs
-  const [respect, setRespect] = React.useState(null);
-  const [response, setResponse] = React.useState(null);
-
-  // handle bike / pet friendly
-  const [bike, setBike] = React.useState(false);
-  const handleBikeChange = (e) => {
-    setBike(!bike);
-  };
-
-  const [pet, setPet] = React.useState(false);
-  const handlePetChange = (e) => {
-    setPet(!pet);
-  };
-
-  //handle description input (limit 1000)
-  const [description, setDescription] = React.useState("");
-  const handleDescChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  // method to handle form submission
-  const sendReview = () => {
-    // build req body
-    const formBody = {
-      title: title,
-      username: userData.username,
-      overall_rating: overallCalc(respect, response),
-      respect_rating: respect,
-      responsiveness_rating: response,
-      bike_friendly: bike,
-      pet_friendly: pet,
-      description: description,
-      user_id: userData._id,
-      landlord_id: landlordID.landlord_id,
-    };
-
-=======
 
     fetch(`/address/byLandlord/${landlordID.landlord_id}`)
       .then((res) => {
@@ -193,7 +120,6 @@ export function ReviewPage({ userData }) {
       address_id: selected,
     };
 
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
     fetch(`/reviews/${landlordID.landlord_id}`, {
       method: "POST",
       body: JSON.stringify(formBody),
@@ -226,8 +152,6 @@ export function ReviewPage({ userData }) {
               helperText="Max 100 Characters"
               sx={{ mb: 2, mt: 2 }}
             />
-<<<<<<< HEAD
-=======
             <Autocomplete
               disablePortal
               clearOnEscape
@@ -242,7 +166,6 @@ export function ReviewPage({ userData }) {
               }}
             />
 
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <h3 className="reviewLabel">Overall Rating</h3>
@@ -283,46 +206,36 @@ export function ReviewPage({ userData }) {
                   onChange={(e, val) => setResponse(val)}
                 />
               </Grid>
-<<<<<<< HEAD
-              <Grid item xs={6}>
-                <h3 className="reviewLabel"></h3>
-=======
-              {selected &&(
-                  <>
-              <Grid item xs={6}>
-                <h3 className="reviewLabel">TLC</h3>
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
-              </Grid>
-              <Grid item xs={6}>
-                <Rating
-                  required
-                  size="large"
-                  style={{ color: "tomato" }}
-                  precision={0.5}
-<<<<<<< HEAD
-                  value={response}
-                  onChange={(e, val) => setResponse(val)}
-                />
-              </Grid>
-=======
-                  value={tlc}
-                  onChange={(e, val) => setTlc(val)}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <h3 className="reviewLabel">Personalization</h3>
-              </Grid>
-              <Grid item xs={6}>
-                <Rating
-                  required
-                  size="large"
-                  style={{ color: "tomato" }}
-                  precision={0.5}
-                  value={personalization}
-                  onChange={(e, val) => setPersonalization(val)}
-                />
-              </Grid></>)}
->>>>>>> 3cf63a723a02ead9e7ad8c59312817bfb295fc8d
+              {selected && (
+                <>
+                  <Grid item xs={6}>
+                    <h3 className="reviewLabel">TLC</h3>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Rating
+                      required
+                      size="large"
+                      style={{ color: "tomato" }}
+                      precision={0.5}
+                      value={tlc}
+                      onChange={(e, val) => setTlc(val)}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <h3 className="reviewLabel">Personalization</h3>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Rating
+                      required
+                      size="large"
+                      style={{ color: "tomato" }}
+                      precision={0.5}
+                      value={personalization}
+                      onChange={(e, val) => setPersonalization(val)}
+                    />
+                  </Grid>
+                </>
+              )}
               {/* <Grid item xs={6}>
                                     <h3 className="reviewLabel">Bike Friendly?</h3>
                                 </Grid>
