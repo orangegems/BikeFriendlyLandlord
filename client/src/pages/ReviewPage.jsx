@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 // import MUI components
 import Button from "@mui/material/Button";
@@ -40,7 +40,7 @@ export function ReviewPage({ userData }) {
             .then((res) => res.json())
             .then((user) => {
               setlandlordName(null);
-              console.log(user.company)
+              console.log(user.company);
               setCompanyName(user.company);
             });
         }
@@ -206,34 +206,36 @@ export function ReviewPage({ userData }) {
                   onChange={(e, val) => setResponse(val)}
                 />
               </Grid>
-              {selected &&(
-                  <>
-              <Grid item xs={6}>
-                <h3 className="reviewLabel">TLC</h3>
-              </Grid>
-              <Grid item xs={6}>
-                <Rating
-                  required
-                  size="large"
-                  style={{ color: "tomato" }}
-                  precision={0.5}
-                  value={tlc}
-                  onChange={(e, val) => setTlc(val)}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <h3 className="reviewLabel">Personalization</h3>
-              </Grid>
-              <Grid item xs={6}>
-                <Rating
-                  required
-                  size="large"
-                  style={{ color: "tomato" }}
-                  precision={0.5}
-                  value={personalization}
-                  onChange={(e, val) => setPersonalization(val)}
-                />
-              </Grid></>)}
+              {selected && (
+                <>
+                  <Grid item xs={6}>
+                    <h3 className="reviewLabel">TLC</h3>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Rating
+                      required
+                      size="large"
+                      style={{ color: "tomato" }}
+                      precision={0.5}
+                      value={tlc}
+                      onChange={(e, val) => setTlc(val)}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <h3 className="reviewLabel">Personalization</h3>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Rating
+                      required
+                      size="large"
+                      style={{ color: "tomato" }}
+                      precision={0.5}
+                      value={personalization}
+                      onChange={(e, val) => setPersonalization(val)}
+                    />
+                  </Grid>
+                </>
+              )}
               {/* <Grid item xs={6}>
                                     <h3 className="reviewLabel">Bike Friendly?</h3>
                                 </Grid>
@@ -246,37 +248,35 @@ export function ReviewPage({ userData }) {
                                 <Grid item xs={6}>
                                     <Checkbox checked={pet} onChange={handlePetChange} size="medium" style={{paddingTop:4, paddingLeft:0}}/>
                                 </Grid> */}
-                            </Grid>
-                            <TextField
-                                fullWidth
-                                required
-                                label="Additional Comments"
-                                multiline
-                                rows={4}
-                                inputProps={{maxLength:1000}}
-                                helperText="Max 1000 Characters"
-                                value={ description }
-                                onChange={ handleDescChange}
-                                sx={{mb:2, mt:2}}
-                            />
-                            <Stack direction="row" spacing={2} justifyContent="flex-end">
-                                <Button
-                                    variant="outlined"
-                                    onClick={() => window.location.replace(`/landlord/${landlordID.landlord_id}`)}
-                                >
-                                    Cancel
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    onClick={(sendReview)}
-                                >
-                                    Submit
-                                </Button>
-                            </Stack>
-                    </Box>
-
-            </Container>
-        </div>
-        </ThemeProvider>
-        )
+            </Grid>
+            <TextField
+              fullWidth
+              required
+              label="Additional Comments"
+              multiline
+              rows={4}
+              inputProps={{ maxLength: 1000 }}
+              helperText="Max 1000 Characters"
+              value={description}
+              onChange={handleDescChange}
+              sx={{ mb: 2, mt: 2 }}
+            />
+            <Stack direction="row" spacing={2} justifyContent="flex-end">
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  window.location.replace(`/landlord/${landlordID.landlord_id}`)
+                }
+              >
+                Cancel
+              </Button>
+              <Button variant="contained" onClick={sendReview}>
+                Submit
+              </Button>
+            </Stack>
+          </Box>
+        </Container>
+      </div>
+    </ThemeProvider>
+  );
 }

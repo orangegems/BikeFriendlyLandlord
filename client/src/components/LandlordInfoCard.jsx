@@ -20,7 +20,7 @@ export function LandlordInfoCard(props) {
           variant="h3"
           sx={{ m: 3, width: "auto", justifyContent: "space-between" }}
         >
-          {props.full_name}
+          {props.full_name || props.company_name}
         </Typography>
         {/* <Link to={`/reviews/$/`}><Button variant="contained" sx={{m: 3}}>Is this you?</Button></Link> */}
       </Stack>

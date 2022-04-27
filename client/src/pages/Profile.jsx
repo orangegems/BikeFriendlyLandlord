@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { Review } from "../components/Review.jsx";
 import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
 import AddressCard from "../components/AddressCard.jsx";
+
+import { useQuery, gql } from "@apollo/client";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -29,52 +31,110 @@ const mapStateToProps = (state) => ({
   userData: state.currentUser.data,
 });
 
+const QUERY_LANDLORD_BY_ID = gql`
+  query GetLandlordById($id: ID!) {
+    landlord(id: $id) {
+      _id
+      overall_rating
+      respect_rating
+      responsiveness_rating
+      addresses {
+        _id
+        street_num
+        street
+        apt_num
+        city
+        state
+        zip_code
+        overall_rating
+        tlc
+        personalization
+        building_type
+        beds
+        baths
+        price
+        listing_link
+      }
+      reviews {
+        _id
+        title
+        username
+        overall_rating
+        respect_rating
+        responsiveness_rating
+        bike_friendly
+        pet_friendly
+        tlc
+        personalization
+        description
+        user {
+          username
+        }
+      }
+    }
+  }
+`;
+
 const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
   const navigate = useNavigate();
-  const [landlordData, setLandlordData] = React.useState(null);
-  const [reviewData, setReviewData] = React.useState(null);
-  const [addresses, setAddresses] = React.useState(null);
+  const [landlordData, setLandlordData] = useState(null);
+  const [addresses, setAddresses] = useState(null);
+  const [reviewData, setReviewData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { landlordId } = useParams();
+  const mounted = useRef(true);
+
+  const queryLandlordId = landlordId || userData.landlord_id;
+
+  const query = useQuery(QUERY_LANDLORD_BY_ID, {
+    variables: { id: queryLandlordId },
+  })
+
+  useEffect(() => {
+    if (query.loading) return setLoading(true);
+    mounted.current = true;
+    if (mounted.current) {
+      setLoading(false);
+      setLandlordData(query.data);
+      setAddresses(query.data.landlord.addresses);
+      setReviewData(query.data.landlord.reviews);
+    }
+    return () => () => (mounted.current = false);
+  }, [query.loading]);
 
   const fetches = async () => {
-    console.log("userData.landlordId: " + userData.landlord_id);
-    console.log("landlordId: " + landlordId);
     // landlord role (state will contain ID)
     if (landlordId || isLandlord) {
       // fetches grab from the url ID (if truthy) or from the userData's landlord ID
-
-      // fetches landlord data to populate profile
-      await fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
-        .then((res) => res.json())
-        .then((landlord) => {
-          setLandlordData(landlord);
-        })
-        .catch((err) => console.log("Error fetching landlord data -->", err));
-
-      // fetches reviews submitted about the landlord user
-      await fetch(
-        `/reviews/landlordReviews/${landlordId || userData.landlord_id}`
-      )
-        .then((res) => res.json())
-        .then((reviews) => {
-          setReviewData(reviews);
-        })
-        .catch((err) =>
-          console.log("Error fetching landlord reviews -->", err)
-        );
-
-      await fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
-        .then((addresses) => {
-          return addresses.json();
-        })
-        .then((json) => {
-          setAddresses(json);
-        })
-        .catch((err) => {
-          console.log("Error fetching landlord addresses -->", err);
-        });
-
+      // // fetches landlord data to populate profile
+      // await fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
+      //   .then((res) => res.json())
+      //   .then((landlord) => {
+      //     setLandlordData(landlord);
+      //   })
+      //   .catch((err) => console.log("Error fetching landlord data -->", err));
+      // // fetches reviews submitted about the landlord user
+      // await fetch(
+      //   `/reviews/landlordReviews/${landlordId || userData.landlord_id}`
+      // )
+      //   .then((res) => res.json())
+      //   .then((reviews) => {
+      //     setReviewData(reviews);
+      //   })
+      //   .catch((err) =>
+      //     console.log("Error fetching landlord reviews -->", err)
+      //   );
+      // await fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
+      //   .then((addresses) => {
+      //     return addresses.json();
+      //   })
+      //   .then((json) => {
+      //     setAddresses(json);
+      //   })
+      //   .catch((err) => {
+      //     console.log("Error fetching landlord addresses -->", err);
+      //   });
       // otherwise, if tenant is logged in and routes
       //  to /profile [with no ID endpoint]
     } else if (isLoggedIn) {
@@ -100,9 +160,10 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
+          {loading ? <>Loading...</> : null }
           {
             // if not logged in and no ID specified in url
-            !landlordId && !isLoggedIn && (
+            !loading && !landlordId && !isLoggedIn && (
               <div>Please login to view your profile</div>
             )
           }
@@ -110,7 +171,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           {
             // if landlord data is falsy on render
             // while URL specifies ID or landlord is logged in
-            !landlordData && (landlordId || isLandlord) && (
+            !loading && !landlordData && (landlordId || isLandlord) && (
               <>Error 500: Database Error or Invalid Landlord ID</>
             )
           }
@@ -126,10 +187,12 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 justifyContent="space-around"
               >
                 <Stack>
-                  <Card sx={{
-                    minWidth: 275,
-                    backgroundColor: "whitesmoke"
-                  }}>
+                  <Card
+                    sx={{
+                      minWidth: 275,
+                      backgroundColor: "whitesmoke",
+                    }}
+                  >
                     <CardContent>
                       <div className="ProfilePicture">
                         <img
@@ -220,7 +283,11 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                               m: 1,
                             }}
                           >
-                            <Button id="createReview" variant="contained" onClick={handleReview}>
+                            <Button
+                              id="createReview"
+                              variant="contained"
+                              onClick={handleReview}
+                            >
                               Create Review
                             </Button>
                           </Stack>
@@ -243,10 +310,21 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           }
 
           {addresses && (
-            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
               {addresses.map((address, i) => (
                 <>
-                  <AddressCard address={address} key={i} isAddCard={false} sx={{margin: '10px'}}/>
+                  <AddressCard
+                    address={address}
+                    key={i}
+                    isAddCard={false}
+                    sx={{ margin: "10px" }}
+                  />
                 </>
               ))}
             </div>
@@ -255,7 +333,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           {
             // if review data fails to load when user is logged in
             // or URL specifies correct landlordId
-            !reviewData && landlordData && (isLoggedIn || landlordId) && (
+            !loading && !reviewData && landlordData && (isLoggedIn || landlordId) && (
               <div>Error 500: Loading reviews failed.</div>
             )
           }

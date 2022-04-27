@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/BikeFriendlyLandlord/BikeFriendlyLandlord#readme",
   "dependencies": {
+    "@apollo/client": "^3.6.0",
     "@babel/runtime": "^7.17.9",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -28,7 +29,9 @@
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
+    "@prisma/client": "^3.13.0",
     "aos": "^3.0.0-beta.6",
+    "apollo-server-express": "^3.6.7",
     "axios": "^0.26.1",
     "babel-plugin-dotenv": "^0.1.1",
     "bcryptjs": "^2.4.3",
@@ -37,6 +40,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "graphql": "^16.4.0",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.7.1",
     "pg": "^8.7.3",
@@ -63,6 +67,7 @@
     "style-loader": "^3.3.1",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.7.4",
+    "webpack-node-externals": "^3.0.0"
   }
 }
