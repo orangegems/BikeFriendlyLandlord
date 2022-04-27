@@ -25,14 +25,39 @@ const resolvers = {
       // also handle conditional landlord creation
       return;
     },
-    updateUsername: (parent, args) => {
-      const { id, newUsername } = args.input.id;
+    updateUser: (parent, args) => {
+      const newUser = args.input;
+      const { _id } = args.input;
       // update sql db here
+      // go through args.input and see which values aren't undefined
+      // then plug those in
       return;
     },
     deleteUser: (parent, args) => {
-      const id = args.id;
+      const _id = args.id;
       // remove from sql db here
+      return;
+    },
+
+    createAddress: (parent, args) => {
+      const address = args.input;
+      const { landlord_id } = args.input;
+      // add to SQL here
+      return;
+    },
+
+    updateAddress: (parents, args) => {
+      const newAddress = args.input;
+      const { _id } = args.input;
+      // update sql db here
+      // go through args.input and see which values aren't undefined
+      // then plug those in
+      return;
+    },
+
+    deleteAddress: (parents, args) => {
+      const _id = args.id;
+      //remove from sql here
       return;
     },
   },

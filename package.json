@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/BikeFriendlyLandlord/BikeFriendlyLandlord#readme",
   "dependencies": {
+    "@apollo/client": "^3.6.0",
     "@babel/runtime": "^7.17.9",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",

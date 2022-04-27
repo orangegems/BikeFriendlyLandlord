@@ -83,9 +83,15 @@ const typeDefs = gql`
     is_landlord: Boolean!
   }
 
-  input UpdateUsernameInput {
+  input UpdateUserInput {
     _id: ID!
-    newUsername: String!
+    newFirstName: String
+    newLastName: String
+    newUsername: String
+    newEmail: String
+    newPassword: String
+    newProfilePic: String
+    newCompany: String
   }
 
   input CreateAddressInput {
@@ -103,7 +109,30 @@ const typeDefs = gql`
   }
 
   input UpdateAddressInput {
-  
+    _id: ID!
+    street_num: Int
+    street: String
+    apt_num: String
+    city: String
+    state: State
+    zip_code: Int
+    bike_friendly: Boolean
+    pet_friendly: Boolean
+    dog_friendly: Boolean
+    dog_breed_restriction: String
+    dog_size_max_lbs: Int
+    overall_rating: Float
+    tlc: Float
+    personalization: Float
+    quiet_hours: String
+    overnight_guests: Boolean
+    smoker_friendly: Boolean
+    building_type: String
+    beds: Int
+    baths: Int
+    price: Int
+    late_payments: String
+    listing_link: String
   }
 
   type Query {
@@ -113,7 +142,7 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(input: CreateUserInput!): User
-    updateUsername(input: UpdateUsernameInput!): User
+    updateUser(input: UpdateUserInput!): User
     deleteUser(id: ID!): User
 
     createAddress(input: CreateAddressInput!): Address

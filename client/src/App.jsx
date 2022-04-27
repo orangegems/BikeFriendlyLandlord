@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 
+import {ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql} from '@apollo/client';
+
 import * as actions from "./actions/actions.js";
 
 // components
@@ -28,7 +30,30 @@ const mapDispatchToProps = (dispatch) => ({
   setIsLoggedIn: (boolean) => dispatch(actions.setIsLoggedIn(boolean)),
 });
 
+const QUERY_ALL_USERS = gql`
+  query GetAllUsers{
+    users{
+      _id
+      first_name
+      last_name
+      username
+      email
+      is_company
+      is_company
+      is_landlord
+    }
+  }
+`;
+
 const App = (props) => {
+  const {data, loading} = useQuery(QUERY_ALL_USERS);
+
+
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: 'http://localhost:3000/graphql'
+  });
+
   const populateUser = async () => {
     await fetch("/user/getUser")
       .then((res) => {
@@ -42,6 +67,7 @@ const App = (props) => {
       })
       .catch((err) => console.log(err));
   };
+
   useEffect(populateUser, []);
 
   const loggedIn = () => {
@@ -51,7 +77,7 @@ const App = (props) => {
   useEffect(loggedIn, [props.userData]);
 
   return (
-    <>
+    <ApolloProvider client={client}>
       <Navbar
         setAuthDisplay={props.setAuthDisplay}
         setUserData={props.setUserData}
@@ -89,7 +115,7 @@ const App = (props) => {
         <Route path="*" element={<p>404 - nothing here</p>} />
       </Routes>
       <Footer />
-    </>
+    </ApolloProvider>
   );
 };
 

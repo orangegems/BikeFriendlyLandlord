@@ -5,6 +5,8 @@ import { Review } from "../components/Review.jsx";
 import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
 import AddressCard from "../components/AddressCard.jsx";
 
+import {useQuery, gql} from '@apollo/client';
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -27,6 +29,14 @@ import tomatopalette from "../theme/tomatopalette.jsx";
 const mapStateToProps = (state) => ({
   isLandlord: state.currentUser.isLandlord,
 });
+
+const QUERY_LANDLORD_BY_ID = gql`
+  query GetLandlordById ($_id: ID!) {
+    landlord(id: $id) {
+      
+    }
+  }
+`;
 
 const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
   const navigate = useNavigate();
