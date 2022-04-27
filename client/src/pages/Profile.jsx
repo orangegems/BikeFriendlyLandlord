@@ -5,6 +5,8 @@ import { Review } from "../components/Review.jsx";
 import { LandlordInfoCard } from "../components/LandlordInfoCard.jsx";
 import AddressCard from "../components/AddressCard.jsx";
 
+import {useQuery, gql} from '@apollo/client';
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -28,6 +30,50 @@ const mapStateToProps = (state) => ({
   isLandlord: state.currentUser.isLandlord,
   userData: state.currentUser.data,
 });
+
+const QUERY_LANDLORD_BY_ID = gql`
+  query GetLandlordById ($_id: ID!) {
+    landlord(id: $id) {
+      _id
+      overall_rating
+      respect_rating
+      responsiveness_rating
+      addresses {
+        _id
+        street_num
+        street
+        apt_num
+        city
+        state
+        zip
+        overall_rating
+        tlc
+        personalization
+        building_type
+        beds
+        baths
+        price
+        listing_link
+      }
+      reviews {
+        _id
+        title
+        username
+        overall_rating
+        respect_rating
+        responsiveness_rating
+        bike_friendly
+        pet_friendly
+        tlc
+        personalization
+        description
+        user {
+          username
+        }
+      }
+    }
+  }
+`;
 
 const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
   const navigate = useNavigate();
@@ -126,7 +172,10 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                 justifyContent="space-around"
               >
                 <Stack>
-                  <Card sx={{ minWidth: 275 }}>
+                  <Card sx={{
+                    minWidth: 275,
+                    backgroundColor: "whitesmoke"
+                  }}>
                     <CardContent>
                       <div className="ProfilePicture">
                         <img
@@ -137,7 +186,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                     </CardContent>
                   </Card>
                   <Card>
-                    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+                    <Box sx={{ width: "100%", bgcolor: "WhiteSmoke" }}>
                       <nav aria-label="main mailbox folders">
                         <List>
                           <ListItem disablePadding>
@@ -217,7 +266,7 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
                               m: 1,
                             }}
                           >
-                            <Button variant="contained" onClick={handleReview}>
+                            <Button id="createReview" variant="contained" onClick={handleReview}>
                               Create Review
                             </Button>
                           </Stack>

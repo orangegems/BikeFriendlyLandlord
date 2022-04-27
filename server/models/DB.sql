@@ -1,8 +1,9 @@
-DROP TABLE reviews;
-DROP TABLE addresses;
-DROP TABLE landlords;
-DROP TABLE users;
+-- psql -d "postgres://ugyuhigb:5d3qkY5RC-HUtqvTUh3PsoiaY9knI4pO@heffalump.db.elephantsql.com/ugyuhigb" -f server/models/DB.sql
 
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS addresses;
+DROP TABLE IF EXISTS landlords;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   _id SERIAL PRIMARY KEY,

@@ -6,8 +6,8 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -40,10 +40,6 @@ function Search(props) {
     setPetR(!petR);
   };
 
-  const [topL, setTopL] = React.useState(false);
-  const handleSetLChange = (e) => {
-    setTopL(!topL);
-  }
 
   // Request to get values (NEED ALL ADDRESSES -> ALL CITIES)
   const [options, setOptions] = React.useState([]);
@@ -70,7 +66,6 @@ function Search(props) {
       city: city,
       bike_friendly: bikeR,
       pet_friendly: petR,
-      top_rated_landlords: topL,
     };
 
     //send request
@@ -162,13 +157,6 @@ function Search(props) {
                   justifyContent="center"
                   alignItems="center"
                 >
-                  <h2>Top Rated Landlords</h2>
-                  <Checkbox
-                    checked={topL}
-                    onChange={handleSetLChange}
-                    size="large"
-                    style={{color: "white"}}
-                  />
                 </Stack>
               </Stack>
               <Button variant="contained" fullWidth onClick={handleSearch}>

@@ -42,6 +42,7 @@ const App = (props) => {
       })
       .catch((err) => console.log(err));
   };
+
   useEffect(populateUser, []);
 
   const loggedIn = () => {
