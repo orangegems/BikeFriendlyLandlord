@@ -72,52 +72,13 @@ const typeDefs = gql`
     user: User!
   }
 
-  input CreateUserInput {
-    first_name: String!
-    last_name: String!
-    full_name: String
-    username: String!
-    email: String!
-    password: String!
-    profile_pic: String = "userProfile.png"
-    is_company: Boolean!
-    company: String = ""
-    is_landlord: Boolean!
-  }
-
-  input UpdateUserInput {
-    _id: ID!
-    newFirstName: String
-    newLastName: String
-    newUsername: String
-    newEmail: String
-    newPassword: String
-    newProfilePic: String
-    newCompany: String
-  }
-
-  input CreateAddressInput {
+  type CreateAddressInput {
     street_num: Int!
     street: String!
     apt_num: String
     city: String!
     state: State!
     zip_code: Int!
-    building_type: String!
-    beds: Int!
-    baths: Int!
-    price: Int!
-    landlord_id: Int!
-  }
-
-  input UpdateAddressInput {
-    _id: ID!
-    street_num: Int
-    street: String
-    apt_num: String
-    city: String
-    state: State
-    zip_code: Int
     bike_friendly: Boolean
     pet_friendly: Boolean
     dog_friendly: Boolean
@@ -129,32 +90,39 @@ const typeDefs = gql`
     quiet_hours: String
     overnight_guests: Boolean
     smoker_friendly: Boolean
-    building_type: String
-    beds: Int
-    baths: Int
-    price: Int
+    building_type: String!
+    beds: Int!
+    baths: Int!
+    price: Int!
     late_payments: String
     listing_link: String
+    landlord_id: Int!
   }
 
   type Query {
     users: [User!]!
     user(id: ID!): User
-    landlords: [Landlord!]!
-    landlord(id: ID!): Landlord
+    landlords: LandlordsResult
+    landlord(id: ID!): LandlordResult
     addresses: [Address]
     reviews: [Review]
   }
 
   type Mutation {
-    createUser(input: CreateUserInput!): User
-    updateUser(input: UpdateUserInput!): User
-    deleteUser(id: ID!): User
-
-    createAddress(input: CreateAddressInput!): Address
-    updateAddress(input: UpdateAddressInput!): Address
-    deleteAddress(id: ID!): Address
+    createReview(input: CreateReviewInput!): Review
+    updateReview(input: UpdateReviewInput!): Review
+    deleteReview(id: ID!): Review
   }
+
+  type LandlordsError = {
+    message: String!
+  }
+
+  type LandlordsSuccess = {
+    landlords: [Landlords!]!
+  }
+  
+  union LandlordsResult = LandlordsSuccess | LandlordsError
 
   enum State {
     CA

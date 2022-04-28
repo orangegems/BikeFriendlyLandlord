@@ -1,12 +1,11 @@
-queries = {}
-
+queries = {};
 
 //Landlords
 queries.getCity = `SELECT DISTINCT city FROM addresses`;
 
 queries.getLandlord = `SELECT * FROM landlords WHERE _id = $1`;
 
-queries.getLandlordId = `SELECT _id FROM landlords WHERE user_id = $1`
+queries.getLandlordId = `SELECT _id FROM landlords WHERE user_id = $1`;
 
 queries.getAllLandlords = `SELECT * FROM landlords`;
 
@@ -63,7 +62,7 @@ WHERE users._id = $1`;
 //Addresses
 queries.postAddress = `INSERT INTO addresses (street_num, street, apt_num, city, state, zip_code, bike_friendly, pet_friendly, dog_friendly, dog_breed_restriction, dog_size_max_lbs, quiet_hours, overnight_guests, smoker_friendly, building_type, beds, baths, price, late_payments, landlord_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)`;
 
-queries.deleteAddress = `DELETE FROM addresses WHERE _id = $1`
+queries.deleteAddress = `DELETE FROM addresses WHERE _id = $1`;
 
 queries.getAddress = `SELECT * FROM addresses WHERE _id = $1`;
 
