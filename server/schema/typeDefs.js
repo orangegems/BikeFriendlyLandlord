@@ -72,69 +72,32 @@ const typeDefs = gql`
     user: User!
   }
 
-  input CreateUserInput {
-    first_name: String!
-    last_name: String!
-    full_name: String
+  input CreateReviewInput {
+    title: String!
     username: String!
-    email: String!
-    password: String!
-    profile_pic: String = "userProfile.png"
-    is_company: Boolean!
-    company: String = ""
-    is_landlord: Boolean!
-  }
-
-  input UpdateUserInput {
-    _id: ID!
-    newFirstName: String
-    newLastName: String
-    newUsername: String
-    newEmail: String
-    newPassword: String
-    newProfilePic: String
-    newCompany: String
-  }
-
-  input CreateAddressInput {
-    street_num: Int!
-    street: String!
-    apt_num: String
-    city: String!
-    state: State!
-    zip_code: Int!
-    building_type: String!
-    beds: Int!
-    baths: Int!
-    price: Int!
-    landlord_id: Int!
-  }
-
-  input UpdateAddressInput {
-    _id: ID!
-    street_num: Int
-    street: String
-    apt_num: String
-    city: String
-    state: State
-    zip_code: Int
-    bike_friendly: Boolean
-    pet_friendly: Boolean
-    dog_friendly: Boolean
-    dog_breed_restriction: String
-    dog_size_max_lbs: Int
-    overall_rating: Float
+    overall_rating: Float!
+    respect_rating: Float!
+    responsiveness_rating: Float!
+    bike_friendly: Boolean!
+    pet_friendly: Boolean!
     tlc: Float
     personalization: Float
-    quiet_hours: String
-    overnight_guests: Boolean
-    smoker_friendly: Boolean
-    building_type: String
-    beds: Int
-    baths: Int
-    price: Int
-    late_payments: String
-    listing_link: String
+    description: String!
+    user_id: Int!
+    landlord_id: Int!
+    address_id: Int
+  }
+
+  input CreateReviewInput {
+    title: String
+    overall_rating: Float
+    respect_rating: Float
+    responsiveness_rating: Float
+    bike_friendly: Boolean
+    pet_friendly: Boolean
+    tlc: Float
+    personalization: Float
+    description: String
   }
 
   type Query {
@@ -147,13 +110,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(input: CreateUserInput!): User
-    updateUser(input: UpdateUserInput!): User
-    deleteUser(id: ID!): User
-
-    createAddress(input: CreateAddressInput!): Address
-    updateAddress(input: UpdateAddressInput!): Address
-    deleteAddress(id: ID!): Address
+    createReview(input: CreateReviewInput!): Review
+    updateReview(input: UpdateReviewInput!): Review
+    deleteReview(id: ID!): Review
   }
 
   enum State {

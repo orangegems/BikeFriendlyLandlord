@@ -76,62 +76,31 @@ const resolvers = {
     },
   },
   Review: {
-      user: async (parent, args, context)=>{
-        const userId = parent.user_id;
-        return await db.query(queries.getUserData, [userId]).then((res)=>{
-            if (!res.rows[0]) {
-                context.response.status(404);
-                throw new GraphQLError(
-                  `Query Error: Landlord with id ${args.id} not found.`
-                );
-              }
-              return res.rows[0];
-            })
-            .catch((err) => err);
-      }
+    user: async (parent, args, context) => {
+      const userId = parent.user_id;
+      return await db
+        .query(queries.getUserData, [userId])
+        .then((res) => {
+          if (!res.rows[0]) {
+            context.response.status(404);
+            throw new GraphQLError(
+              `Query Error: Landlord with id ${args.id} not found.`
+            );
+          }
+          return res.rows[0];
+        })
+        .catch((err) => err);
+    },
   },
   Mutation: {
-    createUser: (parent, args) => {
-      const user = args.input;
-      // add this user object to SQL DB here
-
-      // also handle conditional landlord creation
-      return;
+    createReview: (parent, args, context) => {
+      const review = args.input;
     },
-    updateUser: (parent, args) => {
-      const newUser = args.input;
-      const { _id } = args.input;
-      // update sql db here
-      // go through args.input and see which values aren't undefined
-      // then plug those in
-      return;
+    updateReview: (parent, args, context) => {
+      const review = args.input;
     },
-    deleteUser: (parent, args) => {
-      const _id = args.id;
-      // remove from sql db here
-      return;
-    },
-
-    createAddress: (parent, args) => {
-      const address = args.input;
-      const { landlord_id } = args.input;
-      // add to SQL here
-      return;
-    },
-
-    updateAddress: (parents, args) => {
-      const newAddress = args.input;
-      const { _id } = args.input;
-      // update sql db here
-      // go through args.input and see which values aren't undefined
-      // then plug those in
-      return;
-    },
-
-    deleteAddress: (parents, args) => {
-      const _id = args.id;
-      //remove from sql here
-      return;
+    deleteReview: (parent, args, context) => {
+      const id = args.id;
     },
   },
 };
