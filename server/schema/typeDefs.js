@@ -72,39 +72,38 @@ const typeDefs = gql`
     user: User!
   }
 
-  input CreateReviewInput {
-    title: String!
-    username: String!
-    overall_rating: Float!
-    respect_rating: Float!
-    responsiveness_rating: Float!
-    bike_friendly: Boolean!
-    pet_friendly: Boolean!
-    tlc: Float
-    personalization: Float
-    description: String!
-    user_id: Int!
-    landlord_id: Int!
-    address_id: Int
-  }
-
-  input CreateReviewInput {
-    title: String
-    overall_rating: Float
-    respect_rating: Float
-    responsiveness_rating: Float
+  type CreateAddressInput {
+    street_num: Int!
+    street: String!
+    apt_num: String
+    city: String!
+    state: State!
+    zip_code: Int!
     bike_friendly: Boolean
     pet_friendly: Boolean
+    dog_friendly: Boolean
+    dog_breed_restriction: String
+    dog_size_max_lbs: Int
+    overall_rating: Float
     tlc: Float
     personalization: Float
-    description: String
+    quiet_hours: String
+    overnight_guests: Boolean
+    smoker_friendly: Boolean
+    building_type: String!
+    beds: Int!
+    baths: Int!
+    price: Int!
+    late_payments: String
+    listing_link: String
+    landlord_id: Int!
   }
 
   type Query {
     users: [User!]!
     user(id: ID!): User
-    landlords: [Landlord!]!
-    landlord(id: ID!): Landlord
+    landlords: LandlordsResult
+    landlord(id: ID!): LandlordResult
     addresses: [Address]
     reviews: [Review]
   }
@@ -114,6 +113,16 @@ const typeDefs = gql`
     updateReview(input: UpdateReviewInput!): Review
     deleteReview(id: ID!): Review
   }
+
+  type LandlordsError = {
+    message: String!
+  }
+
+  type LandlordsSuccess = {
+    landlords: [Landlords!]!
+  }
+  
+  union LandlordsResult = LandlordsSuccess | LandlordsError
 
   enum State {
     CA

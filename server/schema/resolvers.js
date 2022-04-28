@@ -20,11 +20,11 @@ const resolvers = {
         .then((res) => {
           if (!res.rows[0]) {
             context.response.status(404);
-            throw new GraphQLError(`Query Error: No landlords found.`);
+            return {message: `Query Error: No landlords found.`}
           }
-          return res.rows;
+          return {landlords: res.rows};
         })
-        .catch((err) => err);
+        .catch((err) => {message: err});
     },
     landlord: async (parent, args, context) => {
       console.log("entered landlord query");
@@ -94,15 +94,57 @@ const resolvers = {
   },
   Mutation: {
     createReview: (parent, args, context) => {
-      const review = args.input;
+      const {
+        title, 
+        username, 
+        overall_rating, 
+        respect_rating, 
+        responsiveness_rating, 
+        bike_friendly, 
+        pet_friendly, 
+        tlc, 
+        personalization, 
+        description, 
+        user_id, 
+        landlord_id, 
+        address_id
+      } = args.input;
+
+
+      // in order to avoid error and return the new review, 
+      // change SQL query to include RETURNING statement
+      return await db.query(queries.addReview, 
+        [title, 
+        username, 
+        overall_rating, 
+        respect_rating, 
+        responsiveness_rating, 
+        bike_friendly, 
+        pet_friendly, 
+        tlc, 
+        personalization, 
+        description, 
+        user_id, 
+        landlord_id, 
+        address_id]).catch((err)=> err);
     },
+
     updateReview: (parent, args, context) => {
       const review = args.input;
     },
+
     deleteReview: (parent, args, context) => {
       const id = args.id;
     },
   },
+  LandlordsResult: {
+    __resolveType(obj) {
+      if(obj.landlords) return "LandlordsSuccess";
+      if(obj.message) return "LandlordsError";
+      return null;
+    }
+  }
+
 };
 
 module.exports = resolvers;
