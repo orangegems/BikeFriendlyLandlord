@@ -76,69 +76,49 @@ const QUERY_LANDLORD_BY_ID = gql`
 `;
 
 const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
-  const navigate = useNavigate();
   const [landlordData, setLandlordData] = useState(null);
   const [addresses, setAddresses] = useState(null);
   const [reviewData, setReviewData] = useState(null);
+
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const { landlordId } = useParams();
   const mounted = useRef(true);
 
   const queryLandlordId = landlordId || userData.landlord_id;
+  let query;
 
-  const query = useQuery(QUERY_LANDLORD_BY_ID, {
-    variables: { id: queryLandlordId },
-  })
+  if(queryLandlordId){
+    query = useQuery(QUERY_LANDLORD_BY_ID, {
+        variables: { id: queryLandlordId },
+      })
+  }
+  
+  // const query = queryLandlordId
+  //   ? useQuery(QUERY_LANDLORD_BY_ID, {
+  //       variables: { id: queryLandlordId },
+  //     })
+  //   : null;
 
+  // graphQL query to load landlord data, apartments, and reviews
   useEffect(() => {
-    if (query.loading) return setLoading(true);
-    mounted.current = true;
-    if (mounted.current) {
-      setLoading(false);
-      setLandlordData(query.data);
-      setAddresses(query.data.landlord.addresses);
-      setReviewData(query.data.landlord.reviews);
-    }
-    return () => () => (mounted.current = false);
-  }, [query.loading]);
-
-  const fetches = async () => {
-    // landlord role (state will contain ID)
     if (landlordId || isLandlord) {
-      // fetches grab from the url ID (if truthy) or from the userData's landlord ID
-      // // fetches landlord data to populate profile
-      // await fetch(`/landlords/getById/${landlordId || userData.landlord_id}`)
-      //   .then((res) => res.json())
-      //   .then((landlord) => {
-      //     setLandlordData(landlord);
-      //   })
-      //   .catch((err) => console.log("Error fetching landlord data -->", err));
-      // // fetches reviews submitted about the landlord user
-      // await fetch(
-      //   `/reviews/landlordReviews/${landlordId || userData.landlord_id}`
-      // )
-      //   .then((res) => res.json())
-      //   .then((reviews) => {
-      //     setReviewData(reviews);
-      //   })
-      //   .catch((err) =>
-      //     console.log("Error fetching landlord reviews -->", err)
-      //   );
-      // await fetch(`/address/byLandlord/${landlordId || userData.landlord_id}`)
-      //   .then((addresses) => {
-      //     return addresses.json();
-      //   })
-      //   .then((json) => {
-      //     setAddresses(json);
-      //   })
-      //   .catch((err) => {
-      //     console.log("Error fetching landlord addresses -->", err);
-      //   });
-      // otherwise, if tenant is logged in and routes
-      //  to /profile [with no ID endpoint]
-    } else if (isLoggedIn) {
-      // fetches reviews submitted by the tenant about other landlord users
+      if (query.loading) return setLoading(true);
+      mounted.current = true;
+      if (mounted.current) {
+        setLoading(false);
+        setLandlordData(query.data);
+        setAddresses(query.data.landlord.addresses);
+        setReviewData(query.data.landlord.reviews);
+      }
+      return () => () => (mounted.current = false);
+    }
+  }, [query?.loading]);
+
+  // fetches reviews submitted by the tenant about other landlord users
+  const fetches = async () => {
+    if (isLoggedIn && !(landlordId || isLandlord)) {
       await fetch(`/reviews/${userData._id}`)
         .then((res) => res.json())
         .then((json) => setReviewData(json.reviews))
@@ -147,12 +127,10 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
   };
 
   useEffect(() => {
-    // if the url contains the landlord id
-    // or the user is logged in and is a
     fetches();
   }, [userData]);
 
-  //onclick for button
+  // onclick for create review button, sends user to create review route
   const handleReview = () =>
     navigate(`/review/${landlordId || userData.landlord_id}/`);
 
@@ -160,7 +138,10 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
     <ThemeProvider theme={tomatopalette}>
       <div id="background">
         <Container className="MainContainer">
-          {loading ? <>Loading...</> : null }
+          {
+            // insert loading animation here
+            loading ? <>Loading...</> : null
+          }
           {
             // if not logged in and no ID specified in url
             !loading && !landlordId && !isLoggedIn && (
@@ -333,9 +314,12 @@ const ProfilePage = ({ userData, isLoggedIn, isLandlord }) => {
           {
             // if review data fails to load when user is logged in
             // or URL specifies correct landlordId
-            !loading && !reviewData && landlordData && (isLoggedIn || landlordId) && (
-              <div>Error 500: Loading reviews failed.</div>
-            )
+            !loading &&
+              !reviewData &&
+              landlordData &&
+              (isLoggedIn || landlordId) && (
+                <div>Error 500: Loading reviews failed.</div>
+              )
           }
         </Container>
       </div>
