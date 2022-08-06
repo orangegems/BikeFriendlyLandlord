@@ -116,6 +116,10 @@ const typeDefs = gql`
     deleteReview(id: ID!): Review
   }
 
+  type Subscription {
+        messagePosted: Message
+    }
+
   type LandlordsError {
     message: String!
   }

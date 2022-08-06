@@ -2,6 +2,10 @@ const db = require("../models/BFLL.js");
 const queries = require("../models/queries");
 const { GraphQLError } = require("graphql");
 
+// publish/subscribe
+const { PubSub } = require('graphql-subscriptions');
+const pubsub = new PubSub();
+
 const resolvers = {
   Query: {
     users: () => {
@@ -93,7 +97,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    createReview: async(parent, args, context) => {
+    createReview: async (parent, args, context) => {
       const {
         title,
         username,
@@ -143,7 +147,14 @@ const resolvers = {
       if (obj.message) return "LandlordsError";
       return null;
     }
-  }
+  },
+
+  Subscription: {
+    messagePosted: {
+      subscribe: () => pubsub.asyncIterator('MESSAGE_POSTED')
+      
+    }
+  },
 
 };
 
