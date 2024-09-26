@@ -15,6 +15,11 @@ const authRouter = require("./routes/auth.js");
 const addressRouter = require("./routes/address.js");
 const userRouter = require("./routes/user.js");
 
+const { WebSocketServer } = require('ws');
+const { useServer } = require('graphql-ws/lib/use/ws');
+
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
